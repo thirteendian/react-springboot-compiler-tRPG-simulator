@@ -4,7 +4,7 @@ plugins {
 	id 'java'
 }
 
-group = 'edu.duke.ece568'
+group = 'edu.duke.summer'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 
@@ -15,6 +15,12 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	runtimeOnly 'org.postgresql:postgresql'
+	// https://mvnrepository.com/artifact/javax.validation/validation-api
+	implementation 'javax.validation:validation-api:2.0.1.Final'
+
 }
 
 tasks.named('test') {
