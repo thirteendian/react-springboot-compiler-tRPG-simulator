@@ -18,7 +18,7 @@ package edu.duke.summer.client.Game;
 //    @GetMapping("/gameCenter/creatGame")
 //    public String showGameCreateForm(Model model){
 //        model.addAttribute("newGame", new Game());
-//        return "creatGame.html";
+//        return "createGame.html";
 //    }
 //
 //

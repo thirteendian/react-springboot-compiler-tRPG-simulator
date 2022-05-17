@@ -28,13 +28,13 @@ public class GameController {
     @GetMapping("creatGame")
     public String showGameCreateForm(Model model){
         model.addAttribute("newGame", new Game());
-        return "creatGame";
+        return "createGame.html";
     }
 
     @PostMapping("/process_create")
     public String processCreateGame(Game game){
         gameRepo.save(game);
-        return "create_successfully.html";
+        return "gamesuccess";
     }
 
     @GetMapping("chooseGame")
