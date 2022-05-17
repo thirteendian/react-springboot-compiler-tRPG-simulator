@@ -35,7 +35,7 @@ public class AuthenticationController {
 //        }
         model.addAttribute("signup", signup);
         this.isSignUp = true;
-        return "signupsuccess";
+        return "game";
     }
 
     @GetMapping("/login")
@@ -48,7 +48,7 @@ public class AuthenticationController {
     public String loginpost(@ModelAttribute Login login, Model model) {
         model.addAttribute("login", login);
         this.isSignUp = true;
-        return "signupsuccess";
+        return "game";
     }
 
 
