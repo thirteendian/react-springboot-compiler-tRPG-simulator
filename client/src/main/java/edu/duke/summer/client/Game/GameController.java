@@ -28,7 +28,7 @@ public class GameController {
     @GetMapping("creatGame")
     public String showGameCreateForm(Model model){
         model.addAttribute("newGame", new Game());
-        return "creatGame.html";
+        return "creatGame";
     }
 
     @PostMapping("/process_create")
@@ -39,7 +39,7 @@ public class GameController {
 
     @GetMapping("chooseGame")
     public String showGameChooseForm(Model model){
-        return "chooseGame.html";
+        return "chooseGame";
     }
 
 
