@@ -6,22 +6,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
-<label for="chk" aria-hidden="true">Welcome to DICE</label><br/>
-
 <div class="main">
     <input type="checkbox" id="chk" aria-hidden="true">
 
     <div class="signup">
-        <form action = "/signup">
+        <form action = "#" th:action="@{/signup}" th:object="${signup}" method="post">
             <label for="chk" aria-hidden="true">Sign up</label>
+            <input type="email" th:field="*{email}" name="email" placeholder="Email" required="">
+            <input type="password" th:field="*{password}" name="pswd" placeholder="Password" required="">
+            <input type="password" th:field="*{matchingPassword}" name="repswd" placeholder="Re-Enter Password" required="">
             <button type="submit">Sign up</button>
-        </form>
-    </div>
-
-    <div class="login">
-        <form action = "/login">
-            <label for="chk" aria-hidden="true">Login</label>
-            <button>Login</button>
         </form>
     </div>
 </div>
