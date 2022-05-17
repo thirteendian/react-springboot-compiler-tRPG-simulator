@@ -6,13 +6,12 @@ import java.net.*;
 import java.util.*;
 import java.util.concurrent.*;
 
+import edu.duke.summer.shared.*;
+
 public class Server {
 
   private final int frontendPort = 12345;
   private ServerSocket frontendListener;
-  private Socket frontendSocket;
-  private InputStream in;
-  private OutputStream out;
 
   /**
    * This constructs a server
@@ -23,34 +22,12 @@ public class Server {
    * This starts the server
    */
   public void runServer() {
-    System.out.println("Ready to get connection!");
-    while(true) {
-      getConnection();
-      break;
-    }
+    System.out.println("Database setup!");
+    new DatabaseOperator().setupDatabase();
     System.out.println("Service start!");
     startService();
   }
 
-  /**
-   * This tries to make a socket connection betweeen backend server and frontend website
-   */
-  public void getConnection() {
-    while (true) {
-      try {
-        frontendListener = new ServerSocket(frontendPort);
-        frontendSocket = frontendListener.accept();
-        in = frontendSocket.getInputStream();
-        out = frontendSocket.getOutputStream();
-        System.out.println("Connected Successfully!");
-        break;
-      }
-      catch (IOException e) {
-        System.out.println("Frontend connection: " + e.toString());
-        continue;
-      }
-    }
-  }
 
   /**
    * This starts to deal with messages from frontend website
@@ -69,32 +46,30 @@ public class Server {
    * This receives messages sent from frontend website
    */
   public void receiveFrontendMessage() {
-    try {
-      FrontendMessage message = new FrontendMessage();
-      //new MessageOperator().receiveMessage(message, in);
-      Thread th = new Thread() {
-        @Override()
-        public void run() {
-          try {
-            handleFrontendMessage(message);
+    while (true) {
+      try {
+        Socket frontendSocket = frontendListener.accept();
+        Thread th = new Thread() {
+          @Override()
+          public void run() {
+            try {
+              InputStream in = frontendSocket.getInputStream();
+              OutputStream out = frontendSocket.getOutputStream();
+              Action action = new Action();
+              new MessageOperator().receiveMessage(action, in);
+              action.doAction();
+            }
+            catch (IOException e) {
+              System.out.println("Message from frontend: " + e.toString());
+            }
           }
-          catch (IOException e) {
-            System.out.println("Message from frontend: " + e.toString());
-          }
-        }
-      };
-      th.start();
+        };
+        th.start();
+      }
+      catch (Exception e) {
+        System.out.println("Message from frontend: " + e.toString());
+      }
     }
-    catch (Exception e) {
-      System.out.println("Message from frontend: " + e.toString());
-    }
-  }
-
-  /**
-   * This handles messages sent from frontend website
-   */
-  public void handleFrontendMessage(FrontendMessage message) throws IOException {
-
   }
 
 
