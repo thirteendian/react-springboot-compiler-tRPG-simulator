@@ -14,4 +14,6 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Constraint(validatedBy = PasswordMatchesValidator.class)
 @Documented
 public @interface PasswordMatches {
+    //todo group=sign up (only check when sign up, because otherwise matching password is null)
+    //todo payload
 }

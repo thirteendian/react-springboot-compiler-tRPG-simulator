@@ -12,32 +12,61 @@ public class UserServiceImpl implements UserService{
     private UserRepository userRepository;
 
     @Override
-    //todo
-    public User createNewUser(UserDto registerDto) {
-        return null;
-//        if(accountExist(email)) {
-//            throw new IllegalArgumentException("There is already an account under this email address.");
-//        }
-//        User user = new User();
-//        user.setEmail(email);
-//        user.setFirstName(firstName);
-//        user.setLastName(lastName);
-//        user.setPassword(password);
-//        user.setActive(true);
-//        return userRepository.save(user);
-    }
-
-    public boolean accountExist(String email) {
-        return userRepository.existsByEmail(email);
+    public User createNewUser(UserDto userDto) {
+        if(accountExist(userDto.getEmail())) {
+            throw new IllegalArgumentException("There is already an account under this email address.");
+        }
+        User user = new User();
+        user.setEmail(userDto.getEmail());
+        user.setFirstName(userDto.getFirstName());
+        user.setLastName(userDto.getLastName());
+        user.setPassword(userDto.getPassword());
+        user.setActive(true);
+        return userRepository.save(user);
     }
 
     @Override
     public User logIn(UserDto userDto) {
-        return null;
+        //check account exist
+        if(!accountExist(userDto.getEmail())) {
+            throw new IllegalArgumentException("Email address doesn't exist, please sign up first.");
+        }
+        //check password correct
+        if(!passwordCorrect(userDto.getEmail(), userDto.getPassword())) {
+            throw new IllegalArgumentException("The password is incorrect.");
+        }
+        //login, active account
+        User user = userRepository.findByEmail(userDto.getEmail());
+        user.setActive(true);
+        return user;
     }
 
     @Override
     public void logOut(UserDto userDto) {
+        //check account exist
+        if(!accountExist(userDto.getEmail())) {
+            throw new IllegalArgumentException("Email address doesn't exist, please sign up first.");
+        }
+        //check current status is login
+        if(!isActive(userDto.getEmail())) {
+            throw new IllegalArgumentException("You have not logged in yet");
+        }
+        userRepository.findByEmail(userDto.getEmail()).setActive(false);
+    }
 
+
+    /**
+     * utilities
+     */
+    public boolean accountExist(String email) {
+        return userRepository.existsByEmail(email);
+    }
+
+    public boolean passwordCorrect(String email, String providedPassword) {
+        return userRepository.findByEmail(email).getPassword().equals(providedPassword);
+    }
+
+    public boolean isActive(String email) {
+        return userRepository.findByEmail(email).isActive();
     }
 }
