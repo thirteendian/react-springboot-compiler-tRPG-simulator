@@ -47,31 +47,13 @@ public class GameServiceImpl implements GameService {
   }
 
   @Override
-  public Game getGameById(final Long id) {
-    final Game game = gameRepository.findById(id);
-    if (game != null) {
-      return game;
-    }
-    return null;
-  }
+  public List<Game> filterGame(final GameFilterDto gameFilterDto) {}
+  
+  @Override
+  public Game joinGame(final GameDto gameJoinDto) {}
 
   @Override
-  public List<Game> getGameByCreatorEmail(final String creatorEmail) {
-    final List<Game> gameList = gameRepository.findByCreatorEmail(creatorEmail);
-    if (gameList != null) {
-      return gameList;
-    }
-    return null;
-  }
-
-  @Override
-  public List<Game> getGameByName(final String gameName) {
-    final List<Game> gameList = gameRepository.findByGameName(gameName);
-    if (gameList != null) {
-      return gameList;
-    }
-    return null;
-  }
+  public boolean checkPassowrd(final String password) {}
 
   @Override
   public void saveGame(final Game game) {
