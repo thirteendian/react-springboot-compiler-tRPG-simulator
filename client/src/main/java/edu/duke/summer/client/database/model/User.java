@@ -14,6 +14,7 @@ public class User {
     private String firstName;
     private String lastName;
     private String password;
+    private boolean active;
 
     public String getEmail() {
         return email;
@@ -45,6 +46,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     @Override
