@@ -5,13 +5,9 @@ import edu.duke.summer.client.dto.UserDto;
 
 public interface UserService {
 
-    //todo: password match
-    User createNewUser(UserDto registerDto);
+    User createNewUser(UserDto userDto);
 
-    //todo: check password here?
-    //todo: fail throw exception
     User logIn(UserDto userDto);
 
-    //todo: fail: already log out throw exception
     void logOut (UserDto userDto);
 }

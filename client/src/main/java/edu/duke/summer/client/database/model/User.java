@@ -1,5 +1,7 @@
 package edu.duke.summer.client.database.model;
 
+import edu.duke.summer.client.annotation.ValidEmail;
+
 import javax.persistence.*;
 
 @Entity
@@ -8,6 +10,7 @@ public class User {
     @Id
     @Column(unique = true, nullable = false, insertable = false, updatable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @ValidEmail
     private String email;
 
     @Column(nullable = false)
