@@ -38,6 +38,9 @@ public class GameServiceImpl implements GameService {
 
   @Override
   public Game createNewGame(final GameDto gameDto) {
+    if (gameRepository.existsById(gameDto.getId())) {
+      throw new IllegalArgumentException("Game ID already exists!");
+    }
     final Game game = new Game();
     game.setId(gameDto.getId());
     game.setCreatorEmail(gameDto.getCreatorEmail());
@@ -53,11 +56,21 @@ public class GameServiceImpl implements GameService {
   
   @Override
   public Game joinGame(final GameDto gameDto) {
-    return null;
+    if (!gameRepository.existsById(gameDto.getId())) {
+      throw new IllegalArgumentException("Game does not exists!");
+    }
+    Game game = gameRepository.findById(gameDto.getId()));
+    return game;
   }
 
   @Override
   public boolean checkPassowrd(final Long id, final String password) {
+    if (passowrd != null) {
+      Game game = gameRepository.findById(id);
+      if (!passwordEncoder.matches(password, game.getPassword())) {
+        return false;
+      }
+    }
     return true;
   }
 
