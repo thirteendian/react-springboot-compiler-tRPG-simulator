@@ -14,6 +14,8 @@ public interface GameRepository extends JpaRepository<Game, Long> {
 
   Game findById(Long id); 
 
+  boolean existsById(Long id);
+
   List<Game> findByCreatorEmail(String creatorEmail);
 
   List<Game> findByGameName(String gameName);
