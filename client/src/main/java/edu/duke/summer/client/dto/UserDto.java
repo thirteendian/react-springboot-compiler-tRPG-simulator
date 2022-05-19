@@ -2,15 +2,15 @@ package edu.duke.summer.client.dto;
 
 import edu.duke.summer.client.annotation.PasswordMatches;
 import edu.duke.summer.client.annotation.ValidEmail;
+import edu.duke.summer.client.database.SignUpGroup;
 
 import javax.validation.constraints.NotNull;
 
-@PasswordMatches
+@PasswordMatches(groups = {SignUpGroup.class})
 public class UserDto {
 
     @NotNull
     @ValidEmail
-    //todo: message?
     private String email;
 
     @NotNull
