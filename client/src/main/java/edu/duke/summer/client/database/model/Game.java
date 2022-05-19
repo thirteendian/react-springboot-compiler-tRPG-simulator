@@ -1,17 +1,16 @@
 package edu.duke.summer.client.database.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.util.Objects;
+import javax.persistence.*;
+
+import java.lang.*;
+import java.util.*;
 
 @Entity
 @Table(name = "games")
 public class Game {
    
   @Id   
-  @Column(unique = true, nullable = false)
+  @Column(unique = true, nullable = false, updatable = false)
   private Long id;
   @Column(nullable = false, length = 50)
   private String creatorEmail;
@@ -23,48 +22,42 @@ public class Game {
   public Game() {}
 
   public void setId(Long id) {
-      this.id = id;
+    this.id = id;
   }
 
   public Long getId() {
-      return id;
+    return id;
   }
 
   public void setCreatorEmail(String creatorEmail) {
-      this.creatorEmail = creatorEmail;
+    this.creatorEmail = creatorEmail;
   }
 
   public String getCreatorEmail() {
-      return creatorEmail;
+    return creatorEmail;
   }
 
   public void setGameName(String gameName) {
-      this.gameName = gameName;
+    this.gameName = gameName;
   }
 
   public String getGameName() {
-      return gameName;
+    return gameName;
   }
 
   public void setPassword(String password) {
-      this.password = password;
+    this.password = password;
   }
 
   public String getPassword() {
-      return password;
+    return password;
   }
 
   public Game(Long id, String creatorEmail, String password, String gameName) {
-      this.id = id;
-      this.creatorEmail = creatorEmail;
-      this.password = password;
-      this.gameName = gameName;
-  }
-
-  public Game(String creatorEmail, String password, String gameName) {
-      this.creatorEmail = creatorEmail;
-      this.password = password;
-      this.gameName = gameName;
+    this.id = id;
+    this.creatorEmail = creatorEmail;
+    this.password = password;
+    this.gameName = gameName;
   }
 
   @Override

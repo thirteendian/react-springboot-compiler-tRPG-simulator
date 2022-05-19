@@ -1,6 +1,17 @@
 package edu.duke.summer.client.dto;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import java.util.*;
+
 public class GameFilterDto {
+
+  public GameDto(Long id, String creatorEmail, String gameName) {
+    this.id = id;
+    this.creatorEmail = creatorEmail;
+    this.gameName = gameName;
+  }
 
   @NotNull
   @Size(min = 1)
@@ -15,27 +26,27 @@ public class GameFilterDto {
   private String gameName;
 
   public void setId(final Long id) {
-      this.id = id;
+    this.id = id;
   }
 
   public Long getId() {
-      return id;
+    return id;
   }
 
   public void setCreatorEmail(final String creatorEmail) {
-      this.creatorEmail = creatorEmail;
+    this.creatorEmail = creatorEmail;
   }
 
   public String getCreatorEmail() {
-      return creatorEmail;
+    return creatorEmail;
   }
 
   public void setGameName(final String gameName) {
-      this.gameName = gameName;
+    this.gameName = gameName;
   }
 
   public String getGameName() {
-      return gameName;
+    return gameName;
   }
 
   @Override
@@ -56,11 +67,11 @@ public class GameFilterDto {
 
   @Override
   public String toString() {
-      return "Game{" +
-              "id=" + id +
-              ", creatorEmail='" + creatorEmail + '\'' +
-              ", gameName='" + gameName + '\'' +
-              '}';
+    return "Game{" +
+            "id=" + id +
+            ", creatorEmail='" + creatorEmail + '\'' +
+            ", gameName='" + gameName + '\'' +
+            '}';
   }
 
 }

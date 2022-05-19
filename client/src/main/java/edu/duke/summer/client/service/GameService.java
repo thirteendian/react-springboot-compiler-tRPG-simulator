@@ -30,16 +30,14 @@ import com.maxmind.geoip2.DatabaseReader;
 @Transactional
 public interface GameService {
   
-  Game createNewGame(final GameDto gameCreateDto) {}
+  Game createNewGame(final GameDto gameDto) {}
 
   List<Game> filterGame(final GameFilterDto gameFilterDto) {}
 
-  Game joinGame(final GameDto gameJoinDto) {}
+  Game joinGame(final GameDto gameDto) {}
 
-  boolean checkPassowrd(final String password) {}
+  boolean checkPassowrd(final Long id, final String password) {}
   
-  void saveGame(final Game game) {}
-
   void deleteGame(final Game game) {}
     
 }
