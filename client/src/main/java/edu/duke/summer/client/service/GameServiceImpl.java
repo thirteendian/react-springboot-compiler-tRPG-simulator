@@ -47,18 +47,18 @@ public class GameServiceImpl implements GameService {
   }
 
   @Override
-
-  public List<Game> filterGame(final GameFilterDto gameFilterDto) {}
+  public List<Game> filterGame(final GameFilterDto gameFilterDto) {
+    return null;
+  }
   
   @Override
-  public Game joinGame(final GameDto gameJoinDto) {}
+  public Game joinGame(final GameDto gameDto) {
+    return null;
+  }
 
   @Override
-  public boolean checkPassowrd(final String password) {}
-
-  @Override
-  public void saveGame(final Game game) {
-    gameRepository.save(game);
+  public boolean checkPassowrd(final Long id, final String password) {
+    return true;
   }
 
   @Override
