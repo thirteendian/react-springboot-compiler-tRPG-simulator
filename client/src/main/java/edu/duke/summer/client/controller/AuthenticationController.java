@@ -17,7 +17,6 @@ public class AuthenticationController {
     private final ShipmentRepository repository;
     private Boolean isSignUp = false;
 
-
     public AuthenticationController(ShipmentRepository repository) {
         this.repository = repository;
     }
