@@ -15,6 +15,8 @@ import javax.transaction.Transactional;
 import edu.duke.summer.client.database.model.Game;
 import edu.duke.summer.client.database.repository.GameRepository;
 
+import edu.duke.summer.client.dto.GameDto;
+import edu.duke.summer.client.dto.GameFilterDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.env.Environment;
@@ -22,6 +24,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +38,7 @@ public class GameServiceImpl implements GameService {
   private GameRepository gameRepository;
 
   @Autowired
-  private PasswordEncoder passwordEncoder;
+  private BCryptPasswordEncoder passwordEncoder;
 
   @Override
   public Game createNewGame(final GameDto gameDto) {
@@ -101,13 +104,13 @@ public class GameServiceImpl implements GameService {
     if (!gameRepository.existsById(gameDto.getId())) {
       throw new IllegalArgumentException("Game does not exists!");
     }
-    Game game = gameRepository.findById(gameDto.getId()));
+    Game game = gameRepository.findById(gameDto.getId());
     return game;
   }
 
   @Override
   public boolean checkPassowrd(final Long id, final String password) {
-    if (passowrd != null) {
+    if (password != null) {
       Game game = gameRepository.findById(id);
       if (!passwordEncoder.matches(password, game.getPassword())) {
         return false;

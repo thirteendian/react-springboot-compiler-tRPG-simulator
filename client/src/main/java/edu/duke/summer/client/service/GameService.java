@@ -14,6 +14,8 @@ import javax.transaction.Transactional;
 import edu.duke.summer.client.database.model.Game;
 import edu.duke.summer.client.database.repository.GameRepository;
 
+import edu.duke.summer.client.dto.GameDto;
+import edu.duke.summer.client.dto.GameFilterDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.env.Environment;
@@ -30,14 +32,14 @@ import com.maxmind.geoip2.DatabaseReader;
 @Transactional
 public interface GameService {
   
-  Game createNewGame(final GameDto gameDto) {}
+  Game createNewGame(final GameDto gameDto);
 
-  List<Game> filterGame(final GameFilterDto gameFilterDto) {}
+  List<Game> filterGame(final GameFilterDto gameFilterDto);
 
-  Game joinGame(final GameDto gameDto) {}
+  Game joinGame(final GameDto gameDto);
 
-  boolean checkPassowrd(final Long id, final String password) {}
+  boolean checkPassowrd(final Long id, final String password);
   
-  void deleteGame(final Game game) {}
+  void deleteGame(final Game game);
     
 }
