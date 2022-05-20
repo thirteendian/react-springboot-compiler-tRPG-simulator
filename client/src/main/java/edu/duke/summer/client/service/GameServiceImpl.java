@@ -1,15 +1,7 @@
 package edu.duke.summer.client.service;
 
-import java.io.UnsupportedEncodingException;
-import java.net.InetAddress;
-import java.net.URLEncoder;
-import java.util.Arrays;
-import java.util.Calendar;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Optional;
-import java.util.UUID;
-import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 
 import edu.duke.summer.client.database.model.Game;
@@ -18,27 +10,18 @@ import edu.duke.summer.client.database.repository.GameRepository;
 import edu.duke.summer.client.dto.GameDto;
 import edu.duke.summer.client.dto.GameFilterDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.core.env.Environment;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.session.SessionRegistry;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import com.maxmind.geoip2.DatabaseReader;
 
 @Service
 @Transactional
 public class GameServiceImpl implements GameService {
 
-  @Autowired
+
   private GameRepository gameRepository;
 
   @Autowired
-  private BCryptPasswordEncoder passwordEncoder;
+  private PasswordEncoder passwordEncoder;
 
   @Override
   public Game createNewGame(final GameDto gameDto) {
@@ -104,14 +87,14 @@ public class GameServiceImpl implements GameService {
     if (!gameRepository.existsById(gameDto.getId())) {
       throw new IllegalArgumentException("Game does not exists!");
     }
-    Game game = gameRepository.findById(gameDto.getId());
+    Game game = gameRepository.findByid(gameDto.getId());
     return game;
   }
 
   @Override
   public boolean checkPassowrd(final Long id, final String password) {
     if (password != null) {
-      Game game = gameRepository.findById(id);
+      Game game = gameRepository.findByid(id);
       if (!passwordEncoder.matches(password, game.getPassword())) {
         return false;
       }

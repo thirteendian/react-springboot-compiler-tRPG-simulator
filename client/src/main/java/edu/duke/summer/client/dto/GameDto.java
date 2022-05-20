@@ -1,5 +1,7 @@
 package edu.duke.summer.client.dto;
 
+import edu.duke.summer.client.database.model.Game;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 

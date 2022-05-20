@@ -3,37 +3,43 @@ package edu.duke.summer.client.controller;
 import edu.duke.summer.client.Login;
 import edu.duke.summer.client.Signup;
 import edu.duke.summer.client.database.ShipmentRepository;
+import edu.duke.summer.client.dto.UserDto;
+import edu.duke.summer.client.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.validation.Valid;
 
 
 @Controller
 public class AuthenticationController {
-    private final ShipmentRepository repository;
-    private Boolean isSignUp = false;
+    @Autowired
+    private UserService userService;
 
-    public AuthenticationController(ShipmentRepository repository) {
-        this.repository = repository;
-    }
+    private Boolean isSignUp = false;
 
     @GetMapping("/signup")
     public String signup(Model model) {
-        model.addAttribute("signup", new Signup());
+        model.addAttribute("signup", new UserDto());
         return "signup";
     }
 
     @PostMapping("/signup")
-    public String signupPost(@ModelAttribute @Valid Signup signup, Model model) {
-//        try {
-//
-//        }
-        model.addAttribute("signup", signup);
-        this.isSignUp = true;
+    public String signupPost(@ModelAttribute @Valid UserDto userDto, Model model) {
+        try {
+            userService.createNewUser(userDto);
+        } catch (Exception e) {
+            e.printStackTrace();
+            //redirect to Getmapping signup
+            return "redirect:/signup";
+        }
+        model.addAttribute("signup", userDto);
+//        this.isSignUp = true;
         return "game";
     }
 

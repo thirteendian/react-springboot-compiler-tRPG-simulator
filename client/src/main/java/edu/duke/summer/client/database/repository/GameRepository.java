@@ -12,7 +12,7 @@ import java.util.*;
 
 public interface GameRepository extends JpaRepository<Game, Long> {
 
-  Game findById(Long id); 
+  Game findByid(Long id);
 
   boolean existsById(Long id);
 
