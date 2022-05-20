@@ -1,9 +1,14 @@
 package edu.duke.summer.client.service;
 
+import edu.duke.summer.client.database.Authentication;
 import edu.duke.summer.client.database.model.User;
 import edu.duke.summer.client.database.repository.UserRepository;
 import edu.duke.summer.client.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +19,8 @@ public class UserServiceImpl implements UserService{
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    private AuthenticationManager authenticationManager;
 
     @Override
     public User createNewUser(UserDto userDto) {
@@ -27,6 +34,12 @@ public class UserServiceImpl implements UserService{
         //password will be a length of 60 encrypted string with salt
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         user.setActive(true);
+
+//        //Set authentication
+//        UsernamePasswordAuthenticationToken authReq = new UsernamePasswordAuthenticationToken(user.getEmail(),user.getPassword());
+//        Authentication authentication = (Authentication) authenticationManager.authenticate(authReq);
+//        SecurityContext securityContext = SecurityContextHolder.getContext();
+//        securityContext.setAuthentication((org.springframework.security.core.Authentication) authentication);
         return userRepository.save(user);
     }
 

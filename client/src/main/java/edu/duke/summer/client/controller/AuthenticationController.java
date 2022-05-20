@@ -3,6 +3,7 @@ package edu.duke.summer.client.controller;
 import edu.duke.summer.client.Login;
 import edu.duke.summer.client.Signup;
 import edu.duke.summer.client.database.ShipmentRepository;
+import edu.duke.summer.client.database.model.User;
 import edu.duke.summer.client.dto.UserDto;
 import edu.duke.summer.client.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +32,11 @@ public class AuthenticationController {
 
     @PostMapping("/signup")
     public String signupPost(@ModelAttribute @Valid UserDto userDto, Model model) {
+        UserDto loggedUser = new UserDto();
         try {
-            userService.createNewUser(userDto);
+            User user = userService.createNewUser(userDto);
+            loggedUser.setEmail(user.getEmail());
+            model.addAttribute("loggedinformation",loggedUser);
         } catch (Exception e) {
             e.printStackTrace();
             //redirect to Getmapping signup
@@ -45,14 +49,22 @@ public class AuthenticationController {
 
     @GetMapping("/login")
     public String login(Model model) {
-        model.addAttribute("login", new Login());
+        model.addAttribute("login", new UserDto());
         return "login";
     }
 
     @PostMapping("/login")
-    public String loginpost(@ModelAttribute Login login, Model model) {
-        model.addAttribute("login", login);
-        this.isSignUp = true;
+    public String loginpost(@ModelAttribute UserDto userDto, Model model) {
+        UserDto loggedUser = new UserDto();
+        model.addAttribute("login", userDto);
+        try {
+            User user = userService.logIn(userDto);
+            System.out.println(user.getEmail());
+            loggedUser.setEmail(user.getEmail());
+            model.addAttribute("loggedinformation",loggedUser);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return "game";
     }
 
