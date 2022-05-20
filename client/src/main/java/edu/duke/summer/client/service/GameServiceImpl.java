@@ -6,6 +6,7 @@ import java.net.URLEncoder;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -51,7 +52,48 @@ public class GameServiceImpl implements GameService {
 
   @Override
   public List<Game> filterGame(final GameFilterDto gameFilterDto) {
-    return null;
+    List<Game> gameFilterById = new ArrayList<>();
+    List<Game> gameFilterByEmail = new ArrayList<>();
+    List<Game> gameFilterByName = new ArrayList<>();
+    if (gameFilterDto.getId() != null) {
+      gameFilterById = gameRepository.findByIdStartsWith(gameFilterDto.getId());
+      if (gameFilterById.isEmpty()) {
+        return null;
+      }
+    }
+    if (gameFilterDto.getCreatorEmail() != null) {
+      gameFilterByEmail = gameRepository.findByCreatorEmailStartsWith(gameFilterDto.getCreatorEmail());
+      if (gameFilterByEmail.isEmpty()) {
+        return null;
+      }
+    }
+    if (gameFilterDto.getGameName() != null) {
+      gameFilterByName = gameRepository.findByGameNameStartsWith(gameFilterDto.getGameName());
+      if (gameFilterByName.isEmpty()) {
+        return null;
+      }
+    }
+    List<Game> gameList = new ArrayList<>();
+    if (!gameFilterById.isEmpty()) {
+      gameList = gameFilterById;
+    }
+    if (!gameFilterByEmail.isEmpty()) {
+      if (gameList.isEmpty()) {
+        gameList = gameFilterByEmail;
+      }
+      else {
+        gameList.retainAll(gameFilterByEmail);
+      }
+    }
+    if (!gameFilterByName.isEmpty()) {
+      if (gameList.isEmpty()) {
+        gameList = gameFilterByName;
+      }
+      else {
+        gameList.retainAll(gameFilterByName);
+      }
+    }
+    return gameList;
   }
   
   @Override

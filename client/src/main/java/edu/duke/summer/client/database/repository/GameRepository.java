@@ -7,8 +7,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.util.stream.Stream;
-import java.util.List;
+import java.util.*;
+
 
 public interface GameRepository extends JpaRepository<Game, Long> {
 
@@ -16,10 +16,12 @@ public interface GameRepository extends JpaRepository<Game, Long> {
 
   boolean existsById(Long id);
 
-  List<Game> findByCreatorEmail(String creatorEmail);
+  List<Game> findByIdStartsWith(Long id);
 
-  List<Game> findByGameName(String gameName);
+  List<Game> findByCreatorEmailStartsWith(String creatorEmail);
 
+  List<Game> findByGameNameStartsWith(String gameName);
+  
   void delete(Game game);
 
 }
