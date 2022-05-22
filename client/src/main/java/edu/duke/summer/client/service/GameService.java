@@ -22,5 +22,7 @@ public interface GameService {
   boolean checkPassowrd(final Long id, final String password);
   
   void deleteGame(final Game game);
+
+  List<String> getDiceRollingResults(String game, String user);
     
 }

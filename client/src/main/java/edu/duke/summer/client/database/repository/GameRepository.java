@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.*;
 
-
+@Repository
 public interface GameRepository extends JpaRepository<Game, Long> {
 
   Game findByid(Long id);
