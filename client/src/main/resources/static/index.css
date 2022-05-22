@@ -78,6 +78,9 @@ button:hover{
     color: #573b8a;
     transform: scale(.6);
 }
+.error{
+    color:red;
+}
 
 #chk:checked ~ .login{
     transform: translateY(-500px);

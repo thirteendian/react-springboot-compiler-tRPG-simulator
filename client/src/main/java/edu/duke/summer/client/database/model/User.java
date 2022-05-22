@@ -1,22 +1,33 @@
 package edu.duke.summer.client.database.model;
 
 import edu.duke.summer.client.annotation.ValidEmail;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "User")
+@Table(name = "users")
 public class User {
-    @Id
+    @Id @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid",strategy = "uuid")
     @Column(unique = true, nullable = false, insertable = false, updatable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+    private String id;
+
+    @Column
     @ValidEmail
     private String email;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String firstName;
+
+    @Column(nullable = true)
     private String lastName;
+
+    @Column(nullable = false)
     private String password;
+
+    @Column(nullable = false)
     private boolean active;
 
     public String getEmail() {

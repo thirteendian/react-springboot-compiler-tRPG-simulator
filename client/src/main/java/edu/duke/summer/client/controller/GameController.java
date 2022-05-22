@@ -24,9 +24,6 @@ public class GameController {
 //        return "index.html";
 //    }   没办法做连续页面
 
-    @Autowired
-    private GameRepository gameRepo;
-
     @GetMapping("creatGame")
     public String showGameCreateForm(Model model){
         model.addAttribute("newGame", new Game());
@@ -35,7 +32,6 @@ public class GameController {
 
     @PostMapping("/process_create")
     public String processCreateGame(Game game){
-        gameRepo.save(game);
         return "gamesuccess";
     }
 

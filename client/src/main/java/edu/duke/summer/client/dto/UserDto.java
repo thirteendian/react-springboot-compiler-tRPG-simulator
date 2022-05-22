@@ -54,6 +54,7 @@ public class UserDto {
         return password;
     }
 
+    //setPassword using BC
     public void setPassword(String password) {
         this.password = password;
     }
