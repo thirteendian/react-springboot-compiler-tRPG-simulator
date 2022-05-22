@@ -5,83 +5,86 @@ import javax.persistence.*;
 import java.lang.*;
 import java.util.*;
 
+import javax.persistence.*;
+
+
 @Entity
 @Table(name = "games")
 public class Game {
-   
-  @Id   
-  @Column(unique = true, nullable = false, updatable = false)
-  private Long id;
-  @Column(nullable = false, length = 50)
-  private String creatorEmail;
-  @Column(nullable = true, length = 50)
-  private String password;
-  @Column(nullable = false, length = 50)
+
+  @SequenceGenerator(
+          name = "game_sequence",
+          sequenceName = "game_sequence",
+          allocationSize = 1
+  )
+
+  private Long id;  //game id, primary key
+
+  @Column(nullable = false, unique = true, length = 45)
+  private String CreatorEmail;
+
+  @Column(nullable = false)
+  private int playerNum;
+
+  @Column(nullable = false, length = 45)
   private String gameName;
 
-  public Game() {}
+  public Game() {
+  }
+
+  @Column(name = "GAME_ID")
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  public Long getId() {
+    return id;
+  }
 
   public void setId(Long id) {
     this.id = id;
   }
 
-  public Long getId() {
-    return id;
+  public String getCreatorEmail() {
+    return CreatorEmail;
   }
+
+
+  public String getGameName() {
+    return gameName;
+  }
+
+
+  public Integer getPlayerNum() {return playerNum;}
 
   public void setCreatorEmail(String creatorEmail) {
-    this.creatorEmail = creatorEmail;
-  }
-
-  public String getCreatorEmail() {
-    return creatorEmail;
+    CreatorEmail = creatorEmail;
   }
 
   public void setGameName(String gameName) {
     this.gameName = gameName;
   }
 
-  public String getGameName() {
-    return gameName;
-  }
+  public void setPlayerNum(int playerNum) {this.playerNum = playerNum;}
 
-  public void setPassword(String password) {
-    this.password = password;
-  }
-
-  public String getPassword() {
-    return password;
-  }
-
-  public Game(Long id, String creatorEmail, String password, String gameName) {
+  public Game(Long id, String creatorEmail, Integer playerNum, String gameName) {
     this.id = id;
-    this.creatorEmail = creatorEmail;
-    this.password = password;
+    CreatorEmail = creatorEmail;
+    this.playerNum = playerNum;
+    this.gameName = gameName;
+  }
+
+  public Game(String creatorEmail, Integer playerNum, String gameName) {
+    CreatorEmail = creatorEmail;
+    this.playerNum = playerNum;
     this.gameName = gameName;
   }
 
   @Override
-  public int hashCode() {
-    return toString().hashCode();
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    if (obj.getClass().equals(getClass())) {
-      Game game = (Game) obj;
-      if (this.id == game.getId()) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  @Override
   public String toString() {
-      return "Game{" +
-              "id=" + id +
-              ", creatorEmail='" + creatorEmail + '\'' +
-              ", gameName='" + gameName + '\'' +
-              '}';
+    return "Game{" +
+            "id=" + id +
+            ", CreatorEmail='" + CreatorEmail + '\'' +
+            ", gameName='" + gameName + '\'' +
+            '}';
   }
 }
+

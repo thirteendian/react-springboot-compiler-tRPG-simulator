@@ -2,6 +2,7 @@ package edu.duke.summer.client.service;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Optional;
 import javax.transaction.Transactional;
 
 import edu.duke.summer.client.database.model.Game;
@@ -10,18 +11,21 @@ import edu.duke.summer.client.database.repository.GameRepository;
 import edu.duke.summer.client.dto.GameDto;
 import edu.duke.summer.client.dto.GameFilterDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+//import org.springframework.security.core.Authentication;
+//import org.springframework.security.core.context.SecurityContextHolder;
+//import org.springframework.security.core.session.SessionRegistry;
+//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+//import com.maxmind.geoip2.DatabaseReader;
 
 @Service
 @Transactional
 public class GameServiceImpl implements GameService {
 
-
-  private GameRepository gameRepository;
-
   @Autowired
-  private PasswordEncoder passwordEncoder;
+  private GameRepository gameRepository;
 
   @Override
   public Game createNewGame(final GameDto gameDto) {
@@ -32,7 +36,7 @@ public class GameServiceImpl implements GameService {
     game.setId(gameDto.getId());
     game.setCreatorEmail(gameDto.getCreatorEmail());
     game.setGameName(gameDto.getGameName());
-    game.setPassword(passwordEncoder.encode(gameDto.getPassword()));
+    game.setPlayerNum(gameDto.getPlayerNum());
     return gameRepository.save(game);
   }
 
@@ -81,30 +85,20 @@ public class GameServiceImpl implements GameService {
     }
     return gameList;
   }
-  
+
   @Override
-  public Game joinGame(final GameDto gameDto) {
+  public Optional<Game> joinGame(final GameDto gameDto) {
     if (!gameRepository.existsById(gameDto.getId())) {
       throw new IllegalArgumentException("Game does not exists!");
     }
-    Game game = gameRepository.findByid(gameDto.getId());
+    Optional<Game> game = gameRepository.findById(gameDto.getId());
     return game;
   }
 
-  @Override
-  public boolean checkPassowrd(final Long id, final String password) {
-    if (password != null) {
-      Game game = gameRepository.findByid(id);
-      if (!passwordEncoder.matches(password, game.getPassword())) {
-        return false;
-      }
-    }
-    return true;
-  }
 
   @Override
   public void deleteGame(final Game game) {
     gameRepository.delete(game);
   }
-    
+
 }
