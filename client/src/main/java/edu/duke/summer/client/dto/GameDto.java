@@ -1,29 +1,38 @@
 package edu.duke.summer.client.dto;
 
-import javax.validation.constraints.NotNull;
+import com.sun.istack.NotNull;
+import edu.duke.summer.client.database.model.Game;
+
 import javax.validation.constraints.Size;
 
 import java.util.*;
 
 public class GameDto {
 
-  public GameDto(Long id, String creatorEmail, String password, String gameName) {
+
+  public GameDto(Long id, String creatorEmail, Integer playerNum, String gameName) {
     this.id = id;
     this.creatorEmail = creatorEmail;
-    this.password = password;
+    this.playerNum = playerNum;
     this.gameName = gameName;
   }
 
-  @NotNull
+  @com.sun.istack.NotNull
   @Size(min = 1)
   private Long id;
 
-  @NotNull
+  @com.sun.istack.NotNull
   @Size(min = 1, max = 50)
   private String creatorEmail;
 
-  @Size(max = 50)
-  private String password;
+//    @Size(max = 50)
+//    private String password;
+
+  @com.sun.istack.NotNull
+  @Size(min = 1, max = 20)
+  private Integer playerNum;
+
+
 
   @NotNull
   @Size(min = 1, max = 50)
@@ -53,13 +62,21 @@ public class GameDto {
     return gameName;
   }
 
-  public void setPassword(final String password) {
-    this.password = password;
+  public Integer getPlayerNum() {
+    return playerNum;
   }
 
-  public String getPassword() {
-    return password;
+  public void setPlayerNum(Integer playerNum) {
+    this.playerNum = playerNum;
   }
+
+  //    public void setPassword(final String password) {
+//        this.password = password;
+//    }
+//
+//    public String getPassword() {
+//        return password;
+//    }
 
   @Override
   public int hashCode() {

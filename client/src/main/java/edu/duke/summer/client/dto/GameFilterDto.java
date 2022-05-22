@@ -1,5 +1,7 @@
 package edu.duke.summer.client.dto;
 
+import edu.duke.summer.client.database.model.Game;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -7,7 +9,7 @@ import java.util.*;
 
 public class GameFilterDto {
 
-  public GameDto(Long id, String creatorEmail, String gameName) {
+  public GameFilterDto(Long id, String creatorEmail, String gameName) {
     this.id = id;
     this.creatorEmail = creatorEmail;
     this.gameName = gameName;
