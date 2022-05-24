@@ -18,8 +18,7 @@ public interface GameService {
   List<Game> filterGame(final GameFilterDto gameFilterDto);
 
   Game joinGame(final GameDto gameDto);
-
-  boolean checkPassowrd(final Long id, final String password);
+  //boolean checkPassowrd(final Long id, final String password);
   
   void deleteGame(final Game game);
 

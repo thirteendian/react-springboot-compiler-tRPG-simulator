@@ -27,8 +27,6 @@ import org.springframework.stereotype.Service;
 public class GameServiceImpl implements GameService {
 
 
-  private GameRepository gameRepository;
-
   private DiceRollingRepository diceRollingRepository;
 
   @Autowired
@@ -94,11 +92,11 @@ public class GameServiceImpl implements GameService {
   }
 
   @Override
-  public Optional<Game> joinGame(final GameDto gameDto) {
+  public Game joinGame(final GameDto gameDto) {
     if (!gameRepository.existsById(gameDto.getId())) {
       throw new IllegalArgumentException("Game does not exists!");
     }
-    Optional<Game> game = gameRepository.findById(gameDto.getId());
+    Game game = gameRepository.findByGameId(gameDto.getId());
     return game;
   }
 
