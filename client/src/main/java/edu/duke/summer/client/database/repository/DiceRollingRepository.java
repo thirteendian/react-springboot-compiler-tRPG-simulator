@@ -21,10 +21,10 @@ public interface DiceRollingRepository extends JpaRepository<DiceRolling, Long> 
 
     DiceRolling findById(String id);
 
-    @Query("select d.result from DiceRolling d where d.game = :game case when d.user = :user then true else d.visible = true end")
-    List<String> findRecentResults(@Param("game") String game, @Param("user") String user, Pageable pageable);
+    @Query("select d from DiceRolling d where d.game = :game case when d.user = :user then true else d.visible = true end")
+    List<DiceRolling> findRecentResults(@Param("game") String game, @Param("user") String user, Pageable pageable);
 
-    default List<String> findTop20RecentResults(String game, String user) {
+    default List<DiceRolling> findTop20RecentResults(String game, String user) {
         Pageable pageable = PageRequest.of(0, 20, Sort.by("id").descending());
         return findRecentResults(game, user, pageable);
     }

@@ -108,8 +108,8 @@ public class GameServiceImpl implements GameService {
 
 
   @Override
-  public List<String> getDiceRollingResults(String game, String user) {
-    List<String> results = diceRollingRepository.findTop20RecentResults(game, user);
+  public List<DiceRolling> getDiceRollingResults(String game, String user) {
+    List<DiceRolling> results = diceRollingRepository.findTop20RecentResults(game, user);
     return results;
   }
 
