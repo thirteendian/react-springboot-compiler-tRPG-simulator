@@ -21,7 +21,7 @@ public class Game {
   private Long id;  //game id, primary key
 
   @Column(nullable = false, unique = true, length = 45)
-  private String CreatorEmail;
+  private String creatorEmail;
 
   @Column(nullable = false)
   private int playerNum;
@@ -44,7 +44,7 @@ public class Game {
   }
 
   public String getCreatorEmail() {
-    return CreatorEmail;
+    return creatorEmail;
   }
 
 
@@ -56,7 +56,7 @@ public class Game {
   public Integer getPlayerNum() {return playerNum;}
 
   public void setCreatorEmail(String creatorEmail) {
-    CreatorEmail = creatorEmail;
+    this.creatorEmail = creatorEmail;
   }
 
   public void setGameName(String gameName) {
@@ -67,13 +67,13 @@ public class Game {
 
   public Game(Long id, String creatorEmail, Integer playerNum, String gameName) {
     this.id = id;
-    CreatorEmail = creatorEmail;
+    this.creatorEmail = creatorEmail;
     this.playerNum = playerNum;
     this.gameName = gameName;
   }
 
   public Game(String creatorEmail, Integer playerNum, String gameName) {
-    CreatorEmail = creatorEmail;
+    this.creatorEmail = creatorEmail;
     this.playerNum = playerNum;
     this.gameName = gameName;
   }
@@ -82,7 +82,7 @@ public class Game {
   public String toString() {
     return "Game{" +
             "id=" + id +
-            ", CreatorEmail='" + CreatorEmail + '\'' +
+            ", CreatorEmail='" + creatorEmail + '\'' +
             ", gameName='" + gameName + '\'' +
             '}';
   }
