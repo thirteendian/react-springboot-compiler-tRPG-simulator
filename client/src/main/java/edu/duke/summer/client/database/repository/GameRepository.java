@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.*;
 
-
+@Repository
 public interface GameRepository extends JpaRepository<Game, Long> {
 
   Optional<Game> findById(Long id);

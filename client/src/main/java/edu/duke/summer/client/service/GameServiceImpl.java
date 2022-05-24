@@ -7,6 +7,8 @@ import javax.transaction.Transactional;
 
 import edu.duke.summer.client.database.model.Game;
 import edu.duke.summer.client.database.repository.GameRepository;
+import edu.duke.summer.client.database.model.DiceRolling;
+import edu.duke.summer.client.database.repository.DiceRollingRepository;
 
 import edu.duke.summer.client.dto.GameDto;
 import edu.duke.summer.client.dto.GameFilterDto;
@@ -23,6 +25,11 @@ import org.springframework.stereotype.Service;
 @Service
 @Transactional
 public class GameServiceImpl implements GameService {
+
+
+  private GameRepository gameRepository;
+
+  private DiceRollingRepository diceRollingRepository;
 
   @Autowired
   private GameRepository gameRepository;
@@ -99,6 +106,13 @@ public class GameServiceImpl implements GameService {
   @Override
   public void deleteGame(final Game game) {
     gameRepository.delete(game);
+  }
+
+
+  @Override
+  public List<String> getDiceRollingResults(String game, String user) {
+    List<String> results = diceRollingRepository.findTop20RecentResults(game, user);
+    return results;
   }
 
 }
