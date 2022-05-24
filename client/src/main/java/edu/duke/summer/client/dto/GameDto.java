@@ -3,12 +3,65 @@ package edu.duke.summer.client.dto;
 import com.sun.istack.NotNull;
 import edu.duke.summer.client.database.model.Game;
 
+import javax.persistence.*;
 import javax.validation.constraints.Size;
 
 import java.util.*;
 
 public class GameDto {
 
+  @SequenceGenerator(
+          name = "game_sequence",
+          sequenceName = "game_sequence",
+          allocationSize = 1
+  )
+
+  private Long id;  //game id, primary key
+
+  @Column(nullable = false, unique = true, length = 45)
+  private String creatorEmail;
+
+  @Column(nullable = false)
+  private int playerNum;
+
+  @Column(nullable = false, length = 45)
+  private String gameName;
+
+  public GameDto() {
+  }
+
+  @Column(name = "GAME_ID")
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public String getCreatorEmail() {
+    return creatorEmail;
+  }
+
+
+  public String getGameName() {
+    return gameName;
+  }
+
+
+  public Integer getPlayerNum() {return playerNum;}
+
+  public void setCreatorEmail(String creatorEmail) {
+    this.creatorEmail = creatorEmail;
+  }
+
+  public void setGameName(String gameName) {
+    this.gameName = gameName;
+  }
+
+  public void setPlayerNum(int playerNum) {this.playerNum = playerNum;}
 
   public GameDto(Long id, String creatorEmail, Integer playerNum, String gameName) {
     this.id = id;
@@ -17,66 +70,11 @@ public class GameDto {
     this.gameName = gameName;
   }
 
-  @com.sun.istack.NotNull
-  @Size(min = 1)
-  private Long id;
-
-  @com.sun.istack.NotNull
-  @Size(min = 1, max = 50)
-  private String creatorEmail;
-
-//    @Size(max = 50)
-//    private String password;
-
-  @com.sun.istack.NotNull
-  @Size(min = 1, max = 20)
-  private Integer playerNum;
-
-
-
-  @NotNull
-  @Size(min = 1, max = 50)
-  private String gameName;
-
-  public void setId(final Long id) {
-    this.id = id;
-  }
-
-  public Long getId() {
-    return id;
-  }
-
-  public void setCreatorEmail(final String creatorEmail) {
+  public GameDto(String creatorEmail, Integer playerNum, String gameName) {
     this.creatorEmail = creatorEmail;
-  }
-
-  public String getCreatorEmail() {
-    return creatorEmail;
-  }
-
-  public void setGameName(final String gameName) {
+    this.playerNum = playerNum;
     this.gameName = gameName;
   }
-
-  public String getGameName() {
-    return gameName;
-  }
-
-  public Integer getPlayerNum() {
-    return playerNum;
-  }
-
-  public void setPlayerNum(Integer playerNum) {
-    this.playerNum = playerNum;
-  }
-
-  //    public void setPassword(final String password) {
-//        this.password = password;
-//    }
-//
-//    public String getPassword() {
-//        return password;
-//    }
 
   @Override
   public int hashCode() {
