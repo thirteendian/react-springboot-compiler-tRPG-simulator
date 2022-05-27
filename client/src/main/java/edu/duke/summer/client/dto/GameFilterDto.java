@@ -9,15 +9,15 @@ import java.util.*;
 
 public class GameFilterDto {
 
-  public GameFilterDto(Long id, String creatorEmail, String gameName) {
+  public GameFilterDto(String id, String creatorEmail, String gameName) {
     this.id = id;
     this.creatorEmail = creatorEmail;
     this.gameName = gameName;
   }
 
   @NotNull
-  @Size(min = 1)
-  private Long id;
+  @Size(min = 1, max = 50)
+  private String id;
 
   @NotNull
   @Size(min = 1, max = 50)
@@ -27,11 +27,11 @@ public class GameFilterDto {
   @Size(min = 1, max = 50)
   private String gameName;
 
-  public void setId(final Long id) {
+  public void setId(final String id) {
     this.id = id;
   }
 
-  public Long getId() {
+  public String getId() {
     return id;
   }
 
@@ -60,7 +60,7 @@ public class GameFilterDto {
   public boolean equals(Object obj) {
     if (obj.getClass().equals(getClass())) {
       Game game = (Game) obj;
-      if (this.id == game.getId()) {
+      if (this.id.equals(game.getId())) {
         return true;
       }
     }

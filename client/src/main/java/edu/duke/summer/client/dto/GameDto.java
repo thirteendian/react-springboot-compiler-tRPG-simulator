@@ -16,7 +16,7 @@ public class GameDto {
           allocationSize = 1
   )
 
-  private Long id;  //game id, primary key
+  private String id;  //game id, primary key
 
   @Column(nullable = false, unique = true, length = 45)
   private String creatorEmail;
@@ -33,11 +33,11 @@ public class GameDto {
   @Column(name = "GAME_ID")
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  public Long getId() {
+  public String getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(String id) {
     this.id = id;
   }
 
@@ -63,7 +63,7 @@ public class GameDto {
 
   public void setPlayerNum(int playerNum) {this.playerNum = playerNum;}
 
-  public GameDto(Long id, String creatorEmail, Integer playerNum, String gameName) {
+  public GameDto(String id, String creatorEmail, Integer playerNum, String gameName) {
     this.id = id;
     this.creatorEmail = creatorEmail;
     this.playerNum = playerNum;
@@ -85,7 +85,7 @@ public class GameDto {
   public boolean equals(Object obj) {
     if (obj.getClass().equals(getClass())) {
       Game game = (Game) obj;
-      if (this.id == game.getId()) {
+      if (this.id.equals(game.getId())) {
         return true;
       }
     }

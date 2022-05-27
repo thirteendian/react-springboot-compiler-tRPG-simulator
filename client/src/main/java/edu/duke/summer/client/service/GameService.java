@@ -4,6 +4,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import edu.duke.summer.client.database.model.Game;
+import edu.duke.summer.client.database.model.DiceRolling;
 
 import edu.duke.summer.client.dto.GameDto;
 import edu.duke.summer.client.dto.GameFilterDto;
@@ -22,6 +23,6 @@ public interface GameService {
   
   void deleteGame(final Game game);
 
-  List<String> getDiceRollingResults(String game, String user);
-
+  List<DiceRolling> getDiceRollingResults(String game, String userEmail);
+    
 }

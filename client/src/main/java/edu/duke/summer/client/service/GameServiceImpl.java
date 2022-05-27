@@ -96,7 +96,7 @@ public class GameServiceImpl implements GameService {
     if (!gameRepository.existsById(gameDto.getId())) {
       throw new IllegalArgumentException("Game does not exists!");
     }
-    Game game = gameRepository.findByGameId(gameDto.getId());
+    Game game = gameRepository.findById(gameDto.getId());
     return game;
   }
 
@@ -108,8 +108,8 @@ public class GameServiceImpl implements GameService {
 
 
   @Override
-  public List<String> getDiceRollingResults(String game, String user) {
-    List<String> results = diceRollingRepository.findTop20RecentResults(game, user);
+  public List<DiceRolling> getDiceRollingResults(String game, String userEmail) {
+    List<DiceRolling> results = diceRollingRepository.findTop20RecentResults(game, userEmail);
     return results;
   }
 
