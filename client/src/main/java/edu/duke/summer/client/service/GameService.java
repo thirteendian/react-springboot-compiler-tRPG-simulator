@@ -23,6 +23,6 @@ public interface GameService {
   
   void deleteGame(final Game game);
 
-  List<DiceRolling> getDiceRollingResults(String game, String user);
+  List<DiceRolling> getDiceRollingResults(String game, String userEmail);
     
 }

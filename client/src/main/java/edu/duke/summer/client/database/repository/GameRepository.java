@@ -9,11 +9,11 @@ import java.util.*;
 @Repository
 public interface GameRepository extends JpaRepository<Game, Long> {
 
-  Game findByGameId(Long id);
+  Game findById(String id);
 
-  boolean existsById(Long id);
+  boolean existsById(String id);
 
-  List<Game> findByIdStartsWith(Long id);
+  List<Game> findByIdStartsWith(String id);
 
   List<Game> findByCreatorEmailStartsWith(String creatorEmail);
 

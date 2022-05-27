@@ -18,7 +18,7 @@ public class DiceRolling {
     private String game;
 
     @Column(nullable = false)
-    private String user;
+    private String userEmail;
 
     @Column(nullable = false)
     private String result;
@@ -32,9 +32,9 @@ public class DiceRolling {
 
     public String getGame() {return game;}
 
-    public void setUser(String user) {this.user = user;}
+    public void setUserEmail(String user) {this.userEmail = userEmail;}
 
-    public String getUser() {return user;}
+    public String getUserEmail() {return userEmail;}
 
     public void setResult(String result) {this.result = result;}
 
@@ -65,7 +65,7 @@ public class DiceRolling {
         return "DiceRolling{" +
                 "id=" + id +
                 ", game='" + game + '\'' +
-                ", user='" + user + '\'' +
+                ", userEmail='" + userEmail + '\'' +
                 ", result='" + result + '\'' +
                 ", visible='" + visible + '\'' +
                 '}';

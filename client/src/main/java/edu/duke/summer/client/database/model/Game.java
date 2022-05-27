@@ -18,7 +18,7 @@ public class Game {
           allocationSize = 1
   )
 
-  private Long id;  //game id, primary key
+  private String id;  //game id, primary key
 
   @Column(nullable = false, unique = true, length = 45)
   private String creatorEmail;
@@ -35,11 +35,11 @@ public class Game {
   @Column(name = "GAME_ID")
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  public Long getId() {
+  public String getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(String id) {
     this.id = id;
   }
 
@@ -65,7 +65,7 @@ public class Game {
 
   public void setPlayerNum(int playerNum) {this.playerNum = playerNum;}
 
-  public Game(Long id, String creatorEmail, Integer playerNum, String gameName) {
+  public Game(String id, String creatorEmail, Integer playerNum, String gameName) {
     this.id = id;
     this.creatorEmail = creatorEmail;
     this.playerNum = playerNum;
