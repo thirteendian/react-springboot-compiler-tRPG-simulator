@@ -37,4 +37,5 @@ public class ClientApplication {
 	public PasswordEncoder encoder() {
 		return new BCryptPasswordEncoder();
 	}
+
 }
