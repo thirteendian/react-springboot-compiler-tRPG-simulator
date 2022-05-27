@@ -65,7 +65,7 @@ public class AuthenticationController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "game";
+        return "game";//   /(userID)/game
     }
 
 

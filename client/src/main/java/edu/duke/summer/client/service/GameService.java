@@ -23,5 +23,5 @@ public interface GameService {
   void deleteGame(final Game game);
 
   List<String> getDiceRollingResults(String game, String user);
-    
+
 }
