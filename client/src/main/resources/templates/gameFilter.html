@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../static/index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+    <title>Welcome to Join game</title>
+
+    <style>
+        table tr th{
+            border: 1px solid #333;
+            padding: 2px 20px;
+            box-sizing: border-box;
+            background: #b0b0b0;
+        }
+        table tr td{
+            border: 1px solid #333;
+            padding: 5px 20px;
+            box-sizing: border-box;
+            font-size: 18px;
+        }
+        table {
+            border-collapse: collapse;
+            margin-bottom: 400px;
+        }
+        input{
+            width: 200px;
+            height: 18px;
+            margin-bottom: 5px;
+            font-size: 18px;
+        }
+    </style>
+    <script>
+        function filter_0(index) {
+            var searchBox_1 = document.getElementById("searchBox-1");
+            searchBox_1.addEventListener("keyup", function () {
+                var keyword = this.value;
+                keyword = keyword.toUpperCase();
+                var table_1 = document.getElementById("table-1");
+                var all_tr = table_1.getElementsByTagName("tr");
+                for (var i = 0; i < all_tr.length; i++) {
+                    var name_column = all_tr[i].getElementsByTagName("td")[index];
+                    if (name_column) {
+                        var name_value = name_column.textContent || name_column.innerText;
+                        name_value = name_value.toUpperCase();
+                        if (name_value.indexOf(keyword) > -1) {
+                            all_tr[i].style.display = ""; // show
+                        } else {
+                            all_tr[i].style.display = "none"; // hide
+                        }
+                    }
+                }
+            });
+        }
+
+        function filter_1(index) {
+            var searchBox_1 = document.getElementById("searchBox-2");
+            searchBox_1.addEventListener("keyup", function () {
+                var keyword = this.value;
+                keyword = keyword.toUpperCase();
+                var table_1 = document.getElementById("table-1");
+                var all_tr = table_1.getElementsByTagName("tr");
+                for (var i = 0; i < all_tr.length; i++) {
+                    var name_column = all_tr[i].getElementsByTagName("td")[index];
+                    if (name_column) {
+                        var name_value = name_column.textContent || name_column.innerText;
+                        name_value = name_value.toUpperCase();
+                        if (name_value.indexOf(keyword) > -1) {
+                            all_tr[i].style.display = ""; // show
+                        } else {
+                            all_tr[i].style.display = "none"; // hide
+                        }
+                    }
+                }
+            });
+        }
+
+        function filter_2(index) {
+            var searchBox_1 = document.getElementById("searchBox-2");
+            searchBox_1.addEventListener("keyup", function () {
+                var keyword = this.value;
+                keyword = keyword.toUpperCase();
+                var table_1 = document.getElementById("table-1");
+                var all_tr = table_1.getElementsByTagName("tr");
+                for (var i = 0; i < all_tr.length; i++) {
+                    var name_column = all_tr[i].getElementsByTagName("td")[index];
+                    if (name_column) {
+                        var name_value = name_column.textContent || name_column.innerText;
+                        name_value = name_value.toUpperCase();
+                        if (name_value.indexOf(keyword) > -1) {
+                            all_tr[i].style.display = ""; // show
+                        } else {
+                            all_tr[i].style.display = "none"; // hide
+                        }
+                    }
+                }
+            });
+        }
+
+        function filter_3(index) {
+            var searchBox_1 = document.getElementById("searchBox-2");
+            searchBox_1.addEventListener("keyup", function () {
+                var keyword = this.value;
+                keyword = keyword.toUpperCase();
+                var table_1 = document.getElementById("table-1");
+                var all_tr = table_1.getElementsByTagName("tr");
+                for (var i = 0; i < all_tr.length; i++) {
+                    var name_column = all_tr[i].getElementsByTagName("td")[index];
+                    if (name_column) {
+                        var name_value = name_column.textContent || name_column.innerText;
+                        name_value = name_value.toUpperCase();
+                        if (name_value.indexOf(keyword) > -1) {
+                            all_tr[i].style.display = ""; // show
+                        } else {
+                            all_tr[i].style.display = "none"; // hide
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+<div class = "container text-center" >
+    <h1>Welcome to Join Game</h1>
+    <h1> Game Filter</h1>
+        <label for="searchBox-1"></label><input type="text" id="searchBox-1" placeholder="Search Creator Email" onkeyup="filter_0(0)" >
+        <label for="searchBox-2"></label><input type="text" id="searchBox-2" placeholder="Search Game Name" onkeyup="filter_1(1)" >
+        <label for="searchBox-3"></label><input type="text" id="searchBox-3" placeholder="Search Game ID" onkeyup="filter_2(2)" >
+        <label for="searchBox-4"></label><input type="text" id="searchBox-4" placeholder="Search Player Number" onkeyup="filter_3(3)" >
+
+        <table class = "table table-striped" id = "table-1">
+            <tr>
+            <thead class = "thead-dark">
+                <th scope = "row">Creator Email</th>
+                <th scope = "row">Game Name</th>
+                <th scope = "row">Game ID</th>
+                <th scope = "row">Player Number</th>
+<!--                <th scope= "row">Join Game </th>-->
+            </thead>
+            </tr>
+
+            <tbody>
+            <tr th:each = "game : ${gamesFromDB}">
+                <td th:text = "${game.creatorEmail}"></td>
+                <td th:text = "${game.gameName}"></td>
+                <td th:text = "${game.id}"></td>
+                <td th:text = "${game.playerNum}"></td>
+                
+            </tr>
+            </tbody>
+        </table>
+</div>
+</body>
+</html>

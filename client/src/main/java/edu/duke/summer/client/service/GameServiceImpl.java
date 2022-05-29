@@ -34,15 +34,20 @@ public class GameServiceImpl implements GameService {
 
   @Override
   public Game createNewGame(final GameDto gameDto) {
-    if (gameRepository.existsById(gameDto.getId())) {
-      throw new IllegalArgumentException("Game ID already exists!");
-    }
+//    if (gameRepository.existsById(gameDto.getId())) {
+//      throw new IllegalArgumentException("Game ID already exists!");
+//    }
     final Game game = new Game();
-    game.setId(gameDto.getId());
+//    game.setId(gameDto.getId());
     game.setCreatorEmail(gameDto.getCreatorEmail());
     game.setGameName(gameDto.getGameName());
     game.setPlayerNum(gameDto.getPlayerNum());
     return gameRepository.save(game);
+  }
+
+  @Override
+  public List<Game> findAllGames(){
+    return gameRepository.findAll();
   }
 
   @Override
@@ -114,3 +119,4 @@ public class GameServiceImpl implements GameService {
   }
 
 }
+

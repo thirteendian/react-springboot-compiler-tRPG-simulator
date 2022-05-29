@@ -8,6 +8,7 @@ import javax.validation.constraints.Size;
 
 import java.util.*;
 
+
 public class GameDto {
 
   @SequenceGenerator(

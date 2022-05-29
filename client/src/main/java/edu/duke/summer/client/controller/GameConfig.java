@@ -17,14 +17,14 @@ public class GameConfig {
         return args -> {
             Game marianGame = new Game(
                     "Marian@gmail.com",
-                    4,
+                    3,
                     "Marian's Game"
             );
 
             Game alexGame = new Game(
                     "alex@gmail.com",
-                    5,
-                    "Mariam's Game"
+                    3,
+                    "alex's Game"
             );
 
             repository.saveAll(
