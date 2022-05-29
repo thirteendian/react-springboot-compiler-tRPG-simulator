@@ -29,4 +29,5 @@ public interface GameService {
 
   void deleteGame(final Game game);
 
+  List<Game> findAllGames();
 }

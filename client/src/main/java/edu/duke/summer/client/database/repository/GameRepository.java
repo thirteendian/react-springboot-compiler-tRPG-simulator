@@ -17,7 +17,8 @@ public interface GameRepository extends JpaRepository<Game, Long> {
   List<Game> findByCreatorEmailStartsWith(String creatorEmail);
 
   List<Game> findByGameNameStartsWith(String gameName);
-  
+
   void delete(Game game);
+
 
 }
