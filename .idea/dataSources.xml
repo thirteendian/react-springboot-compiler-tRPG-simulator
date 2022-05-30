@@ -8,7 +8,7 @@
       <jdbc-url>jdbc:postgresql://localhost:5440/game</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="postgres@localhost [2]" uuid="b3534896-a5fa-4bc3-baa1-851605787110">
+    <data-source source="LOCAL" name="postgres@localhost" uuid="342082e0-cd31-4861-8c17-bea4679c5907">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>

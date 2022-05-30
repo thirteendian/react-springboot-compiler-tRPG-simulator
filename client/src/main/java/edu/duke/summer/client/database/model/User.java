@@ -70,6 +70,15 @@ public class User {
         this.active = active;
     }
 
+    public User() {}
+    public User(String email, String firstName, String lastName, String password) {
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.active = true;
+    }
+
     @Override
     public boolean equals(Object o) {
         if(!getClass().equals(o.getClass())) return false;

@@ -1,5 +1,7 @@
 package edu.duke.summer.client.database.model;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 
 import java.lang.*;
@@ -12,13 +14,15 @@ import javax.persistence.*;
 @Table(name = "games")
 public class Game {
 
-  @SequenceGenerator(
-          name = "game_sequence",
-          sequenceName = "game_sequence",
-          allocationSize = 1
-  )
-
-  private String id;  //game id, primary key
+//  @SequenceGenerator(
+//          name = "game_sequence",
+//          sequenceName = "game_sequence",
+//          allocationSize = 1
+//  )
+  @Id @GeneratedValue(generator = "system-uuid")
+  @GenericGenerator(name = "system-uuid",strategy = "uuid")
+  @Column(unique = true, nullable = false, insertable = false, updatable = false)
+  private String id;
 
   @Column(nullable = false, unique = true, length = 45)
   private String creatorEmail;
@@ -29,8 +33,7 @@ public class Game {
   @Column(nullable = false, length = 45)
   private String gameName;
 
-  public Game() {
-  }
+  public Game() {}
 
   @Column(name = "GAME_ID")
   @Id
