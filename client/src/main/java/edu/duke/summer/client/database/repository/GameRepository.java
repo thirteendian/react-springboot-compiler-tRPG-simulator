@@ -9,7 +9,7 @@ import java.util.*;
 @Repository
 public interface GameRepository extends JpaRepository<Game, Long> {
 
-  Game findByGameId(Long id);
+  Optional<Game> findById(Long id);
 
   boolean existsById(Long id);
 

@@ -7,8 +7,7 @@ import javax.transaction.Transactional;
 
 import edu.duke.summer.client.database.model.Game;
 import edu.duke.summer.client.database.repository.GameRepository;
-import edu.duke.summer.client.database.model.DiceRolling;
-import edu.duke.summer.client.database.repository.DiceRollingRepository;
+//import edu.duke.summer.client.database.repository.DiceRollingRepository;
 
 import edu.duke.summer.client.dto.GameDto;
 import edu.duke.summer.client.dto.GameFilterDto;
@@ -27,7 +26,7 @@ import org.springframework.stereotype.Service;
 public class GameServiceImpl implements GameService {
 
 
-  private DiceRollingRepository diceRollingRepository;
+  //private DiceRollingRepository diceRollingRepository;
 
   @Autowired
   private GameRepository gameRepository;
@@ -97,11 +96,11 @@ public class GameServiceImpl implements GameService {
   }
 
   @Override
-  public Game joinGame(final GameDto gameDto) {
+  public Optional<Game> joinGame(final GameDto gameDto) {
     if (!gameRepository.existsById(gameDto.getId())) {
       throw new IllegalArgumentException("Game does not exists!");
     }
-    Game game = gameRepository.findByGameId(gameDto.getId());
+    Optional<Game> game = gameRepository.findById(gameDto.getId());
     return game;
   }
 
@@ -111,12 +110,17 @@ public class GameServiceImpl implements GameService {
     gameRepository.delete(game);
   }
 
-
   @Override
   public List<String> getDiceRollingResults(String game, String user) {
-    List<String> results = diceRollingRepository.findTop20RecentResults(game, user);
-    return results;
+    return null;
   }
+
+
+//  @Override
+//  public List<String> getDiceRollingResults(String game, String user) {
+//    List<String> results = diceRollingRepository.findTop20RecentResults(game, user);
+//    return results;
+//  }
 
 }
 
