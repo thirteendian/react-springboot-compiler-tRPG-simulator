@@ -1,15 +1,18 @@
 package edu.duke.summer.client.service;
 
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Optional;
+import java.util.*;
 import javax.transaction.Transactional;
 
 import edu.duke.summer.client.database.model.Game;
 import edu.duke.summer.client.database.repository.GameRepository;
 import edu.duke.summer.client.database.model.DiceRolling;
 import edu.duke.summer.client.database.repository.DiceRollingRepository;
+import edu.duke.summer.client.database.model.Visibility;
+import edu.duke.summer.client.database.repository.VisibilityRepository;
+import edu.duke.summer.client.database.model.MagicCheck;
+import edu.duke.summer.client.database.repository.MagicCheckRepository;
 
+import edu.duke.summer.client.dto.DiceRollingDto;
 import edu.duke.summer.client.dto.GameDto;
 import edu.duke.summer.client.dto.GameFilterDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,15 +25,23 @@ import org.springframework.stereotype.Service;
 
 //import com.maxmind.geoip2.DatabaseReader;
 
+import edu.duke.summer.client.algorithm.*;
+
 @Service
 @Transactional
 public class GameServiceImpl implements GameService {
 
-
   private DiceRollingRepository diceRollingRepository;
+
+  private VisibilityRepository visibilityRepository;
+
+
+  private MagicCheckRepository magicCheckRepository;
 
   @Autowired
   private GameRepository gameRepository;
+
+  private EvalServicempl evalService;
 
   @Override
   public Game createNewGame(final GameDto gameDto) {
@@ -105,12 +116,44 @@ public class GameServiceImpl implements GameService {
   public void deleteGame(final Game game) {
     gameRepository.delete(game);
   }
-
+  @Override
+  public DiceRolling getDiceRollingResults(DiceRollingDto diceRollingDto) {
+    MagicCheck magicCheck = new MagicCheck();
+    magicCheck.setId(diceRollingDto.getId());
+    magicCheck.setGame(diceRollingDto.getGame());
+    magicCheck.setUserEmail(diceRollingDto.getUserEmail());
+    magicCheck.setData(diceRollingDto.getRawData());
+    magicCheckRepository.save(magicCheck);
+    for (String visible : diceRollingDto.getVisibles()) {
+      Visibility visibility = new Visibility();
+      visibility.setGameId(diceRollingDto.getGame());
+      visibility.setPlayerId(visible);
+      visibility.setResultId(diceRollingDto.getId());
+      visibilityRepository.save(visibility);
+    }
+    String rawData = diceRollingDto.getRawData();
+    String result = evalService.EvalRoll(rawData, new HashMap<>(), new Random()).toString();
+    final DiceRolling diceRolling = new DiceRolling();
+    diceRolling.setId(diceRollingDto.getId());
+    diceRolling.setGame(diceRollingDto.getGame());
+    diceRolling.setUserEmail(diceRollingDto.getUserEmail());
+    diceRolling.setResult(result);
+    return diceRollingRepository.save(diceRolling);
+  }
 
   @Override
-  public List<DiceRolling> getDiceRollingResults(String game, String userEmail) {
-    List<DiceRolling> results = diceRollingRepository.findTop20RecentResults(game, userEmail);
+  public List<DiceRolling> getPlayerResults(String game, String player) {
+    List<Visibility> visibles = visibilityRepository.findTop20RecentResults(game, player);
+    List<DiceRolling> results = new ArrayList<>();
+    for (Visibility visible : visibles) {
+      results.add(diceRollingRepository.findById(visible.getResultId()));
+    }
     return results;
+  }
+
+  public MagicCheck getMagicCheckData(String id) {
+    MagicCheck magicCheck = magicCheckRepository.findById(id);
+    return magicCheck;
   }
 
 }

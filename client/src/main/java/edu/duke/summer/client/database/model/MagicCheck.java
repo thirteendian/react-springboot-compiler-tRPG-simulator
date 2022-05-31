@@ -7,8 +7,9 @@ import java.lang.*;
 import java.util.*;
 
 @Entity
-@Table(name = "diceRolling")
-public class DiceRolling {
+@Table(name = "magicCheck")
+public class MagicCheck {
+
     @Id
     @Column(unique = true, nullable = false, updatable = false)
     private String id;
@@ -20,7 +21,7 @@ public class DiceRolling {
     private String userEmail;
 
     @Column(nullable = false)
-    private String result;
+    private String data;
 
     public void setId(String id) {this.id = id;}
 
@@ -34,9 +35,9 @@ public class DiceRolling {
 
     public String getUserEmail() {return userEmail;}
 
-    public void setResult(String result) {this.result = result;}
+    public void setData(String data) {this.data = data;}
 
-    public String getResult() {return result;}
+    public String getData() {return data;}
 
     @Override
     public int hashCode() {
@@ -46,8 +47,8 @@ public class DiceRolling {
     @Override
     public boolean equals(Object obj) {
         if (obj.getClass().equals(getClass())) {
-            DiceRolling diceRolling = (DiceRolling) obj;
-            if (this.id.equals(diceRolling.getId())) {
+            MagicCheck magicCheck = (MagicCheck) obj;
+            if (this.id.equals(magicCheck.getId())) {
                 return true;
             }
         }
@@ -60,7 +61,7 @@ public class DiceRolling {
                 "id=" + id +
                 ", game='" + game + '\'' +
                 ", userEmail='" + userEmail + '\'' +
-                ", result='" + result + '\'' +
+                ", data='" + data + '\'' +
                 '}';
     }
 }

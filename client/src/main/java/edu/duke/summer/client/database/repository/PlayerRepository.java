@@ -1,6 +1,5 @@
 package edu.duke.summer.client.database.repository;
 
-import edu.duke.summer.client.database.model.Game;
 import edu.duke.summer.client.database.model.Player;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

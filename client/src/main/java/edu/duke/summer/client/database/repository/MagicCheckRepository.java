@@ -1,12 +1,12 @@
 package edu.duke.summer.client.database.repository;
 
-import edu.duke.summer.client.database.model.DiceRolling;
+import edu.duke.summer.client.database.model.MagicCheck;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface DiceRollingRepository extends JpaRepository<DiceRolling, Long> {
+public interface MagicCheckRepository extends JpaRepository<MagicCheck, Long> {
 
-    DiceRolling findById(String id);
+    MagicCheck findById(String id);
 
 }

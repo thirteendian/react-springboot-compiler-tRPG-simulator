@@ -5,7 +5,8 @@ import javax.transaction.Transactional;
 
 import edu.duke.summer.client.database.model.Game;
 import edu.duke.summer.client.database.model.DiceRolling;
-
+import edu.duke.summer.client.database.model.MagicCheck;
+import edu.duke.summer.client.dto.DiceRollingDto;
 import edu.duke.summer.client.dto.GameDto;
 import edu.duke.summer.client.dto.GameFilterDto;
 import org.springframework.stereotype.Service;
@@ -19,10 +20,13 @@ public interface GameService {
   List<Game> filterGame(final GameFilterDto gameFilterDto);
 
   Game joinGame(final GameDto gameDto);
-  //boolean checkPassowrd(final Long id, final String password);
-  
+
   void deleteGame(final Game game);
 
-  List<DiceRolling> getDiceRollingResults(String game, String userEmail);
+  DiceRolling getDiceRollingResults(DiceRollingDto diceRollingDto);
+
+  List<DiceRolling> getPlayerResults(String game, String userEmail);
+
+  MagicCheck getMagicCheckData(String id);
     
 }
