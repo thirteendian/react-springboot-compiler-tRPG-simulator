@@ -168,8 +168,15 @@
 
     </style>
     <script src="https://kit.fontawesome.com/087220df25.js" crossorigin="anonymous"></script>
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <script src="/app.js"></script>
 </head>
 <body id="grad1">
+<noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being
+    enabled. Please enable
+    Javascript and reload this page!</h2></noscript>
         <div>
             <div id = "search-bar-div">
             <form action = "https://www.google.com/search" id = "search-bar">
@@ -208,13 +215,27 @@
             </div>
 
             <div id = "resultTable">
+                <table id="conversation" class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Result:</th>
+                    </tr>
+                    </thead>
+                    <tbody id="greetings">
+                    </tbody>
+                </table>
             </div>
+
 
             <div id="inputParameter">
                 <form action="/gameCenter">
-                    <label>Input Your Parameters:</label><br>
-                    <input type="text" id="userParameters" name="" value=""><br>
-                <input type="button" value="Submit">
+                    <label for="connect">WebSocket connection:</label>
+                    <button id="connect" class="btn btn-default" type="submit">Connect</button>
+                    <button id="disconnect" class="btn btn-default" type="submit" disabled="disabled">Disconnect
+                    </button>
+                    <label>Rolling String:</label><br>
+                    <input type="text" id="name" class="form-control" placeholder="Your str here...">
+                    <button id="send" class="btn btn-default" type="submit">Send</button>
                 </form>
             </div>
 
