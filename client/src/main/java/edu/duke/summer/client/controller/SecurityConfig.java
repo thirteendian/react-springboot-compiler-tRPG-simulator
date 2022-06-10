@@ -26,19 +26,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     UserDetailsService userDetailsService;
 
-//    @Autowired
-//    DataSource dataSource;
+    @Autowired
+    DataSource dataSource;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.jdbcAuthentication()
-//                .dataSource(dataSource)
-//                .usersByUsernameQuery("select username,password,enabled from myuser where username=?")
-//                .authoritiesByUsernameQuery("select username,authority from authorities where username=?");
+        auth.jdbcAuthentication()
+                .dataSource(dataSource)
+                .usersByUsernameQuery("select username,password,enabled from myuser where username=?")
+                .authoritiesByUsernameQuery("select username,authority from authorities where username=?");
 
-////        auth.inMemoryAuthentication()
-
-        auth.userDetailsService(userDetailsService);
     }
 
     @Override
@@ -46,7 +43,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/user").hasAnyRole("USER","ADMIN")
-                .antMatchers("/game").hasRole("USER")
                 .antMatchers("/admin").hasRole("ADMIN")
                 .and().formLogin();
     }
