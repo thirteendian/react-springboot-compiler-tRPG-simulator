@@ -6,18 +6,25 @@ import edu.duke.summer.client.database.ShipmentRepository;
 import edu.duke.summer.client.database.model.User;
 import edu.duke.summer.client.dto.UserDto;
 import edu.duke.summer.client.service.UserService;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 
-@Controller
+@RestController
 public class AuthenticationController {
     @Autowired
     private UserService userService;
@@ -47,25 +54,40 @@ public class AuthenticationController {
         return "game";
     }
 
-    @GetMapping("/login")
-    public String login(Model model) {
-        model.addAttribute("login", new UserDto());
-        return "login";
+//    @GetMapping("/login")
+//    public String login(Model model) {
+//        model.addAttribute("login", new UserDto());
+//        return "login";
+//    }
+//
+//    @PostMapping("/login")
+//    public String loginpost(HttpServletRequest httpServletRequest, @ModelAttribute UserDto userDto, Model model) {
+//        UserDto loggedUser = new UserDto();
+//        model.addAttribute("login", userDto);
+//        try {
+//            User user = userService.logIn(userDto);
+////            //if successfully loggedin, create a session
+////            HttpSession session = httpServletRequest.getSession(true);
+////            SecurityContext securityContext = SecurityContextHolder.getContext();
+////            session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY,securityContext);
+////
+////            System.out.println(user.getEmail());
+////            loggedUser.setEmail(user.getEmail());
+//            model.addAttribute("loggedinformation",loggedUser);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return "game";//   /(userID)/game
+//    }
+
+    @GetMapping("/user")
+    public String user(){
+        return "game.html";
     }
 
-    @PostMapping("/login")
-    public String loginpost(@ModelAttribute UserDto userDto, Model model) {
-        UserDto loggedUser = new UserDto();
-        model.addAttribute("login", userDto);
-        try {
-            User user = userService.logIn(userDto);
-            System.out.println(user.getEmail());
-            loggedUser.setEmail(user.getEmail());
-            model.addAttribute("loggedinformation",loggedUser);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "game";//   /(userID)/game
+    @GetMapping("/admin")
+    public String admin(){
+        return("<h1>Welcome Admin</h1>");
     }
 
 

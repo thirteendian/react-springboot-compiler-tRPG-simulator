@@ -1,9 +1,14 @@
-CREATE TABLE user
+CREATE TABLE myuser
 (
-    email     varchar(100) not null,
---     firstName varchar(100) not null,
---     lastName  varchar(100) not null,
-    password  varchar(60)  not null,
-    boolean   boolean      not null,
-    PRIMARY KEY (email)
+    username     varchar(100) not null primary key,
+    password varchar(60) not null,
+    enabled boolean not null
 );
+
+create table authorities(
+    username     varchar(100) not null primary key,
+    authority varchar(100) not null,
+    constraint fk_authorities_users foreign key (username) references  myuser(username)
+);
+
+create unique index ix_auth_username on authorities(username, authority);
