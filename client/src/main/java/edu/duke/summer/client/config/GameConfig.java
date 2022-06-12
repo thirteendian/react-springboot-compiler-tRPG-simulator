@@ -1,4 +1,4 @@
-package edu.duke.summer.client.controller;
+package edu.duke.summer.client.config;
 
 
 import edu.duke.summer.client.database.model.Game;

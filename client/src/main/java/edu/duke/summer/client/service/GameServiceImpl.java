@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.core.context.SecurityContextHolder;
 //import org.springframework.security.core.session.SessionRegistry;
 //import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 //import com.maxmind.geoip2.DatabaseReader;
@@ -36,6 +37,7 @@ public class GameServiceImpl implements GameService {
   private VisibilityRepository visibilityRepository;
 
 
+  @Autowired
   private MagicCheckRepository magicCheckRepository;
 
   @Autowired
@@ -134,7 +136,8 @@ public class GameServiceImpl implements GameService {
     String rawData = diceRollingDto.getRawData();
     String result = evalService.EvalRoll(rawData, new HashMap<>(), new Random()).toString();
     final DiceRolling diceRolling = new DiceRolling();
-    diceRolling.setId(diceRollingDto.getId());
+    //Principle is current loggedin user
+    diceRolling.setId(diceRollingDto.getId());//TODO:
     diceRolling.setGame(diceRollingDto.getGame());
     diceRolling.setUserEmail(diceRollingDto.getUserEmail());
     diceRolling.setResult(result);

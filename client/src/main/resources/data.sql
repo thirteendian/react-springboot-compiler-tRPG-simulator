@@ -1,11 +1,2 @@
-INSERT INTO myuser (username, password, enabled)
-values ('user', 'pass', true);
-
-INSERT INTO myuser (username, password, enabled)
-values ('admin', 'pass', true);
-
-INSERT INTO authorities (username, authority)
-values ('user','ROLE_USER');
-
-INSERT INTO authorities (username,authority)
-values ('admin','ROLE_ADMIN');
+INSERT INTO users(String email, String firstName, String lastName, String password, String roles, boolean active)
+values ('user','u','ser', 'pass','ROLE_USER', true);
