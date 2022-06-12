@@ -22,6 +22,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.security.Principal;
 
 
 @RestController
@@ -80,9 +81,14 @@ public class AuthenticationController {
 //        return "game";//   /(userID)/game
 //    }
 
+//    @GetMapping("/")
+//    public String home(){
+//        return ("<h1> Welcome </h1>");
+//    }
+
     @GetMapping("/user")
-    public String user(){
-        return "<h1>Welcome User</h1>";
+    public String user(Principal principal){
+        return "<h1>Welcome name: "+ principal.getName()+"</h1>";
     }
 
     @GetMapping("/admin")

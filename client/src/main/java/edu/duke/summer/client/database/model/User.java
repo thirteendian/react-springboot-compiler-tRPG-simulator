@@ -5,11 +5,17 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
+/**
+ * A Table in Postgresql named users
+ * <p>
+ *     Note that it should not be named as user, or it will conflict with the original user created by spring security
+ */
 @Entity
 @Table(name = "users")
 public class User {
-    @Id @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid",strategy = "uuid")
+    @Id
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid")
     @Column(unique = true, nullable = false, insertable = false, updatable = false)
 //    @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
@@ -26,6 +32,9 @@ public class User {
 
     @Column(nullable = false)
     private String password;
+
+    @Column(nullable = true)
+    private String roles;
 
     @Column(nullable = false)
     private boolean active;
@@ -70,18 +79,37 @@ public class User {
         this.active = active;
     }
 
-    public User() {}
-    public User(String email, String firstName, String lastName, String password) {
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getRoles() {
+        return roles;
+    }
+
+    public void setRoles(String roles) {
+        this.roles = roles;
+    }
+
+    public User() {
+    }
+
+    public User(String email, String firstName, String lastName, String password, String roles, boolean active) {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
-        this.active = true;
+        this.roles = roles;
+        this.active = active;
     }
 
     @Override
     public boolean equals(Object o) {
-        if(!getClass().equals(o.getClass())) return false;
+        if (!getClass().equals(o.getClass())) return false;
         User user = (User) o;
         return email.equals(user.getEmail());
     }

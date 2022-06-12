@@ -1,4 +1,4 @@
-package edu.duke.summer.client.controller;
+package edu.duke.summer.client.config;
 
 
 import net.bytebuddy.asm.Advice;
@@ -18,7 +18,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.sql.DataSource;
 
-//In Memory Authentication
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -26,17 +25,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     UserDetailsService userDetailsService;
 
-    @Autowired
-    DataSource dataSource;
+//    @Autowired
+//    DataSource dataSource;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.jdbcAuthentication()
-                .dataSource(dataSource)
-                .usersByUsernameQuery("select username,password,enabled from myuser where username=?")
-                .authoritiesByUsernameQuery("select username,authority from authorities where username=?");
-
+//        auth.jdbcAuthentication()
+//                .dataSource(dataSource)
+//                .usersByUsernameQuery("select username,password,enabled from myuser where username=?")
+//                .authoritiesByUsernameQuery("select username,authority from authorities where username=?");
+        auth.userDetailsService(userDetailsService);
     }
+
+    /**
+     * Settings for authorization
+     * using HttpSecurity to setup roles for each
+     */
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -47,6 +51,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().formLogin();
     }
 
+    /**
+     * Gets the PasswordEncoder for springframework.security.
+     * <p>
+     * This method was used by springframework.security to encode string password into 60 length encoded string.
+     * @return
+     */
     @Bean
     public PasswordEncoder getPasswordEncoder(){
         return NoOpPasswordEncoder.getInstance();

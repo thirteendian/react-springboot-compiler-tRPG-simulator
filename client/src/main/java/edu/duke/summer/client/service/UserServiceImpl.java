@@ -24,67 +24,81 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User createNewUser(UserDto userDto) {
-        if(accountExist(userDto.getEmail())) {
-            throw new IllegalArgumentException("There is already an account under this email address.");
-        }
-        User user = new User();
-        user.setEmail(userDto.getEmail());
-        user.setFirstName(userDto.getFirstName());
-        user.setLastName(userDto.getLastName());
-        //password will be a length of 60 encrypted string with salt
-        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-        user.setActive(true);
-
-//        //Set authentication
-//        UsernamePasswordAuthenticationToken authReq = new UsernamePasswordAuthenticationToken(user.getEmail(),user.getPassword());
-//        Authentication authentication = (Authentication) authenticationManager.authenticate(authReq);
-//        SecurityContext securityContext = SecurityContextHolder.getContext();
-//        securityContext.setAuthentication((org.springframework.security.core.Authentication) authentication);
-        return userRepository.save(user);
+        return null;
     }
 
     @Override
     public User logIn(UserDto userDto) {
-        //check account exist
-        if(!accountExist(userDto.getEmail())) {
-            throw new IllegalArgumentException("Email address doesn't exist, please sign up first.");
-        }
-        //check password correct
-        if(!passwordCorrect(userDto.getEmail(), userDto.getPassword())) {
-            throw new IllegalArgumentException("The password is incorrect.");
-        }
-        //login, active account
-        User user = userRepository.findByEmail(passwordEncoder.encode(userDto.getEmail()));
-        user.setActive(true);
-        return user;
+        return null;
     }
 
     @Override
     public void logOut(UserDto userDto) {
-        //check account exist
-        if(!accountExist(userDto.getEmail())) {
-            throw new IllegalArgumentException("Email address doesn't exist, please sign up first.");
-        }
-        //check current status is login
-        if(!isActive(userDto.getEmail())) {
-            throw new IllegalArgumentException("You have not logged in yet");
-        }
-        userRepository.findByEmail(userDto.getEmail()).setActive(false);
-    }
 
-
-    /**
-     * utilities
-     */
-    public boolean accountExist(String email) {
-        return userRepository.existsUserByEmail(email);
     }
-
-    public boolean passwordCorrect(String email, String providedPassword) {
-        return userRepository.findByEmail(email).getPassword().equals(providedPassword);
-    }
-
-    public boolean isActive(String email) {
-        return userRepository.findByEmail(email).isActive();
-    }
+//    @Override
+//    public User createNewUser(UserDto userDto) {
+//        if(accountExist(userDto.getEmail())) {
+//            throw new IllegalArgumentException("There is already an account under this email address.");
+//        }
+//        User user = new User();
+//        user.setEmail(userDto.getEmail());
+//        user.setFirstName(userDto.getFirstName());
+//        user.setLastName(userDto.getLastName());
+//        //password will be a length of 60 encrypted string with salt
+//        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+//        user.setActive(true);
+//
+////        //Set authentication
+////        UsernamePasswordAuthenticationToken authReq = new UsernamePasswordAuthenticationToken(user.getEmail(),user.getPassword());
+////        Authentication authentication = (Authentication) authenticationManager.authenticate(authReq);
+////        SecurityContext securityContext = SecurityContextHolder.getContext();
+////        securityContext.setAuthentication((org.springframework.security.core.Authentication) authentication);
+//        return userRepository.save(user);
+//    }
+//
+//    @Override
+//    public User logIn(UserDto userDto) {
+//        //check account exist
+//        if(!accountExist(userDto.getEmail())) {
+//            throw new IllegalArgumentException("Email address doesn't exist, please sign up first.");
+//        }
+//        //check password correct
+//        if(!passwordCorrect(userDto.getEmail(), userDto.getPassword())) {
+//            throw new IllegalArgumentException("The password is incorrect.");
+//        }
+//        //login, active account
+//        User user = userRepository.findByEmail(passwordEncoder.encode(userDto.getEmail()));
+//        user.setActive(true);
+//        return user;
+//    }
+//
+//    @Override
+//    public void logOut(UserDto userDto) {
+//        //check account exist
+//        if(!accountExist(userDto.getEmail())) {
+//            throw new IllegalArgumentException("Email address doesn't exist, please sign up first.");
+//        }
+//        //check current status is login
+//        if(!isActive(userDto.getEmail())) {
+//            throw new IllegalArgumentException("You have not logged in yet");
+//        }
+//        userRepository.findByEmail(userDto.getEmail()).setActive(false);
+//    }
+//
+//
+//    /**
+//     * utilities
+//     */
+//    public boolean accountExist(String email) {
+//        return userRepository.existsUserByEmail(email);
+//    }
+//
+//    public boolean passwordCorrect(String email, String providedPassword) {
+//        return userRepository.findByEmail(email).getPassword().equals(providedPassword);
+//    }
+//
+//    public boolean isActive(String email) {
+//        return userRepository.findByEmail(email).isActive();
+//    }
 }

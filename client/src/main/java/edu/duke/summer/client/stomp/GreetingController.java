@@ -17,13 +17,12 @@ public class GreetingController {
     @MessageMapping("/hello")
     @SendTo("/topic/greetings")
     public Greeting greeting(HelloMessage message) throws Exception {
-        Thread.sleep(1000); // simulated delay
         DiceRollingDto diceRollingDto = new DiceRollingDto();
         diceRollingDto.setUserEmail("user");
         diceRollingDto.setGame("game");
         diceRollingDto.setRawData(message.getName());
         DiceRolling diceRolling = gameService.getDiceRollingResults(diceRollingDto);
-        return new Greeting("Your Result of " + HtmlUtils.htmlEscape(message.getName()) + " is " + diceRolling.getResult());//"xxxx(waiting algorithm)");
+        return new Greeting("Your Result of " + HtmlUtils.htmlEscape(message.getName()) + " is " + gameService.getDiceRollingResults(diceRollingDto));//"xxxx(waiting algorithm)");
     }
 
 

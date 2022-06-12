@@ -23,6 +23,10 @@ public interface GameService {
 
   void deleteGame(final Game game);
 
+  /**
+   * @param diceRollingDto
+   * @return
+   */
   DiceRolling getDiceRollingResults(DiceRollingDto diceRollingDto);
 
   List<DiceRolling> getPlayerResults(String game, String userEmail);
