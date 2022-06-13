@@ -16,4 +16,9 @@ public class ValueNode extends ExpNode {
     public Integer eval(HashMap<String, Integer> vars, Random randNumGen) {
         return this.value;
     }
+
+    @Override
+    public void save(RuleInfo info) {
+
+    }
 }

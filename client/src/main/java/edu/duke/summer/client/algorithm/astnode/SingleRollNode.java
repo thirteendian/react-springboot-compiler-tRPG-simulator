@@ -18,7 +18,11 @@ public class SingleRollNode extends ExpNode {
     public Integer eval(HashMap<String, Integer> vars, Random randNumGen) {
         //set upper limit for the random numbers
         int randNum = randNumGen.nextInt(sides) + 1;
-        System.out.println("SingleRoll:" + randNum);
         return randNum;
+    }
+
+    @Override
+    public void save(RuleInfo info) {
+
     }
 }

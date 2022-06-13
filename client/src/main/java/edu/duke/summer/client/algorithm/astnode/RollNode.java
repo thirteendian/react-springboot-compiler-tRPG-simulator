@@ -35,8 +35,13 @@ public class RollNode extends ExpNode {
             //set upper limit for the random numbers
             randomResult = randNumGen.nextInt(sides) + 1;
         }
-        System.out.println("RollExp:" + randomResult);
+      //  System.out.println("RollExp:" + randomResult);
         return randomResult;
+
+    }
+
+    @Override
+    public void save(RuleInfo info) {
 
     }
 }

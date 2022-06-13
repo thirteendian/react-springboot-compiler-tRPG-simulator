@@ -19,6 +19,64 @@ public interface inputListener extends ParseTreeListener {
 	 */
 	void exitProg(inputParser.ProgContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link inputParser#exps}.
+	 * @param ctx the parse tree
+	 */
+	void enterExps(inputParser.ExpsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link inputParser#exps}.
+	 * @param ctx the parse tree
+	 */
+	void exitExps(inputParser.ExpsContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code nilExp}
+	 * labeled alternative in {@link inputParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void enterNilExp(inputParser.NilExpContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code nilExp}
+	 * labeled alternative in {@link inputParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void exitNilExp(inputParser.NilExpContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code arrayExp}
+	 * labeled alternative in {@link inputParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void enterArrayExp(inputParser.ArrayExpContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code arrayExp}
+	 * labeled alternative in {@link inputParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void exitArrayExp(inputParser.ArrayExpContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code funExp}
+	 * labeled alternative in {@link inputParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunExp(inputParser.FunExpContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code funExp}
+	 * labeled alternative in {@link inputParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunExp(inputParser.FunExpContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code compareExp}
+	 * labeled alternative in {@link inputParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void enterCompareExp(inputParser.CompareExpContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code compareExp}
+	 * labeled alternative in {@link inputParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void exitCompareExp(inputParser.CompareExpContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code parensExp}
 	 * labeled alternative in {@link inputParser#exp}.
 	 * @param ctx the parse tree
@@ -55,17 +113,17 @@ public interface inputListener extends ParseTreeListener {
 	 */
 	void exitTypeDefExp(inputParser.TypeDefExpContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code nilExp}
+	 * Enter a parse tree produced by the {@code expList}
 	 * labeled alternative in {@link inputParser#exp}.
 	 * @param ctx the parse tree
 	 */
-	void enterNilExp(inputParser.NilExpContext ctx);
+	void enterExpList(inputParser.ExpListContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code nilExp}
+	 * Exit a parse tree produced by the {@code expList}
 	 * labeled alternative in {@link inputParser#exp}.
 	 * @param ctx the parse tree
 	 */
-	void exitNilExp(inputParser.NilExpContext ctx);
+	void exitExpList(inputParser.ExpListContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code arithmeticExp}
 	 * labeled alternative in {@link inputParser#exp}.
@@ -115,6 +173,42 @@ public interface inputListener extends ParseTreeListener {
 	 */
 	void exitFunDefExp(inputParser.FunDefExpContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code varDefExp}
+	 * labeled alternative in {@link inputParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void enterVarDefExp(inputParser.VarDefExpContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code varDefExp}
+	 * labeled alternative in {@link inputParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void exitVarDefExp(inputParser.VarDefExpContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code structExp}
+	 * labeled alternative in {@link inputParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void enterStructExp(inputParser.StructExpContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code structExp}
+	 * labeled alternative in {@link inputParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void exitStructExp(inputParser.StructExpContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code logicExp}
+	 * labeled alternative in {@link inputParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void enterLogicExp(inputParser.LogicExpContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code logicExp}
+	 * labeled alternative in {@link inputParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void exitLogicExp(inputParser.LogicExpContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code conditionalExp}
 	 * labeled alternative in {@link inputParser#exp}.
 	 * @param ctx the parse tree
@@ -139,26 +233,6 @@ public interface inputListener extends ParseTreeListener {
 	 */
 	void exitValueExp(inputParser.ValueExpContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link inputParser#defTypeBody}.
-	 * @param ctx the parse tree
-	 */
-	void enterDefTypeBody(inputParser.DefTypeBodyContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link inputParser#defTypeBody}.
-	 * @param ctx the parse tree
-	 */
-	void exitDefTypeBody(inputParser.DefTypeBodyContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link inputParser#defType}.
-	 * @param ctx the parse tree
-	 */
-	void enterDefType(inputParser.DefTypeContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link inputParser#defType}.
-	 * @param ctx the parse tree
-	 */
-	void exitDefType(inputParser.DefTypeContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link inputParser#fields}.
 	 * @param ctx the parse tree
 	 */
@@ -169,6 +243,40 @@ public interface inputListener extends ParseTreeListener {
 	 */
 	void exitFields(inputParser.FieldsContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code regularTypeDefExp}
+	 * labeled alternative in {@link inputParser#defType}.
+	 * @param ctx the parse tree
+	 */
+	void enterRegularTypeDefExp(inputParser.RegularTypeDefExpContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code regularTypeDefExp}
+	 * labeled alternative in {@link inputParser#defType}.
+	 * @param ctx the parse tree
+	 */
+	void exitRegularTypeDefExp(inputParser.RegularTypeDefExpContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code assignTypeDefExp}
+	 * labeled alternative in {@link inputParser#defType}.
+	 * @param ctx the parse tree
+	 */
+	void enterAssignTypeDefExp(inputParser.AssignTypeDefExpContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code assignTypeDefExp}
+	 * labeled alternative in {@link inputParser#defType}.
+	 * @param ctx the parse tree
+	 */
+	void exitAssignTypeDefExp(inputParser.AssignTypeDefExpContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link inputParser#typeID}.
+	 * @param ctx the parse tree
+	 */
+	void enterTypeID(inputParser.TypeIDContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link inputParser#typeID}.
+	 * @param ctx the parse tree
+	 */
+	void exitTypeID(inputParser.TypeIDContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link inputParser#defFun}.
 	 * @param ctx the parse tree
 	 */
@@ -178,4 +286,154 @@ public interface inputListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitDefFun(inputParser.DefFunContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link inputParser#funcallExp}.
+	 * @param ctx the parse tree
+	 */
+	void enterFuncallExp(inputParser.FuncallExpContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link inputParser#funcallExp}.
+	 * @param ctx the parse tree
+	 */
+	void exitFuncallExp(inputParser.FuncallExpContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link inputParser#params}.
+	 * @param ctx the parse tree
+	 */
+	void enterParams(inputParser.ParamsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link inputParser#params}.
+	 * @param ctx the parse tree
+	 */
+	void exitParams(inputParser.ParamsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link inputParser#initArrayExp}.
+	 * @param ctx the parse tree
+	 */
+	void enterInitArrayExp(inputParser.InitArrayExpContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link inputParser#initArrayExp}.
+	 * @param ctx the parse tree
+	 */
+	void exitInitArrayExp(inputParser.InitArrayExpContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link inputParser#initStructExp}.
+	 * @param ctx the parse tree
+	 */
+	void enterInitStructExp(inputParser.InitStructExpContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link inputParser#initStructExp}.
+	 * @param ctx the parse tree
+	 */
+	void exitInitStructExp(inputParser.InitStructExpContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link inputParser#defVar}.
+	 * @param ctx the parse tree
+	 */
+	void enterDefVar(inputParser.DefVarContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link inputParser#defVar}.
+	 * @param ctx the parse tree
+	 */
+	void exitDefVar(inputParser.DefVarContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link inputParser#lvalue}.
+	 * @param ctx the parse tree
+	 */
+	void enterLvalue(inputParser.LvalueContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link inputParser#lvalue}.
+	 * @param ctx the parse tree
+	 */
+	void exitLvalue(inputParser.LvalueContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link inputParser#ifStmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterIfStmt(inputParser.IfStmtContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link inputParser#ifStmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitIfStmt(inputParser.IfStmtContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link inputParser#whileStmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterWhileStmt(inputParser.WhileStmtContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link inputParser#whileStmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitWhileStmt(inputParser.WhileStmtContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link inputParser#forStmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterForStmt(inputParser.ForStmtContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link inputParser#forStmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitForStmt(inputParser.ForStmtContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link inputParser#returnStmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterReturnStmt(inputParser.ReturnStmtContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link inputParser#returnStmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitReturnStmt(inputParser.ReturnStmtContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link inputParser#stmts}.
+	 * @param ctx the parse tree
+	 */
+	void enterStmts(inputParser.StmtsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link inputParser#stmts}.
+	 * @param ctx the parse tree
+	 */
+	void exitStmts(inputParser.StmtsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link inputParser#stmtList}.
+	 * @param ctx the parse tree
+	 */
+	void enterStmtList(inputParser.StmtListContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link inputParser#stmtList}.
+	 * @param ctx the parse tree
+	 */
+	void exitStmtList(inputParser.StmtListContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link inputParser#stmtField}.
+	 * @param ctx the parse tree
+	 */
+	void enterStmtField(inputParser.StmtFieldContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link inputParser#stmtField}.
+	 * @param ctx the parse tree
+	 */
+	void exitStmtField(inputParser.StmtFieldContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link inputParser#array}.
+	 * @param ctx the parse tree
+	 */
+	void enterArray(inputParser.ArrayContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link inputParser#array}.
+	 * @param ctx the parse tree
+	 */
+	void exitArray(inputParser.ArrayContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link inputParser#option}.
+	 * @param ctx the parse tree
+	 */
+	void enterOption(inputParser.OptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link inputParser#option}.
+	 * @param ctx the parse tree
+	 */
+	void exitOption(inputParser.OptionContext ctx);
 }

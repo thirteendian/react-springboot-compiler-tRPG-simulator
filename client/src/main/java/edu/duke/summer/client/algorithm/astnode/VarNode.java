@@ -18,4 +18,9 @@ public class VarNode extends ExpNode{
             return value;
         }
     }
+
+    @Override
+    public void save(RuleInfo info) {
+
+    }
 }
