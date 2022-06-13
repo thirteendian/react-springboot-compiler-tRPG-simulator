@@ -1,13 +1,26 @@
 package edu.duke.summer.client.algorithm;
 
 import edu.duke.summer.client.algorithm.astnode.*;
+import org.antlr.v4.runtime.tree.TerminalNode;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 //build AST tree
 public class BuildAstVisitor extends inputBaseVisitor<ExpNode>{
+    String realTypeId;
+    HashMap<String, TypeDefNode> typeList = new HashMap<>();
+
+    public HashMap<String, TypeDefNode> getTypeList() {
+        return typeList;
+    }
+
     @Override
     public ExpNode visitProg(inputParser.ProgContext ctx) {
         return visit(ctx.exp());
     }
+
 
     @Override
     public ExpNode visitValueExp(inputParser.ValueExpContext ctx) {
@@ -32,11 +45,9 @@ public class BuildAstVisitor extends inputBaseVisitor<ExpNode>{
             case inputLexer.MUL:
                 node = new MulNode();
                 break;
-            case inputLexer.DIV:
+            default :
                 node = new DivNode();
-                break;
-            default:
-                throw new IllegalArgumentException("the operation is not supported");
+
         }
         node.setLeftExp(visit(ctx.leftExp));
         node.setRightExp(visit(ctx.rightExp));
@@ -67,4 +78,58 @@ public class BuildAstVisitor extends inputBaseVisitor<ExpNode>{
     public ExpNode visitRollExp(inputParser.RollExpContext ctx) {
         return new RollNode(String.valueOf(ctx.ROLL().getText()));
     }
+
+    @Override
+    public ExpNode visitTypeDefExp(inputParser.TypeDefExpContext ctx){
+        return visitChildren(ctx);
+    }
+
+    public void getId(inputParser.TypeIDContext typeCtx){
+        if(typeCtx.ID() != null){
+            realTypeId = realTypeId + typeCtx.ID().getText();
+        }else {
+            inputParser.ArrayContext arrayCtx = typeCtx.array();
+            inputParser.OptionContext optionCtx = typeCtx.option();
+            if (arrayCtx != null) {
+                realTypeId = realTypeId + "array of " ;
+                getId(arrayCtx.typeID());
+            }else{
+                realTypeId = realTypeId + "option of ";
+                getId(optionCtx.typeID());
+            }
+        }
+    }
+    @Override
+    public ExpNode visitRegularTypeDefExp(inputParser.RegularTypeDefExpContext ctx){
+        TypeDefNode node = new TypeDefNode();
+        String newTypeId = String.valueOf(ctx.idExp.getText());
+        node.setTypeId(newTypeId);
+        HashMap<String, String> fields = new HashMap<String, String>();
+        List<TerminalNode> fieldIds = ctx.fields().ID();
+        List<String> fieldTypes = new ArrayList<>();
+        List<inputParser.TypeIDContext> fieldTypeIDContext = ctx.fields().typeID();
+        for(inputParser.TypeIDContext typeCtx : fieldTypeIDContext){
+            realTypeId = "";
+            getId(typeCtx);
+            fieldTypes.add(realTypeId);
+        }
+        for(int i = 0; i < fieldIds.size(); i++){
+            fields.put(String.valueOf(fieldIds.get(i).getText()), fieldTypes.get(i));
+        }
+        node.setTypeFields(fields);
+        for(Object obj : fields.keySet()){
+            Object value = fields.get(obj);
+        }
+        typeList.put(newTypeId, node);
+        return node;
+    }
+
+    @Override
+    public ExpNode visitAssignTypeDefExp(inputParser.AssignTypeDefExpContext ctx){
+        String newTypeId = String.valueOf(ctx.idExp.getText());
+        String referTypeId = String.valueOf(ctx.refer.getText());
+        AssignTypeNode node = new AssignTypeNode(newTypeId, referTypeId);
+        return node;
+    }
+
 }

@@ -11,4 +11,9 @@ public class MulNode extends ArithmeticNode {
     public Integer eval(HashMap<String, Integer> vars, Random randNumGen) {
         return this.leftExp.eval(vars, randNumGen) * this.rightExp.eval(vars, randNumGen);
     }
+
+    @Override
+    public void save(RuleInfo info) {
+
+    }
 }
