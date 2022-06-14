@@ -10,20 +10,19 @@ import java.util.*;
 @Table(name = "magicCheck")
 public class MagicCheck {
 
-    @Id
-    @Column(unique = true, nullable = false, updatable = false)
+    @Id @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid",strategy = "uuid")
+    @Column(unique = true, nullable = false, insertable = false, updatable = false)
     private String id;
 
     @Column(nullable = false)
     private String game;
 
     @Column(nullable = false)
-    private String userEmail;
+    private String player;
 
     @Column(nullable = false)
     private String data;
-
-    public void setId(String id) {this.id = id;}
 
     public String getId() {return id;}
 
@@ -31,13 +30,15 @@ public class MagicCheck {
 
     public String getGame() {return game;}
 
-    public void setUserEmail(String userEmail) {this.userEmail = userEmail;}
+    public void setPlayer(String player) {this.player = player;}
 
-    public String getUserEmail() {return userEmail;}
+    public String getPlayer() {return player;}
 
     public void setData(String data) {this.data = data;}
 
     public String getData() {return data;}
+
+    public MagicCheck() {}
 
     @Override
     public int hashCode() {
@@ -48,9 +49,7 @@ public class MagicCheck {
     public boolean equals(Object obj) {
         if (obj.getClass().equals(getClass())) {
             MagicCheck magicCheck = (MagicCheck) obj;
-            if (this.id.equals(magicCheck.getId())) {
-                return true;
-            }
+            return this.id.equals(magicCheck.getId());
         }
         return false;
     }
@@ -60,7 +59,7 @@ public class MagicCheck {
         return "DiceRolling{" +
                 "id=" + id +
                 ", game='" + game + '\'' +
-                ", userEmail='" + userEmail + '\'' +
+                ", player='" + player + '\'' +
                 ", data='" + data + '\'' +
                 '}';
     }

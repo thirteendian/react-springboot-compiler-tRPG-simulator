@@ -9,20 +9,19 @@ import java.util.*;
 @Entity
 @Table(name = "diceRolling")
 public class DiceRolling {
-    @Id
-    @Column(unique = true, nullable = false, updatable = false)
+    @Id @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid",strategy = "uuid")
+    @Column(unique = true, nullable = false, insertable = false, updatable = false)
     private String id;
 
     @Column(nullable = false)
     private String game;
 
     @Column(nullable = false)
-    private String userEmail;
+    private String player;
 
     @Column(nullable = false)
     private String result;
-
-    public void setId(String id) {this.id = id;}
 
     public String getId() {return id;}
 
@@ -30,13 +29,15 @@ public class DiceRolling {
 
     public String getGame() {return game;}
 
-    public void setUserEmail(String userEmail) {this.userEmail = userEmail;}
+    public void setPlayer(String player) {this.player = player;}
 
-    public String getUserEmail() {return userEmail;}
+    public String getPlayer() {return player;}
 
     public void setResult(String result) {this.result = result;}
 
     public String getResult() {return result;}
+
+    public DiceRolling() {}
 
     @Override
     public int hashCode() {
@@ -59,7 +60,7 @@ public class DiceRolling {
         return "DiceRolling{" +
                 "id=" + id +
                 ", game='" + game + '\'' +
-                ", userEmail='" + userEmail + '\'' +
+                ", player='" + player + '\'' +
                 ", result='" + result + '\'' +
                 '}';
     }
