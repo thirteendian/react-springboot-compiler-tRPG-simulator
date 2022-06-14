@@ -5,11 +5,14 @@ function setConnected(connected) {
     $("#disconnect").prop("disabled", !connected);
     if (connected) {
         $("#conversation").show();
+        $("#magicCheckTable").show();
     }
     else {
         $("#conversation").hide();
+        $("#magicCheckTable").hide();
     }
-    $("#greetings").html("");
+    $("#results").html("");
+    $("#magicCheckResult").html("");
 }
 
 function connect() {
@@ -18,8 +21,9 @@ function connect() {
     stompClient.connect({}, function (frame) {
         setConnected(true);
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/greetings', function (greeting) {
-            showGreeting(JSON.parse(greeting.body).content);
+        stompClient.subscribe('/dicerolling/result', function (RespDiceRollingResult) {
+            showResult(JSON.parse(RespDiceRollingResult.body).content);
+            showMagicCheck(JSON.parse(RespDiceRollingResult.body).magicCheckList);
         });
     });
 }
@@ -32,12 +36,24 @@ function disconnect() {
     console.log("Disconnected");
 }
 
-function sendName() {
-    stompClient.send("/app/hello", {}, JSON.stringify({'name': $("#name").val()}));
+function sendRawString() {
+    var checkbox = document.getElementById('magicCheckbox');
+    var ifMagicCheck = false;
+    if(checkbox.checked){
+        ifMagicCheck=true;
+    }
+    stompClient.send("/app/dicerolling_result", {}, JSON.stringify({'rawString': $("#rawstring").val(),'magicCheck': ifMagicCheck}));
 }
 
-function showGreeting(message) {
-    $("#greetings").append("<tr><td>" + message + "</td></tr>");
+function showResult(message) {
+    $("#results").append("<tr><td>" + message + "</td></tr>");
+}
+
+function showMagicCheck(megicCheckList){
+    var table = document.getElementById('magicCheckResult');
+    for(var i = 0; i< megicCheckList.length;i++){
+        table.innerHTML += megicCheckList[i].data;
+    }
 }
 
 $(function () {
@@ -46,5 +62,5 @@ $(function () {
     });
     $( "#connect" ).click(function() { connect(); });
     $( "#disconnect" ).click(function() { disconnect(); });
-    $( "#send" ).click(function() { sendName(); });
+    $( "#sendrawstring" ).click(function() { sendRawString(); });
 });

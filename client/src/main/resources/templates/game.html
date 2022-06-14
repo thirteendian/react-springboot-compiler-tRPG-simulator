@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>GameCenter</title>
@@ -168,9 +168,11 @@
 
     </style>
     <script src="https://kit.fontawesome.com/087220df25.js" crossorigin="anonymous"></script>
+<!--   ------------------------------------ SockJS and STOMP javascript libraries-->
     <script src="/webjars/jquery/jquery.min.js"></script>
     <script src="/webjars/sockjs-client/sockjs.min.js"></script>
     <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+<!--      --------------------------------- Logic of Client Application-->
     <script src="/app.js"></script>
 </head>
 <body id="grad1">
@@ -198,7 +200,7 @@
                         </a>
                     </div>
                     <div style="display: inline-block;">
-                        <p> Marian</p>
+                        <p th:text="${curruser}" />
                     </div>
                 </div>
 
@@ -215,13 +217,15 @@
             </div>
 
             <div id = "resultTable">
+<!--      ----------------------------- This ID related to js whether to show the result-->
                 <table id="conversation" class="table table-striped">
                     <thead>
                     <tr>
                         <th>Result:</th>
                     </tr>
                     </thead>
-                    <tbody id="greetings">
+<!--      ----------------------------- This ID related to js content-->
+                    <tbody id="results">
                     </tbody>
                 </table>
             </div>
@@ -233,11 +237,17 @@
                     <button id="connect" class="btn btn-default" type="submit">Connect</button>
                     <button id="disconnect" class="btn btn-default" type="submit" disabled="disabled">Disconnect
                     </button>
+                    <p>
+                    MagicCheck?
+                    <input name="magicCheck" id="magicCheckbox" type="checkbox">
+                    <p>
                     <label>Rolling String:</label><br>
-                    <input type="text" id="name" class="form-control" placeholder="Your str here...">
-                    <button id="send" class="btn btn-default" type="submit">Send</button>
+                    <input type="text" id="rawstring" class="form-control" placeholder="Your str here...">
+                    <button id="sendrawstring" class="btn btn-default" type="submit">Send</button>
                 </form>
             </div>
+
+
 
         </div>
 

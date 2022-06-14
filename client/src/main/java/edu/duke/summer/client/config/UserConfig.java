@@ -16,7 +16,7 @@ public class UserConfig {
     CommandLineRunner commandLineRunnerUser(UserRepository repository){
         return args -> {
             User John = new User(
-                    "user",
+                    "user1",
                     "John",
                     "Alex",
                     "pass",
@@ -25,11 +25,11 @@ public class UserConfig {
             );
 
             User Bob = new User(
-                    "admin",
+                    "user2",
                     "Bob",
                     "Dylan",
                     "pass",
-                    "ROLE_USER,ROLE_ADMIN",
+                    "ROLE_USER",
                     true
             );
 //
