@@ -16,7 +16,7 @@ import java.util.*;
 @Repository
 public interface VisibilityRepository extends JpaRepository<Visibility, Long> {
 
-    @Query("select v from Visibility v where v.gameId = :game and v.playerId = :player")
+    @Query("select v from Visibility v where v.game = :game and v.player = :player")
     List<Visibility> findRecentResults(@Param("game") String game, @Param("player") String player, Pageable pageable);
 
     default List<Visibility> findTop20RecentResults(String game, String player) {

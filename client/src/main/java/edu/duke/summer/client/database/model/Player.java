@@ -18,32 +18,26 @@ public class Player {
     private String id;
 
     @Column(nullable = false)
-    private String gameId;
+    private String game;
 
     @Column(nullable = false)
     private String userId;
 
     public Player() {}
 
-    public Player(String gameId, String userId) {
-        this.gameId = gameId;
+    public Player(String game, String userId) {
+        this.game = game;
         this.userId = userId;
     }
 
-    @Column(name = "PLAYER_ID")
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
+    public String getGame() { return game; }
 
-    public String getGameId() { return gameId; }
-
-    public void setGameId(String gameId) { this.gameId = gameId; }
+    public void setGame(String game) { this.game = game; }
 
     public String getUserId() { return userId; }
 
@@ -53,7 +47,7 @@ public class Player {
     public String toString() {
         return "Player{" +
                 "id=" + id +
-                ", game='" + gameId + '\'' +
+                ", game='" + game + '\'' +
                 ", user='" + userId + '\'' +
                 '}';
     }

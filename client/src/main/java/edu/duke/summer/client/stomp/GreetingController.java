@@ -18,7 +18,7 @@ public class GreetingController {
     @SendTo("/topic/greetings")
     public Greeting greeting(HelloMessage message) throws Exception {
         DiceRollingDto diceRollingDto = new DiceRollingDto();
-        diceRollingDto.setUserEmail("user");
+        diceRollingDto.setPlayer("user");
         diceRollingDto.setGame("game");
         diceRollingDto.setRawData(message.getName());
         DiceRolling diceRolling = gameService.getDiceRollingResults(diceRollingDto);

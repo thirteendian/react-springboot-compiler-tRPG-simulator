@@ -16,35 +16,37 @@ public class Visibility {
     private String id;
 
     @Column(nullable = false)
-    private String gameId;
+    private String game;
 
     @Column(nullable = false)
-    private String playerId;
+    private String player;
 
     @Column(nullable = false)
-    private String resultId;
+    private String result;
 
     public String getId() {return id;}
 
-    public void setGameId(String gameId) {this.gameId = gameId;}
+    public void setGame(String game) {this.game = game;}
 
-    public String getGameId() {return gameId;}
+    public String getGame() {return game;}
 
-    public void setPlayerId(String playerId) {this.playerId = playerId;}
+    public void setPlayer(String player) {this.player = player;}
 
-    public String getPlayerId() {return playerId;}
+    public String getPlayer() {return player;}
 
-    public void setResultId(String resultId) {this.resultId = resultId;}
+    public void setResult(String result) {this.result = result;}
 
-    public String getResultId() {return resultId;}
+    public String getResult() {return result;}
+
+    public Visibility() {}
 
     @Override
     public String toString() {
         return "Visibility{" +
                 "id=" + id +
-                ", game='" + gameId + '\'' +
-                ", player='" + playerId + '\'' +
-                ", result='" + resultId + '\'' +
+                ", game='" + game + '\'' +
+                ", player='" + player + '\'' +
+                ", result='" + result + '\'' +
                 '}';
     }
 
