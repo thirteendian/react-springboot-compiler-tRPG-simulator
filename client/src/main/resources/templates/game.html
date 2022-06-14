@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>GameCenter</title>
     <link rel="stylesheet" type="text/css" href="game.css">
-<!--    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">-->
+    <!--    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">-->
     <style>
         #grad1 {
             height: 100vh;
@@ -110,8 +110,8 @@
         }
 
         #nav-links li:hover a{
-               color: #c1c2ff;
-               transition: 0.3s;
+            color: #c1c2ff;
+            transition: 0.3s;
         }
 
         #nav-links li:hover ~.Personal-page-active{
@@ -148,10 +148,20 @@
 
         #resultTable{
             width:275px;
-            height: 50%;
+            height: 35%;
             background: #c1c2ff;
             position: fixed;
             top:100px;
+            right:15px;
+            padding: 20px 30px;
+        }
+
+        #visibility{
+            width:275px;
+            height:17%;
+            background: #c1c2ff;
+            position: fixed;
+            top:480px;
             right:15px;
             padding: 20px 30px;
         }
@@ -161,64 +171,450 @@
             height: 10%;
             background: #c1c2ff;
             position: fixed;
-            top:650px;
+            top:700px;
             right:15px;
             padding: 20px 30px;
         }
 
+        #visibility p{
+            color: black;
+            font-weight: bold;
+            font-size:10px ;
+            background: transparent;
+            padding-top: 0;
+        }
+
+        #outer-wrapper {
+            margin: 10px 20px;
+            border: 1px solid black;
+            border-radius: 4px;
+            box-shadow: 0 0 3px rgba(0, 0, 0, 0.9);
+            max-width: 275px;
+            max-height: 115px;
+        }
+
+        #table-wrapper {
+            overflow-y: scroll;
+            overflow-x: scroll;
+            height: 80px;
+            max-height: 66.4vh;
+            margin: 15px;
+            padding-bottom: 20px;
+        }
+
+
+        #visibility table {
+            min-width: max-content;
+            border-collapse: separate;
+            border-spacing: 0px;
+        }
+
+        #visibility table th{
+            position: sticky;
+            top: 0px;
+
+            background-color: #6d44b8;
+            color: rgb(241, 245, 179);
+
+            text-align: center;
+            font-weight: normal;
+            font-size: 10px;
+            outline: 0.7px solid black;
+            border: 1.5px solid black;
+
+        }
+
+        #visibility table th, table td {
+            padding: 3px 8px;
+        }
+
+        #visibility table td {
+            text-align: left;
+            font-size: 10px;
+            border: 1px solid rgb(177, 177, 177);
+            padding-left: 20px;
+        }
+
+        #visibility-submit{
+            padding-bottom: 0px;
+        }
+
+        #magic{
+            width:400px;
+            height: 20%;
+            background: #c1c2ff;
+            position: fixed;
+            top:150px;
+            right:600px;
+            padding: 20px 30px;
+        }
+
+        #outer-wrapper-magic {
+            margin: 10px 20px;
+            border: 1px solid black;
+            border-radius: 4px;
+            box-shadow: 0 0 3px rgba(0, 0, 0, 0.9);
+            max-width: 400px;
+            max-height: 115px;
+        }
+
+        #table-wrapper-magic {
+            overflow-y: scroll;
+            /*overflow-x: scroll;*/
+            height: 80px;
+            max-height: 66.4vh;
+            margin: 15px;
+            padding-bottom: 20px;
+        }
+
+        #magic table {
+            min-width: max-content;
+            border-collapse: separate;
+            border-spacing: 0px;
+        }
+
+        #magic table th{
+            position: sticky;
+            top: 0px;
+
+            background-color: #6d44b8;
+            color: rgb(241, 245, 179);
+
+            text-align: center;
+            font-weight: normal;
+            font-size: 10px;
+            outline: 0.7px solid black;
+            border: 1.5px solid black;
+        }
+
+        #magic table th, table td {
+            padding: 3px 8px;
+        }
+
+        #magic table td {
+            text-align: left;
+            font-size: 10px;
+            border: 1px solid rgb(177, 177, 177);
+            padding-left: 20px;
+        }
+
+        #create-object{
+            width:150px;
+            height: 5%;
+            background: #c1c2ff;
+            position: fixed;
+            top:500px;
+            right:600px;
+            padding: 20px 30px;
+        }
+
+        #object-info-form{
+            width:200px;
+            height: 20%;
+            background: #c1c2ff;
+            position: fixed;
+            top:400px;
+            right:850px;
+            padding: 20px 30px;
+        }
+
+        #object-list{
+            width:400px;
+            height: 15%;
+            background: #c1c2ff;
+            position: fixed;
+            bottom:50px;
+            right:600px;
+            padding: 20px 30px;
+        }
+
+        #outer-wrapper-object {
+            margin: 10px 20px;
+            border: 1px solid black;
+            border-radius: 4px;
+            box-shadow: 0 0 3px rgba(0, 0, 0, 0.9);
+            max-width: 400px;
+            max-height: 100px;
+        }
+
+        #table-wrapper-object {
+            overflow-y: scroll;
+            /*overflow-x: scroll;*/
+            height: 60px;
+            max-height: 66.4vh;
+            margin: 15px;
+            padding-bottom: 20px;
+        }
+
+        #object-list table {
+            min-width: max-content;
+            border-collapse: separate;
+            border-spacing: 0px;
+        }
+
+        #object-list table th{
+            position: sticky;
+            top: 0px;
+
+            background-color: #6d44b8;
+            color: rgb(241, 245, 179);
+
+            text-align: center;
+            font-weight: normal;
+            font-size: 10px;
+            outline: 0.7px solid black;
+            border: 1.5px solid black;
+        }
+
+        #object-list table th, table td {
+            padding: 3px 8px;
+        }
+
+        #object-list table td {
+            text-align: left;
+            font-size: 10px;
+            border: 1px solid rgb(177, 177, 177);
+            padding-left: 20px;
+        }
+
     </style>
+
+    <script>
+        function showForm() {
+            document.getElementById('formElement').style.display = 'block';
+        }
+        function hideForm(){
+            document.getElementById('formElement').style.display = "none" ;
+        }
+    </script>
+
     <script src="https://kit.fontawesome.com/087220df25.js" crossorigin="anonymous"></script>
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <script src="/app.js"></script>
 </head>
 <body id="grad1">
+<noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being
+    enabled. Please enable
+    Javascript and reload this page!</h2></noscript>
+<div>
+    <div id = "search-bar-div">
+        <form action = "https://www.google.com/search" id = "search-bar">
+
+            <input type = "text" placeholder = "search anything" name = "q" >
+            <button type = "submit"><img src = "magnifyingGlass_gameCenter.png" alt=""></button>
+        </form>
+    </div>
+
+    <div>
+        <h1 id = "welcome"><FONT COLOR="WHITE">Welcome to Game Center</FONT></h1>
+    </div>
+
+    <div id = "infoSide">
         <div>
-            <div id = "search-bar-div">
-            <form action = "https://www.google.com/search" id = "search-bar">
-
-                <input type = "text" placeholder = "search anything" name = "q" >
-                <button type = "submit"><img src = "magnifyingGlass_gameCenter.png" alt=""></button>
-            </form>
+            <div style="display: inline-block;">
+                <a href = "#" id = "userPic">
+                    <img src = "userPic.png" width = "50" height="50">
+                </a>
             </div>
-
-            <div>
-                <h1 id = "welcome"><FONT COLOR="WHITE">Welcome to Game Center</FONT>></h1>
+            <div style="display: inline-block;">
+                <p> Marian</p>
             </div>
-
-            <div id = "infoSide">
-                <div>
-                    <div style="display: inline-block;">
-                        <a href = "#" id = "userPic">
-                            <img src = "userPic.png" width = "50" height="50">
-                        </a>
-                    </div>
-                    <div style="display: inline-block;">
-                        <p> Marian</p>
-                    </div>
-                </div>
-
-                <ul id = "nav-links">
-                    <li><a href = "#"><i class="fa-solid fa-circle-user"></i><p>Personal Page</p></a></li>
-                    <li><a href = "#"><i class="fa-solid fa-gamepad"></i><p>Game Info</p></a></li>
-                    <li><a href = "#"><i class="fa-solid fa-comment-dots"></i><p>Invitation</p></a></li>
-                    <li><a href = "#"><i class="fa-solid fa-gear"></i><p>Settings</p></a></li>
-                    <li><a href = "#"><i class="fa-solid fa-door-open"></i><p>Quit Game</p></a></li>
-                    <li><a a href = "/createGame"><i class="fa-solid fa-dice-five"></i><p>Create Game</p></a></li>
-                    <li><a a href = "/chooseGame"><i class="fa-solid fa-hand"></i><p>Join Game</p></a></li>
-                    <div id = "Personal-page-active" class = "Personal-page-active"></div>
-                </ul>
-            </div>
-
-            <div id = "resultTable">
-            </div>
-
-            <div id="inputParameter">
-                <form action="/gameCenter">
-                    <label>Input Your Parameters:</label><br>
-                    <input type="text" id="userParameters" name="" value=""><br>
-                <input type="button" value="Submit">
-                </form>
-            </div>
-
         </div>
+
+        <ul id = "nav-links">
+            <li><a href = "#"><i class="fa-solid fa-circle-user"></i><p>Personal Page</p></a></li>
+            <li><a href = "#"><i class="fa-solid fa-gamepad"></i><p>Game Info</p></a></li>
+            <li><a href = "#"><i class="fa-solid fa-comment-dots"></i><p>Invitation</p></a></li>
+            <li><a href = "#"><i class="fa-solid fa-gear"></i><p>Settings</p></a></li>
+            <li><a href = "#"><i class="fa-solid fa-door-open"></i><p>Quit Game</p></a></li>
+            <li><a a href = "/createGame"><i class="fa-solid fa-dice-five"></i><p>Create Game</p></a></li>
+            <li><a a href = "/chooseGame"><i class="fa-solid fa-hand"></i><p>Join Game</p></a></li>
+            <div id = "Personal-page-active" class = "Personal-page-active"></div>
+        </ul>
+    </div>
+
+    <div id = "resultTable">
+        <table id="conversation" class="table table-striped">
+            <thead>
+            <tr>
+                <th>Result:</th>
+            </tr>
+            </thead>
+            <tbody id="greetings">
+            </tbody>
+        </table>
+    </div>
+
+
+    <div id="visibility">
+        <p>Visibility</p>
+        <div id="outer-wrapper">
+            <div id="table-wrapper">
+                <table>
+                    <thead>
+                    <th>Game Player</th>
+                    <th>Show or Hide</th>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Wolfeschlegelsteinhausenbergerdorff Sr.</td>
+                        <td><input type="checkbox" id="checkbox1"><label for="checkbox1">show</label></td>
+
+                    </tr>
+                    <tr>
+                        <td>Alex</td>
+                        <td><input type="checkbox" id="checkbox2"><label for="checkbox2">show</label></td>
+                    </tr>
+                    <tr>
+                        <td>Summer</td>
+                        <td><input type="checkbox" id="checkbox3"><label for="checkbox3">show</label></td>
+                    </tr>
+                    <tr>
+                        <td>Emma</td>
+                        <td><input type="checkbox" id="checkbox4"><label for="checkbox4">show</label></td>
+                    </tr>
+                    <tr>
+                        <td>Lucas</td>
+                        <td><input type="checkbox" id="checkbox5"><label for="checkbox5">show</label></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div id="visibility-submit">
+            <input type="submit" value="Submit" style="height:20px; width:50px;font-size:10px">
+        </div>
+    </div>
+
+
+    <div id="inputParameter">
+        <form action="/gameCenter">
+            <label for="connect">WebSocket connection:</label>
+            <button id="connect" class="btn btn-default" type="submit">Connect</button>
+            <button id="disconnect" class="btn btn-default" type="submit" disabled="disabled">Disconnect
+            </button>
+            <label>Rolling String:</label><br>
+            <input type="text" id="name" class="form-control" placeholder="Your str here...">
+            <button id="send" class="btn btn-default" type="submit">Send</button>
+            <button id ="save" class = "btn btn-default" type="submit">Save</button>
+        </form>
+    </div>
+
+    <div id="magic">
+        <p> magic</p>
+        <div id="outer-wrapper-magic">
+            <div id="table-wrapper-magic">
+                <table>
+                    <thead>
+                    <th>Magic input</th>
+                    <th>Use</th>
+                    <th>Delete</th>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>magic1</td>
+                        <td><input type="submit" value="Use" style="height:20px; width:50px;font-size:10px"></td>
+                        <td><input type="submit" value="Delete" style="height:20px; width:50px;font-size:10px"></td>
+                    </tr>
+                    <tr>
+                        <td>magic2</td>
+                        <td><input type="submit" value="Use" style="height:20px; width:50px;font-size:10px"></td>
+                        <td><input type="submit" value="Delete" style="height:20px; width:50px;font-size:10px"></td>
+                    </tr>
+                    <tr>
+                        <td>magic3</td>
+                        <td><input type="submit" value="Use" style="height:20px; width:50px;font-size:10px"></td>
+                        <td><input type="submit" value="Delete" style="height:20px; width:50px;font-size:10px"></td>
+                    </tr>
+                    <tr>
+                        <td>magic4</td>
+                        <td><input type="submit" value="Use" style="height:20px; width:50px;font-size:10px"></td>
+                        <td><input type="submit" value="Delete" style="height:20px; width:50px;font-size:10px"></td>
+                    </tr>
+                    <tr>
+                        <td>magic5</td>
+                        <td><input type="submit" value="Use" style="height:20px; width:50px;font-size:10px"></td>
+                        <td><input type="submit" value="Delete" style="height:20px; width:50px;font-size:10px"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="create-object">
+        <form>
+            <label> Select Objects </label>
+            <select>
+                <option value = "object1"> object1
+                </option>
+                <option value = "object2"> object2
+                </option>
+                <option value = "object3"> object3
+                </option>
+                <option value = "object4"> object4
+                </option>
+            </select>
+        </form>
+        <button onclick="showForm()" value="Choose" style="height:20px; width:50px;font-size:10px">Choose</button>
+        <form id="formElement" style="display: none;">
+            <div id="object-info-form">
+                <label>Number:</label><br>
+                <input type="number" value=1><br>
+                <label>String:</label><br>
+                <input type="text" value="string"><br>
+                <button onclick="hideForm()" value="Choose" style="height:20px; width:50px;font-size:10px">OK</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="object-list">
+        <p>object list</p>
+        <div id="outer-wrapper-object">
+            <div id="table-wrapper-object">
+                <table>
+                    <thead>
+                    <th>Object List</th>
+                    <th>Use</th>
+                    <th>Delete</th>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Object1</td>
+                        <td><input type="submit" value="Use" style="height:20px; width:50px;font-size:10px"></td>
+                        <td><input type="submit" value="Delete" style="height:20px; width:50px;font-size:10px"></td>
+                    </tr>
+                    <tr>
+                        <td>Object2</td>
+                        <td><input type="submit" value="Use" style="height:20px; width:50px;font-size:10px"></td>
+                        <td><input type="submit" value="Delete" style="height:20px; width:50px;font-size:10px"></td>
+                    </tr>
+                    <tr>
+                        <td>Object3</td>
+                        <td><input type="submit" value="Use" style="height:20px; width:50px;font-size:10px"></td>
+                        <td><input type="submit" value="Delete" style="height:20px; width:50px;font-size:10px"></td>
+                    </tr>
+                    <tr>
+                        <td>Object4</td>
+                        <td><input type="submit" value="Use" style="height:20px; width:50px;font-size:10px"></td>
+                        <td><input type="submit" value="Delete" style="height:20px; width:50px;font-size:10px"></td>
+                    </tr>
+                    <tr>
+                        <td>Object5</td>
+                        <td><input type="submit" value="Use" style="height:20px; width:50px;font-size:10px"></td>
+                        <td><input type="submit" value="Delete" style="height:20px; width:50px;font-size:10px"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+</div>
 
 </body>
 </html>
+
