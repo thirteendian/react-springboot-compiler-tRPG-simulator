@@ -419,7 +419,7 @@
                 </a>
             </div>
             <div style="display: inline-block;">
-                <p th:text="${curruser}" />
+<!--                <p th:text="${curruser}" />-->
             </div>
         </div>
 
@@ -436,16 +436,21 @@
     </div>
 
     <div id = "resultTable">
+        <!--      ----------------------------- This ID related to js whether to show the result-->
         <table id="conversation" class="table table-striped">
             <thead>
             <tr>
                 <th>Result:</th>
             </tr>
             </thead>
-            <tbody id="greetings">
+            <!--      ----------------------------- This ID related to js content-->
+            <tbody id="results">
             </tbody>
         </table>
     </div>
+
+
+
 
 
     <div id="visibility">
@@ -495,10 +500,13 @@
             <button id="connect" class="btn btn-default" type="submit">Connect</button>
             <button id="disconnect" class="btn btn-default" type="submit" disabled="disabled">Disconnect
             </button>
-            <label>Rolling String:</label><br>
-            <input type="text" id="name" class="form-control" placeholder="Your str here...">
-            <button id="send" class="btn btn-default" type="submit">Send</button>
-            <button id ="save" class = "btn btn-default" type="submit">Save</button>
+            <p>
+                MagicCheck?
+                <input name="magicCheck" id="magicCheckbox" type="checkbox">
+            <p>
+                <label>Rolling String:</label><br>
+                <input type="text" id="rawstring" class="form-control" placeholder="Your str here...">
+                <button id="sendrawstring" class="btn btn-default" type="submit">Send</button>
         </form>
     </div>
 
