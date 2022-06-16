@@ -33,11 +33,11 @@ public class UserTest {
     public void test_get_and_equals() {
         User test1 = new User("davidbrown@gmail.com","david",
                 "brown","davidbrown","role_user",true);
-        User test2 = new User("johnSmith@gmail.com","john",
+        User test2 = new User("stella@gmail.com","john",
                 "smith","johnsmith","role_user",true);
-        User test3 = new User("johnSmith@gmail.com","jo",
+        User test3 = new User("stella@gmail.com","jo",
                 "smi","johnsmith","role_loggedin_user",true);
-        assertEquals("johnSmith@gmail.com",test2.getEmail());
+        assertEquals("stella@gmail.com",test2.getEmail());
         assertEquals("smi",test3.getLastName());
         assertNotEquals(test1,test2);
         assertEquals(test2, test3);
