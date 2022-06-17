@@ -4,7 +4,9 @@ import java.util.HashMap;
 import java.util.Random;
 
 public class TypeDefNode extends ExpNode {
+    /* typeName */
     String typeId;
+    /* mapping typeFieldsName to typeFieldsType */
     HashMap<String, String> typeFields;
 
     public void setTypeFields(HashMap<String, String> typeFields) {
