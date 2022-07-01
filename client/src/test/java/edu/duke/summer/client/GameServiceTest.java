@@ -1,8 +1,13 @@
 package edu.duke.summer.client;
 
+import edu.duke.summer.client.algorithm.EvalServicempl;
+import edu.duke.summer.client.algorithm.astnode.RuleInfo;
+import edu.duke.summer.client.algorithm.astnode.TypeDefNode;
 import edu.duke.summer.client.config.SpringConfig;
 import edu.duke.summer.client.database.model.DiceRolling;
+import edu.duke.summer.client.database.model.ObjectField;
 import edu.duke.summer.client.database.model.Player;
+import edu.duke.summer.client.database.repository.ObjectFieldRepository;
 import edu.duke.summer.client.database.repository.PlayerRepository;
 import edu.duke.summer.client.dto.DiceRollingDto;
 import edu.duke.summer.client.service.GameService;
@@ -26,6 +31,9 @@ public class GameServiceTest {
 
     @Autowired
     private PlayerRepository playerRepository;
+
+    @Autowired
+    private ObjectFieldRepository objectFieldRepository;
 
     @Test
     public void getDiceRollingResultsTest() {
@@ -82,6 +90,34 @@ public class GameServiceTest {
         player3.setUserId("user3");
         playerRepository.save(player3);
         assertEquals(2, gameService.getAllPlayers("test1").size());
+    }
+
+    @Test
+    public void createObjectsTest() {
+        String code = "{type rollwithmod { \n" +
+                "   numdice:int,\n" +
+                "   numsides:int,\n" +
+                "   modifier:int\n" +
+                "};\n" +
+                "type attack {\n" +
+                "     basedmg: rollwithmod,\n" +
+                "     attackbon: int,\n" +
+                "     rerolls: int,\n" +
+                "     critthreat: int,\n" +
+                "     autoconfirm: bool,\n" +
+                "     addoncrit : rollwithmod,\n" +
+                "     addonsneak: rollwithmod,\n" +
+                "     addoncritsneak:rollwithmod\n" +
+                "};\n}";
+        gameService.createObjects("1", code);
+        assertEquals(11, objectFieldRepository.findByGameId("1").size());
+        assertEquals(3, objectFieldRepository.findByTypeName("rollwithmod").size());
+        assertEquals(8, objectFieldRepository.findByTypeName("attack").size());
+    }
+
+    @Test
+    public void storeObjectsTest() {
+
     }
 
 }
