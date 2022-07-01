@@ -38,7 +38,7 @@ public class EvalServicempl implements EvalService{
             ExpNode node = buildAstVisitor(subStr[i]);
             node.save(info);
         }
-        info.printInfo();
+        //info.printInfo();
         return info;
     }
 

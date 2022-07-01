@@ -3,6 +3,7 @@ package edu.duke.summer.client.service;
 import java.util.List;
 import javax.transaction.Transactional;
 
+import edu.duke.summer.client.algorithm.astnode.RuleInfo;
 import edu.duke.summer.client.database.model.Game;
 import edu.duke.summer.client.database.model.DiceRolling;
 import edu.duke.summer.client.database.model.MagicCheck;
@@ -28,7 +29,7 @@ public interface GameService {
    *
    * @param diceRollingDto the diceRollingDto contains information of player, game and raw string with visibilities and the choice of magicCheck
    *        diceRollingDto {
-   *          game: the game player is involved in
+   *          game: the game that the player is involved in
    *          player: the player who did this dice-rolling
    *          rawData: the raw string of this dice-rolling
    *          visibles: which players could view this dice-rolling result
@@ -60,9 +61,17 @@ public interface GameService {
   /**
    * Get all players that are involved in the game
    *
-   * @param game the game player is involved in
+   * @param game the game that the player is involved in
    * @return list of players in the game
    */
   List<Player> getAllPlayers(String game);
-    
+
+  /**
+   * Create and store objects through the code provided by the game creator
+   *
+   * @param gameId the game that the creator is involved in
+   * @param code the code that contains the description of objects
+   */
+  RuleInfo createObjects(String gameId, String code);
+
 }

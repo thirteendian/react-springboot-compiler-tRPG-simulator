@@ -3,12 +3,10 @@ package edu.duke.summer.client.service;
 import java.util.*;
 import javax.transaction.Transactional;
 
-import edu.duke.summer.client.database.model.Game;
+import edu.duke.summer.client.algorithm.astnode.RuleInfo;
+import edu.duke.summer.client.algorithm.astnode.TypeDefNode;
+import edu.duke.summer.client.database.model.*;
 import edu.duke.summer.client.database.repository.*;
-import edu.duke.summer.client.database.model.DiceRolling;
-import edu.duke.summer.client.database.model.Visibility;
-import edu.duke.summer.client.database.model.MagicCheck;
-import edu.duke.summer.client.database.model.Player;
 
 import edu.duke.summer.client.dto.DiceRollingDto;
 import edu.duke.summer.client.dto.GameDto;
@@ -43,6 +41,9 @@ public class GameServiceImpl implements GameService {
 
   @Autowired
   private GameRepository gameRepository;
+
+  @Autowired
+  private ObjectFieldRepository objectFieldRepository;
 
   @Override
   public Game createNewGame(final GameDto gameDto) {
@@ -174,6 +175,27 @@ public class GameServiceImpl implements GameService {
   @Override
   public List<Player> getAllPlayers(String game) {
     return playerRepository.findAllByGame(game);
+  }
+
+  public RuleInfo createObjects(String gameId, String code) {
+    EvalServicempl evalService = new EvalServicempl();
+    RuleInfo ruleInfo = evalService.SaveRules(code);
+    HashMap<String, TypeDefNode> types = ruleInfo.getTypes();
+    for (String type : types.keySet()) {
+      TypeDefNode typeDefNode = types.get(type);
+      HashMap<String, String> fields = typeDefNode.getTypeFields();
+      int fieldNum = 0;
+      for (String field : fields.keySet()) {
+        final ObjectField objectField = new ObjectField();
+        objectField.setGameId(gameId);
+        objectField.setTypeName(typeDefNode.getTypeId());
+        objectField.setFieldNum(String.valueOf(fieldNum++));
+        objectField.setFieldName(field);
+        objectField.setFieldType(fields.get(field));
+        objectFieldRepository.save(objectField);
+      }
+    }
+    return ruleInfo;
   }
 
 }
