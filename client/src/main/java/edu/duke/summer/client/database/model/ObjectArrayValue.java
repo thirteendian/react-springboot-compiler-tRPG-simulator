@@ -27,13 +27,13 @@ public class ObjectArrayValue implements Serializable {
     private String index;
 
     @Column
-    private String intVal;
+    private String intVal = "null";
 
     @Column
-    private String stringVal;
+    private String stringVal = "null";
 
     @Column
-    private String boolVal;
+    private String boolVal = "null";
 
     public void setGameId(String gameId) {
         this.gameId = gameId;

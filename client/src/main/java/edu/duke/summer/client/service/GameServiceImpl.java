@@ -8,9 +8,7 @@ import edu.duke.summer.client.algorithm.astnode.TypeDefNode;
 import edu.duke.summer.client.database.model.*;
 import edu.duke.summer.client.database.repository.*;
 
-import edu.duke.summer.client.dto.DiceRollingDto;
-import edu.duke.summer.client.dto.GameDto;
-import edu.duke.summer.client.dto.GameFilterDto;
+import edu.duke.summer.client.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 //import org.springframework.security.core.Authentication;
@@ -44,6 +42,12 @@ public class GameServiceImpl implements GameService {
 
   @Autowired
   private ObjectFieldRepository objectFieldRepository;
+
+  @Autowired
+  private ObjectValueRepository objectValueRepository;
+
+  @Autowired
+  private ObjectArrayValueRepository objectArrayValueRepository;
 
   @Override
   public Game createNewGame(final GameDto gameDto) {
@@ -177,7 +181,7 @@ public class GameServiceImpl implements GameService {
     return playerRepository.findAllByGame(game);
   }
 
-  public RuleInfo createObjects(String gameId, String code) {
+  public void createObjects(String gameId, String code) {
     EvalServicempl evalService = new EvalServicempl();
     RuleInfo ruleInfo = evalService.SaveRules(code);
     HashMap<String, TypeDefNode> types = ruleInfo.getTypes();
@@ -195,7 +199,124 @@ public class GameServiceImpl implements GameService {
         objectFieldRepository.save(objectField);
       }
     }
-    return ruleInfo;
   }
 
+  public List<String> getObjectsList(String gameId) {
+    List<String> objectsList = objectFieldRepository.findObjectType(gameId);
+    return objectsList;
+  }
+
+  public ObjectFieldDto getObjectFields(String gameId, String typeName) {
+    ObjectFieldDto objectFieldDto = new ObjectFieldDto();
+    objectFieldDto.setTypeName(typeName);
+    List<ObjectField> objectFields = objectFieldRepository.findObjectField(gameId, typeName);
+    for (ObjectField objectField : objectFields) {
+      objectFieldDto.addObjectField(objectField.getFieldName());
+      objectFieldDto.addFieldType(objectField.getFieldName(), objectField.getFieldType());
+    }
+    return objectFieldDto;
+  }
+
+  public Boolean checkWhetherNewObjectRequired(String type) {
+    if (type.equals("int") || type.equals("string") || type.equals("bool")) {
+      return true;
+    }
+    return false;
+  }
+
+  public String saveObjects(ObjectValueDto objectValueDto) {
+    List<String> fieldValues = objectValueDto.getFieldValue();
+    int fieldNum = 0;
+    for (String value : fieldValues) {
+      final ObjectValue objectValue = new ObjectValue();
+      objectValue.setGameId(objectValueDto.getGameId());
+      objectValue.setTypeName(objectValueDto.getTypeName());
+      objectValue.setValueNum(objectValueDto.getValueNum());
+      objectValue.setFieldNum(String.valueOf(fieldNum++));
+      if (value.equals("true") || value.equals("false")) {
+        objectValue.setBoolVal(value);
+      }
+      else {
+        try {
+          int val = Integer.parseInt(value);
+          objectValue.setIntVal(value);
+        } catch (NumberFormatException nfe) {
+          objectValue.setStringVal(value);
+        }
+      }
+      objectValueRepository.save(objectValue);
+    }
+    return objectValueDto.getValueNum();
+  }
+
+  public String saveArrays(ObjectValueDto objectValueDto) {
+    List<String> fieldValues = objectValueDto.getFieldValue();
+    int index = 0;
+    for (String value : fieldValues) {
+      final ObjectArrayValue objectArrayValue = new ObjectArrayValue();
+      objectArrayValue.setGameId(objectValueDto.getGameId());
+      objectArrayValue.setEltType(objectValueDto.getTypeName());
+      objectArrayValue.setValueNum(objectValueDto.getValueNum());
+      objectArrayValue.setIndex(String.valueOf(index++));
+      if (value.equals("true") || value.equals("false")) {
+        objectArrayValue.setBoolVal(value);
+      }
+      else {
+        try {
+          int val = Integer.parseInt(value);
+          objectArrayValue.setIntVal(value);
+        } catch (NumberFormatException nfe) {
+          objectArrayValue.setStringVal(value);
+        }
+      }
+      objectArrayValueRepository.save(objectArrayValue);
+    }
+    return objectValueDto.getValueNum();
+  }
+
+  public ObjectValueDto getObjectValues(String gameId, String typeName, String valueNum) {
+    List<ObjectValue> objectValues = objectValueRepository.findObjectValue(gameId, typeName, valueNum);
+    if (objectValues.isEmpty()) {
+      return null;
+    }
+    ObjectValueDto objectValueDto = new ObjectValueDto();
+    objectValueDto.setGameId(objectValues.get(0).getGameId());
+    objectValueDto.setTypeName(objectValues.get(0).getTypeName());
+    objectValueDto.setValueNum(objectValues.get(0).getValueNum());
+    for(ObjectValue objectValue : objectValues) {
+      if (!objectValue.getIntVal().equals("null")) {
+        objectValueDto.addFieldValue(objectValue.getIntVal());
+      }
+      else if (!objectValue.getStringVal().equals("null")) {
+        objectValueDto.addFieldValue(objectValue.getStringVal());
+      }
+      else {
+        objectValueDto.addFieldValue(objectValue.getBoolVal());
+      }
+    }
+    return objectValueDto;
+  }
+
+  public ObjectValueDto getArrayValues(String gameId, String valueNum) {
+    List<ObjectArrayValue> arrayValues = objectArrayValueRepository.findArrayValue(gameId, valueNum);
+    if (arrayValues.isEmpty()) {
+      return null;
+    }
+    ObjectValueDto objectValueDto = new ObjectValueDto();
+    objectValueDto.setGameId(arrayValues.get(0).getGameId());
+    objectValueDto.setTypeName(arrayValues.get(0).getEltType());
+    objectValueDto.setValueNum(arrayValues.get(0).getValueNum());
+    for(ObjectArrayValue arrayValue : arrayValues) {
+      if (!arrayValue.getIntVal().equals("null")) {
+        objectValueDto.addFieldValue(arrayValue.getIntVal());
+      }
+      else if (!arrayValue.getStringVal().equals("null")) {
+        objectValueDto.addFieldValue(arrayValue.getStringVal());
+      }
+      else {
+        objectValueDto.addFieldValue(arrayValue.getBoolVal());
+      }
+    }
+    return objectValueDto;
+  }
 }
