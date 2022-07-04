@@ -8,8 +8,8 @@ import java.util.List;
  * An Output JSON carry the dicerolling result
  */
 public class RespDiceRollingResult {
-    private String content;
-    private List<MagicCheck> magicCheckList;
+    private String content;// dice rolling result
+    private List<MagicCheck> magicCheckList; //saved rolls
 
     public RespDiceRollingResult() {
     }
