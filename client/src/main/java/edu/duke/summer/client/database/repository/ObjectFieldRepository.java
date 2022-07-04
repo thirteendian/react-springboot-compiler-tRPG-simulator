@@ -15,7 +15,11 @@ public interface ObjectFieldRepository extends JpaRepository<ObjectField, Long> 
 
     List<ObjectField> findByTypeName(String typeName);
 
-    @Query("select o from ObjectField o where o.gameId = :gameId and o.typeName = :typeName and o.fieldNum = :fieldNum")
-    ObjectField findObjectField(@Param("gameId") String gameId, @Param("typeName") String typeName, @Param("fieldNum") String fieldNum);
+    @Query("select distinct o.typeName from ObjectField o where o.gameId= :gameId")
+    List<String> findObjectType(@Param("gameId") String gameId);
 
+    @Query("select o from ObjectField o where o.gameId = :gameId and o.typeName = :typeName")
+    List<ObjectField> findObjectField(@Param("gameId") String gameId, @Param("typeName") String typeName);
+    @Query("select o.fieldName from ObjectField o where o.gameId = :gameId and o.typeName = :typeName and o.fieldNum = :fieldNum")
+    String findFieldName(@Param("gameId") String gameId, @Param("typeName") String typeName, @Param("fieldNum") String fieldNum);
 }

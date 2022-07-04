@@ -8,9 +8,7 @@ import edu.duke.summer.client.database.model.Game;
 import edu.duke.summer.client.database.model.DiceRolling;
 import edu.duke.summer.client.database.model.MagicCheck;
 import edu.duke.summer.client.database.model.Player;
-import edu.duke.summer.client.dto.DiceRollingDto;
-import edu.duke.summer.client.dto.GameDto;
-import edu.duke.summer.client.dto.GameFilterDto;
+import edu.duke.summer.client.dto.*;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -67,11 +65,72 @@ public interface GameService {
   List<Player> getAllPlayers(String game);
 
   /**
-   * Create and store objects through the code provided by the game creator
+   * Create and store object types & fields through the code provided by the game creator
    *
    * @param gameId the game that the creator is involved in
    * @param code the code that contains the description of objects
    */
-  RuleInfo createObjects(String gameId, String code);
+  void createObjects(String gameId, String code);
+
+  /**
+   * Get all object types in the game
+   *
+   * @param gameId the game to get all the object types involved in
+   * @return list of object types in the game
+   */
+  List<String> getObjectsList(String gameId);
+
+  /**
+   * Get all field names & field types of one object type in the game
+   *
+   * @param gameId the game to get the object fields
+   * @param typeName the object type to get its field name & field type
+   * @return objectFieldDto that contains all field information of the object type in this game
+   */
+  ObjectFieldDto getObjectFields(String gameId, String typeName);
+
+  /**
+   * Check whether a new object is required to be created for this object field
+   * @param type the type of this object field
+   * @return TRUE if this field type is int/string/bool, FALSE otherwise
+   */
+  Boolean checkWhetherNewObjectRequired(String type);
+
+  /**
+   * Store field values of one object
+   *
+   * @param objectValueDto the Dto that contains all the information of one specific object,
+   * including game ID, type name and field values
+   * @return the value number of the object in database
+   */
+  String saveObjects(ObjectValueDto objectValueDto);
+
+  /**
+   * Store field values of one array
+   *
+   * @param objectValueDto the Dto that contains all the information of one specific array,
+   * including game ID, elt name and field values
+   * @return the value number of the array in database
+   */
+  String saveArrays(ObjectValueDto objectValueDto);
+
+  /**
+   * Get all field values of one object type in the game
+   *
+   * @param gameId the game which the object is created in
+   * @param typeName the object type to get its field values
+   * @param valueNum the value number of the object
+   * @return objectFieldDto that contains all field information of the object in this game
+   */
+  ObjectValueDto getObjectValues(String gameId, String typeName, String valueNum);
+
+  /**
+   * Get all field values of one array object type in the game
+   *
+   * @param gameId the game which the array is created in
+   * @param valueNum the value number of the array
+   * @return objectFieldDto that contains all field information of the array in this game
+   */
+  ObjectValueDto getArrayValues(String gameId, String valueNum);
 
 }

@@ -26,18 +26,14 @@ public class ObjectValue implements Serializable {
     @Column(nullable = false)
     private String fieldNum;
 
-    @Id
-    @Column(nullable = false)
-    private String index;
+    @Column
+    private String intVal = "null";
 
     @Column
-    private String intVal;
+    private String stringVal = "null";
 
     @Column
-    private String stringVal;
-
-    @Column
-    private String boolVal;
+    private String boolVal = "null";
 
     public void setGameId(String gameId) {
         this.gameId = gameId;
@@ -69,14 +65,6 @@ public class ObjectValue implements Serializable {
 
     public String getFieldNum() {
         return fieldNum;
-    }
-
-    public void setIndex(String index) {
-        this.index = index;
-    }
-
-    public String getIndex() {
-        return index;
     }
 
     public void setIntVal(String intVal) {
@@ -112,7 +100,6 @@ public class ObjectValue implements Serializable {
                 ", typeName='" + typeName + '\'' +
                 ", valueNum='" + valueNum + '\'' +
                 ", fieldNum='" + fieldNum + '\'' +
-                ", index='" + index + '\'' +
                 ", intVal='" + intVal + '\'' +
                 ", stringVal='" + stringVal + '\'' +
                 ", boolVal='" + boolVal + '\'' +

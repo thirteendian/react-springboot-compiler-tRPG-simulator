@@ -7,11 +7,16 @@ import edu.duke.summer.client.config.SpringConfig;
 import edu.duke.summer.client.database.model.DiceRolling;
 import edu.duke.summer.client.database.model.ObjectField;
 import edu.duke.summer.client.database.model.Player;
+import edu.duke.summer.client.database.repository.ObjectArrayValueRepository;
 import edu.duke.summer.client.database.repository.ObjectFieldRepository;
+import edu.duke.summer.client.database.repository.ObjectValueRepository;
 import edu.duke.summer.client.database.repository.PlayerRepository;
 import edu.duke.summer.client.dto.DiceRollingDto;
+import edu.duke.summer.client.dto.ObjectFieldDto;
+import edu.duke.summer.client.dto.ObjectValueDto;
 import edu.duke.summer.client.service.GameService;
 import edu.duke.summer.client.service.GameServiceImpl;
+import edu.duke.summer.client.service.SeqNumService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -34,6 +39,12 @@ public class GameServiceTest {
 
     @Autowired
     private ObjectFieldRepository objectFieldRepository;
+
+    @Autowired
+    private ObjectValueRepository objectValueRepository;
+
+    @Autowired
+    private ObjectArrayValueRepository objectArrayValueRepository;
 
     @Test
     public void getDiceRollingResultsTest() {
@@ -116,8 +127,86 @@ public class GameServiceTest {
     }
 
     @Test
-    public void storeObjectsTest() {
-
+    public void getObjectsListTest() {
+        List<String> objectsList = gameService.getObjectsList("1");
+        assertEquals(2, objectsList.size());
     }
 
+    @Test
+    public void getObjectFieldsTest() {
+        String code = "{type rollwithmod { \n" +
+                "   numdice:int,\n" +
+                "   numsides:int,\n" +
+                "   modifier:int\n" +
+                "};\n" +
+                "type attack {\n" +
+                "     basedmg: rollwithmod,\n" +
+                "     attackbon: int,\n" +
+                "     rerolls: int,\n" +
+                "     critthreat: int,\n" +
+                "     autoconfirm: bool,\n" +
+                "     addoncrit : rollwithmod,\n" +
+                "     addonsneak: rollwithmod,\n" +
+                "     addoncritsneak:rollwithmod\n" +
+                "};\n}";
+        gameService.createObjects("1", code);
+        ObjectFieldDto attackField = gameService.getObjectFields("1", "attack");
+        assertEquals(8, attackField.getObjectField().size());
+        assertEquals(8, attackField.getFieldType().size());
+        ObjectFieldDto rollwithmodField = gameService.getObjectFields("1", "rollwithmod");
+        assertEquals(3, rollwithmodField.getObjectField().size());
+        assertEquals(3, rollwithmodField.getFieldType().size());
+    }
+
+    @Test
+    public void saveObjectsTest() {
+        ObjectValueDto objectValueDto = new ObjectValueDto();
+        objectValueDto.setGameId("1");
+        objectValueDto.setTypeName("rollwithmod");
+        objectValueDto.addFieldValue("2");
+        objectValueDto.addFieldValue("6");
+        objectValueDto.addFieldValue("1");
+        gameService.saveObjects(objectValueDto);
+        assertEquals(3, objectValueRepository.findByGameId("1").size());
+    }
+
+    @Test
+    public void saveArraysTest() {
+        ObjectValueDto objectValueDto = new ObjectValueDto();
+        objectValueDto.setGameId("1");
+        objectValueDto.setTypeName("int");
+        objectValueDto.addFieldValue("1");
+        objectValueDto.addFieldValue("4");
+        objectValueDto.addFieldValue("7");
+        gameService.saveArrays(objectValueDto);
+        assertEquals(3, objectArrayValueRepository.findByGameId("1").size());
+    }
+
+    @Test
+    public void getObjectValuesTest() {
+        ObjectValueDto objectValueDto = new ObjectValueDto();
+        objectValueDto.setGameId("2");
+        objectValueDto.setTypeName("rollwithmod");
+        objectValueDto.addFieldValue("2");
+        objectValueDto.addFieldValue("6");
+        objectValueDto.addFieldValue("1");
+        gameService.saveObjects(objectValueDto);
+        assertEquals(3, objectValueRepository.findByGameId("2").size());
+        ObjectValueDto result = gameService.getObjectValues("2", "rollwithmod", "0");
+        assertEquals(3, result.getFieldValue().size());
+    }
+
+    @Test
+    public void getArrayValuesTest() {
+        ObjectValueDto objectValueDto = new ObjectValueDto();
+        objectValueDto.setGameId("3");
+        objectValueDto.setTypeName("int");
+        objectValueDto.addFieldValue("1");
+        objectValueDto.addFieldValue("4");
+        objectValueDto.addFieldValue("7");
+        gameService.saveArrays(objectValueDto);
+        assertEquals(3, objectArrayValueRepository.findByGameId("3").size());
+        ObjectValueDto result = gameService.getArrayValues("3",  "2");
+        assertEquals(3, result.getFieldValue().size());
+    }
 }
