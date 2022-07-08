@@ -8,8 +8,10 @@ import edu.duke.summer.client.dto.UserDto;
 import edu.duke.summer.client.service.UserService;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,13 +21,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.security.Principal;
 
-
-@RestController
+/**
+ * Note that use Controller will enable return value to be the HTML's name
+ * Rather than RestController that will only return the String
+ */
+@Controller
 public class AuthenticationController {
     @Autowired
     private UserService userService;
@@ -55,11 +63,11 @@ public class AuthenticationController {
         return "game";
     }
 
-//    @GetMapping("/login")
-//    public String login(Model model) {
-//        model.addAttribute("login", new UserDto());
-//        return "login";
-//    }
+    @GetMapping("/main")
+    public String mainPage(Model model) {
+        model.addAttribute("main", new UserDto());
+        return "main";
+    }
 //
 //    @PostMapping("/login")
 //    public String loginpost(HttpServletRequest httpServletRequest, @ModelAttribute UserDto userDto, Model model) {

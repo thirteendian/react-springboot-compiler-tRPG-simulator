@@ -560,29 +560,26 @@
     </div>
 
     <div id="create-object">
-        <form>
-            <label> Select Objects </label>
-            <select>
-                <option value="object1"> object1
+        <h1> Select Objects </h1>
+        <form action="#" th:action="@{/createobject}" th:object="${objectNameDto}" method="post">
+            <select class="form-control" id="objectName" name="objectName">
+                <option disabled> - select objects -
                 </option>
-                <option value="object2"> object2
-                </option>
-                <option value="object3"> object3
-                </option>
-                <option value="object4"> object4
+                <option th:each="objectName : ${objects}" th:value="${objectName}" th:text="${objectName}">
                 </option>
             </select>
+            <p><input type="submit" value="Submit"/></p>
         </form>
-        <button onclick="showForm()" value="Choose" style="height:20px; width:50px;font-size:10px">Choose</button>
-        <form id="formElement" style="display: none;">
-            <div id="object-info-form">
-                <label>Number:</label><br>
-                <input type="number" value=1><br>
-                <label>String:</label><br>
-                <input type="text" value="string"><br>
-                <button onclick="hideForm()" value="Choose" style="height:20px; width:50px;font-size:10px">OK</button>
-            </div>
-        </form>
+<!--        <button onclick="showForm()" value="Choose" style="height:20px; width:50px;font-size:10px">Choose</button>-->
+<!--        <form id="formElement" style="display: none;">-->
+<!--            <div id="object-info-form">-->
+<!--                <label>Number:</label><br>-->
+<!--                <input type="number" value=1><br>-->
+<!--                <label>String:</label><br>-->
+<!--                <input type="text" value="string"><br>-->
+<!--                <button onclick="hideForm()" value="Choose" style="height:20px; width:50px;font-size:10px">OK</button>-->
+<!--            </div>-->
+<!--        </form>-->
     </div>
 
     <div id="object-list">

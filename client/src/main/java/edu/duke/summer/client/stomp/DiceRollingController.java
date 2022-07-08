@@ -10,12 +10,14 @@ import org.springframework.web.util.HtmlUtils;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
 public class DiceRollingController {
     @Autowired
     private GameService gameService;
+
 
     /**
      * Receive diceRolling raw input string, broadcast output to SendTo
@@ -37,6 +39,22 @@ public class DiceRollingController {
         diceRollingDto.setRawData(message.getRawString());
         System.out.println("The Magic Check is "+ gameService.getMagicCheckData("game",principal.getName()));
         return new RespDiceRollingResult(HtmlUtils.htmlEscape(message.getRawString()),gameService.getDiceRollingResults(diceRollingDto).getResult(),gameService.getMagicCheckData("game",principal.getName()));
+    }
+
+    @MessageMapping("/createobject_name")
+    @SendTo("/objectcreate/field")
+    public RespObjectCreatingField getObjectCreatingField(ReqObjectCreatingName reqObjectCreatingName){
+        System.out.println("ObjectName:" + reqObjectCreatingName.getObjectName());
+        RespObjectCreatingField respObjectCreatingField = new RespObjectCreatingField();
+        List<String> list = new ArrayList<String>();
+        list.add("Test1");
+        list.add("Test2");
+        HashMap<String,String> hashMap = new HashMap<>();
+        hashMap.put("Test1","int");
+        hashMap.put("Test2","string");
+        respObjectCreatingField.setObjectField(list);
+        respObjectCreatingField.setFieldType(hashMap);
+        return respObjectCreatingField;
     }
 
 

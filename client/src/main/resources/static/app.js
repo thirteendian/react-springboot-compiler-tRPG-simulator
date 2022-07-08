@@ -1,13 +1,16 @@
 var stompClient = null;
 
+/**
+ * Functions for Connection to Server
+ * @param connected
+ */
 function setConnected(connected) {
     $("#connect").prop("disabled", connected);
     $("#disconnect").prop("disabled", !connected);
     if (connected) {
         $("#conversation").show();
         $("#magicCheckTable").show();
-    }
-    else {
+    } else {
         $("#conversation").hide();
         $("#magicCheckTable").hide();
     }
@@ -36,22 +39,28 @@ function disconnect() {
     console.log("Disconnected");
 }
 
+/**
+ * Send String to Server
+ */
 function sendRawString() {
     var checkbox = document.getElementById('magicCheckbox');
     var ifMagicCheck = false;
-    if(checkbox.checked){
-        ifMagicCheck=true;
+    if (checkbox.checked) {
+        ifMagicCheck = true;
     }
-    stompClient.send("/app/dicerolling_result", {}, JSON.stringify({'rawString': $("#rawstring").val(),'magicCheck': ifMagicCheck}));
+    stompClient.send("/app/dicerolling_result", {}, JSON.stringify({
+        'rawString': $("#rawstring").val(),
+        'magicCheck': ifMagicCheck
+    }));
 }
 
 function showResult(message) {
     $("#results").append("<tr><td>" + message + "</td></tr>");
 }
 
-function showMagicCheck(megicCheckList){
+function showMagicCheck(megicCheckList) {
     var table = document.getElementById('magicCheckResult');
-    for(var i = 0; i< megicCheckList.length;i++){
+    for (var i = 0; i < megicCheckList.length; i++) {
         table.innerHTML += megicCheckList[i].data;
     }
 }
@@ -60,7 +69,23 @@ $(function () {
     $("form").on('submit', function (e) {
         e.preventDefault();
     });
-    $( "#connect" ).click(function() { connect(); });
-    $( "#disconnect" ).click(function() { disconnect(); });
-    $( "#sendrawstring" ).click(function() { sendRawString(); });
+    $("#connect").click(function () {
+        connect();
+    });
+    $("#disconnect").click(function () {
+        disconnect();
+    });
+    $("#sendrawstring").click(function () {
+        sendRawString();
+    });
+    $("#createObject1111").click(function () {
+        submitCreateObject();
+    })
 });
+
+function submitCreateObject() {
+    var objectName = $('objectName');
+    $.post("/createobject", objectName).done(function(response) {
+        console.log("Response:" + response);
+    });
+}

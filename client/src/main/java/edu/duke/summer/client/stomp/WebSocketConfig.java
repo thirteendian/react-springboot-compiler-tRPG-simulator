@@ -24,7 +24,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
         //Return OUTPUT message destination, example: /topic/greetings
-        config.enableSimpleBroker("/dicerolling");
+        config.enableSimpleBroker("/objectcreate");
         //The prefix of @MessageMapping in Controller, example: /app/hello as @MessageMapping(/hello)
         config.setApplicationDestinationPrefixes("/app");
     }

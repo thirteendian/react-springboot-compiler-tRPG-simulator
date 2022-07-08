@@ -1,6 +1,8 @@
 package edu.duke.summer.client.config;
 
 
+import edu.duke.summer.client.controller.AuthenticationController;
+import edu.duke.summer.client.controller.LoginSuccessHandler;
 import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -10,13 +12,19 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
+import java.io.IOException;
 
 @Configuration
 @EnableWebSecurity
@@ -48,8 +56,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 .antMatchers("/user").hasAnyRole("USER","ADMIN")
                 .antMatchers("/admin").hasRole("ADMIN")
-                .and().formLogin();
+                .and()
+                .formLogin()
+                .successHandler(loginSuccessHandler);
     }
+
+    /**
+     * This is a special Component extends method of
+     * onAuthenticationSuccess
+     * that will be used by HttpSecurity....formLogin().successHandler();
+     */
+    @Autowired
+    private LoginSuccessHandler loginSuccessHandler;
 
     /**
      * Gets the PasswordEncoder for springframework.security.
@@ -61,4 +79,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder getPasswordEncoder(){
         return NoOpPasswordEncoder.getInstance();
     }
+
+
 }
