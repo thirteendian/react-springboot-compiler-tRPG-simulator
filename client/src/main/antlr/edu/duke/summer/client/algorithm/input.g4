@@ -6,93 +6,148 @@ exps : exp
       |exp SEMICOLON exps
       ;
 
-exp : ROLL                                              # rollExp
-    | SINGLEROLL                                        # singleRollExp
-    | cond = exp '?' opt1 = exp COLON opt2 = exp        # conditionalExp
-    | leftExp = exp op = (MUL|DIV) rightExp = exp       # arithmeticExp
-    | leftExp = exp op = (ADD|SUB) rightExp = exp       # arithmeticExp
-    | leftExp = exp op = (AND|OR) rightExp = exp        # logicExp
-    | leftExp = exp op = (EQ|NEQ) rightExp = exp        # compareExp
-    | LPAREN exp RPAREN                                 # parensExp
-    | ID                                                # varExp
-    | value = INT                                       # valueExp
-    | defType                                           # typeDefExp
-    | defFun                                            # funDefExp
-    | defVar                                            # varDefExp
-    |                                                   # nilExp
-    | LBRACE exps RBRACE                                # expList
-    | initArrayExp                                      # arrayExp
-    | funcallExp                                        # funExp
-    | initStructExp                                     # structExp
+exp : ROLL                                                          # rollExp
+    | SINGLEROLL                                                    # singleRollExp
+    | cond = exp '?' opt1 = exp COLON opt2 = exp                    # conditionalExp
+    | leftExp = exp op = (MUL|DIV) rightExp = exp                   # arithmeticExp
+    | leftExp = exp op = (PLUS|MINUS) rightExp = exp                # arithmeticExp
+    | leftExp = exp op = (AND|OR) rightExp = exp                    # arithmeticExp
+    | leftExp = exp op = (EQ|NE|LT|LE|GT|GE) rightExp = exp         # arithmeticExp
+    | LPAREN exp RPAREN                                             # parensExp
+    | ID                                                            # simpleVarExp
+    | exp DOT LENGTH                                                # lenExp
+    | exp DOT ID LPAREN exps RPAREN                                 # fieldFunCallExp
+    | value = INT                                                   # intExp
+    | STRING                                                        # stringExp
+    | strExp                                                        # quoStrExp
+    | TRUE                                                          # trueExp
+    | FALSE                                                         # falseExp
+    | '!' exp                                                       # nonExp
+    | MINUS exp                                                     # uminusExp
+    | decs                                                          # decList
+    |                                                               # nilExp
+    | LBRACE exps RBRACE                                            # expList
+    | funcallExp                                                    # callExp
+    | DEFSTRUCTKEY ID LBRACE finalFields RBRACE                     # structExp
+    | lvalue                                                        # lvalueExp
+    | assign                                                        # assignExp
     ;
+//stringExp
+strExp : QUO ID QUO
+        |QUO STRING QUO
+        |QUO INT QUO;
 
-fields : ID COLON idExp = typeID ( COMMA ID COLON idExp = typeID )*
-        |;
+//declaration
+dec : defType
+     |defFun
+     |defVar
+     ;
 
-defType : DEFTYPEKEY idExp = typeID LBRACE fields RBRACE      #regularTypeDefExp
-         |DEFTYPEKEY idExp = typeID ASSIGN refer = typeID         #assignTypeDefExp
+decs: dec
+     |dec decs
+     ;
+
+//fields dec related to type and struct
+typefield : ID COLON typeID;
+
+typefields : typefield
+        |typefield COMMA typefields;
+
+finalFields : typefields                #regularFields
+              |                         #emptyFields
+              ;
+
+defType : DEFTYPEKEY ID LBRACE finalFields RBRACE          #regularTypeDefExp
+         |DEFTYPEKEY ID ASSIGN refer = typeID              #assignTypeDefExp
          ;
 
+//typeId
 typeID : ID
-        | array
-        | option
+     | typeID OPTION
+     | typeID LBRACK RBRACK
+     | typeID LBRACK INT RBRACK
+     ;
+
+//params related to function dec
+paramList : typeID ID paramRest*
+            |
+            ;
+
+paramRest : COMMA typeID ID;
+
+
+//vars declaration
+defVar : DEFVARKEY ID ASSIGN exp
+        |DEFVARKEY ID COLON ID ASSIGN exp
+        |DEFVARKEY ID COLON ID
         ;
 
-defFun : DEFFUNKEY typeID ID LPAREN fields RPAREN LBRACE stmtList RBRACE;
+//function call
+params : exp                #singleParam
+        |exp COMMA params   #mulParam
+        ;
 
 funcallExp : ID LPAREN RPAREN
             |ID LPAREN params RPAREN
             ;
 
-params : exp ( COMMA exp )*;
-
-initArrayExp : NEW ID LBRACK  exp RBRACK OF exp;
-
-initStructExp :NEW ID LBRACE ID ASSIGN exp ( COMMA ID ASSIGN exp )* RBRACE;
-
-defVar : DEFVARKEY ID ASSIGN exp
-        |DEFVARKEY ID COLON typeID ASSIGN exp
+//lvalue
+lvalue : ID DOT ID                  #simpleFieldVar
+        | ID LBRACK exp RBRACK      #simpleSubscriptVar
+        | lvalue DOT ID             #fieldVar
+        | lvalue LBRACK exp RBRACK  #subscriptVar
         ;
+//initArray
+initArray : exp (COMMA exp)* ;
 
-lvalue : ID
-        |lvalue DOT ID
-        |lvalue LBRACK exp RBRACK
-        ;
+//assignExp
+assign :    ID ASSIGN exp                          #simpleAssign
+           |lvalue ASSIGN exp                      #lvalueAssign
+           |lvalue ASSIGN LBRACE initArray RBRACE  #initArrayAssign
+           |ID ASSIGN LBRACE initArray RBRACE      #simpleInitArrayAssign
+           ;
 
-ifStmt : IF condExp = exp THEN op1 = stmtField ELSE op2 = stmtField
-       | IF condExp = exp THEN op1 = stmtField
+//statements
+ifStmt : IF LPAREN condExp = exp RPAREN THEN op1 = stmts ELSE op2 = stmts
+       | IF LPAREN condExp = exp RPAREN THEN op1 = stmts
        ;
 
-whileStmt : WHILE exp DO stmtField;
+whileStmt : WHILE LPAREN exp RPAREN DO stmts;
 
-forStmt : FOR ID ASSIGN exp TO exp DO stmtField;
+forStmt : FOR LPAREN ID COLON exp RPAREN stmts;
 
-returnStmt : RETURN exp;
+printStmt : PRINT LPAREN exp RPAREN SEMICOLON;
 
-stmts: ifStmt
+returnStmt : RETURN exp SEMICOLON;
+
+expStmt : exp SEMICOLON;
+
+decStmt : defVar SEMICOLON;
+
+stmts: LBRACE stmts* RBRACE
+      |ifStmt
       |whileStmt
       |forStmt
+      |printStmt
       |returnStmt
-      |exp
+      |decStmt
+      |BREAK SEMICOLON
+      |expStmt
       ;
 
-stmtList : stmts
-          |stmts SEMICOLON stmtList
-          ;
+defFun : DEFFUNKEY typeID ID LPAREN paramList RPAREN LBRACE decStmt* stmts* returnStmt RBRACE;
 
-stmtField : LBRACE stmtList RBRACE
-            |stmts
-            ;
-
-array: 'array of' typeID;
-option: 'option of' typeID;
-
+QUO: '"';
 EQ: '==';
-NEQ: '!=';
-ADD: '+';
-SUB: '-';
+NE: '!=';
+PLUS: '+';
+MINUS: '-';
 MUL: '*';
 DIV: '/';
+LT: '<';
+LE: '<=';
+GT: '>';
+GE: '>=';
 MOD: '%';
 AND: '&&';
 OR: '||';
@@ -110,18 +165,28 @@ DOT: '.' ;
 NEW: 'new' ;
 ROLL: INT ROLLKEY INT ;
 SINGLEROLL: ROLLKEY INT;
-INT: [0-9]+ ;
 ROLLKEY: [d|D] ;
 IF: 'if';
 THEN: 'then';
 ELSE: 'else';
 WHILE: 'while';
 RETURN: 'return';
+BREAK: 'break';
+ARRAY: 'array';
+OPTION: 'option';
+LENGTH: 'length';
+TRUE : 'true';
+FALSE : 'false';
+PRINT : 'print';
 DO: 'do';
 FOR: 'for';
+OF: 'of';
 TO: 'to';
 DEFTYPEKEY: 'type';
 DEFFUNKEY: 'fun';
 DEFVARKEY: 'var';
+DEFSTRUCTKEY: 'struct';
+INT: [0-9]+ ;
 ID: [a-zA-Z][0-9a-zA-Z]* ;
+STRING:[0-9a-zA-Z]+ ;
 WS: [ \t\r\n]+ -> skip ;

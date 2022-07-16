@@ -1,9 +1,7 @@
 package edu.duke.summer.client.service;
 
 import java.util.List;
-import javax.transaction.Transactional;
 
-import edu.duke.summer.client.algorithm.astnode.RuleInfo;
 import edu.duke.summer.client.database.model.Game;
 import edu.duke.summer.client.database.model.DiceRolling;
 import edu.duke.summer.client.database.model.MagicCheck;
