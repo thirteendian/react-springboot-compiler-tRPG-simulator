@@ -11,7 +11,8 @@ import java.util.Random;
 public class FieldList extends Absyn {
 
    public Symbol name;
-   public Symbol typ;
+   public Symbol typ; //type string
+                      // e.g.string option [] option
 
    public Ty type;
 
@@ -55,14 +56,16 @@ public class FieldList extends Absyn {
       System.out.println(type.toString());
       while(tail != null){
          i++;
-         System.out.println(i + ": name:" + tail.name );
+         System.out.println(i + ": name:" + tail.name);
          System.out.println(tail.type.toString());
          Ty tmp = tail.type;
          while((tmp instanceof ArrayTy) || (tmp instanceof OptionTy)){
             if((tmp instanceof ArrayTy)){
+               System.out.println("key: "  + ((ArrayTy) tmp).getKey().toString());
                System.out.println(((ArrayTy) tmp).elem.toString());
                tmp = ((ArrayTy) tmp).elem;
             }else{
+               System.out.println("key: "  + ((OptionTy) tmp).getKey().toString());
                System.out.println(((OptionTy) tmp).elem.toString());
                tmp = ((OptionTy) tmp).elem;
             }

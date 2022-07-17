@@ -47,9 +47,9 @@ public class BuildASTVisitor extends inputBaseVisitor<Absyn>{
         }else if(type instanceof PrimTy) {
             typeId = ((PrimTy) type).getName().toString();
         }else if (type instanceof ArrayTy){
-            typeId = ((ArrayTy) type).getTyp().toString();
+            typeId = ((ArrayTy) type).getName().toString();
         }else if (type instanceof OptionTy){
-            typeId = ((OptionTy) type).getTyp().toString();
+            typeId = ((OptionTy) type).getName().toString();
         }else if (type instanceof BooleanTy){
             typeId = ((BooleanTy) type).getName().toString();
         }
@@ -68,9 +68,9 @@ public class BuildASTVisitor extends inputBaseVisitor<Absyn>{
         if(type instanceof NameTy){
             TypeId = ((NameTy) type).getName().toString();
         }else if (type instanceof ArrayTy){
-            TypeId = ((ArrayTy) type).getTyp().toString();
+            TypeId = ((ArrayTy) type).getName().toString();
         }else if (type instanceof OptionTy){
-            TypeId = ((OptionTy) type).getTyp().toString();
+            TypeId = ((OptionTy) type).getName().toString();
         }else if (type instanceof PrimTy){
             TypeId = ((PrimTy) type).getName().toString();
         }else if (type instanceof BooleanTy){

@@ -9,13 +9,13 @@ import java.util.HashMap;
 import java.util.Random;
 
 public class OptionTy extends Ty{
-    public Symbol typ;
+    public Symbol name;
     public Symbol key;
     public Ty elem;
-    public OptionTy(int p, Symbol t) {pos=p; typ=t; key = Symbol.symbol("option");}
+    public OptionTy(int p, Symbol t) {pos=p; name=t; key = Symbol.symbol("option");}
 
     public OptionTy(OptionTy refer){
-        typ = refer.typ;
+        name = refer.name;
         key = refer.key;
         if(refer.elem instanceof OptionTy){
             elem = new OptionTy(pos, refer.elem);
@@ -35,35 +35,42 @@ public class OptionTy extends Ty{
     public OptionTy(int p, Absyn a){
         key = Symbol.symbol("option");
         if(a instanceof ArrayTy){
-            String tmpTyp = ((ArrayTy) a).getTyp().toString() + " option";
+            String tmpTyp = ((ArrayTy) a).getName().toString() + " option";
             elem = (ArrayTy) a;
-            typ = Symbol.symbol(tmpTyp);
+            name = Symbol.symbol(tmpTyp);
         }
         else if(a instanceof OptionTy){
-            String tmpTyp = ((OptionTy) a).getTyp().toString() + " option";
+            String tmpTyp = ((OptionTy) a).getName().toString() + " option";
             elem = (OptionTy) a;
-            typ = Symbol.symbol(tmpTyp);
+            name = Symbol.symbol(tmpTyp);
         }
         else if(a instanceof NameTy){
             String tmpTyp = ((NameTy) a).getName().toString() + " option";
             elem = (NameTy) a;
-            typ = Symbol.symbol(tmpTyp);
+            name = Symbol.symbol(tmpTyp);
 
         }else if(a instanceof PrimTy) {
             String tmpTyp = ((PrimTy) a).getName().toString() + " option";
             elem = (PrimTy) a;
-            typ = Symbol.symbol(tmpTyp);
+            name = Symbol.symbol(tmpTyp);
 
         }else if(a instanceof BooleanTy) {
             String tmpTyp = ((BooleanTy) a).getName().toString() + " option";
             elem = (BooleanTy) a;
-            typ = Symbol.symbol(tmpTyp);
+            name = Symbol.symbol(tmpTyp);
         }else{
             throw new IllegalArgumentException("Invalid option declaration!");
         }
     }
-    public Symbol getTyp() {
-        return typ;
+    public Symbol getName() {
+        return name;
+    }
+
+    public Symbol getKey() {
+        return key;
+    }
+    public Ty getElem() {
+        return elem;
     }
 
     @Override

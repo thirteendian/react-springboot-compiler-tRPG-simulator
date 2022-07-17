@@ -68,20 +68,20 @@ public class TypeInfo {
     }
 
     public void printInfo(){
-        System.out.println("-------" + typeId + "-------" );
+        System.out.println("-------typeId:" + typeId + "-------" );
         if(!typeFields.isEmpty()){
             for (Map.Entry<String, String> entry: typeFields.entrySet()){
                 System.out.println(entry.getKey() +":" +  entry.getValue());
             }
         }else if (ty instanceof ArrayTy){
-            System.out.println(((ArrayTy) ty).typ);
+            System.out.println(((ArrayTy) ty).getName());
         }else if (ty instanceof OptionTy){
-            System.out.println(((OptionTy) ty).typ);
+            System.out.println(((OptionTy) ty).getName());
         }
     }
 
     public void printTyInfo(){
-        System.out.println("-------" + typeId + "-------" );
+        System.out.println("-------typeId:" + typeId + "-------" );
         if(ty != null){
             if(ty instanceof FieldsTy){
                 ((FieldsTy)ty).printInfo();

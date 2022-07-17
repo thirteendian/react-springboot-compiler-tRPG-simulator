@@ -26,6 +26,10 @@ public class PrimTy extends Ty{
         return key;
     }
 
+    public Ty getElem() {
+        return null;
+    }
+
     @Override
     public Value eval(HashMap<String, Value> vars, Random randNumGen, RuleInfo info, RollState state) {
         return null;

@@ -21,6 +21,13 @@ public class BooleanTy extends Ty{
         return name;
     }
 
+    public Symbol getKey() {
+        return key;
+    }
+    public Ty getElem() {
+        return null;
+    }
+
     @Override
     public Value eval(HashMap<String, Value> vars, Random randNumGen, RuleInfo info, RollState state) {
         return null;

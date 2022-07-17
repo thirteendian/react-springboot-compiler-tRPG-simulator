@@ -12,6 +12,18 @@ public class UserTy extends Ty {
     Symbol key;
     Symbol name;
 
+    public Symbol getKey() {
+        return key;
+    }
+
+    public Symbol getName() {
+        return name;
+    }
+
+    public Symbol getTy() {
+        return null;
+    }
+
     public UserTy(Symbol n, Symbol k){
         name = n;
         key = k;

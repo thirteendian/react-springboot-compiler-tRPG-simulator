@@ -9,14 +9,27 @@ import java.util.HashMap;
 import java.util.Random;
 
 public class ArrayTy extends Ty {
-   public Symbol typ;
+   public Symbol name;
    public Integer size; //optional
 
    public Symbol key;
    public Ty elem;
-   public ArrayTy(int p, Symbol t) {pos = p; typ = t; key = Symbol.symbol("array");}
+
+   public Symbol getKey() {
+      return key;
+   }
+
+   public Ty getElem() {
+      return elem;
+   }
+
+   public Symbol getName() {
+      return name;
+   }
+
+   public ArrayTy(int p, Symbol t) {pos = p; name = t; key = Symbol.symbol("array");}
    public ArrayTy(ArrayTy refer){
-      typ = refer.typ;
+      name = refer.name;
       size = refer.size;
       key = refer.key;
       if(refer.elem instanceof ArrayTy){
@@ -37,36 +50,33 @@ public class ArrayTy extends Ty {
       key = Symbol.symbol("array");
       size = s;
       if(a instanceof ArrayTy){
-         String tmpTyp = ((ArrayTy) a).getTyp().toString() + " []";
+         String tmpTyp = ((ArrayTy) a).getName().toString() + " []";
          elem =(ArrayTy) a;
-         typ = Symbol.symbol(tmpTyp);
+         name = Symbol.symbol(tmpTyp);
       }
       else if(a instanceof OptionTy){
-         String tmpTyp = ((OptionTy) a).getTyp().toString() + " []";
-         typ = Symbol.symbol(tmpTyp);
+         String tmpTyp = ((OptionTy) a).getName().toString() + " []";
+         name = Symbol.symbol(tmpTyp);
          elem =(OptionTy) a;
       }
       else if(a instanceof NameTy){
          String tmpTyp = ((NameTy) a).getName().toString()+ " []";
-         typ = Symbol.symbol(tmpTyp);
+         name = Symbol.symbol(tmpTyp);
          elem = (NameTy) a;
 
       }else if(a instanceof PrimTy) {
          String tmpTyp = ((PrimTy) a).getName().toString() + " []";
-         typ = Symbol.symbol(tmpTyp);
+         name = Symbol.symbol(tmpTyp);
          elem = (PrimTy) a;
       }else if(a instanceof BooleanTy) {
          String tmpTyp = ((BooleanTy) a).getName().toString() + " []";
-         typ = Symbol.symbol(tmpTyp);
+         name = Symbol.symbol(tmpTyp);
          elem = (BooleanTy) a;
       }else{
          throw new IllegalArgumentException("Invalid array declaration!");
       }
    }
 
-   public Symbol getTyp() {
-      return typ;
-   }
 
    @Override
    public Value eval(HashMap<String, Value> vars, Random randNumGen, RuleInfo info, RollState state) {
