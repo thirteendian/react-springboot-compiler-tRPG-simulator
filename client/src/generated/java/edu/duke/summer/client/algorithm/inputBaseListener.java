@@ -1,4 +1,4 @@
-// Generated from edu\duke\summer\client\algorithm\input.g4 by ANTLR 4.5
+// Generated from edu/duke/summer/client/algorithm/input.g4 by ANTLR 4.5
 package edu.duke.summer.client.algorithm;
 
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -53,37 +53,49 @@ public class inputBaseListener implements inputListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterArrayExp(inputParser.ArrayExpContext ctx) { }
+	@Override public void enterAssignExp(inputParser.AssignExpContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitArrayExp(inputParser.ArrayExpContext ctx) { }
+	@Override public void exitAssignExp(inputParser.AssignExpContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFunExp(inputParser.FunExpContext ctx) { }
+	@Override public void enterLenExp(inputParser.LenExpContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFunExp(inputParser.FunExpContext ctx) { }
+	@Override public void exitLenExp(inputParser.LenExpContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCompareExp(inputParser.CompareExpContext ctx) { }
+	@Override public void enterLvalueExp(inputParser.LvalueExpContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCompareExp(inputParser.CompareExpContext ctx) { }
+	@Override public void exitLvalueExp(inputParser.LvalueExpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCallExp(inputParser.CallExpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCallExp(inputParser.CallExpContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -101,25 +113,13 @@ public class inputBaseListener implements inputListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterVarExp(inputParser.VarExpContext ctx) { }
+	@Override public void enterUminusExp(inputParser.UminusExpContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitVarExp(inputParser.VarExpContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterTypeDefExp(inputParser.TypeDefExpContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitTypeDefExp(inputParser.TypeDefExpContext ctx) { }
+	@Override public void exitUminusExp(inputParser.UminusExpContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -149,6 +149,18 @@ public class inputBaseListener implements inputListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterNonExp(inputParser.NonExpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitNonExp(inputParser.NonExpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterRollExp(inputParser.RollExpContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -173,25 +185,13 @@ public class inputBaseListener implements inputListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFunDefExp(inputParser.FunDefExpContext ctx) { }
+	@Override public void enterTrueExp(inputParser.TrueExpContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFunDefExp(inputParser.FunDefExpContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterVarDefExp(inputParser.VarDefExpContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitVarDefExp(inputParser.VarDefExpContext ctx) { }
+	@Override public void exitTrueExp(inputParser.TrueExpContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -209,13 +209,25 @@ public class inputBaseListener implements inputListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterLogicExp(inputParser.LogicExpContext ctx) { }
+	@Override public void enterSimpleVarExp(inputParser.SimpleVarExpContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitLogicExp(inputParser.LogicExpContext ctx) { }
+	@Override public void exitSimpleVarExp(inputParser.SimpleVarExpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFalseExp(inputParser.FalseExpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFalseExp(inputParser.FalseExpContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -233,25 +245,145 @@ public class inputBaseListener implements inputListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterValueExp(inputParser.ValueExpContext ctx) { }
+	@Override public void enterStringExp(inputParser.StringExpContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitValueExp(inputParser.ValueExpContext ctx) { }
+	@Override public void exitStringExp(inputParser.StringExpContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFields(inputParser.FieldsContext ctx) { }
+	@Override public void enterQuoStrExp(inputParser.QuoStrExpContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFields(inputParser.FieldsContext ctx) { }
+	@Override public void exitQuoStrExp(inputParser.QuoStrExpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterIntExp(inputParser.IntExpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitIntExp(inputParser.IntExpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDecList(inputParser.DecListContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDecList(inputParser.DecListContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFieldFunCallExp(inputParser.FieldFunCallExpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFieldFunCallExp(inputParser.FieldFunCallExpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterStrExp(inputParser.StrExpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitStrExp(inputParser.StrExpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDec(inputParser.DecContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDec(inputParser.DecContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDecs(inputParser.DecsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDecs(inputParser.DecsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterTypefield(inputParser.TypefieldContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTypefield(inputParser.TypefieldContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterTypefields(inputParser.TypefieldsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTypefields(inputParser.TypefieldsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterRegularFields(inputParser.RegularFieldsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitRegularFields(inputParser.RegularFieldsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterEmptyFields(inputParser.EmptyFieldsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitEmptyFields(inputParser.EmptyFieldsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -293,61 +425,25 @@ public class inputBaseListener implements inputListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDefFun(inputParser.DefFunContext ctx) { }
+	@Override public void enterParamList(inputParser.ParamListContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitDefFun(inputParser.DefFunContext ctx) { }
+	@Override public void exitParamList(inputParser.ParamListContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFuncallExp(inputParser.FuncallExpContext ctx) { }
+	@Override public void enterParamRest(inputParser.ParamRestContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFuncallExp(inputParser.FuncallExpContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterParams(inputParser.ParamsContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitParams(inputParser.ParamsContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterInitArrayExp(inputParser.InitArrayExpContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitInitArrayExp(inputParser.InitArrayExpContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterInitStructExp(inputParser.InitStructExpContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitInitStructExp(inputParser.InitStructExpContext ctx) { }
+	@Override public void exitParamRest(inputParser.ParamRestContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -365,13 +461,145 @@ public class inputBaseListener implements inputListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterLvalue(inputParser.LvalueContext ctx) { }
+	@Override public void enterSingleParam(inputParser.SingleParamContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitLvalue(inputParser.LvalueContext ctx) { }
+	@Override public void exitSingleParam(inputParser.SingleParamContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterMulParam(inputParser.MulParamContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMulParam(inputParser.MulParamContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFuncallExp(inputParser.FuncallExpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFuncallExp(inputParser.FuncallExpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSimpleFieldVar(inputParser.SimpleFieldVarContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSimpleFieldVar(inputParser.SimpleFieldVarContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSubscriptVar(inputParser.SubscriptVarContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSubscriptVar(inputParser.SubscriptVarContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSimpleSubscriptVar(inputParser.SimpleSubscriptVarContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSimpleSubscriptVar(inputParser.SimpleSubscriptVarContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFieldVar(inputParser.FieldVarContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFieldVar(inputParser.FieldVarContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterInitArray(inputParser.InitArrayContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitInitArray(inputParser.InitArrayContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSimpleAssign(inputParser.SimpleAssignContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSimpleAssign(inputParser.SimpleAssignContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterLvalueAssign(inputParser.LvalueAssignContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLvalueAssign(inputParser.LvalueAssignContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterInitArrayAssign(inputParser.InitArrayAssignContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitInitArrayAssign(inputParser.InitArrayAssignContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSimpleInitArrayAssign(inputParser.SimpleInitArrayAssignContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSimpleInitArrayAssign(inputParser.SimpleInitArrayAssignContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -413,6 +641,18 @@ public class inputBaseListener implements inputListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterPrintStmt(inputParser.PrintStmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPrintStmt(inputParser.PrintStmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterReturnStmt(inputParser.ReturnStmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -420,6 +660,30 @@ public class inputBaseListener implements inputListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitReturnStmt(inputParser.ReturnStmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterExpStmt(inputParser.ExpStmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExpStmt(inputParser.ExpStmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDecStmt(inputParser.DecStmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDecStmt(inputParser.DecStmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -437,49 +701,13 @@ public class inputBaseListener implements inputListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStmtList(inputParser.StmtListContext ctx) { }
+	@Override public void enterDefFun(inputParser.DefFunContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitStmtList(inputParser.StmtListContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterStmtField(inputParser.StmtFieldContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitStmtField(inputParser.StmtFieldContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterArray(inputParser.ArrayContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitArray(inputParser.ArrayContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterOption(inputParser.OptionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitOption(inputParser.OptionContext ctx) { }
+	@Override public void exitDefFun(inputParser.DefFunContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

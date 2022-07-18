@@ -1,8 +1,8 @@
 package edu.duke.summer.client;
 
 import edu.duke.summer.client.algorithm.EvalServicempl;
-import edu.duke.summer.client.algorithm.astnode.RuleInfo;
-import edu.duke.summer.client.algorithm.astnode.TypeDefNode;
+import edu.duke.summer.client.algorithm.RuleInfo;
+import edu.duke.summer.client.algorithm.absyn.TypeDec;
 import edu.duke.summer.client.config.SpringConfig;
 import edu.duke.summer.client.database.model.DiceRolling;
 import edu.duke.summer.client.database.model.ObjectField;

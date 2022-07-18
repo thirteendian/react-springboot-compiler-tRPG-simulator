@@ -1,4 +1,4 @@
-// Generated from edu\duke\summer\client\algorithm\input.g4 by ANTLR 4.5
+// Generated from edu/duke/summer/client/algorithm/input.g4 by ANTLR 4.5
 package edu.duke.summer.client.algorithm;
 import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
@@ -31,26 +31,33 @@ public interface inputVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitNilExp(inputParser.NilExpContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code arrayExp}
+	 * Visit a parse tree produced by the {@code assignExp}
 	 * labeled alternative in {@link inputParser#exp}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitArrayExp(inputParser.ArrayExpContext ctx);
+	T visitAssignExp(inputParser.AssignExpContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code funExp}
+	 * Visit a parse tree produced by the {@code lenExp}
 	 * labeled alternative in {@link inputParser#exp}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFunExp(inputParser.FunExpContext ctx);
+	T visitLenExp(inputParser.LenExpContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code compareExp}
+	 * Visit a parse tree produced by the {@code lvalueExp}
 	 * labeled alternative in {@link inputParser#exp}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitCompareExp(inputParser.CompareExpContext ctx);
+	T visitLvalueExp(inputParser.LvalueExpContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code callExp}
+	 * labeled alternative in {@link inputParser#exp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCallExp(inputParser.CallExpContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code parensExp}
 	 * labeled alternative in {@link inputParser#exp}.
@@ -59,19 +66,12 @@ public interface inputVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitParensExp(inputParser.ParensExpContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code varExp}
+	 * Visit a parse tree produced by the {@code uminusExp}
 	 * labeled alternative in {@link inputParser#exp}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitVarExp(inputParser.VarExpContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code typeDefExp}
-	 * labeled alternative in {@link inputParser#exp}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitTypeDefExp(inputParser.TypeDefExpContext ctx);
+	T visitUminusExp(inputParser.UminusExpContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code expList}
 	 * labeled alternative in {@link inputParser#exp}.
@@ -87,6 +87,13 @@ public interface inputVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitArithmeticExp(inputParser.ArithmeticExpContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code nonExp}
+	 * labeled alternative in {@link inputParser#exp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNonExp(inputParser.NonExpContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code rollExp}
 	 * labeled alternative in {@link inputParser#exp}.
 	 * @param ctx the parse tree
@@ -101,19 +108,12 @@ public interface inputVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitSingleRollExp(inputParser.SingleRollExpContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code funDefExp}
+	 * Visit a parse tree produced by the {@code trueExp}
 	 * labeled alternative in {@link inputParser#exp}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFunDefExp(inputParser.FunDefExpContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code varDefExp}
-	 * labeled alternative in {@link inputParser#exp}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitVarDefExp(inputParser.VarDefExpContext ctx);
+	T visitTrueExp(inputParser.TrueExpContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code structExp}
 	 * labeled alternative in {@link inputParser#exp}.
@@ -122,12 +122,19 @@ public interface inputVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStructExp(inputParser.StructExpContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code logicExp}
+	 * Visit a parse tree produced by the {@code simpleVarExp}
 	 * labeled alternative in {@link inputParser#exp}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitLogicExp(inputParser.LogicExpContext ctx);
+	T visitSimpleVarExp(inputParser.SimpleVarExpContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code falseExp}
+	 * labeled alternative in {@link inputParser#exp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFalseExp(inputParser.FalseExpContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code conditionalExp}
 	 * labeled alternative in {@link inputParser#exp}.
@@ -136,18 +143,84 @@ public interface inputVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitConditionalExp(inputParser.ConditionalExpContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code valueExp}
+	 * Visit a parse tree produced by the {@code stringExp}
 	 * labeled alternative in {@link inputParser#exp}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitValueExp(inputParser.ValueExpContext ctx);
+	T visitStringExp(inputParser.StringExpContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link inputParser#fields}.
+	 * Visit a parse tree produced by the {@code quoStrExp}
+	 * labeled alternative in {@link inputParser#exp}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFields(inputParser.FieldsContext ctx);
+	T visitQuoStrExp(inputParser.QuoStrExpContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code intExp}
+	 * labeled alternative in {@link inputParser#exp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIntExp(inputParser.IntExpContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code decList}
+	 * labeled alternative in {@link inputParser#exp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDecList(inputParser.DecListContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code fieldFunCallExp}
+	 * labeled alternative in {@link inputParser#exp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFieldFunCallExp(inputParser.FieldFunCallExpContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link inputParser#strExp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStrExp(inputParser.StrExpContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link inputParser#dec}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDec(inputParser.DecContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link inputParser#decs}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDecs(inputParser.DecsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link inputParser#typefield}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTypefield(inputParser.TypefieldContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link inputParser#typefields}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTypefields(inputParser.TypefieldsContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code regularFields}
+	 * labeled alternative in {@link inputParser#finalFields}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRegularFields(inputParser.RegularFieldsContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code emptyFields}
+	 * labeled alternative in {@link inputParser#finalFields}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitEmptyFields(inputParser.EmptyFieldsContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code regularTypeDefExp}
 	 * labeled alternative in {@link inputParser#defType}.
@@ -169,35 +242,17 @@ public interface inputVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitTypeID(inputParser.TypeIDContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link inputParser#defFun}.
+	 * Visit a parse tree produced by {@link inputParser#paramList}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitDefFun(inputParser.DefFunContext ctx);
+	T visitParamList(inputParser.ParamListContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link inputParser#funcallExp}.
+	 * Visit a parse tree produced by {@link inputParser#paramRest}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFuncallExp(inputParser.FuncallExpContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link inputParser#params}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitParams(inputParser.ParamsContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link inputParser#initArrayExp}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitInitArrayExp(inputParser.InitArrayExpContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link inputParser#initStructExp}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitInitStructExp(inputParser.InitStructExpContext ctx);
+	T visitParamRest(inputParser.ParamRestContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link inputParser#defVar}.
 	 * @param ctx the parse tree
@@ -205,11 +260,87 @@ public interface inputVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDefVar(inputParser.DefVarContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link inputParser#lvalue}.
+	 * Visit a parse tree produced by the {@code singleParam}
+	 * labeled alternative in {@link inputParser#params}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitLvalue(inputParser.LvalueContext ctx);
+	T visitSingleParam(inputParser.SingleParamContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code mulParam}
+	 * labeled alternative in {@link inputParser#params}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMulParam(inputParser.MulParamContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link inputParser#funcallExp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFuncallExp(inputParser.FuncallExpContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code simpleFieldVar}
+	 * labeled alternative in {@link inputParser#lvalue}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSimpleFieldVar(inputParser.SimpleFieldVarContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code subscriptVar}
+	 * labeled alternative in {@link inputParser#lvalue}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSubscriptVar(inputParser.SubscriptVarContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code simpleSubscriptVar}
+	 * labeled alternative in {@link inputParser#lvalue}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSimpleSubscriptVar(inputParser.SimpleSubscriptVarContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code fieldVar}
+	 * labeled alternative in {@link inputParser#lvalue}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFieldVar(inputParser.FieldVarContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link inputParser#initArray}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInitArray(inputParser.InitArrayContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code simpleAssign}
+	 * labeled alternative in {@link inputParser#assign}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSimpleAssign(inputParser.SimpleAssignContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code lvalueAssign}
+	 * labeled alternative in {@link inputParser#assign}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLvalueAssign(inputParser.LvalueAssignContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code initArrayAssign}
+	 * labeled alternative in {@link inputParser#assign}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInitArrayAssign(inputParser.InitArrayAssignContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code simpleInitArrayAssign}
+	 * labeled alternative in {@link inputParser#assign}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSimpleInitArrayAssign(inputParser.SimpleInitArrayAssignContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link inputParser#ifStmt}.
 	 * @param ctx the parse tree
@@ -229,11 +360,29 @@ public interface inputVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitForStmt(inputParser.ForStmtContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link inputParser#printStmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPrintStmt(inputParser.PrintStmtContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link inputParser#returnStmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitReturnStmt(inputParser.ReturnStmtContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link inputParser#expStmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExpStmt(inputParser.ExpStmtContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link inputParser#decStmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDecStmt(inputParser.DecStmtContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link inputParser#stmts}.
 	 * @param ctx the parse tree
@@ -241,27 +390,9 @@ public interface inputVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStmts(inputParser.StmtsContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link inputParser#stmtList}.
+	 * Visit a parse tree produced by {@link inputParser#defFun}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitStmtList(inputParser.StmtListContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link inputParser#stmtField}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitStmtField(inputParser.StmtFieldContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link inputParser#array}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitArray(inputParser.ArrayContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link inputParser#option}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitOption(inputParser.OptionContext ctx);
+	T visitDefFun(inputParser.DefFunContext ctx);
 }

@@ -3,8 +3,8 @@ package edu.duke.summer.client.service;
 import java.util.*;
 import javax.transaction.Transactional;
 
-import edu.duke.summer.client.algorithm.astnode.RuleInfo;
-import edu.duke.summer.client.algorithm.astnode.TypeDefNode;
+import edu.duke.summer.client.algorithm.RuleInfo;
+import edu.duke.summer.client.algorithm.absyn.TypeDec;
 import edu.duke.summer.client.database.model.*;
 import edu.duke.summer.client.database.repository.*;
 
@@ -152,7 +152,7 @@ public class GameServiceImpl implements GameService {
   public DiceRolling saveDiceRollingResults(DiceRollingDto diceRollingDto) {
     String rawData = diceRollingDto.getRawData();
     EvalServicempl evalService = new EvalServicempl();
-    String result = evalService.EvalRoll(rawData, new HashMap<>(), new Random()).toString();
+    String result = evalService.evalRoll(rawData, new HashMap<>(), new Random()).toString();
     final DiceRolling diceRolling = new DiceRolling();
     diceRolling.setGame(diceRollingDto.getGame());
     diceRolling.setPlayer(diceRollingDto.getPlayer());
@@ -183,22 +183,22 @@ public class GameServiceImpl implements GameService {
 
   public void createObjects(String gameId, String code) {
     EvalServicempl evalService = new EvalServicempl();
-    RuleInfo ruleInfo = evalService.SaveRules(code);
-    HashMap<String, TypeDefNode> types = ruleInfo.getTypes();
-    for (String type : types.keySet()) {
-      TypeDefNode typeDefNode = types.get(type);
-      HashMap<String, String> fields = typeDefNode.getTypeFields();
-      int fieldNum = 0;
-      for (String field : fields.keySet()) {
-        final ObjectField objectField = new ObjectField();
-        objectField.setGameId(gameId);
-        objectField.setTypeName(typeDefNode.getTypeId());
-        objectField.setFieldNum(String.valueOf(fieldNum++));
-        objectField.setFieldName(field);
-        objectField.setFieldType(fields.get(field));
-        objectFieldRepository.save(objectField);
-      }
-    }
+//    RuleInfo ruleInfo = evalService.saveRules(code);
+//    HashMap<String, TypeDec> types = ruleInfo.getTypes();
+//    for (String type : types.keySet()) {
+//      TypeDec typeDefNode = types.get(type);
+//      HashMap<String, String> fields = typeDefNode.getTypeFields();
+//      int fieldNum = 0;
+//      for (String field : fields.keySet()) {
+//        final ObjectField objectField = new ObjectField();
+//        objectField.setGameId(gameId);
+//        objectField.setTypeName(typeDefNode.getTypeId());
+//        objectField.setFieldNum(String.valueOf(fieldNum++));
+//        objectField.setFieldName(field);
+//        objectField.setFieldType(fields.get(field));
+//        objectFieldRepository.save(objectField);
+//      }
+//    }
   }
 
   public List<String> getObjectsList(String gameId) {
