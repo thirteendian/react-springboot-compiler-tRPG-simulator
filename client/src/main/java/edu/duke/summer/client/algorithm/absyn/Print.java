@@ -228,7 +228,7 @@ public class Print {
   }
 
   void prTy(edu.duke.summer.client.algorithm.absyn.ArrayTy t, int i) {
-    say("ArrayTy("); say(t.getName().toString()); say(")");
+    say("ArrayTy("); say(t.getTyName().toString()); say(")");
   }
 
   void prTy(Ty t, int i) {
