@@ -13,12 +13,12 @@ public class NameTy extends Ty {
    public Symbol key;
    public NameTy(int p, Symbol n, Symbol k) {pos=p; name=n; key = k;}
 
-   public Symbol getName() {
-      return name;
+   public String getName() {
+      return name.toString();
    }
 
-   public Symbol getKey() {
-      return key;
+   public String getKey() {
+      return key.toString();
    }
 
    public Ty getElem() {
@@ -28,7 +28,7 @@ public class NameTy extends Ty {
    @Override
    public Value eval(HashMap<String, Value> vars, Random randNumGen, RuleInfo info, RollState state) {
       if(!(info.getTypes().containsKey(name.toString()))){
-         throw new IllegalArgumentException("Using undefined type!");
+         throw new IllegalArgumentException("Using undefined type:" + name.toString() + "!");
       }
       return new VoidValue();
    }

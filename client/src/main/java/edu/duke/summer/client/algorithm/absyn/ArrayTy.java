@@ -15,16 +15,16 @@ public class ArrayTy extends Ty {
    public Symbol key;
    public Ty elem;
 
-   public Symbol getKey() {
-      return key;
+   public String getKey() {
+      return key.toString();
    }
 
    public Ty getElem() {
       return elem;
    }
 
-   public Symbol getName() {
-      return name;
+   public String getName() {
+      return name.toString();
    }
 
    public ArrayTy(int p, Symbol t) {pos = p; name = t; key = Symbol.symbol("array");}
@@ -37,11 +37,11 @@ public class ArrayTy extends Ty {
       }else if(refer.elem instanceof OptionTy){
          elem = new OptionTy(pos, refer.elem);
       }else if(refer.elem instanceof PrimTy){
-         elem = new PrimTy(pos, ((PrimTy) refer.elem).getName(), ((PrimTy) refer.elem).key);
+         elem = new PrimTy(pos, Symbol.symbol(((PrimTy) refer.elem).getName()), ((PrimTy) refer.elem).key);
       }else if(refer.elem instanceof NameTy){
-         elem = new NameTy(pos, ((NameTy) refer.elem).getName(), ((NameTy) refer.elem).key);
+         elem = new NameTy(pos, Symbol.symbol(((NameTy) refer.elem).getName()), ((NameTy) refer.elem).key);
       }else if(refer.elem instanceof BooleanTy){
-         elem = new BooleanTy(pos, ((BooleanTy) refer.elem).getName(), ((BooleanTy) refer.elem).key);
+         elem = new BooleanTy(pos, Symbol.symbol(((BooleanTy) refer.elem).getName()), ((BooleanTy) refer.elem).key);
       }{
          throw new IllegalArgumentException("Invalid Array declaration!");
       }
