@@ -17,12 +17,12 @@ public class BooleanTy extends Ty{
         key = k;
     }
 
-    public Symbol getName() {
-        return name;
+    public String getName() {
+        return name.toString();
     }
 
-    public Symbol getKey() {
-        return key;
+    public String getKey() {
+        return key.toString();
     }
     public Ty getElem() {
         return null;

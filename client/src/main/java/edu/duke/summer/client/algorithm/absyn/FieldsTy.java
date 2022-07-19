@@ -12,7 +12,11 @@ public class FieldsTy extends Ty {
    public FieldList fields;
    public FieldsTy(int p, FieldList f) {pos=p; fields=f;}
 
-   public HashMap<String, String> getFields(RuleInfo info){
+   public FieldList getFields() {
+      return fields;
+   }
+
+   public HashMap<String, String> getFieldsNameStr(RuleInfo info){
       HashMap<String, String> ans = new HashMap<>();
       FieldList list = fields;
       while(list != null){
@@ -37,5 +41,20 @@ public class FieldsTy extends Ty {
          list = list.tail;
       }
       return new VoidValue();
+   }
+
+   @Override
+   public String getKey() {
+      return null;
+   }
+
+   @Override
+   public String getName() {
+      return null;
+   }
+
+   @Override
+   public Ty getElem() {
+      return null;
    }
 }

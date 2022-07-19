@@ -9,24 +9,24 @@ import java.util.HashMap;
 import java.util.Random;
 
 public class OptionTy extends Ty{
-    public Symbol name;
+    public Symbol tyName;
     public Symbol key;
     public Ty elem;
-    public OptionTy(int p, Symbol t) {pos=p; name=t; key = Symbol.symbol("option");}
+    public OptionTy(int p, Symbol t) {pos=p; tyName=t; key = Symbol.symbol("option");}
 
     public OptionTy(OptionTy refer){
-        name = refer.name;
+        tyName = refer.tyName;
         key = refer.key;
         if(refer.elem instanceof OptionTy){
             elem = new OptionTy(pos, refer.elem);
         }else if(refer.elem instanceof OptionTy){
             elem = new OptionTy(pos, refer.elem);
         }else if(refer.elem instanceof PrimTy){
-            elem = new PrimTy(pos, ((PrimTy) refer.elem).getName(), ((PrimTy) refer.elem).key);
+            elem = new PrimTy(pos, Symbol.symbol(((PrimTy) refer.elem).getName()), ((PrimTy) refer.elem).key);
         }else if(refer.elem instanceof NameTy){
-            elem = new NameTy(pos, ((NameTy) refer.elem).getName(), ((NameTy) refer.elem).key);
+            elem = new NameTy(pos, Symbol.symbol(((NameTy) refer.elem).getName()), ((NameTy) refer.elem).key);
         }else if(refer.elem instanceof BooleanTy){
-            elem = new BooleanTy(pos, ((BooleanTy) refer.elem).getName(), ((BooleanTy) refer.elem).key);
+            elem = new BooleanTy(pos, Symbol.symbol(((BooleanTy) refer.elem).getName()), ((BooleanTy) refer.elem).key);
         }{
             throw new IllegalArgumentException("Invalid Array declaration!");
         }
@@ -35,39 +35,43 @@ public class OptionTy extends Ty{
     public OptionTy(int p, Absyn a){
         key = Symbol.symbol("option");
         if(a instanceof ArrayTy){
-            String tmpTyp = ((ArrayTy) a).getName().toString() + " option";
+            String tmpTyp = ((ArrayTy) a).getTyName().toString() + " option";
             elem = (ArrayTy) a;
-            name = Symbol.symbol(tmpTyp);
+            tyName = Symbol.symbol(tmpTyp);
         }
         else if(a instanceof OptionTy){
-            String tmpTyp = ((OptionTy) a).getName().toString() + " option";
+            String tmpTyp = ((OptionTy) a).getTyName().toString() + " option";
             elem = (OptionTy) a;
-            name = Symbol.symbol(tmpTyp);
+            tyName = Symbol.symbol(tmpTyp);
         }
         else if(a instanceof NameTy){
             String tmpTyp = ((NameTy) a).getName().toString() + " option";
             elem = (NameTy) a;
-            name = Symbol.symbol(tmpTyp);
+            tyName = Symbol.symbol(tmpTyp);
 
         }else if(a instanceof PrimTy) {
             String tmpTyp = ((PrimTy) a).getName().toString() + " option";
             elem = (PrimTy) a;
-            name = Symbol.symbol(tmpTyp);
+            tyName = Symbol.symbol(tmpTyp);
 
         }else if(a instanceof BooleanTy) {
             String tmpTyp = ((BooleanTy) a).getName().toString() + " option";
             elem = (BooleanTy) a;
-            name = Symbol.symbol(tmpTyp);
+            tyName = Symbol.symbol(tmpTyp);
         }else{
             throw new IllegalArgumentException("Invalid option declaration!");
         }
     }
-    public Symbol getName() {
-        return name;
+    public String getName() {
+        return null;
     }
 
-    public Symbol getKey() {
-        return key;
+    public Symbol getTyName() {
+        return tyName;
+    }
+
+    public String getKey() {
+        return key.toString();
     }
     public Ty getElem() {
         return elem;

@@ -9,27 +9,33 @@ import java.util.HashMap;
 import java.util.Random;
 
 public class ArrayTy extends Ty {
-   public Symbol name;
+   public Symbol tyName;
    public Integer size; //optional
 
    public Symbol key;
    public Ty elem;
 
-   public Symbol getKey() {
-      return key;
+   public String getKey() {
+      return key.toString();
+   }
+
+   @Override
+   public String getName() {
+      return null;
    }
 
    public Ty getElem() {
       return elem;
    }
 
-   public Symbol getName() {
-      return name;
+   public Symbol getTyName() {
+      return tyName;
    }
 
-   public ArrayTy(int p, Symbol t) {pos = p; name = t; key = Symbol.symbol("array");}
+
+   public ArrayTy(int p, Symbol t) {pos = p; tyName = t; key = Symbol.symbol("array");}
    public ArrayTy(ArrayTy refer){
-      name = refer.name;
+      tyName = refer.tyName;
       size = refer.size;
       key = refer.key;
       if(refer.elem instanceof ArrayTy){
@@ -37,11 +43,11 @@ public class ArrayTy extends Ty {
       }else if(refer.elem instanceof OptionTy){
          elem = new OptionTy(pos, refer.elem);
       }else if(refer.elem instanceof PrimTy){
-         elem = new PrimTy(pos, ((PrimTy) refer.elem).getName(), ((PrimTy) refer.elem).key);
+         elem = new PrimTy(pos, Symbol.symbol(((PrimTy) refer.elem).getName()), ((PrimTy) refer.elem).key);
       }else if(refer.elem instanceof NameTy){
-         elem = new NameTy(pos, ((NameTy) refer.elem).getName(), ((NameTy) refer.elem).key);
+         elem = new NameTy(pos, Symbol.symbol(((NameTy) refer.elem).getName()), ((NameTy) refer.elem).key);
       }else if(refer.elem instanceof BooleanTy){
-         elem = new BooleanTy(pos, ((BooleanTy) refer.elem).getName(), ((BooleanTy) refer.elem).key);
+         elem = new BooleanTy(pos, Symbol.symbol(((BooleanTy) refer.elem).getName()), ((BooleanTy) refer.elem).key);
       }{
          throw new IllegalArgumentException("Invalid Array declaration!");
       }
@@ -50,27 +56,27 @@ public class ArrayTy extends Ty {
       key = Symbol.symbol("array");
       size = s;
       if(a instanceof ArrayTy){
-         String tmpTyp = ((ArrayTy) a).getName().toString() + " []";
+         String tmpTyp = ((ArrayTy) a).getTyName().toString() + " []";
          elem =(ArrayTy) a;
-         name = Symbol.symbol(tmpTyp);
+         tyName = Symbol.symbol(tmpTyp);
       }
       else if(a instanceof OptionTy){
-         String tmpTyp = ((OptionTy) a).getName().toString() + " []";
-         name = Symbol.symbol(tmpTyp);
+         String tmpTyp = ((OptionTy) a).getTyName().toString() + " []";
+         tyName = Symbol.symbol(tmpTyp);
          elem =(OptionTy) a;
       }
       else if(a instanceof NameTy){
          String tmpTyp = ((NameTy) a).getName().toString()+ " []";
-         name = Symbol.symbol(tmpTyp);
+         tyName = Symbol.symbol(tmpTyp);
          elem = (NameTy) a;
 
       }else if(a instanceof PrimTy) {
          String tmpTyp = ((PrimTy) a).getName().toString() + " []";
-         name = Symbol.symbol(tmpTyp);
+         tyName = Symbol.symbol(tmpTyp);
          elem = (PrimTy) a;
       }else if(a instanceof BooleanTy) {
          String tmpTyp = ((BooleanTy) a).getName().toString() + " []";
-         name = Symbol.symbol(tmpTyp);
+         tyName = Symbol.symbol(tmpTyp);
          elem = (BooleanTy) a;
       }else{
          throw new IllegalArgumentException("Invalid array declaration!");
