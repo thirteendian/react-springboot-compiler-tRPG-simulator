@@ -36,6 +36,22 @@ public class FieldList extends Absyn {
       return tail;
    }
 
+   public Symbol getName() {
+      return name;
+   }
+
+   public Symbol getTyp() {
+      return typ;
+   }
+
+   public Ty getType() {
+      return type;
+   }
+
+   public FieldList getTail() {
+      return tail;
+   }
+
    public FieldList(int p, Symbol n, Symbol t,FieldList x) {
       pos=p; name=n; typ=t; tail=x;
    }
