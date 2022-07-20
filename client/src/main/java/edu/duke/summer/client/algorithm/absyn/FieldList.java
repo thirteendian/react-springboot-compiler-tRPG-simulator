@@ -20,6 +20,22 @@ public class FieldList extends Absyn {
 
    public boolean escape = true;
 
+   public Symbol getName() {
+      return name;
+   }
+
+   public Symbol getTyp() {
+      return typ;
+   }
+
+   public Ty getType() {
+      return type;
+   }
+
+   public FieldList getTail() {
+      return tail;
+   }
+
    public FieldList(int p, Symbol n, Symbol t,FieldList x) {
       pos=p; name=n; typ=t; tail=x;
    }

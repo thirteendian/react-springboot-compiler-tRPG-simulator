@@ -19,9 +19,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-//import com.maxmind.geoip2.DatabaseReader;
-
 import edu.duke.summer.client.algorithm.*;
+import edu.duke.summer.client.algorithm.absyn.*;
 
 @Service
 public class GameServiceImpl implements GameService {
@@ -183,22 +182,25 @@ public class GameServiceImpl implements GameService {
 
   public void createObjects(String gameId, String code) {
     EvalServicempl evalService = new EvalServicempl();
-//    RuleInfo ruleInfo = evalService.saveRules(code);
-//    HashMap<String, TypeDec> types = ruleInfo.getTypes();
-//    for (String type : types.keySet()) {
-//      TypeDec typeDefNode = types.get(type);
-//      HashMap<String, String> fields = typeDefNode.getTypeFields();
-//      int fieldNum = 0;
-//      for (String field : fields.keySet()) {
-//        final ObjectField objectField = new ObjectField();
-//        objectField.setGameId(gameId);
-//        objectField.setTypeName(typeDefNode.getTypeId());
-//        objectField.setFieldNum(String.valueOf(fieldNum++));
-//        objectField.setFieldName(field);
-//        objectField.setFieldType(fields.get(field));
-//        objectFieldRepository.save(objectField);
-//      }
-//    }
+    RuleInfo ruleInfo = evalService.saveRules(code);
+    HashMap<String, TypeInfo> types = ruleInfo.getTypes();
+    for (String type : types.keySet()) {
+      if (!type.equals("int") && !type.equals("boolean") && !type.equals("string")) {
+        System.out.println(type);
+        TypeInfo typeDefNode = types.get(type);
+        Ty ty = typeDefNode.getTy();
+        FieldList fieldList = ((FieldsTy)ty).getFieldList();
+        System.out.println(fieldList.getName().toString());
+        System.out.println(fieldList.getTyp().toString());
+        if (fieldList.getTail() != null) {
+          FieldList tail = fieldList.getTail();
+          System.out.println(tail.getName().toString());
+          System.out.println(tail.getTyp().toString());
+        }
+        System.out.println();
+      }
+      break;
+    }
   }
 
   public List<String> getObjectsList(String gameId) {
