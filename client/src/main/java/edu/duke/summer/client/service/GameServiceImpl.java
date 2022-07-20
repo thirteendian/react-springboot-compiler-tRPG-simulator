@@ -188,15 +188,15 @@ public class GameServiceImpl implements GameService {
       if (!type.equals("int") && !type.equals("boolean") && !type.equals("string")) {
         System.out.println(type);
         TypeInfo typeDefNode = types.get(type);
-        Ty ty = typeDefNode.getTy();
-        FieldList fieldList = ((FieldsTy)ty).getFieldList();
-        System.out.println(fieldList.getName().toString());
-        System.out.println(fieldList.getTyp().toString());
-        if (fieldList.getTail() != null) {
-          FieldList tail = fieldList.getTail();
-          System.out.println(tail.getName().toString());
-          System.out.println(tail.getTyp().toString());
-        }
+        //Ty ty = typeDefNode.getTy();
+        //FieldList fieldList = ((FieldsTy)ty).getFieldList();
+        //System.out.println(fieldList.getName().toString());
+        //System.out.println(fieldList.getTyp().toString());
+        //if (fieldList.getTail() != null) {
+          //FieldList tail = fieldList.getTail();
+          //System.out.println(tail.getName().toString());
+          //System.out.println(tail.getTyp().toString());
+        //}
         System.out.println();
       }
       break;
