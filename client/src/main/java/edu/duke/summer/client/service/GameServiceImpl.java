@@ -241,6 +241,8 @@ public class GameServiceImpl implements GameService {
   public ObjectFieldDto getObjectFields(String gameId, String typeName) {
     ObjectFieldDto objectFieldDto = new ObjectFieldDto();
     objectFieldDto.setTypeName(typeName);
+    List<String> objectIdList = objectValueRepository.findIdList(gameId, typeName);
+    objectFieldDto.addObjectIdList(typeName, objectIdList);
     List<ObjectField> objectFields = objectFieldRepository.findObjectField(gameId, typeName);
     for (ObjectField objectField : objectFields) {
       objectFieldDto.addObjectField(objectField.getFieldName());

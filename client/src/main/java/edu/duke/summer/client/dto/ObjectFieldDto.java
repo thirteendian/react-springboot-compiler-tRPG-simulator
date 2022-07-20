@@ -16,6 +16,9 @@ public class ObjectFieldDto {
     @Column(nullable = false)
     private HashMap<String, ObjectFieldTypeDto> fieldType;
 
+    @Column
+    private HashMap<String, List<String>> objectIdList;
+
     public ObjectFieldDto() {
         this.objectField = new ArrayList<>();
         this.fieldType = new HashMap<>();
@@ -46,12 +49,21 @@ public class ObjectFieldDto {
     }
 
 
+    public void addObjectIdList(String typeName, List<String> idList) {
+        objectIdList.put(typeName, idList);
+    }
+
+    public HashMap<String, List<String>> getObjectIdList() {
+        return objectIdList;
+    }
+
     @Override
     public String toString() {
         return "DiceRolling{" +
                 ", typeName='" + typeName + '\'' +
                 ", objectField='" + objectField + '\'' +
                 ", fieldType='" + fieldType + '\'' +
+                ", objectIdList='" + objectIdList + '\'' +
                 '}';
     }
 
