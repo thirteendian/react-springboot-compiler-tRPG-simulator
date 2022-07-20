@@ -14,7 +14,12 @@ public class ObjectFieldDto {
     private List<String> objectField;
 
     @Column(nullable = false)
-    private HashMap<String, String> fieldType;
+    private HashMap<String, ObjectFieldTypeDto> fieldType;
+
+    public ObjectFieldDto() {
+        this.objectField = new ArrayList<>();
+        this.fieldType = new HashMap<>();
+    }
 
     public void setTypeName(String typeName) {
         this.typeName = typeName;
@@ -32,18 +37,14 @@ public class ObjectFieldDto {
         return objectField;
     }
 
-    public void addFieldType(String field, String type) {
-        fieldType.put(field, type);
+    public void addFieldType(String field, ObjectFieldTypeDto objectFieldTypeDto) {
+        fieldType.put(field, objectFieldTypeDto);
     }
 
-    public HashMap<String, String> getFieldType() {
+    public HashMap<String, ObjectFieldTypeDto> getFieldType() {
         return fieldType;
     }
 
-    public ObjectFieldDto() {
-        objectField = new ArrayList<>();
-        fieldType = new HashMap<>();
-    }
 
     @Override
     public String toString() {

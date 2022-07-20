@@ -244,9 +244,28 @@ public class GameServiceImpl implements GameService {
     List<ObjectField> objectFields = objectFieldRepository.findObjectField(gameId, typeName);
     for (ObjectField objectField : objectFields) {
       objectFieldDto.addObjectField(objectField.getFieldName());
-      objectFieldDto.addFieldType(objectField.getFieldName(), objectField.getFieldType());
+      String fieldTypeId = objectField.getFieldType();
+      ObjectFieldType objectFieldType = objectFieldTypeRepository.findById(fieldTypeId);
+      ObjectFieldTypeDto objectFieldTypeDto = saveObjectFieldTypeToDto(objectFieldType);
+      objectFieldDto.addFieldType(objectField.getFieldName(), objectFieldTypeDto);
     }
     return objectFieldDto;
+  }
+
+  public ObjectFieldTypeDto saveObjectFieldTypeToDto(ObjectFieldType objectFieldType) {
+    ObjectFieldTypeDto objectFieldTypeDto = new ObjectFieldTypeDto();
+    objectFieldTypeDto.setId(objectFieldType.getId());
+    objectFieldTypeDto.setK(objectFieldType.getK());
+    if(objectFieldType.getName()!=null) {
+      objectFieldTypeDto.setName(objectFieldType.getName());
+    }
+    else {
+      String fieldElemId = objectFieldType.getElem();
+      ObjectFieldType elem = objectFieldTypeRepository.findById(fieldElemId);
+      ObjectFieldTypeDto fieldElem= saveObjectFieldTypeToDto(elem);
+      objectFieldTypeDto.setElem(fieldElem);
+    }
+    return objectFieldTypeDto;
   }
 
   public Boolean checkWhetherNewObjectRequired(String type) {
