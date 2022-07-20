@@ -43,6 +43,9 @@ public class GameServiceImpl implements GameService {
   private ObjectFieldRepository objectFieldRepository;
 
   @Autowired
+  private ObjectFieldTypeRepository objectFieldTypeRepository;
+
+  @Autowired
   private ObjectValueRepository objectValueRepository;
 
   @Autowired
@@ -186,25 +189,52 @@ public class GameServiceImpl implements GameService {
     HashMap<String, TypeInfo> types = ruleInfo.getTypes();
     for (String type : types.keySet()) {
       if (!type.equals("int") && !type.equals("boolean") && !type.equals("string")) {
-        System.out.println(type);
+        //System.out.println(type);
         TypeInfo typeDefNode = types.get(type);
-        //Ty ty = typeDefNode.getTy();
-        //FieldList fieldList = ((FieldsTy)ty).getFieldList();
-        //System.out.println(fieldList.getName().toString());
-        //System.out.println(fieldList.getTyp().toString());
-        //if (fieldList.getTail() != null) {
-          //FieldList tail = fieldList.getTail();
-          //System.out.println(tail.getName().toString());
-          //System.out.println(tail.getTyp().toString());
-        //}
-        System.out.println();
+        FieldList fields = typeDefNode.getFields();
+        traverseFields(gameId, type, 0, fields);
+        //System.out.println();
       }
-      break;
     }
   }
 
+  public void traverseFields(String gameId, String typeName, int fieldNum, FieldList fields) {
+    if (fields != null) {
+      //System.out.println("fieldName: " + fields.getName().toString());
+      Ty ty  =fields.getType();
+      String fieldType = traverseTypes(ty);
+      ObjectField objectField = new ObjectField();
+      objectField.setGameId(gameId);
+      objectField.setTypeName(typeName);
+      objectField.setFieldNum(Integer.toString(fieldNum++));
+      objectField.setFieldName(fields.getName().toString());
+      objectField.setFieldType(fieldType);
+      objectFieldRepository.save(objectField);
+      traverseFields(gameId, typeName, fieldNum, fields.getTail());
+    }
+  }
+
+  public String traverseTypes(Ty ty) {
+    //System.out.println("k: " + ty.getKey());
+    ObjectFieldType objectFieldType = new ObjectFieldType();
+    objectFieldType.setK(ty.getKey());
+    if (ty.getName() != null) {
+      //System.out.println("name: " + ty.getName());
+      objectFieldType.setName(ty.getName());
+      objectFieldTypeRepository.save(objectFieldType);
+    }
+    else {
+      //System.out.println("elem: ");
+      Ty elem = ty.getElem();
+      String elemId = traverseTypes(elem);
+      objectFieldType.setElem(elemId);
+      objectFieldTypeRepository.save(objectFieldType);
+    }
+    return objectFieldType.getId();
+  }
+
   public List<String> getObjectsList(String gameId) {
-    List<String> objectsList = objectFieldRepository.findObjectType(gameId);
+    List<String> objectsList = objectFieldRepository.getAllTypeName(gameId);
     return objectsList;
   }
 

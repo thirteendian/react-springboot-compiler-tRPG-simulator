@@ -6,11 +6,9 @@ import edu.duke.summer.client.algorithm.absyn.TypeDec;
 import edu.duke.summer.client.config.SpringConfig;
 import edu.duke.summer.client.database.model.DiceRolling;
 import edu.duke.summer.client.database.model.ObjectField;
+import edu.duke.summer.client.database.model.ObjectFieldType;
 import edu.duke.summer.client.database.model.Player;
-import edu.duke.summer.client.database.repository.ObjectArrayValueRepository;
-import edu.duke.summer.client.database.repository.ObjectFieldRepository;
-import edu.duke.summer.client.database.repository.ObjectValueRepository;
-import edu.duke.summer.client.database.repository.PlayerRepository;
+import edu.duke.summer.client.database.repository.*;
 import edu.duke.summer.client.dto.DiceRollingDto;
 import edu.duke.summer.client.dto.ObjectFieldDto;
 import edu.duke.summer.client.dto.ObjectValueDto;
@@ -39,6 +37,9 @@ public class GameServiceTest {
 
     @Autowired
     private ObjectFieldRepository objectFieldRepository;
+
+    @Autowired
+    private ObjectFieldTypeRepository objectFieldTypeRepository;
 
     @Autowired
     private ObjectValueRepository objectValueRepository;
@@ -117,9 +118,17 @@ public class GameServiceTest {
                 "    }\n" +
                 "}";
         gameService.createObjects("1", code);
-        //assertEquals(11, objectFieldRepository.findByGameId("1").size());
-        //assertEquals(3, objectFieldRepository.findByTypeName("rollwithmod").size());
-        //assertEquals(8, objectFieldRepository.findByTypeName("attack").size());
+        assertEquals(6, objectFieldRepository.findByGameId("1").size());
+        List<ObjectField> objectFields = objectFieldRepository.findByGameId("1");
+        for (ObjectField objectField : objectFields) {
+            System.out.println(objectField.toString());
+        }
+        System.out.println();
+        assertEquals(18, objectFieldTypeRepository.findAll().size());
+        List<ObjectFieldType> objectFieldTypes = objectFieldTypeRepository.findAll();
+        for (ObjectFieldType objectFieldType : objectFieldTypes) {
+            System.out.println(objectFieldType.toString());
+        }
     }
 
     @Test
