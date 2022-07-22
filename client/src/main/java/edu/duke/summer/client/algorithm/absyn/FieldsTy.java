@@ -28,6 +28,10 @@ public class FieldsTy extends Ty {
       return ans;
    }
 
+   public FieldList getFieldList() {
+      return fields;
+   }
+
    public void printInfo(){
       System.out.println("-------FieldsTy-------");
       fields.printInfo();

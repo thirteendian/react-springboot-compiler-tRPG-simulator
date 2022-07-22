@@ -14,6 +14,9 @@ public interface ObjectValueRepository extends JpaRepository<ObjectValue, Long> 
 
     List<ObjectValue> findByGameId(String gameId);
 
+    @Query("select o.id from ObjectValue o where o.gameId = :gameId and o.typeName = :typeName")
+    List<String> findIdList(@Param("gameId") String gameId, @Param("typeName") String typeName);
+
     @Query("select o from ObjectValue o where o.gameId = :gameId and o.typeName = :typeName and o.valueNum = :valueNum order by o.fieldNum")
     List<ObjectValue> findObjectValue(@Param("gameId") String gameId, @Param("typeName") String typeName, @Param("valueNum") String valueNum);
 

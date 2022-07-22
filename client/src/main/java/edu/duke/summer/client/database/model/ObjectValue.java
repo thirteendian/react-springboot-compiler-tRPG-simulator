@@ -1,5 +1,7 @@
 package edu.duke.summer.client.database.model;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 
 import java.io.Serializable;
@@ -7,22 +9,22 @@ import java.lang.*;
 
 @Entity
 @Table(name = "objectValue")
-@IdClass(ObjectValue.class)
-public class ObjectValue implements Serializable {
+public class ObjectValue {
 
-    @Id
+    @Id @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid",strategy = "uuid")
+    @Column(unique = true, nullable = false, insertable = false, updatable = false)
+    private String id;
+
     @Column(nullable = false)
     private String gameId;
 
-    @Id
     @Column(nullable = false)
     private String typeName;
 
-    @Id
     @Column(nullable = false)
     private String valueNum;
 
-    @Id
     @Column(nullable = false)
     private String fieldNum;
 
@@ -34,6 +36,10 @@ public class ObjectValue implements Serializable {
 
     @Column
     private String boolVal = "null";
+
+    public String getId() {
+        return id;
+    }
 
     public void setGameId(String gameId) {
         this.gameId = gameId;

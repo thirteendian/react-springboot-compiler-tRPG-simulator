@@ -48,7 +48,7 @@ public class EvalServicempl implements EvalService{
         HashMap<String, Value> VarEntry = new HashMap<String, Value>();
         Absyn node = buildAstVisitor(ruleStr);
         node.eval(VarEntry, new Random(), info, state);
-        info.printInfo();
+        //info.printInfo();
         return info;
     }
 
