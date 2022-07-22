@@ -3,8 +3,8 @@ package edu.duke.summer.client.service;
 import java.util.*;
 import javax.transaction.Transactional;
 
-import edu.duke.summer.client.algorithm.astnode.RuleInfo;
-import edu.duke.summer.client.algorithm.astnode.TypeDefNode;
+import edu.duke.summer.client.algorithm.RuleInfo;
+import edu.duke.summer.client.algorithm.absyn.TypeDec;
 import edu.duke.summer.client.database.model.*;
 import edu.duke.summer.client.database.repository.*;
 
@@ -19,9 +19,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-//import com.maxmind.geoip2.DatabaseReader;
-
 import edu.duke.summer.client.algorithm.*;
+import edu.duke.summer.client.algorithm.absyn.*;
 
 @Service
 public class GameServiceImpl implements GameService {
@@ -42,6 +41,9 @@ public class GameServiceImpl implements GameService {
 
   @Autowired
   private ObjectFieldRepository objectFieldRepository;
+
+  @Autowired
+  private ObjectFieldTypeRepository objectFieldTypeRepository;
 
   @Autowired
   private ObjectValueRepository objectValueRepository;
@@ -152,7 +154,7 @@ public class GameServiceImpl implements GameService {
   public DiceRolling saveDiceRollingResults(DiceRollingDto diceRollingDto) {
     String rawData = diceRollingDto.getRawData();
     EvalServicempl evalService = new EvalServicempl();
-    String result = evalService.EvalRoll(rawData, new HashMap<>(), new Random()).toString();
+    String result = evalService.evalRoll(rawData, new HashMap<>(), new Random()).toString();
     final DiceRolling diceRolling = new DiceRolling();
     diceRolling.setGame(diceRollingDto.getGame());
     diceRolling.setPlayer(diceRollingDto.getPlayer());
@@ -183,38 +185,89 @@ public class GameServiceImpl implements GameService {
 
   public void createObjects(String gameId, String code) {
     EvalServicempl evalService = new EvalServicempl();
-    RuleInfo ruleInfo = evalService.SaveRules(code);
-    HashMap<String, TypeDefNode> types = ruleInfo.getTypes();
+    RuleInfo ruleInfo = evalService.saveRules(code);
+    HashMap<String, TypeInfo> types = ruleInfo.getTypes();
     for (String type : types.keySet()) {
-      TypeDefNode typeDefNode = types.get(type);
-      HashMap<String, String> fields = typeDefNode.getTypeFields();
-      int fieldNum = 0;
-      for (String field : fields.keySet()) {
-        final ObjectField objectField = new ObjectField();
-        objectField.setGameId(gameId);
-        objectField.setTypeName(typeDefNode.getTypeId());
-        objectField.setFieldNum(String.valueOf(fieldNum++));
-        objectField.setFieldName(field);
-        objectField.setFieldType(fields.get(field));
-        objectFieldRepository.save(objectField);
+      if (!type.equals("int") && !type.equals("boolean") && !type.equals("string")) {
+        //System.out.println(type);
+        TypeInfo typeDefNode = types.get(type);
+        FieldList fields = typeDefNode.getFields();
+        traverseFields(gameId, type, 0, fields);
+        //System.out.println();
       }
     }
   }
 
+  public void traverseFields(String gameId, String typeName, int fieldNum, FieldList fields) {
+    if (fields != null) {
+      //System.out.println("fieldName: " + fields.getName().toString());
+      Ty ty  =fields.getType();
+      String fieldType = traverseTypes(ty);
+      ObjectField objectField = new ObjectField();
+      objectField.setGameId(gameId);
+      objectField.setTypeName(typeName);
+      objectField.setFieldNum(Integer.toString(fieldNum++));
+      objectField.setFieldName(fields.getName().toString());
+      objectField.setFieldType(fieldType);
+      objectFieldRepository.save(objectField);
+      traverseFields(gameId, typeName, fieldNum, fields.getTail());
+    }
+  }
+
+  public String traverseTypes(Ty ty) {
+    //System.out.println("k: " + ty.getKey());
+    ObjectFieldType objectFieldType = new ObjectFieldType();
+    objectFieldType.setK(ty.getKey());
+    if (ty.getName() != null) {
+      //System.out.println("name: " + ty.getName());
+      objectFieldType.setName(ty.getName());
+      objectFieldTypeRepository.save(objectFieldType);
+    }
+    else {
+      //System.out.println("elem: ");
+      Ty elem = ty.getElem();
+      String elemId = traverseTypes(elem);
+      objectFieldType.setElem(elemId);
+      objectFieldTypeRepository.save(objectFieldType);
+    }
+    return objectFieldType.getId();
+  }
+
   public List<String> getObjectsList(String gameId) {
-    List<String> objectsList = objectFieldRepository.findObjectType(gameId);
+    List<String> objectsList = objectFieldRepository.getAllTypeName(gameId);
     return objectsList;
   }
 
   public ObjectFieldDto getObjectFields(String gameId, String typeName) {
     ObjectFieldDto objectFieldDto = new ObjectFieldDto();
     objectFieldDto.setTypeName(typeName);
+    List<String> objectIdList = objectValueRepository.findIdList(gameId, typeName);
+    objectFieldDto.addObjectIdList(typeName, objectIdList);
     List<ObjectField> objectFields = objectFieldRepository.findObjectField(gameId, typeName);
     for (ObjectField objectField : objectFields) {
       objectFieldDto.addObjectField(objectField.getFieldName());
-      objectFieldDto.addFieldType(objectField.getFieldName(), objectField.getFieldType());
+      String fieldTypeId = objectField.getFieldType();
+      ObjectFieldType objectFieldType = objectFieldTypeRepository.findById(fieldTypeId);
+      ObjectFieldTypeDto objectFieldTypeDto = saveObjectFieldTypeToDto(objectFieldType);
+      objectFieldDto.addFieldType(objectField.getFieldName(), objectFieldTypeDto);
     }
     return objectFieldDto;
+  }
+
+  public ObjectFieldTypeDto saveObjectFieldTypeToDto(ObjectFieldType objectFieldType) {
+    ObjectFieldTypeDto objectFieldTypeDto = new ObjectFieldTypeDto();
+    objectFieldTypeDto.setId(objectFieldType.getId());
+    objectFieldTypeDto.setK(objectFieldType.getK());
+    if(objectFieldType.getName()!=null) {
+      objectFieldTypeDto.setName(objectFieldType.getName());
+    }
+    else {
+      String fieldElemId = objectFieldType.getElem();
+      ObjectFieldType elem = objectFieldTypeRepository.findById(fieldElemId);
+      ObjectFieldTypeDto fieldElem= saveObjectFieldTypeToDto(elem);
+      objectFieldTypeDto.setElem(fieldElem);
+    }
+    return objectFieldTypeDto;
   }
 
   public Boolean checkWhetherNewObjectRequired(String type) {
