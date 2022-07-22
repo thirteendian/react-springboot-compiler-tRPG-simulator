@@ -60,7 +60,7 @@ public class ObjectFieldDto {
     @Override
     public String toString() {
         return "DiceRolling{" +
-                ", typeName='" + typeName + '\'' +
+                "typeName='" + typeName + '\'' +
                 ", objectField='" + objectField + '\'' +
                 ", fieldType='" + fieldType + '\'' +
                 ", objectIdList='" + objectIdList + '\'' +

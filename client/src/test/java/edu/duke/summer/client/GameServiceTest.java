@@ -129,6 +129,8 @@ public class GameServiceTest {
         for (ObjectFieldType objectFieldType : objectFieldTypes) {
             System.out.println(objectFieldType.toString());
         }
+        ObjectFieldDto objectFieldDto = gameService.getObjectFields("1", "newType");
+        System.out.println(objectFieldDto.toString());
     }
 
     @Test
