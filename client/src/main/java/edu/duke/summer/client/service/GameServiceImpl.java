@@ -242,7 +242,9 @@ public class GameServiceImpl implements GameService {
     ObjectFieldDto objectFieldDto = new ObjectFieldDto();
     objectFieldDto.setTypeName(typeName);
     List<String> objectIdList = objectValueRepository.findIdList(gameId, typeName);
-    objectFieldDto.addObjectIdList(typeName, objectIdList);
+    if (!objectIdList.isEmpty()) {
+      objectFieldDto.addObjectIdList(typeName, objectIdList);
+    }
     List<ObjectField> objectFields = objectFieldRepository.findObjectField(gameId, typeName);
     for (ObjectField objectField : objectFields) {
       objectFieldDto.addObjectField(objectField.getFieldName());
@@ -258,7 +260,7 @@ public class GameServiceImpl implements GameService {
     ObjectFieldTypeDto objectFieldTypeDto = new ObjectFieldTypeDto();
     objectFieldTypeDto.setId(objectFieldType.getId());
     objectFieldTypeDto.setK(objectFieldType.getK());
-    if(objectFieldType.getName()!=null) {
+    if(!objectFieldType.getName().equals("null")) {
       objectFieldTypeDto.setName(objectFieldType.getName());
     }
     else {
