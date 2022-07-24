@@ -95,6 +95,13 @@ public interface GameService {
   Boolean checkWhetherNewObjectRequired(String type);
 
   /**
+   * delete user specified fields of one object
+   * @param gameId specify the gameId of delete operation
+   * @param toDelete the list of field names that user wants to delete
+   */
+  void deleteObjectFields(String gameId, List<String> toDelete);
+
+  /**
    * Store field values of one object
    *
    * @param objectValueDto the Dto that contains all the information of one specific object,

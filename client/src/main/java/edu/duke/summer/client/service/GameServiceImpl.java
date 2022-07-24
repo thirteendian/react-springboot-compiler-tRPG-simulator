@@ -240,6 +240,7 @@ public class GameServiceImpl implements GameService {
 
   public ObjectFieldDto getObjectFields(String gameId, String typeName) {
     ObjectFieldDto objectFieldDto = new ObjectFieldDto();
+    objectFieldDto.setGameId(gameId);
     objectFieldDto.setTypeName(typeName);
     List<String> objectIdList = objectValueRepository.findIdList(gameId, typeName);
     if (!objectIdList.isEmpty()) {
@@ -256,7 +257,7 @@ public class GameServiceImpl implements GameService {
     return objectFieldDto;
   }
 
-  public ObjectFieldTypeDto saveObjectFieldTypeToDto(ObjectFieldType objectFieldType) {
+  private ObjectFieldTypeDto saveObjectFieldTypeToDto(ObjectFieldType objectFieldType) {
     ObjectFieldTypeDto objectFieldTypeDto = new ObjectFieldTypeDto();
     objectFieldTypeDto.setId(objectFieldType.getId());
     objectFieldTypeDto.setK(objectFieldType.getK());
@@ -277,6 +278,10 @@ public class GameServiceImpl implements GameService {
       return true;
     }
     return false;
+  }
+
+  public void deleteObjectFields(String gameId, List<String> toDelete){
+
   }
 
   public String saveObjects(ObjectValueDto objectValueDto) {

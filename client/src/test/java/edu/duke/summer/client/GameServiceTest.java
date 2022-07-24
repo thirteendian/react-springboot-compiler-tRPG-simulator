@@ -106,6 +106,12 @@ public class GameServiceTest {
 
     @Test
     public void createObjectsTest() {
+//        String code_test = "{type test {\n" +
+//                "    testint:int\n" +
+//                "    }\n" +
+//                "}";
+//        gameService.createObjects("1", code_test);
+
         String code = "{type rollwithmod {\n" +
                 "    numdice:int,\n" +
                 "    numsides:int option option [],\n" +
@@ -164,6 +170,7 @@ public class GameServiceTest {
         assertEquals(3, rollwithmodField.getObjectField().size());
         assertEquals(3, rollwithmodField.getFieldType().size());
         ObjectFieldDto objectFieldDto = gameService.getObjectFields("2", "rollwithmod");
+        assertEquals("2", objectFieldDto.getGameId());
         System.out.println(objectFieldDto.toString());
     }
 
