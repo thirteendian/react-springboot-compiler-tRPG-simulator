@@ -97,9 +97,10 @@ public interface GameService {
   /**
    * delete user specified fields of one object
    * @param gameId specify the gameId of delete operation
-   * @param toDelete the list of field names that user wants to delete
+   * @param objectName specify the object in the game
+   * @param toDelete the field name that user wants to delete
    */
-  void deleteObjectFields(String gameId, List<String> toDelete);
+  void deleteObjectField(String gameId, String objectName, String toDelete);
 
   /**
    * Store field values of one object

@@ -175,6 +175,32 @@ public class GameServiceTest {
     }
 
     @Test
+    public void deleteObjectFieldTest() {
+        String code = "{type rollwithmod {\n" +
+                "    numdice:int,\n" +
+                "    numsides:int [][],\n" +
+                "    modifier:int []\n" +
+                "    };\n" +
+                "type newType {\n" +
+                "    a:rollwithmod [],\n" +
+                "    b:string option [] option,\n" +
+                "    c:boolean option []\n" +
+                "    }\n" +
+                "}";
+        gameService.createObjects("3", code);
+        gameService.deleteObjectField("3", "newType", "a");
+        List<ObjectField> objectFields = objectFieldRepository.findByGameId("3");
+        for (ObjectField objectField : objectFields) {
+            System.out.println(objectField.toString());
+        }
+        System.out.println();
+        List<ObjectFieldType> objectFieldTypes = objectFieldTypeRepository.findAll();
+        for (ObjectFieldType objectFieldType : objectFieldTypes) {
+            System.out.println(objectFieldType.toString());
+        }
+    }
+
+    @Test
     public void saveObjectsTest() {
         ObjectValueDto objectValueDto = new ObjectValueDto();
         objectValueDto.setGameId("1");

@@ -246,7 +246,7 @@ public class GameServiceImpl implements GameService {
     if (!objectIdList.isEmpty()) {
       objectFieldDto.addObjectIdList(typeName, objectIdList);
     }
-    List<ObjectField> objectFields = objectFieldRepository.findObjectField(gameId, typeName);
+    List<ObjectField> objectFields = objectFieldRepository.findObjectFieldList(gameId, typeName);
     for (ObjectField objectField : objectFields) {
       objectFieldDto.addObjectField(objectField.getFieldName());
       String fieldTypeId = objectField.getFieldType();
@@ -280,8 +280,17 @@ public class GameServiceImpl implements GameService {
     return false;
   }
 
-  public void deleteObjectFields(String gameId, List<String> toDelete){
-
+  public void deleteObjectField(String gameId, String objectName, String toDelete){
+    ObjectField objectField = objectFieldRepository.findObjectField(gameId, objectName, toDelete);
+    String fieldTypeId = objectField.getFieldType();
+    ObjectFieldType objectFieldType = objectFieldTypeRepository.findById(fieldTypeId);
+    while(!objectFieldType.getElem().equals("null")) {
+      String elem = objectFieldType.getElem();
+      objectFieldTypeRepository.delete(objectFieldType);
+      objectFieldType = objectFieldTypeRepository.findById(elem);
+    }
+    objectFieldTypeRepository.delete(objectFieldType);
+    objectFieldRepository.delete(objectField);
   }
 
   public String saveObjects(ObjectValueDto objectValueDto) {
