@@ -240,12 +240,13 @@ public class GameServiceImpl implements GameService {
 
   public ObjectFieldDto getObjectFields(String gameId, String typeName) {
     ObjectFieldDto objectFieldDto = new ObjectFieldDto();
+    objectFieldDto.setGameId(gameId);
     objectFieldDto.setTypeName(typeName);
     List<String> objectIdList = objectValueRepository.findIdList(gameId, typeName);
     if (!objectIdList.isEmpty()) {
       objectFieldDto.addObjectIdList(typeName, objectIdList);
     }
-    List<ObjectField> objectFields = objectFieldRepository.findObjectField(gameId, typeName);
+    List<ObjectField> objectFields = objectFieldRepository.findObjectFieldList(gameId, typeName);
     for (ObjectField objectField : objectFields) {
       objectFieldDto.addObjectField(objectField.getFieldName());
       String fieldTypeId = objectField.getFieldType();
@@ -256,7 +257,7 @@ public class GameServiceImpl implements GameService {
     return objectFieldDto;
   }
 
-  public ObjectFieldTypeDto saveObjectFieldTypeToDto(ObjectFieldType objectFieldType) {
+  private ObjectFieldTypeDto saveObjectFieldTypeToDto(ObjectFieldType objectFieldType) {
     ObjectFieldTypeDto objectFieldTypeDto = new ObjectFieldTypeDto();
     objectFieldTypeDto.setId(objectFieldType.getId());
     objectFieldTypeDto.setK(objectFieldType.getK());
@@ -277,6 +278,47 @@ public class GameServiceImpl implements GameService {
       return true;
     }
     return false;
+  }
+
+  public void deleteObjectField(String gameId, String objectName, String toDelete){
+    ObjectField objectField = objectFieldRepository.findObjectField(gameId, objectName, toDelete);
+    String fieldTypeId = objectField.getFieldType();
+    String fieldNum = objectField.getFieldNum();
+    int fieldNumInt = Integer.parseInt(fieldNum);
+    ObjectFieldType objectFieldType = objectFieldTypeRepository.findById(fieldTypeId);
+    while(!objectFieldType.getElem().equals("null")) {
+      String elem = objectFieldType.getElem();
+      objectFieldTypeRepository.delete(objectFieldType);
+      objectFieldType = objectFieldTypeRepository.findById(elem);
+    }
+    objectFieldTypeRepository.delete(objectFieldType);
+    objectFieldRepository.delete(objectField);
+    List<ObjectField> objectFields = objectFieldRepository.findObjectFieldList(gameId, objectName);
+    for (ObjectField field: objectFields) {
+      int currFieldNum = Integer.parseInt(field.getFieldNum());
+      if(currFieldNum<fieldNumInt) continue;
+      ObjectField newObjectField = new ObjectField(gameId, objectName,
+              Integer.toString(currFieldNum-1), field.getFieldName(), field.getFieldType());
+      objectFieldRepository.delete(field);
+      objectFieldRepository.save(newObjectField);
+    }
+    //todo delete values
+  }
+
+  public void addObjectFields(String gameId, String code){
+    EvalServicempl evalService = new EvalServicempl();
+    RuleInfo ruleInfo = evalService.saveRules(code);
+    HashMap<String, TypeInfo> objects = ruleInfo.getTypes();
+    for(String objectName: objects.keySet()) {
+      if(!objectName.equals("int") && !objectName.equals("boolean") && !objectName.equals("string")) {
+        TypeInfo typeDefNode = objects.get(objectName);
+        FieldList fields = typeDefNode.getFields();
+        List<ObjectField> objectFields = objectFieldRepository.findObjectFieldList(gameId, objectName);
+        ObjectField lastObjectField = objectFields.get(objectFields.size()-1);
+        int lastIndex = Integer.parseInt(lastObjectField.getFieldNum());
+        traverseFields(gameId, objectName, lastIndex+1, fields);
+      }
+    }
   }
 
   public String saveObjects(ObjectValueDto objectValueDto) {

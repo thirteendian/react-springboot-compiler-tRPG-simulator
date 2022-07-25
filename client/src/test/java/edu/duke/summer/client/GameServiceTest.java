@@ -106,6 +106,12 @@ public class GameServiceTest {
 
     @Test
     public void createObjectsTest() {
+//        String code_test = "{type test {\n" +
+//                "    testint:int\n" +
+//                "    }\n" +
+//                "}";
+//        gameService.createObjects("1", code_test);
+
         String code = "{type rollwithmod {\n" +
                 "    numdice:int,\n" +
                 "    numsides:int option option [],\n" +
@@ -124,7 +130,7 @@ public class GameServiceTest {
             System.out.println(objectField.toString());
         }
         System.out.println();
-        assertEquals(18, objectFieldTypeRepository.findAll().size());
+        //assertEquals(18, objectFieldTypeRepository.findAll().size());
         List<ObjectFieldType> objectFieldTypes = objectFieldTypeRepository.findAll();
         for (ObjectFieldType objectFieldType : objectFieldTypes) {
             System.out.println(objectFieldType.toString());
@@ -143,8 +149,8 @@ public class GameServiceTest {
     public void getObjectFieldsTest() {
         String code = "{type rollwithmod { \n" +
                 "   numdice:int,\n" +
-                "   numsides:int,\n" +
-                "   modifier:int\n" +
+                "   numsides:int option option [],\n" +
+                "   modifier:int [][][] option\n" +
                 "};\n" +
                 "type attack {\n" +
                 "     basedmg: rollwithmod,\n" +
@@ -156,13 +162,49 @@ public class GameServiceTest {
                 "     addonsneak: rollwithmod,\n" +
                 "     addoncritsneak:rollwithmod\n" +
                 "};\n}";
-        gameService.createObjects("1", code);
-        ObjectFieldDto attackField = gameService.getObjectFields("1", "attack");
+        gameService.createObjects("2", code);
+        ObjectFieldDto attackField = gameService.getObjectFields("2", "attack");
         assertEquals(8, attackField.getObjectField().size());
         assertEquals(8, attackField.getFieldType().size());
-        ObjectFieldDto rollwithmodField = gameService.getObjectFields("1", "rollwithmod");
+        ObjectFieldDto rollwithmodField = gameService.getObjectFields("2", "rollwithmod");
         assertEquals(3, rollwithmodField.getObjectField().size());
         assertEquals(3, rollwithmodField.getFieldType().size());
+        ObjectFieldDto objectFieldDto = gameService.getObjectFields("2", "rollwithmod");
+        assertEquals("2", objectFieldDto.getGameId());
+        System.out.println(objectFieldDto.toString());
+    }
+
+    @Test
+    public void deleteAndAddObjectFieldTest() {
+        String code = "{type rollwithmod {\n" +
+                "    numdice:int,\n" +
+                "    numsides:int [][],\n" +
+                "    modifier:int []\n" +
+                "    };\n" +
+                "type newType {\n" +
+                "    a:rollwithmod [],\n" +
+                "    b:string option [] option,\n" +
+                "    c:boolean option []\n" +
+                "    }\n" +
+                "}";
+        gameService.createObjects("3", code);
+        gameService.deleteObjectField("3", "newType", "a");
+
+        String codeAdd = "{type rollwithmod {\n" +
+                "    add:int\n" +
+                "    }\n" +
+                "}";
+        gameService.addObjectFields("3", codeAdd);
+
+        List<ObjectField> objectFields = objectFieldRepository.findByGameId("3");
+        for (ObjectField objectField : objectFields) {
+            System.out.println(objectField.toString());
+        }
+        System.out.println();
+        List<ObjectFieldType> objectFieldTypes = objectFieldTypeRepository.findAll();
+        for (ObjectFieldType objectFieldType : objectFieldTypes) {
+            System.out.println(objectFieldType.toString());
+        }
     }
 
     @Test

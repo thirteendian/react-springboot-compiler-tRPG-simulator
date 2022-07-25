@@ -8,6 +8,9 @@ import java.util.*;
 public class ObjectFieldDto {
 
     @Column(nullable = false)
+    private String gameId;
+
+    @Column(nullable = false)
     private String typeName;
 
     @Column(nullable = false)
@@ -22,6 +25,14 @@ public class ObjectFieldDto {
     public ObjectFieldDto() {
         this.objectField = new ArrayList<>();
         this.fieldType = new HashMap<>();
+    }
+
+    public String getGameId() {
+        return gameId;
+    }
+
+    public void setGameId(String gameId) {
+        this.gameId = gameId;
     }
 
     public void setTypeName(String typeName) {
@@ -60,7 +71,8 @@ public class ObjectFieldDto {
     @Override
     public String toString() {
         return "DiceRolling{" +
-                "typeName='" + typeName + '\'' +
+                "gameId='" + gameId + '\'' +
+                ", typeName='" + typeName + '\'' +
                 ", objectField='" + objectField + '\'' +
                 ", fieldType='" + fieldType + '\'' +
                 ", objectIdList='" + objectIdList + '\'' +
