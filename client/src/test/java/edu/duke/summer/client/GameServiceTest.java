@@ -175,7 +175,7 @@ public class GameServiceTest {
     }
 
     @Test
-    public void deleteObjectFieldTest() {
+    public void deleteAndAddObjectFieldTest() {
         String code = "{type rollwithmod {\n" +
                 "    numdice:int,\n" +
                 "    numsides:int [][],\n" +
@@ -189,6 +189,13 @@ public class GameServiceTest {
                 "}";
         gameService.createObjects("3", code);
         gameService.deleteObjectField("3", "newType", "a");
+
+        String codeAdd = "{type rollwithmod {\n" +
+                "    add:int\n" +
+                "    }\n" +
+                "}";
+        gameService.addObjectFields("3", codeAdd);
+
         List<ObjectField> objectFields = objectFieldRepository.findByGameId("3");
         for (ObjectField objectField : objectFields) {
             System.out.println(objectField.toString());

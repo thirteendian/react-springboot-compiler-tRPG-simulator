@@ -283,6 +283,8 @@ public class GameServiceImpl implements GameService {
   public void deleteObjectField(String gameId, String objectName, String toDelete){
     ObjectField objectField = objectFieldRepository.findObjectField(gameId, objectName, toDelete);
     String fieldTypeId = objectField.getFieldType();
+    String fieldNum = objectField.getFieldNum();
+    int fieldNumInt = Integer.parseInt(fieldNum);
     ObjectFieldType objectFieldType = objectFieldTypeRepository.findById(fieldTypeId);
     while(!objectFieldType.getElem().equals("null")) {
       String elem = objectFieldType.getElem();
@@ -291,6 +293,32 @@ public class GameServiceImpl implements GameService {
     }
     objectFieldTypeRepository.delete(objectFieldType);
     objectFieldRepository.delete(objectField);
+    List<ObjectField> objectFields = objectFieldRepository.findObjectFieldList(gameId, objectName);
+    for (ObjectField field: objectFields) {
+      int currFieldNum = Integer.parseInt(field.getFieldNum());
+      if(currFieldNum<fieldNumInt) continue;
+      ObjectField newObjectField = new ObjectField(gameId, objectName,
+              Integer.toString(currFieldNum-1), field.getFieldName(), field.getFieldType());
+      objectFieldRepository.delete(field);
+      objectFieldRepository.save(newObjectField);
+    }
+    //todo delete values
+  }
+
+  public void addObjectFields(String gameId, String code){
+    EvalServicempl evalService = new EvalServicempl();
+    RuleInfo ruleInfo = evalService.saveRules(code);
+    HashMap<String, TypeInfo> objects = ruleInfo.getTypes();
+    for(String objectName: objects.keySet()) {
+      if(!objectName.equals("int") && !objectName.equals("boolean") && !objectName.equals("string")) {
+        TypeInfo typeDefNode = objects.get(objectName);
+        FieldList fields = typeDefNode.getFields();
+        List<ObjectField> objectFields = objectFieldRepository.findObjectFieldList(gameId, objectName);
+        ObjectField lastObjectField = objectFields.get(objectFields.size()-1);
+        int lastIndex = Integer.parseInt(lastObjectField.getFieldNum());
+        traverseFields(gameId, objectName, lastIndex+1, fields);
+      }
+    }
   }
 
   public String saveObjects(ObjectValueDto objectValueDto) {
