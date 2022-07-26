@@ -1,11 +1,13 @@
 package edu.duke.summer.client.stomp;
 
 import edu.duke.summer.client.dto.DiceRollingDto;
+import edu.duke.summer.client.dto.ObjectFieldDto;
 import edu.duke.summer.client.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.util.HtmlUtils;
 
 import java.security.Principal;
@@ -45,15 +47,12 @@ public class DiceRollingController {
     @SendTo("/objectcreate/field")
     public RespObjectCreatingField getObjectCreatingField(ReqObjectCreatingName reqObjectCreatingName){
         System.out.println("ObjectName:" + reqObjectCreatingName.getObjectName());
+        ObjectFieldDto objectFieldDto = gameService.getObjectFields("1",reqObjectCreatingName.getObjectName());
         RespObjectCreatingField respObjectCreatingField = new RespObjectCreatingField();
-        List<String> list = new ArrayList<String>();
-        list.add("Test1");
-        list.add("Test2");
-        HashMap<String,String> hashMap = new HashMap<>();
-        hashMap.put("Test1","int");
-        hashMap.put("Test2","string");
-        respObjectCreatingField.setObjectField(list);
-        respObjectCreatingField.setFieldType(hashMap);
+        //List of field(Order)
+        respObjectCreatingField.setObjectField(objectFieldDto.getObjectField());
+        //Hashmap of Type(Self FK)
+        respObjectCreatingField.setFieldType(objectFieldDto.getFieldType());
         return respObjectCreatingField;
     }
 

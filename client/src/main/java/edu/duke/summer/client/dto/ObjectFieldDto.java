@@ -22,6 +22,7 @@ public class ObjectFieldDto {
     public ObjectFieldDto() {
         this.objectField = new ArrayList<>();
         this.fieldType = new HashMap<>();
+        this.objectIdList = new HashMap<>();
     }
 
     public void setTypeName(String typeName) {

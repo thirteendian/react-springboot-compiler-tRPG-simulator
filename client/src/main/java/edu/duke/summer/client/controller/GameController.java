@@ -27,13 +27,13 @@ public class GameController {
     GameService gameService;
 
     @GetMapping("/gameCenter")
-    public String greeting(Principal principal,Model model){
+    public String greeting(Principal principal, Model model) {
 
         //Get All Object List to rander
         List<String> objects = gameService.getObjectsList("1");
-        model.addAttribute("objects",objects);
-        model.addAttribute("curruser",principal.getName());
-        model.addAttribute("objectNameDto",new ObjectNameDto());
+        model.addAttribute("objects", objects);
+        model.addAttribute("curruser", principal.getName());
+        model.addAttribute("objectNameDto", new ObjectNameDto());
         return "game";
     }
 
@@ -41,19 +41,19 @@ public class GameController {
     private GameRepository gameRepo;
 
     @GetMapping("/createGame")
-    public String GameCreateForm(Model model){
+    public String GameCreateForm(Model model) {
         model.addAttribute("gameDto", new GameDto());
         return "createGame";
     }
 
     @PostMapping("/createGame")
-    public String processCreateGame(@ModelAttribute @Valid GameDto gameDto, Model model){
+    public String processCreateGame(@ModelAttribute @Valid GameDto gameDto, Model model) {
         model.addAttribute("gameDto", gameDto);
         return "gameCreateSuccess";
     }
 
     @GetMapping("chooseGame")
-    public String showGameChooseForm(Model model){
+    public String showGameChooseForm(Model model) {
         return "chooseGame";
     }
 
@@ -81,7 +81,7 @@ public class GameController {
             BufferedReader reader = new BufferedReader(isReader);
             StringBuffer sb = new StringBuffer();
             String str;
-            while((str = reader.readLine())!=null){
+            while ((str = reader.readLine()) != null) {
                 sb.append(str);
             }
             System.out.println(sb.toString());
@@ -95,22 +95,23 @@ public class GameController {
 
         // return success response
         attributes.addFlashAttribute("message", "You successfully uploaded " + fileName + '!');
-        gameService.createObjects("1",uploadString);
+        gameService.createObjects("1", uploadString);
         System.out.println("Successfully Create Objects, the Objects List:");
         System.out.println(gameService.getObjectsList("1"));
         return "redirect:/createobject";
     }
 
-//TODO: This get method should be merged into GamePage
+    //TODO: This get method should be merged into GamePage
     @GetMapping("/createobject")
-    public String createObject(Model model){
+    public String createObject(Model model) {
         List<String> objects = gameService.getObjectsList("1");
-        model.addAttribute("objects",objects);
+        model.addAttribute("objects", objects);
         return "object";//TODO:This should be redirected to Game Page
     }
+
     @PostMapping("/createobject")
-    public String createObject(@Valid String objectName){
-        System.out.println("This is the selected objectName: "+ objectName);
+    public String createObject(@Valid String objectName) {
+        System.out.println("This is the selected objectName: " + objectName);
         return "redirect:/createobject";//TODO:This should be redirected to Game Page
     }
 }

@@ -6,10 +6,12 @@
     <script src="/webjars/jquery/jquery.min.js"></script>
     <script src="/webjars/sockjs-client/sockjs.min.js"></script>
     <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <script src="/createObject.js"></script>
 </head>
 <body>
 <h1> Select Objects </h1>
-<form action="#" th:action="@{/createobject}" method="post">
+<!--<form action="#" th:action="@{/createobject}" method="post">-->
+<form action="#" method="post">
     <select class="form-control" id="objectName" name="objectName">
         <option disabled> - select objects -
         </option>
@@ -20,102 +22,6 @@
 </form>
 <p id="showTheTextMessage"></p>
 <button onClick="createForm()">generateForm</button>
-<!--<button onclick="connectObjectCreateSocket()">connect</button>-->
-<!--<button onclick="disconnect()">disconnect</button>-->
 <button onclick="sendObjectName()">sendObjectName</button>
 </body>
-<script>
-    $(document).ready(function(){
-        connectObjectCreateSocket();
-    })
-    function createFormInput(form, entryName, id) {
-        var label = document.createElement("label");
-        label.innerHTML = entryName+": ";
-        var br = document.createElement("br");
-        var i = document.createElement("input");
-        i.type = "text";
-        i.name = entryName;
-        i.id = id;
-        form.appendChild(label);
-        form.appendChild(i);
-        form.appendChild(br);
-    }
-    function createFormCheckBox(form, entryName, id) {
-        var label = document.createElement("label");
-        label.innerHTML = entryName+": ";
-        var br = document.createElement("br");
-        var c = document.createElement("input");
-        c.type = "checkbox";
-        c.id = id;
-        c.name = entryName;
-        form.appendChild(label);
-        form.appendChild(c);
-        form.appendChild(br);
-    }
-
-    function createFormButton(form, buttonName) {
-        var br = document.createElement("br");
-        var s = document.createElement("input");
-        s.type = "submit";
-        s.value = buttonName;
-        form.appendChild(s);
-        form.appendChild(br);
-    }
-
-    function createFormDropDown(form,entryName,arrayList,id){
-        var label = document.createElement("label");
-        label.innerHTML = entryName+": ";
-        var br = document.createElement("br");
-        var select = document.createElement("select");
-        select.name="objectList";
-        select.id=id;
-        for(const val of arrayList){
-            var option = document.createElement("option");
-            option.value=val;
-            option.text =val;
-            select.appendChild(option);
-        }
-        form.appendChild(label);
-        form.appendChild(select);
-        form.appendChild(br);
-    }
-    function createForm() {
-        //create a form
-        var f = document.createElement("form");
-        f.setAttribute('method',"post");
-        f.setAttribute('action',"submit.php");
-        createFormInput(f,"asdf","1234");
-        createFormInput(f,"asdf","1234");
-        createFormInput(f,"asdf","1234");
-        createFormCheckBox(f,"asdf","asdf");
-        createFormButton(f,"asdf");
-        var values = ["dog","cat","parrpt"];
-        createFormDropDown(f, "asdf",values);
-        document.getElementsByTagName('body')[0].appendChild(f); //pure javascript
-    }
-    var stompClient = null;
-    function connectObjectCreateSocket(){
-        var socket = new SockJS('/gs-guide-websocket');
-        stompClient = Stomp.over(socket);
-        stompClient.connect({},function (frame){
-            console.log('Connected: '+ frame);
-            stompClient.subscribe('/objectcreate/field',function (RespObjectCreatingField){
-                    var objectField = JSON.parse(RespObjectCreatingField.body).objectField;
-                for(var i = 0; i < objectField.length;i++){
-                    document.writeln(objectField[i]);}
-                });
-            });
-    }
-    function disconnect() {
-        if (stompClient !== null) {
-            stompClient.disconnect();
-        }
-        console.log("Disconnected");
-    }
-    function sendObjectName(){
-        stompClient.send("/app/createobject_name",{},JSON.stringify({
-            'objectName':"asdf"
-        }));
-    }
-</script>
 </html>
