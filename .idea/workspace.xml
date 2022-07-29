@@ -1,0 +1,648 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1f0c4109-50b5-43a7-ad7e-20c17b1e0e50" name="Changes" comment="Game Create" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$/app">
+          <activation />
+        </task>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <task path="$PROJECT_DIR$/client">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="dicerolling" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="dicerolling" type="f1a62948:ProjectNode" />
+                <item name="client" type="2d1252cf:ModuleNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="dicerolling" type="f1a62948:ProjectNode" />
+                <item name="client" type="2d1252cf:ModuleNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="dicerolling" type="f1a62948:ProjectNode" />
+                <item name="client" type="2d1252cf:ModuleNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="application" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="dicerolling" type="f1a62948:ProjectNode" />
+                <item name="client" type="2d1252cf:ModuleNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="AnnotationType" />
+        <option value="JavaScript File" />
+        <option value="Interface" />
+        <option value="Class" />
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Merge.Settings">
+    <option name="BRANCH" value="8-game-implementation-2" />
+  </component>
+  <component name="Git.Rebase.Settings">
+    <option name="NEW_BASE" value="test" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="test" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/client/src/main/java/edu/duke/summer/client/ClientApplication.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/client/build.gradle" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="JpbToolWindowState">
+    <option name="myId2FirstActivated">
+      <map>
+        <entry key="com.haulmont.jpb.jpaInspector" value="true" />
+        <entry key="com.haulmont.jpb.jpaPalette" value="true" />
+        <entry key="com.haulmont.jpb.jpaStructure" value="true" />
+      </map>
+    </option>
+    <option name="myId2Visible">
+      <map>
+        <entry key="com.haulmont.jpb.jpaInspector" value="false" />
+        <entry key="com.haulmont.jpb.jpaPalette" value="false" />
+        <entry key="com.haulmont.jpb.jpaStructure" value="false" />
+      </map>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="291Wxu53qdDwqEGXpz8RYcflBaY" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="postgresql" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/SQL Dialect" value="PostgreSQL" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/client/src/main/resources/templates" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/client/src/main/resources/templates" />
+      <recent name="$PROJECT_DIR$/client/src/main/java/edu/duke/summer/client" />
+      <recent name="$PROJECT_DIR$/client/src/main/java/edu/duke/summer/client/database" />
+      <recent name="$PROJECT_DIR$/client/src/main/resources/static" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/client/src/main/resources/static/images" />
+      <recent name="$PROJECT_DIR$/client/src/main/resources/static" />
+      <recent name="$PROJECT_DIR$/client/src/main/java/edu/duke/summer/client" />
+      <recent name="$PROJECT_DIR$/client" />
+      <recent name="$PROJECT_DIR$/client/src" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="edu.duke.summer.client.database" />
+      <recent name="edu.duke.summer.client" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.ClientApplication (2)">
+    <configuration name="dicerolling:app [run]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/app" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="run" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="dicerolling:client [bootRun]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/client" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="bootRun" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="dicerolling:client [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/client" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="dicerolling:client [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/client" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="clean" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="ClientApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="miniUPS.client.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="edu.duke.summer.client.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="edu.duke.summer.client.ClientApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ClientApplication (2)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="dicerolling.client.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="edu.duke.summer.client.ClientApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ClientApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="miniUPS.client.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="edu.duke.ece568.client.ClientApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DicerollingApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <option name="SPRING_BOOT_MAIN_CLASS" value="dicerollling.dicerolling.DicerollingApplication" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="ALTERNATIVE_JRE_PATH" value="17" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Gradle.dicerolling:app [run]" />
+      <item itemvalue="Gradle.dicerolling:client [bootRun]" />
+      <item itemvalue="Gradle.dicerolling:client [clean]" />
+      <item itemvalue="Gradle.dicerolling:client [build]" />
+      <item itemvalue="Spring Boot.DicerollingApplication" />
+      <item itemvalue="Spring Boot.ClientApplication" />
+      <item itemvalue="Spring Boot.ClientApplication (2)" />
+      <item itemvalue="Spring Boot.ClientApplication (1)" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.ClientApplication (1)" />
+        <item itemvalue="Gradle.dicerolling:client [build]" />
+        <item itemvalue="Gradle.dicerolling:client [clean]" />
+        <item itemvalue="Gradle.dicerolling:client [bootRun]" />
+        <item itemvalue="Gradle.dicerolling:app [run]" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1f0c4109-50b5-43a7-ad7e-20c17b1e0e50" name="Changes" comment="" />
+      <created>1652281321766</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1652281321766</updated>
+      <workItem from="1652281323004" duration="1080000" />
+      <workItem from="1652282657668" duration="656000" />
+      <workItem from="1652283356634" duration="1732000" />
+      <workItem from="1652316529176" duration="294000" />
+      <workItem from="1652456855775" duration="10599000" />
+      <workItem from="1652752880489" duration="3485000" />
+      <workItem from="1652791305808" duration="3371000" />
+      <workItem from="1652802399531" duration="1149000" />
+      <workItem from="1652923619947" duration="1220000" />
+      <workItem from="1653012680898" duration="896000" />
+      <workItem from="1653016422601" duration="1072000" />
+      <workItem from="1653018983530" duration="30000" />
+      <workItem from="1653045838725" duration="17344000" />
+      <workItem from="1653245983071" duration="4782000" />
+      <workItem from="1653278670842" duration="920000" />
+      <workItem from="1653399087502" duration="3270000" />
+      <workItem from="1653661363305" duration="10792000" />
+      <workItem from="1653705130134" duration="64000" />
+      <workItem from="1653993038273" duration="6870000" />
+      <workItem from="1654615360277" duration="1772000" />
+      <workItem from="1654825602999" duration="18783000" />
+      <workItem from="1655005884324" duration="10627000" />
+      <workItem from="1655170143282" duration="26686000" />
+      <workItem from="1656472006762" duration="1022000" />
+      <workItem from="1656689391653" duration="2531000" />
+      <workItem from="1656965110270" duration="705000" />
+      <workItem from="1656965821956" duration="619000" />
+      <workItem from="1656967623281" duration="49413000" />
+      <workItem from="1657589295423" duration="18402000" />
+      <workItem from="1658448255271" duration="19944000" />
+      <workItem from="1658804435210" duration="4440000" />
+      <workItem from="1659044173472" duration="30399000" />
+      <workItem from="1659085244142" duration="8540000" />
+    </task>
+    <task id="LOCAL-00001" summary="gradle configuration">
+      <created>1652281895441</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1652281895441</updated>
+    </task>
+    <task id="LOCAL-00002" summary="gradle configuration">
+      <created>1652282209744</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1652282209744</updated>
+    </task>
+    <task id="LOCAL-00003" summary="gradle configuration">
+      <created>1652283394459</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1652283394459</updated>
+    </task>
+    <task id="LOCAL-00004" summary="gradle configuration">
+      <created>1652284427586</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1652284427586</updated>
+    </task>
+    <task id="LOCAL-00005" summary="gradle configuration">
+      <created>1652316578245</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1652316578245</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Authentication Framework">
+      <created>1652465344701</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1652465344701</updated>
+    </task>
+    <task id="LOCAL-00007" summary="combined">
+      <created>1652756509232</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1652756509232</updated>
+    </task>
+    <task id="LOCAL-00008" summary="combined">
+      <created>1652756699615</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1652756699615</updated>
+    </task>
+    <task id="LOCAL-00009" summary="combined">
+      <created>1652757299443</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1652757299443</updated>
+    </task>
+    <task id="LOCAL-00010" summary="combined">
+      <created>1653012798293</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1653012798293</updated>
+    </task>
+    <task id="LOCAL-00011" summary="combined">
+      <created>1653012943808</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1653012943808</updated>
+    </task>
+    <task id="LOCAL-00012" summary="solve conflicts">
+      <created>1653017232378</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1653017232378</updated>
+    </task>
+    <task id="LOCAL-00013" summary="solve conflicts">
+      <created>1653062779248</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1653062779248</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Signup finished">
+      <created>1653065067862</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1653065067862</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Signup finished">
+      <created>1653661953444</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1653661953444</updated>
+    </task>
+    <task id="LOCAL-00016" summary="HTTPServer">
+      <created>1653994395556</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1653994395556</updated>
+    </task>
+    <task id="LOCAL-00017" summary="HTTPServer">
+      <created>1654880754842</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1654880754842</updated>
+    </task>
+    <task id="LOCAL-00018" summary="HTTPServer">
+      <created>1654885598089</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1654885598089</updated>
+    </task>
+    <task id="LOCAL-00019" summary="HTTPServer">
+      <created>1654885914973</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1654885914973</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Simple Password Authentication process">
+      <created>1655021692693</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1655021692693</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Simple Password Authentication process">
+      <created>1655021753949</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1655021753949</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Simple Password Authentication process">
+      <created>1655021762199</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1655021762199</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Simple Password Authentication process">
+      <created>1655191970239</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1655191970239</updated>
+    </task>
+    <task id="LOCAL-00024" summary="MagicCheck">
+      <created>1655206935284</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1655206935284</updated>
+    </task>
+    <task id="LOCAL-00025" summary="MagicCheck">
+      <created>1655217073219</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1655217073219</updated>
+    </task>
+    <task id="LOCAL-00026" summary="MagicCheck">
+      <created>1655217191068</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1655217191068</updated>
+    </task>
+    <task id="LOCAL-00027" summary="MagicCheck">
+      <created>1655217771737</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1655217771737</updated>
+    </task>
+    <task id="LOCAL-00028" summary="MagicCheck">
+      <created>1656966403740</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1656966403740</updated>
+    </task>
+    <task id="LOCAL-00029" summary="MagicCheck">
+      <created>1656968116917</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1656968116917</updated>
+    </task>
+    <task id="LOCAL-00030" summary="MagicCheck">
+      <created>1656968158475</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1656968158475</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Object Generating 1">
+      <created>1657301694317</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1657301694317</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Object Generating">
+      <created>1658804493263</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1658804493263</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Basic Login Signup Done">
+      <created>1659080699773</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1659080699773</updated>
+    </task>
+    <task id="LOCAL-00034" summary="Basic Login Signup Done">
+      <created>1659082574909</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1659082574909</updated>
+    </task>
+    <task id="LOCAL-00035" summary="Game Create">
+      <created>1659096249630</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1659096249630</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/test" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="gradle configuration" />
+    <MESSAGE value="Authentication Framework" />
+    <MESSAGE value="combined" />
+    <MESSAGE value="solve conflicts" />
+    <MESSAGE value="Signup finished" />
+    <MESSAGE value="HTTPServer" />
+    <MESSAGE value="Simple Password Authentication process" />
+    <MESSAGE value="MagicCheck" />
+    <MESSAGE value="Object Generating 1" />
+    <MESSAGE value="Object Generating" />
+    <MESSAGE value="Basic Login Signup Done" />
+    <MESSAGE value="Game Create" />
+    <option name="LAST_COMMIT_MESSAGE" value="Game Create" />
+  </component>
+</project>

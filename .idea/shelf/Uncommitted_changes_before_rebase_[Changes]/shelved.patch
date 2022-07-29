@@ -1,0 +1,215 @@
+Index: client/src/main/java/edu/duke/summer/client/controller/AuthenticationController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package edu.duke.summer.client.controller;\n\nimport edu.duke.summer.client.Login;\nimport edu.duke.summer.client.Signup;\nimport edu.duke.summer.client.database.ShipmentRepository;\nimport org.springframework.stereotype.Controller;\nimport org.springframework.ui.Model;\nimport org.springframework.web.bind.annotation.GetMapping;\nimport org.springframework.web.bind.annotation.ModelAttribute;\nimport org.springframework.web.bind.annotation.PostMapping;\n\nimport javax.validation.Valid;\n\n\n@Controller\npublic class AuthenticationController {\n    private final ShipmentRepository repository;\n    private Boolean isSignUp = false;\n\n\n    public AuthenticationController(ShipmentRepository repository) {\n        this.repository = repository;\n    }\n\n    @GetMapping(\"/signup\")\n    public String signup(Model model) {\n        model.addAttribute(\"signup\", new Signup());\n        return \"signup\";\n    }\n\n    @PostMapping(\"/signup\")\n    public String signupPost(@ModelAttribute @Valid Signup signup, Model model) {\n//        try {\n//\n//        }\n        model.addAttribute(\"signup\", signup);\n        this.isSignUp = true;\n        return \"game\";\n    }\n\n    @GetMapping(\"/login\")\n    public String login(Model model) {\n        model.addAttribute(\"login\", new Login());\n        return \"login\";\n    }\n\n    @PostMapping(\"/login\")\n    public String loginpost(@ModelAttribute Login login, Model model) {\n        model.addAttribute(\"login\", login);\n        this.isSignUp = true;\n        return \"game\";\n    }\n\n\n}\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/client/src/main/java/edu/duke/summer/client/controller/AuthenticationController.java b/client/src/main/java/edu/duke/summer/client/controller/AuthenticationController.java
+--- a/client/src/main/java/edu/duke/summer/client/controller/AuthenticationController.java	(revision a1ed1ca609d7462d67ad9e79f21af0a9a5db9209)
++++ b/client/src/main/java/edu/duke/summer/client/controller/AuthenticationController.java	(date 1652796543284)
+@@ -1,7 +1,7 @@
+ package edu.duke.summer.client.controller;
+ 
+ import edu.duke.summer.client.Login;
+-import edu.duke.summer.client.Signup;
++import edu.duke.summer.client.userDTO;
+ import edu.duke.summer.client.database.ShipmentRepository;
+ import org.springframework.stereotype.Controller;
+ import org.springframework.ui.Model;
+@@ -24,16 +24,14 @@
+ 
+     @GetMapping("/signup")
+     public String signup(Model model) {
+-        model.addAttribute("signup", new Signup());
++        model.addAttribute("signup", new userDTO());
+         return "signup";
+     }
+ 
+     @PostMapping("/signup")
+-    public String signupPost(@ModelAttribute @Valid Signup signup, Model model) {
+-//        try {
+-//
+-//        }
+-        model.addAttribute("signup", signup);
++    public String signupPost(@ModelAttribute @Valid userDTO userDTO, Model model) {
++
++        model.addAttribute("signup", userDTO);
+         this.isSignUp = true;
+         return "game";
+     }
+Index: client/src/main/java/edu/duke/summer/client/Signup.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/client/src/main/java/edu/duke/summer/client/Signup.java b/client/src/main/java/edu/duke/summer/client/userDTO.java
+rename from client/src/main/java/edu/duke/summer/client/Signup.java
+rename to client/src/main/java/edu/duke/summer/client/userDTO.java
+--- a/client/src/main/java/edu/duke/summer/client/Signup.java	(revision a1ed1ca609d7462d67ad9e79f21af0a9a5db9209)
++++ b/client/src/main/java/edu/duke/summer/client/userDTO.java	(date 1652927056083)
+@@ -5,9 +5,11 @@
+ import edu.duke.summer.client.annotation.ValidEmail;
+ 
+ import javax.validation.constraints.NotEmpty;
++import javax.validation.constraints.Size;
++import java.util.UUID;
+ 
+ @PasswordMatches
+-public class Signup {
++public class userDTO {
+     @ValidEmail
+     @NotNull
+     @NotEmpty
+@@ -16,6 +18,9 @@
+     @NotNull
+     @NotEmpty
+     private String password;
++
++    @NotNull
++    @Size(min=1)
+     private String matchingPassword;
+ 
+     public String getEmail() {
+Index: client/src/main/java/edu/duke/summer/client/Game/GameController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/client/src/main/java/edu/duke/summer/client/Game/GameController.java b/client/src/main/java/edu/duke/summer/client/controller/GameController.java
+rename from client/src/main/java/edu/duke/summer/client/Game/GameController.java
+rename to client/src/main/java/edu/duke/summer/client/controller/GameController.java
+--- a/client/src/main/java/edu/duke/summer/client/Game/GameController.java	(revision a1ed1ca609d7462d67ad9e79f21af0a9a5db9209)
++++ b/client/src/main/java/edu/duke/summer/client/controller/GameController.java	(date 1652802961561)
+@@ -1,5 +1,7 @@
+-package edu.duke.summer.client.Game;
++package edu.duke.summer.client.controller;
+ 
++import edu.duke.summer.client.Game.Game;
++import edu.duke.summer.client.database.GameRepository;
+ import org.springframework.beans.factory.annotation.Autowired;
+ import org.springframework.stereotype.Controller;
+ import org.springframework.ui.Model;
+Index: client/src/main/java/edu/duke/summer/client/Game/CreateGameController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/client/src/main/java/edu/duke/summer/client/Game/CreateGameController.java b/client/src/main/java/edu/duke/summer/client/controller/CreateGameController.java
+rename from client/src/main/java/edu/duke/summer/client/Game/CreateGameController.java
+rename to client/src/main/java/edu/duke/summer/client/controller/CreateGameController.java
+--- a/client/src/main/java/edu/duke/summer/client/Game/CreateGameController.java	(revision a1ed1ca609d7462d67ad9e79f21af0a9a5db9209)
++++ b/client/src/main/java/edu/duke/summer/client/controller/CreateGameController.java	(date 1652802961568)
+@@ -1,4 +1,4 @@
+-package edu.duke.summer.client.Game;
++package edu.duke.summer.client.controller;
+ 
+ //@Controller
+ //@RestController
+Index: client/src/main/resources/templates/login.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE html>\n<html xmlns:th=\"https://www.thymeleaf.org\">\n<head>\n    <title>Mini UPS</title>\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"index.css\">\n    <link href=\"https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap\" rel=\"stylesheet\">\n</head>\n<body>\n<div class=\"main\">\n    <input type=\"checkbox\" id=\"chk\" aria-hidden=\"true\">\n\n    <div class=\"signup\">\n        <form action = \"#\" th:action=\"@{/login}\" th:object=\"${login}\" method=\"post\">\n            <label for=\"chk\" aria-hidden=\"true\">Login</label>\n            <input type=\"email\" name=\"email\" placeholder=\"Email\" required=\"\">\n            <input type=\"password\" name=\"pswd\" placeholder=\"Password\" required=\"\">\n            <button>Login</button>\n        </form>\n    </div>\n</div>\n</body>\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/client/src/main/resources/templates/login.html b/client/src/main/resources/templates/login.html
+--- a/client/src/main/resources/templates/login.html	(revision a1ed1ca609d7462d67ad9e79f21af0a9a5db9209)
++++ b/client/src/main/resources/templates/login.html	(date 1652795723259)
+@@ -9,7 +9,7 @@
+ <div class="main">
+     <input type="checkbox" id="chk" aria-hidden="true">
+ 
+-    <div class="signup">
++    <div class="userDTO">
+         <form action = "#" th:action="@{/login}" th:object="${login}" method="post">
+             <label for="chk" aria-hidden="true">Login</label>
+             <input type="email" name="email" placeholder="Email" required="">
+Index: client/src/main/resources/templates/signup.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE html>\n<html xmlns:th=\"https://www.thymeleaf.org\">\n<head>\n    <title>Mini UPS</title>\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"index.css\">\n    <link href=\"https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap\" rel=\"stylesheet\">\n</head>\n<body>\n<div class=\"main\">\n    <input type=\"checkbox\" id=\"chk\" aria-hidden=\"true\">\n\n    <div class=\"signup\">\n        <form action = \"#\" th:action=\"@{/signup}\" th:object=\"${signup}\" method=\"post\">\n            <label for=\"chk\" aria-hidden=\"true\">Sign up</label>\n            <input type=\"email\" th:field=\"*{email}\" name=\"email\" placeholder=\"Email\" required=\"\">\n            <input type=\"password\" th:field=\"*{password}\" name=\"pswd\" placeholder=\"Password\" required=\"\">\n            <input type=\"password\" th:field=\"*{matchingPassword}\" name=\"repswd\" placeholder=\"Re-Enter Password\" required=\"\">\n            <button type=\"submit\">Sign up</button>\n        </form>\n    </div>\n</div>\n</body>\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/client/src/main/resources/templates/signup.html b/client/src/main/resources/templates/signup.html
+--- a/client/src/main/resources/templates/signup.html	(revision a1ed1ca609d7462d67ad9e79f21af0a9a5db9209)
++++ b/client/src/main/resources/templates/signup.html	(date 1652795723271)
+@@ -9,8 +9,8 @@
+ <div class="main">
+     <input type="checkbox" id="chk" aria-hidden="true">
+ 
+-    <div class="signup">
+-        <form action = "#" th:action="@{/signup}" th:object="${signup}" method="post">
++    <div class="userDTO">
++        <form action = "#" th:action="@{/userDTO}" th:object="${userDTO}" method="post">
+             <label for="chk" aria-hidden="true">Sign up</label>
+             <input type="email" th:field="*{email}" name="email" placeholder="Email" required="">
+             <input type="password" th:field="*{password}" name="pswd" placeholder="Password" required="">
+Index: client/src/main/java/edu/duke/summer/client/Game/GameRepository.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/client/src/main/java/edu/duke/summer/client/Game/GameRepository.java b/client/src/main/java/edu/duke/summer/client/database/GameRepository.java
+rename from client/src/main/java/edu/duke/summer/client/Game/GameRepository.java
+rename to client/src/main/java/edu/duke/summer/client/database/GameRepository.java
+--- a/client/src/main/java/edu/duke/summer/client/Game/GameRepository.java	(revision a1ed1ca609d7462d67ad9e79f21af0a9a5db9209)
++++ b/client/src/main/java/edu/duke/summer/client/database/GameRepository.java	(date 1652802961566)
+@@ -1,5 +1,6 @@
+-package edu.duke.summer.client.Game;
++package edu.duke.summer.client.database;
+ 
++import edu.duke.summer.client.Game.Game;
+ import org.springframework.data.jpa.repository.JpaRepository;
+ 
+ import javax.persistence.Id;
+Index: client/src/main/resources/static/index.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE html>\n<html xmlns:th=\"https://www.thymeleaf.org\">\n<head>\n    <title>Mini UPS</title>\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"index.css\">\n    <link href=\"https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap\" rel=\"stylesheet\">\n</head>\n<body>\n<label for=\"chk\" aria-hidden=\"true\">Welcome to DICE</label><br/>\n\n<div class=\"main\">\n    <input type=\"checkbox\" id=\"chk\" aria-hidden=\"true\">\n\n    <div class=\"signup\">\n        <form action = \"/signup\">\n            <label for=\"chk\" aria-hidden=\"true\">Sign up</label>\n            <button type=\"submit\">Sign up</button>\n        </form>\n    </div>\n\n    <div class=\"login\">\n        <form action = \"/login\">\n            <label for=\"chk\" aria-hidden=\"true\">Login</label>\n            <button>Login</button>\n        </form>\n    </div>\n</div>\n</body>\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/client/src/main/resources/static/index.html b/client/src/main/resources/static/index.html
+--- a/client/src/main/resources/static/index.html	(revision a1ed1ca609d7462d67ad9e79f21af0a9a5db9209)
++++ b/client/src/main/resources/static/index.html	(date 1652795723245)
+@@ -11,8 +11,8 @@
+ <div class="main">
+     <input type="checkbox" id="chk" aria-hidden="true">
+ 
+-    <div class="signup">
+-        <form action = "/signup">
++    <div class="userDTO">
++        <form action = "/userDTO">
+             <label for="chk" aria-hidden="true">Sign up</label>
+             <button type="submit">Sign up</button>
+         </form>
+Index: client/src/main/java/edu/duke/summer/client/annotation/PasswordMatchesValidator.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package edu.duke.summer.client.annotation;\n\nimport edu.duke.summer.client.Signup;\n\nimport javax.validation.ConstraintValidator;\nimport javax.validation.ConstraintValidatorContext;\n\npublic class PasswordMatchesValidator implements ConstraintValidator<PasswordMatches, Object> {\n    @Override\n    public void initialize(PasswordMatches constraintAnnotation) {\n    }\n    @Override\n    public boolean isValid(Object obj, ConstraintValidatorContext context){\n        Signup signup = (Signup) obj;\n        return signup.getPassword().equals(signup.getMatchingPassword());\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/client/src/main/java/edu/duke/summer/client/annotation/PasswordMatchesValidator.java b/client/src/main/java/edu/duke/summer/client/annotation/PasswordMatchesValidator.java
+--- a/client/src/main/java/edu/duke/summer/client/annotation/PasswordMatchesValidator.java	(revision a1ed1ca609d7462d67ad9e79f21af0a9a5db9209)
++++ b/client/src/main/java/edu/duke/summer/client/annotation/PasswordMatchesValidator.java	(date 1652795723257)
+@@ -1,6 +1,6 @@
+ package edu.duke.summer.client.annotation;
+ 
+-import edu.duke.summer.client.Signup;
++import edu.duke.summer.client.userDTO;
+ 
+ import javax.validation.ConstraintValidator;
+ import javax.validation.ConstraintValidatorContext;
+@@ -11,7 +11,7 @@
+     }
+     @Override
+     public boolean isValid(Object obj, ConstraintValidatorContext context){
+-        Signup signup = (Signup) obj;
+-        return signup.getPassword().equals(signup.getMatchingPassword());
++        userDTO userDTO = (userDTO) obj;
++        return userDTO.getPassword().equals(userDTO.getMatchingPassword());
+     }
+ }

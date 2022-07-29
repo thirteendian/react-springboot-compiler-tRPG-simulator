@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/dicerolling.iml" filepath="$PROJECT_DIR$/.idea/modules/dicerolling.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/client/dicerolling.client.iml" filepath="$PROJECT_DIR$/.idea/modules/client/dicerolling.client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/client/dicerolling.client.main.iml" filepath="$PROJECT_DIR$/.idea/modules/client/dicerolling.client.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/client/dicerolling.client.test.iml" filepath="$PROJECT_DIR$/.idea/modules/client/dicerolling.client.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/server/dicerolling.server.iml" filepath="$PROJECT_DIR$/.idea/modules/server/dicerolling.server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/server/dicerolling.server.main.iml" filepath="$PROJECT_DIR$/.idea/modules/server/dicerolling.server.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/server/dicerolling.server.test.iml" filepath="$PROJECT_DIR$/.idea/modules/server/dicerolling.server.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/shared/dicerolling.shared.iml" filepath="$PROJECT_DIR$/.idea/modules/shared/dicerolling.shared.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/shared/dicerolling.shared.main.iml" filepath="$PROJECT_DIR$/.idea/modules/shared/dicerolling.shared.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/shared/dicerolling.shared.test.iml" filepath="$PROJECT_DIR$/.idea/modules/shared/dicerolling.shared.test.iml" />
+    </modules>
+  </component>
+</project>

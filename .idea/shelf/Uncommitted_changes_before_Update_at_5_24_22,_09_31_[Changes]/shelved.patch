@@ -1,0 +1,3 @@
+diff --git a/client/src/main/resources/static/createGame.html b/client/src/main/resources/templates/createGame.html
+rename from client/src/main/resources/static/createGame.html
+rename to client/src/main/resources/templates/createGame.html

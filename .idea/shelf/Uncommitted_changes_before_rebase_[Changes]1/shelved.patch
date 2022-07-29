@@ -1,0 +1,19 @@
+Index: client/src/main/java/edu/duke/summer/client/service/MyUserDetailsServiceImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package edu.duke.summer.client.service;\n\nimport edu.duke.summer.client.database.model.User;\nimport edu.duke.summer.client.database.repository.UserRepository;\nimport org.springframework.beans.factory.annotation.Autowired;\nimport org.springframework.security.core.userdetails.UserDetails;\nimport org.springframework.security.core.userdetails.UsernameNotFoundException;\nimport org.springframework.stereotype.Service;\n\nimport java.util.Optional;\n\n@Service\npublic class MyUserDetailsServiceImpl implements MyUserDetailsService {\n\n    @Autowired\n    UserRepository userRepository;\n\n    /**\n     * Construct UserDetails by username\n     *\n     * @param username the username\n     * @return MyUserDetails implements UserDetails\n     * @throws UsernameNotFoundException\n     */\n    @Override\n    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {\n        Optional<User> user = userRepository.findByEmail(username);\n\n        user.orElseThrow(() -> new UsernameNotFoundException(\"Not found: \" + username));\n\n        return user.map(MyUserDtails::new).get();\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/client/src/main/java/edu/duke/summer/client/service/MyUserDetailsServiceImpl.java b/client/src/main/java/edu/duke/summer/client/service/MyUserDetailsServiceImpl.java
+--- a/client/src/main/java/edu/duke/summer/client/service/MyUserDetailsServiceImpl.java	(revision 5901e9a8a865fc7bbb08d90a0109df75dc38e0b4)
++++ b/client/src/main/java/edu/duke/summer/client/service/MyUserDetailsServiceImpl.java	(date 1658804790499)
+@@ -11,7 +11,7 @@
+ 
+ @Service
+ public class MyUserDetailsServiceImpl implements MyUserDetailsService {
+-
++ƒ
+     @Autowired
+     UserRepository userRepository;
+ 
