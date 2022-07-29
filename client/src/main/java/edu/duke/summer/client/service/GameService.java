@@ -12,11 +12,11 @@ import org.springframework.stereotype.Service;
 @Service
 public interface GameService {
   
-  Game createNewGame(final GameDto gameDto);
+  Game createNewGame(final CreateGameDto createGameDto);
 
   List<Game> filterGame(final GameFilterDto gameFilterDto);
 
-  Game joinGame(final GameDto gameDto);
+  Game joinGame(final CreateGameDto createGameDto);
 
   void deleteGame(final Game game);
 

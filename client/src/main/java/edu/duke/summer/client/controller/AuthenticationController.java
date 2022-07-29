@@ -6,6 +6,7 @@ import edu.duke.summer.client.dto.SignupDto;
 import edu.duke.summer.client.service.MyUserDetailsService;
 import edu.duke.summer.client.exceptions.UserAlreadyExistException;
 import edu.duke.summer.client.service.StorageService;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,10 +33,16 @@ public class AuthenticationController {
     private Boolean isSignUp = false;
     private StorageService storageService;
 
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
+
     @GetMapping("/")
-    public String index() {
+    public String index(Model model) {
         if (myUserDetailsService.isUserAuthenticated()) {
             MyUserDtails myUserDtails = myUserDetailsService.loadMyUserDetailsOfCurrentUser();
+            if(!model.containsAttribute("loggedInMyUserDtails")){
+                model.addAttribute("loggedInMyUserDtails",myUserDtails);
+            }
             return "redirect:/user/" + myUserDtails.getUuid() + "/index_after_login";
         }
         return "index_before_login";
@@ -61,6 +68,7 @@ public class AuthenticationController {
         model.addAttribute("signupDto", new SignupDto());
         return "signup";
     }
+
 
     @PostMapping("/signup")
     //@RequestParam("profile") MultipartFile multipartFile

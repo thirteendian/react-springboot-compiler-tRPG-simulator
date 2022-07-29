@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Game</title>
+</head>
+<body>
+<form th:action="@{'/user/'+${uuid}+'/creategame'}" th:object="${createGameDto}" method="post">
+    <p>
+        Game Name:<input type="text" th:field="*{gameName}" name="gameName" placeholder="Game Name" required>
+    <p th:if="${#fields.hasErrors('gameName')}" th:class="${#fields.hasErrors('gameName')}?error">Game Name too short</p>
+
+    <p>
+        Game Name:<input type="text" th:field="*{playerNum}" name="playerNum" placeholder="PlayerNum" required>
+    <p th:if="${#fields.hasErrors('playerNum')}" th:class="${#fields.hasErrors('playerNum')}?error">player Number too large</p>
+
+    <button type="submit">Confirm</button>
+</form>
+
+<form th:action="@{/}" method="get">
+    <button type="submit">Back</button>
+</form>
+</body>
+</html>

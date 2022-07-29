@@ -48,15 +48,15 @@ public class GameServiceImpl implements GameService {
   private ObjectArrayValueRepository objectArrayValueRepository;
 
   @Override
-  public Game createNewGame(final GameDto gameDto) {
-    if (gameRepository.existsById(gameDto.getId())) {
+  public Game createNewGame(final CreateGameDto createGameDto) {
+    if (gameRepository.existsById(createGameDto.getId())) {
       throw new IllegalArgumentException("Game ID already exists!");
     }
     final Game game = new Game();
-    game.setId(gameDto.getId());
-    game.setCreatorEmail(gameDto.getCreatorEmail());
-    game.setGameName(gameDto.getGameName());
-    game.setPlayerNum(gameDto.getPlayerNum());
+    game.setId(createGameDto.getId());
+    game.setCreatorEmail("0");
+    game.setGameName(createGameDto.getGameName());
+    game.setPlayerNum(createGameDto.getPlayerNum());
     return gameRepository.save(game);
   }
 
@@ -107,11 +107,11 @@ public class GameServiceImpl implements GameService {
   }
 
   @Override
-  public Game joinGame(final GameDto gameDto) {
-    if (!gameRepository.existsById(gameDto.getId())) {
+  public Game joinGame(final CreateGameDto createGameDto) {
+    if (!gameRepository.existsById(createGameDto.getId())) {
       throw new IllegalArgumentException("Game does not exists!");
     }
-    return gameRepository.findById(gameDto.getId());
+    return gameRepository.findById(createGameDto.getId());
   }
 
 

@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<form th:action="@{/creategame}" method="get">
+<form th:action="@{'/user/'+${loggedInMyUserDtails.getUuid()}+'/creategame'}" method="get">
     <input type="submit" value="Create Game">
 </form>
 <form th:action="@{/joingame}" method="get">
@@ -17,5 +17,6 @@
 <form th:action="@{/logout}" method="post">
     <input type="submit" value="Logout">
 </form>
+
 </body>
 </html>

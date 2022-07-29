@@ -99,7 +99,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/user").hasAnyRole("USER","ADMIN")
+                .antMatchers("/user/**").hasRole("USER")
                 .antMatchers("/index_after_login").hasAnyRole("USER","ADMIN")
                 .antMatchers("/admin").hasRole("ADMIN")
 
@@ -111,6 +111,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .rememberMe().key("uniqueAndSecret")
                 .tokenValiditySeconds(86400)//valid for a day
+
 
                 .and().formLogin(
                         form->form.loginPage("/login")

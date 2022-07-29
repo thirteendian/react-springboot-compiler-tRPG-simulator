@@ -1,9 +1,11 @@
 package edu.duke.summer.client.controller;
 
 import edu.duke.summer.client.database.repository.GameRepository;
-import edu.duke.summer.client.dto.GameDto;
+import edu.duke.summer.client.dto.CreateGameDto;
 import edu.duke.summer.client.dto.ObjectNameDto;
 import edu.duke.summer.client.service.GameService;
+import edu.duke.summer.client.service.MyUserDetailsService;
+import edu.duke.summer.client.service.MyUserDtails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +28,49 @@ public class GameController {
     @Autowired
     GameService gameService;
 
-    @GetMapping("/gameCenter")
+    @Autowired
+    private MyUserDetailsService myUserDetailsService;
+
+    @GetMapping("/user/{uuid}/creategame")
+    public String getCreateGame(@PathVariable String uuid, Model model) {
+        model.addAttribute("uuid", uuid);
+        model.addAttribute("createGameDto", new CreateGameDto());
+        return "/user/+" + uuid + "/creategame";
+    }
+
+    @PostMapping("/user/{uuid}/creategame")
+    public String postCreateGame(@RequestParam("file") MultipartFile file, RedirectAttributes attributes,
+                                 @PathVariable String uuid, @ModelAttribute @Valid CreateGameDto createGameDto) {
+        // check if file is empty
+        if (file.isEmpty()) {
+            attributes.addFlashAttribute("message", "Please select a file to upload.");
+            return "redirect:/";
+        }
+        // normalize the file path
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        String uploadString = "";
+        // convert File to be String
+        try {
+
+            InputStream inputStream = file.getInputStream();
+            InputStreamReader isReader = new InputStreamReader(inputStream);
+            BufferedReader reader = new BufferedReader(isReader);
+            StringBuffer sb = new StringBuffer();
+            String str;
+            while ((str = reader.readLine()) != null) {
+                sb.append(str);
+            }
+            System.out.println(sb.toString());
+            uploadString = sb.toString();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        gameService.createNewGame(createGameDto);
+        gameService.createObjects(createGameDto.getId(), uploadString);
+        return "redirect:/user/" + uuid + "/" + createGameDto.getId() + "/gamecenter";
+    }
+
+    @GetMapping("/user/{uuid}/{gameid}/gamecenter")
     public String greeting(Principal principal, Model model) {
 
         //Get All Object List to rander
@@ -42,13 +86,13 @@ public class GameController {
 
     @GetMapping("/createGame")
     public String GameCreateForm(Model model) {
-        model.addAttribute("gameDto", new GameDto());
+        model.addAttribute("gameDto", new CreateGameDto());
         return "createGame";
     }
 
     @PostMapping("/createGame")
-    public String processCreateGame(@ModelAttribute @Valid GameDto gameDto, Model model) {
-        model.addAttribute("gameDto", gameDto);
+    public String processCreateGame(@ModelAttribute @Valid CreateGameDto createGameDto, Model model) {
+        model.addAttribute("gameDto", createGameDto);
         return "gameCreateSuccess";
     }
 

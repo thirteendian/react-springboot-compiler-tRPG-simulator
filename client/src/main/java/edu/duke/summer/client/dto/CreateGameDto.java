@@ -1,14 +1,10 @@
 package edu.duke.summer.client.dto;
 
-import com.sun.istack.NotNull;
 import edu.duke.summer.client.database.model.Game;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
 
-import java.util.*;
-
-public class GameDto {
+public class CreateGameDto {
 
   @SequenceGenerator(
           name = "game_sequence",
@@ -16,10 +12,10 @@ public class GameDto {
           allocationSize = 1
   )
 
+  @Column(name = "GAME_ID")
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private String id;  //game id, primary key
-
-  @Column(nullable = false, unique = true, length = 45)
-  private String creatorEmail;
 
   @Column(nullable = false)
   private int playerNum;
@@ -27,12 +23,9 @@ public class GameDto {
   @Column(nullable = false, length = 45)
   private String gameName;
 
-  public GameDto() {
-  }
+  @Column(nullable = false)
+  private String gameSettings;
 
-  @Column(name = "GAME_ID")
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
   public String getId() {
     return id;
   }
@@ -41,11 +34,6 @@ public class GameDto {
     this.id = id;
   }
 
-  public String getCreatorEmail() {
-    return creatorEmail;
-  }
-
-
   public String getGameName() {
     return gameName;
   }
@@ -53,9 +41,6 @@ public class GameDto {
 
   public Integer getPlayerNum() {return playerNum;}
 
-  public void setCreatorEmail(String creatorEmail) {
-    this.creatorEmail = creatorEmail;
-  }
 
   public void setGameName(String gameName) {
     this.gameName = gameName;
@@ -63,17 +48,12 @@ public class GameDto {
 
   public void setPlayerNum(int playerNum) {this.playerNum = playerNum;}
 
-  public GameDto(String id, String creatorEmail, Integer playerNum, String gameName) {
-    this.id = id;
-    this.creatorEmail = creatorEmail;
-    this.playerNum = playerNum;
-    this.gameName = gameName;
+  public String getGameSettings() {
+    return gameSettings;
   }
 
-  public GameDto(String creatorEmail, Integer playerNum, String gameName) {
-    this.creatorEmail = creatorEmail;
-    this.playerNum = playerNum;
-    this.gameName = gameName;
+  public void setGameSettings(String gameSettings) {
+    this.gameSettings = gameSettings;
   }
 
   @Override
@@ -92,13 +72,5 @@ public class GameDto {
     return false;
   }
 
-  @Override
-  public String toString() {
-    return "Game{" +
-            "id=" + id +
-            ", creatorEmail='" + creatorEmail + '\'' +
-            ", gameName='" + gameName + '\'' +
-            '}';
-  }
 
 }
