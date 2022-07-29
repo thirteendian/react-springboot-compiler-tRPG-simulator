@@ -5,7 +5,7 @@
     <title>Create Game</title>
 </head>
 <body>
-<form th:action="@{'/user/'+${uuid}+'/creategame'}" th:object="${createGameDto}" method="post">
+<form th:action="@{'/user/'+${uuid}+'/creategame'}" th:object="${createGameDto}" enctype="multipart/form-data" method="post">
     <p>
         Game Name:<input type="text" th:field="*{gameName}" name="gameName" placeholder="Game Name" required>
     <p th:if="${#fields.hasErrors('gameName')}" th:class="${#fields.hasErrors('gameName')}?error">Game Name too short</p>
@@ -14,8 +14,12 @@
         Game Name:<input type="text" th:field="*{playerNum}" name="playerNum" placeholder="PlayerNum" required>
     <p th:if="${#fields.hasErrors('playerNum')}" th:class="${#fields.hasErrors('playerNum')}?error">player Number too large</p>
 
+    <input type="file" name="file" class="form-control-file">
+
     <button type="submit">Confirm</button>
 </form>
+
+
 
 <form th:action="@{/}" method="get">
     <button type="submit">Back</button>

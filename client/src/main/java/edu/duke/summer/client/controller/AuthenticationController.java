@@ -40,9 +40,7 @@ public class AuthenticationController {
     public String index(Model model) {
         if (myUserDetailsService.isUserAuthenticated()) {
             MyUserDtails myUserDtails = myUserDetailsService.loadMyUserDetailsOfCurrentUser();
-            if(!model.containsAttribute("loggedInMyUserDtails")){
-                model.addAttribute("loggedInMyUserDtails",myUserDtails);
-            }
+            model.addAttribute("uuid",myUserDtails.getUuid());
             return "redirect:/user/" + myUserDtails.getUuid() + "/index_after_login";
         }
         return "index_before_login";

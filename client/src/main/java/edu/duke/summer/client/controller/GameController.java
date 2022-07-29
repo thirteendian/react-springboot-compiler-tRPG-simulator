@@ -35,12 +35,13 @@ public class GameController {
     public String getCreateGame(@PathVariable String uuid, Model model) {
         model.addAttribute("uuid", uuid);
         model.addAttribute("createGameDto", new CreateGameDto());
-        return "/user/+" + uuid + "/creategame";
+        return "create_game";
     }
 
     @PostMapping("/user/{uuid}/creategame")
     public String postCreateGame(@RequestParam("file") MultipartFile file, RedirectAttributes attributes,
                                  @PathVariable String uuid, @ModelAttribute @Valid CreateGameDto createGameDto) {
+        gameService.createNewGame(createGameDto);
         // check if file is empty
         if (file.isEmpty()) {
             attributes.addFlashAttribute("message", "Please select a file to upload.");
@@ -65,20 +66,15 @@ public class GameController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        gameService.createNewGame(createGameDto);
+
         gameService.createObjects(createGameDto.getId(), uploadString);
         return "redirect:/user/" + uuid + "/" + createGameDto.getId() + "/gamecenter";
     }
 
     @GetMapping("/user/{uuid}/{gameid}/gamecenter")
-    public String greeting(Principal principal, Model model) {
-
-        //Get All Object List to rander
-        List<String> objects = gameService.getObjectsList("1");
-        model.addAttribute("objects", objects);
-        model.addAttribute("curruser", principal.getName());
-        model.addAttribute("objectNameDto", new ObjectNameDto());
-        return "game";
+    public String greeting(@PathVariable String uuid, @PathVariable String gameid) {
+        System.out.println("Current Game :" + gameid);
+        return"game_center";
     }
 
     @Autowired
