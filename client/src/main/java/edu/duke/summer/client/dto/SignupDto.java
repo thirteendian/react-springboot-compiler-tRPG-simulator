@@ -4,11 +4,13 @@ import edu.duke.summer.client.annotation.PasswordMatches;
 import edu.duke.summer.client.annotation.ValidEmail;
 import edu.duke.summer.client.database.SignUpGroup;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-@PasswordMatches(groups = {SignUpGroup.class})
-public class UserDto {
+@PasswordMatches
+public class SignupDto {
 
+    @NotEmpty
     @NotNull
     @ValidEmail
     private String email;
@@ -20,10 +22,13 @@ public class UserDto {
     private String lastName;
 
     @NotNull
+    private String username;
+
+    @NotNull
     private String password;
 
-    //if this is not for registration, just pass null
-    private String matchingPassword;
+    @NotNull
+    private String reEnterPassword;
 
 
     public String getEmail() {
@@ -38,32 +43,42 @@ public class UserDto {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
 
     public String getLastName() {
         return lastName;
+    }
+
+
+    public String getUsername() {
+        return username;
+    }
+
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getReEnterPassword() {
+        return reEnterPassword;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
-    public String getPassword() {
-        return password;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    //setPassword using BC
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getMatchingPassword() {
-        return matchingPassword;
-    }
-
-    public void setMatchingPassword(String matchingPassword) {
-        this.matchingPassword = matchingPassword;
+    public void setReEnterPassword(String reEnterPassword) {
+        this.reEnterPassword = reEnterPassword;
     }
 }

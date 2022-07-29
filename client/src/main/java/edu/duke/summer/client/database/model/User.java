@@ -24,10 +24,13 @@ public class User {
     @ValidEmail
     private String email;
 
-    @Column(nullable = true)
+    @Column(nullable = false)
+    private String userName;
+
+    @Column(nullable = false)
     private String firstName;
 
-    @Column(nullable = true)
+    @Column(nullable = false)
     private String lastName;
 
     @Column(nullable = false)
@@ -38,6 +41,9 @@ public class User {
 
     @Column(nullable = false)
     private boolean active;
+
+    @Column(nullable = true)
+    private String profile;
 
     public String getEmail() {
         return email;
@@ -93,6 +99,22 @@ public class User {
 
     public void setRoles(String roles) {
         this.roles = roles;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getProfile() {
+        return profile;
+    }
+
+    public void setProfile(String profile) {
+        this.profile = profile;
     }
 
     public User() {

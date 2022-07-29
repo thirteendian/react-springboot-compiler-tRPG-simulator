@@ -1,28 +1,28 @@
-<!--This HTML page is Used for rendering Spring Security Login Page-->
-<!--This Page was settled in SecurityConfig of HttpSecurity...loginPage()-->
 <!DOCTYPE html>
-<!--Spring Security: The form need CSRF Token which is included by Thymeleaf-->
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
     <title>Please Log In</title>
 </head>
 <body>
 <h1>Please Log In</h1>
+<!--Error message pop up place-->
 <div th:if="${param.error}">
     Invalid username and password.</div>
+<!--Logout message pop up place-->
 <div th:if="${param.logout}">
     You have been logged out.</div>
-<!--Spring Security: The form must perform a post to /login-->
-<!--username in name of "username"-->
-<!--password in name of "password"-->
-<!--{param.error} must be provided-->
-<!--{param.logout} must be provided-->
+<!--Form post to /login-->
 <form th:action="@{/login}" method="post">
     <div>
+<!--        username's name should be "username"-->
         <input type="text" name="username" placeholder="Username"/>
     </div>
     <div>
+<!--        password's name should be "password"-->
         <input type="password" name="password" placeholder="Password"/>
+    </div>
+    <div>
+        <input type="checkbox" name="remember-me"/> Remember Me
     </div>
     <input type="submit" value="Log in" />
 </form>

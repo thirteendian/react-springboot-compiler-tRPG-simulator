@@ -2,6 +2,7 @@ package edu.duke.summer.client.config;
 
 import edu.duke.summer.client.database.model.User;
 import edu.duke.summer.client.database.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,24 +12,25 @@ import java.util.List;
 
 @Configuration
 public class UserConfig {
-
+    @Autowired
+    PasswordEncoder passwordEncoder;
     @Bean
     CommandLineRunner commandLineRunnerUser(UserRepository repository){
         return args -> {
             User John = new User(
-                    "user1",
+                    "user1@duke.edu",
                     "John",
                     "Alex",
-                    "pass",
+                    passwordEncoder.encode("pass"),
                     "ROLE_USER",
                     true
             );
 
             User Bob = new User(
-                    "user2",
+                    "user2@duke.edu",
                     "Bob",
                     "Dylan",
-                    "pass",
+                    passwordEncoder.encode("pass"),
                     "ROLE_USER",
                     true
             );
