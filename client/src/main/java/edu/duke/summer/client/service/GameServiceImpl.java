@@ -1,10 +1,8 @@
 package edu.duke.summer.client.service;
 
 import java.util.*;
-import javax.transaction.Transactional;
 
 import edu.duke.summer.client.algorithm.RuleInfo;
-import edu.duke.summer.client.algorithm.absyn.TypeDec;
 import edu.duke.summer.client.database.model.*;
 import edu.duke.summer.client.database.repository.*;
 
@@ -15,8 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.core.context.SecurityContextHolder;
 //import org.springframework.security.core.session.SessionRegistry;
 //import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import edu.duke.summer.client.algorithm.*;

@@ -1,17 +1,15 @@
 package edu.duke.summer.client.service;
 
-import edu.duke.summer.client.database.Authentication;
 import edu.duke.summer.client.database.model.User;
 import edu.duke.summer.client.database.repository.UserRepository;
-import edu.duke.summer.client.dto.UserDto;
+import edu.duke.summer.client.dto.SignupDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
+//TODO:CAN BE DELETED
 @Service
 public class UserServiceImpl implements UserService{
     @Autowired
@@ -23,20 +21,31 @@ public class UserServiceImpl implements UserService{
     private AuthenticationManager authenticationManager;
 
     @Override
-    public User createNewUser(UserDto userDto) {
+    public User createNewUser(SignupDto signupDto) {
         return null;
     }
 
     @Override
-    public User logIn(UserDto userDto) {
+    public User logIn(SignupDto signupDto) {
         return null;
     }
 
     @Override
-    public void logOut(UserDto userDto) {
+    public void logOut(SignupDto signupDto) {
 
     }
-//    @Override
+    @Override
+    public boolean isUserAuthenticated(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(authentication!=null&& authentication.getAuthorities().stream().anyMatch(a->a.getAuthority().equals("USER"))|| authentication.getAuthorities().stream().anyMatch(a->a.getAuthority().equals("ADMIN"))){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    //    @Override
 //    public User createNewUser(UserDto userDto) {
 //        if(accountExist(userDto.getEmail())) {
 //            throw new IllegalArgumentException("There is already an account under this email address.");

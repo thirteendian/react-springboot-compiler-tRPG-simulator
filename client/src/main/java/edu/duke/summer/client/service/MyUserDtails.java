@@ -8,10 +8,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class MyUserDtails implements UserDetails {
 
+    private String uuid;
     private String userName;
     private String password;
     private String firstname;
@@ -21,6 +23,7 @@ public class MyUserDtails implements UserDetails {
 
 
     public MyUserDtails(User user) {
+        this.uuid = user.getId();
         this.userName = user.getEmail();
         this.password = user.getPassword();
         this.active = user.isActive();
@@ -36,6 +39,9 @@ public class MyUserDtails implements UserDetails {
         return authorityList;
     }
 
+    public String getUuid() {
+        return uuid;
+    }
     @Override
     public String getPassword() {
         return password;
@@ -44,6 +50,14 @@ public class MyUserDtails implements UserDetails {
     @Override
     public String getUsername() {
         return userName;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
     }
 
     @Override

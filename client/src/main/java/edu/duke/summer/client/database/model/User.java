@@ -25,9 +25,12 @@ public class User {
     private String email;
 
     @Column(nullable = true)
+    private String userName;
+
+    @Column(nullable = false)
     private String firstName;
 
-    @Column(nullable = true)
+    @Column(nullable = false)
     private String lastName;
 
     @Column(nullable = false)
@@ -38,6 +41,9 @@ public class User {
 
     @Column(nullable = false)
     private boolean active;
+
+    @Column(nullable = true)
+    private String profile;
 
     public String getEmail() {
         return email;
@@ -95,10 +101,26 @@ public class User {
         this.roles = roles;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getProfile() {
+        return profile;
+    }
+
+    public void setProfile(String profile) {
+        this.profile = profile;
+    }
+
     public User() {
     }
 
-    public User(String email, String firstName, String lastName, String password, String roles, boolean active) {
+    public User(String email, String username, String firstName, String lastName, String password, String roles, boolean active) {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;

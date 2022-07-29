@@ -1,6 +1,6 @@
 package edu.duke.summer.client.annotation;
 
-import edu.duke.summer.client.dto.UserDto;
+import edu.duke.summer.client.dto.SignupDto;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -11,7 +11,7 @@ public class PasswordMatchesValidator implements ConstraintValidator<PasswordMat
     }
     @Override
     public boolean isValid(Object obj, ConstraintValidatorContext context){
-        UserDto userDto = (UserDto) obj;
-        return userDto.getPassword().equals(userDto.getMatchingPassword());
+        SignupDto signupDto = (SignupDto) obj;
+        return signupDto.getPassword().equals(signupDto.getReEnterPassword());
     }
 }

@@ -1,8 +1,6 @@
 package edu.duke.summer.client.dto;
 
-import edu.duke.summer.client.database.model.ObjectValue;
 import edu.duke.summer.client.service.SeqNumService;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.*;

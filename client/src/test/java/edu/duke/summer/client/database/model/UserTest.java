@@ -16,12 +16,12 @@ public class UserTest {
 
     @Test
     public void test_generate_id() {
-        User test = new User("johnSmith@gmail.com","john",
+        User test = new User("johnSmith@gmail.com","username551","john",
                 "smith","johnsmith","role_user",true);
         userRepository.save(test);
         assertNotNull(test.getId());
 
-        User test2 = new User("davidSmith@gmail.com","david",
+        User test2 = new User("davidSmith@gmail.com","username552","david",
                 "smith","davidsmith","role_user",true);
         assertNull(test2.getId());
         userRepository.save(test2);
@@ -31,11 +31,11 @@ public class UserTest {
 
     @Test
     public void test_get_and_equals() {
-        User test1 = new User("davidbrown@gmail.com","david",
+        User test1 = new User("davidbrown@gmail.com","username535","david",
                 "brown","davidbrown","role_user",true);
-        User test2 = new User("stella@gmail.com","john",
+        User test2 = new User("stella@gmail.com","username554","john",
                 "smith","johnsmith","role_user",true);
-        User test3 = new User("stella@gmail.com","jo",
+        User test3 = new User("stella@gmail.com","username555","jo",
                 "smi","johnsmith","role_loggedin_user",true);
         assertEquals("stella@gmail.com",test2.getEmail());
         assertEquals("smi",test3.getLastName());

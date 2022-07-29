@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/creategame}" method="get">
+    <input type="submit" value="Create Game">
+</form>
+<form th:action="@{/joingame}" method="get">
+    <input type="submit" value="Join Game">
+</form>
+<form th:action="@{/loadgame}" method="get">
+    <input type="submit" value="Load Game">
+</form>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Logout">
+</form>
+</body>
+</html>

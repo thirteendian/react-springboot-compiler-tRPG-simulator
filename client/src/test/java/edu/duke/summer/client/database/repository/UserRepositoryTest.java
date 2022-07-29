@@ -16,10 +16,10 @@ public class UserRepositoryTest {
 
     @Test
     public void test_find_and_query() {
-        User test1 = new User("kelvin@gmail.com","john",
+        User test1 = new User("kelvin@gmail.com","username100","john",
                 "smith","johnsmith","role_user",true);
         userRepository.save(test1);
-        User test2 = new User("davidbrown@gmail.com","david",
+        User test2 = new User("davidbrown@gmail.com","username55","david",
                 "brown","davidbrown","role_user",true);
         userRepository.save(test2);
         assertEquals(Optional.empty(), userRepository.findByEmail("stellaBrown@gmail.com"));

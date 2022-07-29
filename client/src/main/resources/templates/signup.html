@@ -1,23 +1,47 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
-    <title>Mini UPS</title>
-    <link rel="stylesheet" type="text/css" href="index.css">
-    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+    <title>signup</title>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
 </head>
 <body>
-<div class="main">
-    <input type="checkbox" id="chk" aria-hidden="true">
+<form th:action="@{/signup}" th:object="${signupDto}" method="post">
+    Email: <input type="email" th:field="*{email}" name="email" placeholder="Email" required>
+    <!--    note that fields.hasErrors check th:object's field name rather than form name-->
+    <p th:if="${#fields.hasErrors('email')}" th:class="${#fields.hasErrors('email')}?error">Email Errors</p>
+    <!--    The th:class choose css error using regular expression -->
+    <p>
+        First Name: <input type="text" th:field="*{firstName}" name="firstname" placeholder="First Name">
+    <p th:if="${#fields.hasErrors('firstName')}" th:class="${#fields.hasErrors('firstName')}?error"> First Name
+        Errors</p>
 
-    <div class="signup">
-        <form action = "#" th:action="@{/signup}" th:object="${signup}" method="post">
-            <label for="chk" aria-hidden="true">Sign up</label>
-            <input type="email" th:field="*{email}" name="email" placeholder="Email" required="">
-            <input type="password" th:field="*{password}" name="pswd" placeholder="Password" required="">
-            <input type="password" th:field="*{matchingPassword}" name="repswd" placeholder="Re-Enter Password" required="">
-            <button type="submit">Sign up</button>
-        </form>
-    </div>
-</div>
+    <p>
+        Last Name:<input type="text" th:field="*{lastName}" name="lastname" placeholder="Last name" required>
+    <p th:if="${#fields.hasErrors('lastName')}" th:class="${#fields.hasErrors('lastName')}?error">LastName Errors</p>
+
+    <p>
+        Password:<input type="password" th:field="*{password}" name="password" placeholder="Password" required>
+    <p th:if="${#fields.hasErrors('password')}" th:class="${#fields.hasErrors('password')}?error">password Errors</p>
+
+    <p>
+        Re-Enter Password:<input type="password" th:field="*{reEnterPassword}" name="repassword" placeholder="Password"
+                                 required>
+    <p th:if="${#fields.hasErrors('reEnterPassword')}" th:class="${#fields.hasErrors('reEnterPassword')}?error">password
+        Not Match</p>
+
+    <p>
+        <label>Upload your Profiles:</label>
+        <input type="file" name="profile" accept="image/png, image/jpeg"/>
+        <button type="submit">Sign up</button>
+</form>
+
+<form th:action="@{/}" method="get">
+    <button type="submit">Back</button>
+</form>
+
 </body>
 </html>

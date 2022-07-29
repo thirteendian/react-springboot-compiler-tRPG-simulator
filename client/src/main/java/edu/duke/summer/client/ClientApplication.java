@@ -24,6 +24,8 @@ public class ClientApplication {
 		SpringApplication.run(ClientApplication.class, args);
 	}
 
+
+
 	@Bean
 	public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
 		return args -> {
