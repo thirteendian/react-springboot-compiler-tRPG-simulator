@@ -1,0 +1,76 @@
+/*Button container*/
+.index_before_login_login_button_container{
+    box-sizing: border-box;
+    position: absolute;
+    width: 520px;
+    height: 89px;
+    left: 460px;
+    top: 351px;
+
+    font-family: 'Bungee Spice';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.index_before_login_dukeshibboleth_button_container{
+    box-sizing: border-box;
+    position: absolute;
+    width: 520px;
+    height: 89px;
+    left: 460px;
+    top: 507px;
+
+    font-family: 'Bungee Spice';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.index_before_login_google_button_container{
+    box-sizing: border-box;
+    position: absolute;
+    width: 520px;
+    height: 89px;
+    left: 460px;
+    top: 636px;
+
+    font-family: 'Bungee Spice';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.index_before_login_createyourcount_button_container{
+    box-sizing: border-box;
+    position: absolute;
+    width: 520px;
+    height: 89px;
+    left: 460px;
+    top: 523px;
+
+    font-family: 'Bungee Spice';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
