@@ -19,6 +19,7 @@ public class UserConfig {
         return args -> {
             User John = new User(
                     "user1@duke.edu",
+                    "username1",
                     "John",
                     "Alex",
                     passwordEncoder.encode("pass"),
@@ -28,6 +29,7 @@ public class UserConfig {
 
             User Bob = new User(
                     "user2@duke.edu",
+                    "username2",
                     "Bob",
                     "Dylan",
                     passwordEncoder.encode("pass"),

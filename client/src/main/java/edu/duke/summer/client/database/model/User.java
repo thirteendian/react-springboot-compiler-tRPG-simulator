@@ -24,7 +24,7 @@ public class User {
     @ValidEmail
     private String email;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String userName;
 
     @Column(nullable = false)
@@ -120,7 +120,7 @@ public class User {
     public User() {
     }
 
-    public User(String email, String firstName, String lastName, String password, String roles, boolean active) {
+    public User(String email, String username, String firstName, String lastName, String password, String roles, boolean active) {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;

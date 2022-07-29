@@ -5,11 +5,14 @@ import edu.duke.summer.client.service.MyUserDtails;
 import edu.duke.summer.client.dto.SignupDto;
 import edu.duke.summer.client.service.MyUserDetailsService;
 import edu.duke.summer.client.exceptions.UserAlreadyExistException;
+import edu.duke.summer.client.service.StorageService;
+import org.springframework.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +30,7 @@ public class AuthenticationController {
     @Autowired
     private MyUserDetailsService myUserDetailsService;
     private Boolean isSignUp = false;
-
+    private StorageService storageService;
 
     @GetMapping("/")
     public String index() {
@@ -60,7 +63,11 @@ public class AuthenticationController {
     }
 
     @PostMapping("/signup")
+    //@RequestParam("profile") MultipartFile multipartFile
     public String postSignup(@ModelAttribute("signupDto") @Valid SignupDto signupDto, HttpServletRequest request, Errors errors) {
+        //Profile Upload
+//        String filename =StringUtils.cleanPath(multipartFile.getOriginalFilename());
+//        signupDto.setProfile(filename);
         try{
             User registered =  myUserDetailsService.signupNewUser(signupDto);
         } catch (UserAlreadyExistException e) {

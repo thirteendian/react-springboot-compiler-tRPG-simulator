@@ -30,6 +30,8 @@ public class SignupDto {
     @NotNull
     private String reEnterPassword;
 
+    private String profile;
+
 
     public String getEmail() {
         return email;
@@ -80,5 +82,13 @@ public class SignupDto {
 
     public void setReEnterPassword(String reEnterPassword) {
         this.reEnterPassword = reEnterPassword;
+    }
+
+    public String getProfile() {
+        return profile;
+    }
+
+    public void setProfile(String profile) {
+        this.profile = profile;
     }
 }
