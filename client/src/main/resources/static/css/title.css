@@ -175,6 +175,25 @@
 }
 
 
+.subhead_container_loadGame{
+    position: absolute;
+    width: 1000px;
+    height: 117px;
+    left: 242px;
+    top: 210px;
+}
+
+.subhead_loadGame{
+    font-family: 'Bungee inline';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 43px;
+    text-align: center;
+
+    color: #FFFFFF;
+}
+
 
 
 

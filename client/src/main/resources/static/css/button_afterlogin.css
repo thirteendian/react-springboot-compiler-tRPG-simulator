@@ -189,8 +189,6 @@ table tr td{
     font-size: 24px;
     line-height: 22px;
     /* identical to box height */
-
-
     color: #000000;
 }
 
@@ -858,5 +856,108 @@ table tr td{
 
 .show {display: block;}
 
+/*load game Page*/
+.loadGamePage_gameList_blackBg{
+    position: absolute;
+    width: 913px;
+    height: 600px;
+    left: 286px;
+    top: 275px;
+
+    overflow: auto;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 60px;
+}
+
+.loadGamePage_tbody{
+    position: absolute;
+    left:0;
+    top:30px;
+}
+
+.loadGamePage_table tr td{
+    padding: 50px 60px;
+    box-sizing: border-box;
+
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 100;
+    font-size: 24px;
+    line-height: 22px;
+    /* identical to box height */
+    color: #000000;
+}
+
+.loadGamePage_gameList_delete{
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    /* identical to box height */
+
+
+    color: #000000;
+}
+
+.loadGamePage_demo1_position{
+    position: absolute;
+    width: 61px;
+    height: 18px;
+    left: 905px;
+    top: 270px;
+}
+
+.loadGamePage_demo2_position{
+    position: absolute;
+    width: 61px;
+    height: 18px;
+    left: 904px;
+    top: 350px;
+}
+
+
+.loadGamePage_back{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 494px;
+    height: 90px;
+    left: 241px;
+    top: 880px;
+
+    text-align: center;
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.loadGamePage_OK{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 494px;
+    height: 90px;
+    left: 783px;
+    top: 880px;
+
+    text-align: center;
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.loadGamePage_button_font{
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+
+    color: #000000;
+
+    background-color: transparent;
+    border: transparent;
+}
 
 

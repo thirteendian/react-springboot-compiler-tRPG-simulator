@@ -157,6 +157,11 @@ public class GameController {
         return "join_game";
     }
 
+    @GetMapping("/loadGame")
+    public String showLoadList(Model model) {
+        return "load_game";
+    }
+
     @GetMapping("/gameCenter")
     public String showGameCenter(Model model) {
         return "game_center";
@@ -166,7 +171,6 @@ public class GameController {
     public String showGameChooseForm(Model model) {
         return "object";
     }
-
 
 
 }
