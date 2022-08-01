@@ -2,10 +2,8 @@ package edu.duke.summer.client.controller;
 
 import edu.duke.summer.client.database.repository.GameRepository;
 import edu.duke.summer.client.dto.CreateGameDto;
-import edu.duke.summer.client.dto.ObjectNameDto;
 import edu.duke.summer.client.service.GameService;
 import edu.duke.summer.client.service.MyUserDetailsService;
-import edu.duke.summer.client.service.MyUserDtails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +17,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -80,22 +77,18 @@ public class GameController {
     @Autowired
     private GameRepository gameRepo;
 
-    @GetMapping("/createGame")
-    public String GameCreateForm(Model model) {
-        model.addAttribute("gameDto", new CreateGameDto());
-        return "createGame";
-    }
+//    @GetMapping("/createGame")
+//    public String GameCreateForm(Model model) {
+//        model.addAttribute("gameDto", new CreateGameDto());
+//        return "00creategame";
+////        return "create_game";
+//    }
 
-    @PostMapping("/createGame")
-    public String processCreateGame(@ModelAttribute @Valid CreateGameDto createGameDto, Model model) {
-        model.addAttribute("gameDto", createGameDto);
-        return "gameCreateSuccess";
-    }
-
-    @GetMapping("chooseGame")
-    public String showGameChooseForm(Model model) {
-        return "chooseGame";
-    }
+//    @PostMapping("/createGame")
+//    public String processCreateGame(@ModelAttribute @Valid CreateGameDto createGameDto, Model model) {
+//        model.addAttribute("gameDto", createGameDto);
+//        return "gameCreateSuccess";
+//    }
 
 
     //private final String UPLOAD_DIR = "./uploads/";
@@ -154,4 +147,26 @@ public class GameController {
         System.out.println("This is the selected objectName: " + objectName);
         return "redirect:/createobject";//TODO:This should be redirected to Game Page
     }
+
+
+    /*
+    html frame work for game center,object page
+     */
+    @GetMapping("/joinGame")
+    public String showGameList(Model model) {
+        return "join_game";
+    }
+
+    @GetMapping("/gameCenter")
+    public String showGameCenter(Model model) {
+        return "game_center";
+    }
+
+    @GetMapping("/createObject")
+    public String showGameChooseForm(Model model) {
+        return "object";
+    }
+
+
+
 }

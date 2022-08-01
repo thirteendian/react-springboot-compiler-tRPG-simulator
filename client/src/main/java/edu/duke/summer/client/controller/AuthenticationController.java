@@ -7,13 +7,11 @@ import edu.duke.summer.client.service.MyUserDetailsService;
 import edu.duke.summer.client.exceptions.UserAlreadyExistException;
 import edu.duke.summer.client.service.StorageService;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -78,7 +76,7 @@ public class AuthenticationController {
             User registered =  myUserDetailsService.signupNewUser(signupDto);
         } catch (UserAlreadyExistException e) {
             e.printStackTrace();
-            ModelAndView errorModelAndView = new ModelAndView("/signup");
+            ModelAndView errorModelAndView = new ModelAndView("signup");
             errorModelAndView.addObject("message","An Account for that email already exists.");
 
             return "redirect:/signup";
@@ -97,6 +95,19 @@ public class AuthenticationController {
         return ("<h1>Welcome Admin</h1>");
     }
 
+    /*
+    html Frame work
+     */
+    @GetMapping("/accountSettings")
+    public String getAccountSettings(Model model) {
+        model.addAttribute("signupDto", new SignupDto());
+        return "account_settings";
+    }
 
+    @GetMapping("/changePassword")
+    public String getChangePassword(Model model) {
+        model.addAttribute("signupDto", new SignupDto());
+        return "change_password";
+    }
 }
 

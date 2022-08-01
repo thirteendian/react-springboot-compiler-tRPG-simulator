@@ -3,26 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <title>Create Game</title>
+    <link rel="stylesheet" th:href="@{/css/font.css}"/>
+    <link rel="stylesheet" th:href="@{/css/background.css}"/>
+    <link rel="stylesheet" th:href="@{/css/title.css}"/>
+    <link rel="stylesheet" th:href="@{/css/button.css}"/>
 </head>
 <body>
+<div class = "main_container">
+    <div class="bg_chapel">
+    <div class="head_container_dice_rolling_game">
+        <h1 class="head_dice_rolling_game" >DICE       ROLLING         GAME</h1>
+    </div>
+    <div class = "subhead_container_createGame">
+        <h1 class="subhead_createGame">Create Game</h1>
+    </div>
+    <div class = "createGamePage_gameName">
+        <p class = "createGamePage_gameName_font"> GAME NAME:</p>
+    </div>
+    <div class = "createGamePage_playerNum">
+        <p class = "createGamePage_gameName_font"> PLAYER NUMBER:</p>
+    </div>
+    <div class = "createGamePage_loadPreSetting">
+        <p class = "createGamePage_gameName_font"> LOAD YOUR PRE SETTINGS:</p>
+    </div>
+
 <form th:action="@{'/user/'+${uuid}+'/creategame'}" th:object="${createGameDto}" enctype="multipart/form-data" method="post">
-    <p>
-        Game Name:<input type="text" th:field="*{gameName}" name="gameName" placeholder="Game Name" required>
+    <input type="text" th:field="*{gameName}" name="gameName" placeholder="Game Name" class = "createGamePage_gameName_placeholder"  required>
     <p th:if="${#fields.hasErrors('gameName')}" th:class="${#fields.hasErrors('gameName')}?error">Game Name too short</p>
 
-    <p>
-        Game Name:<input type="text" th:field="*{playerNum}" name="playerNum" placeholder="PlayerNum" required>
+    <input type="text" th:field="*{playerNum}" name="playerNum" placeholder="PlayerNum" class = "createGamePage_playerNum_placeholder" required>
     <p th:if="${#fields.hasErrors('playerNum')}" th:class="${#fields.hasErrors('playerNum')}?error">player Number too large</p>
 
-    <input type="file" name="file" class="form-control-file">
+    <!--<input type="file" name="file" class="form-control-file">-->
+    <input type="file" name="file"  class = "createGamePage_loadPreSetting_placeholder">
 
-    <button type="submit">Confirm</button>
+<!--    <button type="submit">Confirm</button>-->
+
+    <div class = "createGamePage_confirm">
+        <form th:action="@{/}" method="get">
+            <button type="submit" class = "createGamePage_back_font">Confirm</button>
+        </form>
+    </div>
+
 </form>
 
+        <div class = "createGamePage_fileContent">
+        </div>
 
+        <div class = "createGamePage_back">
+            <form th:action="@{/}" method="get">
+                <button type="submit" class = "createGamePage_back_font">Confirm</button>
+            </form>
+        </div>
 
-<form th:action="@{/}" method="get">
-    <button type="submit">Back</button>
-</form>
+    </div>
+</div>
 </body>
 </html>

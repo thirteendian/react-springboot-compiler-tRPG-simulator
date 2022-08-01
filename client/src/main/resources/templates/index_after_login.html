@@ -2,21 +2,57 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Navigator after login</title>
+    <link rel="stylesheet" th:href="@{/css/font.css}"/>
+    <link rel="stylesheet" th:href="@{/css/background.css}"/>
+    <link rel="stylesheet" th:href="@{/css/title.css}"/>
+    <link rel="stylesheet" th:href="@{/css/button.css}"/>
 </head>
 <body>
-<form th:action="@{'/user/'+${uuid}+'/creategame'}" method="get">
-    <input type="submit" value="Create Game">
-</form>
-<form th:action="@{/joingame}" method="get">
-    <input type="submit" value="Join Game">
-</form>
-<form th:action="@{/loadgame}" method="get">
-    <input type="submit" value="Load Game">
-</form>
-<form th:action="@{/logout}" method="post">
-    <input type="submit" value="Logout">
-</form>
+<div class = "main_container">
+    <div class="bg_chapel">
 
+        <div class="head_container_dice_rolling_game">
+            <h1 class="head_dice_rolling_game" >DICE       ROLLING         GAME</h1>
+        </div>
+
+
+    <div class = "index_after_login_createGame">
+        <form th:action="@{'/user/'+${uuid}+'/creategame'}" method="get">
+            <input type="submit" value="Create Game" class = "index_after_login_font">
+        </form>
+    </div>
+
+    <div class = "index_after_login_joinGame">
+        <form th:action="@{/joinGame}" method="get" >
+            <input type="submit" value="Join Game" class = "index_after_login_font">
+        </form>
+    </div>
+
+    <div class = "index_after_login_loadGame">
+        <form th:action="@{/loadgame}" method="get">
+            <input type="submit" value="Load Game" class = "index_after_login_font">
+        </form>
+    </div>
+
+    <div class = "index_after_login_logout">
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Logout" class = "index_after_login_font">
+        </form>
+    </div>
+
+    </div>
+</div>
 </body>
 </html>
+
+
+
+<!--TODO 1. cursor open the profile pic and info with hard code-->
+<!--TODO 2. cursor open the invitation chat box with hard code-->
+<!--user1@duke.edu  pass-->
+<!--join game: scroll for games table, hard code-->
+<!--load game:-->
+<!--game center:-->
+<!--object create: -->
+

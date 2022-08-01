@@ -3,25 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <title>Object Create</title>
+    <link rel="stylesheet" th:href="@{/css/font.css}"/>
+    <link rel="stylesheet" th:href="@{/css/background.css}"/>
+    <link rel="stylesheet" th:href="@{/css/title.css}"/>
+    <link rel="stylesheet" th:href="@{/css/button_afterlogin.css}"/>
     <script src="/webjars/jquery/jquery.min.js"></script>
     <script src="/webjars/sockjs-client/sockjs.min.js"></script>
     <script src="/webjars/stomp-websocket/stomp.min.js"></script>
     <script src="/createObject.js"></script>
+
 </head>
 <body>
-<h1> Select Objects </h1>
-<!--<form action="#" th:action="@{/createobject}" method="post">-->
-<form action="#" method="post">
-    <select class="form-control" id="objectName" name="objectName">
-        <option disabled> - select objects -
-        </option>
-        <option th:each="objectName : ${objects}" th:value="${objectName}" th:text="${objectName}">
-        </option>
-    </select>
-    <p><input type="submit" value="Submit"/></p>
-</form>
-<p id="showTheTextMessage"></p>
-<button onClick="createForm()">generateForm</button>
-<button onclick="sendObjectName()">sendObjectName</button>
+<div class = "main_container">
+    <div class="bg_chapel">
+
+<!--        subhead game name and invite & quit button-->
+        <div class="subhead_HELLFIRE_DRAGON">
+            <h1 class="subhead_HELLFIRE_DRAGON_font">HELL FIRE AND DRAGON</h1>
+        </div>
+
+        <div class = "gameCenter_invite">
+            <form th:action="@{/}" method="get" >
+                <button class = "gameCenter_invite_font" type="submit">INVITE</button>
+            </form>
+        </div>
+
+        <div class = "gameCenter_quit">
+            <form th:action="@{/}" method="get" >
+                <button class = "gameCenter_quit_font" type="submit">QUIT</button>
+            </form>
+        </div>
+
+<!--        user profile pic-->
+        <div class = "gameCenter_userProfilePic_pointer">
+        </div>
+        <div class = "gameCenter_userProfilePic">
+        </div>
+
+<!--        back to game center-->
+        <div class = "objectPage_back">
+            <form th:action="@{/gameCenter}" method="get">
+                <button class = "objectPage_button_font" type="submit">BACK TO GAME CENTER</button>
+            </form>
+        </div>
+
+<!--        object list-->
+        <div class = "objectPage_objectList">
+        </div>
+        <div class = "objectPage_objectList_title">
+            <p class = "objectPage_objectList_title_font">OBJECT LIST</p>
+        </div>
+
+<!--     object generate form-->
+        <div class = "objectPage_objectForm">
+<!--<form action="#" th:action="@{/createObject}" method="post">-->
+        <form action="#" method="post">
+            <select class="objectPage_form-control" id="objectName" name="objectName">
+                <option disabled> - select objects -
+                </option>
+                <option th:each="objectName : ${objects}" th:value="${objectName}" th:text="${objectName}">
+                </option>
+            </select>
+
+<!--            fill boxes: create by javascript-->
+
+            <div class = "objectPage_Submit">
+            <p><input class = "objectPage_button_font" type="submit" value="Submit"/></p>
+            </div>
+        </form>
+        </div>
+
+        <p id="showTheTextMessage"></p>
+        <div class = "objectPage_generateForm">
+            <button class = "objectPage_button_font" onClick="createForm()">generate Form</button>
+        </div>
+
+        <div class = "objectPage_sendObjectName">
+            <button class = "objectPage_button_font" onclick="sendObjectName()">send Object Name</button>
+        </div>
+
+    </div>
+</div>
 </body>
 </html>

@@ -7,36 +7,39 @@
     <link rel="stylesheet" th:href="@{/css/background.css}"/>
     <link rel="stylesheet" th:href="@{/css/title.css}"/>
     <link rel="stylesheet" th:href="@{/css/button.css}"/>
-
 </head>
-<body class="bg_chapel">
-<div class="head_container_dice_rolling_game">
-    <h1 class="head_dice_rolling_game" >DICE       ROLLING         GAME</h1>
-</div>
+<body>
+<div class = "main_container">
+    <div class="bg_chapel">
+        <div class="head_container_dice_rolling_game">
+            <h1 class="head_dice_rolling_game" >DICE       ROLLING         GAME</h1>
+        </div>
 
-<div class ="index_before_login_button_container">
-    <form class ="index_before_login_login_button_font" th:action="@{/login}" method="get">
-        <input type="submit" value="Login">
-    </form>
-</div>
+        <div class ="index_before_login_login_button_container">
+            <form  th:action="@{/login}" method="get">
+                <input type="submit" class ="index_before_login_login_button_font" value="Login">
+            </form>
+        </div>
 
-<div class ="index_before_login_dukeshibboleth_button_container">
-    <form  th:action="@{/signup}" method="get">
-        <input type="submit" value="Duke Shibboleth">
-    </form>
-</div>
+        <div class ="index_before_login_dukeshibboleth_button_container">
+            <form  th:action="@{/signup}" method="get">
+                <input type="submit" class = "index_before_login_dukeshibboleth_button_font" value="Duke Shibboleth">
+            </form>
+        </div>
 
-<div class ="index_before_login_google_button_container">
-    <form  th:action="@{/signup}" method="get">
-        <input type="submit" value="Google Login">
-    </form>
-</div>
+        <div class ="index_before_login_google_button_container">
+            <form  th:action="@{/signup}" method="get">
+                <input type="submit" class = "index_before_login_google_button_font" value="Google Login">
+            </form>
+        </div>
 
-<div class ="index_before_login_createyourcount_button_container">
-    <form  th:action="@{/signup}" method="get">
-        <input type="submit" value="Create Account">
-    </form>
-</div>
+        <div class ="index_before_login_createyourcount_button_container">
+            <form  th:action="@{/signup}" method="get">
+                <input type="submit" class = "index_before_login_createyourcount_button_font" value="Create Account">
+            </form>
+        </div>
 
+    </div>
+</div>
 </body>
 </html>
