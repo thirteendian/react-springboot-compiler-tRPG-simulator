@@ -12,6 +12,26 @@
     <script src="/webjars/stomp-websocket/stomp.min.js"></script>
     <script src="/createObject.js"></script>
 
+    <script>
+        function showPersonalInfo() {
+            var text = document.getElementById("demo_personalInfo");
+            if (text.style.display === "none") {
+                text.style.display = "block";
+            } else {
+                text.style.display = "none";
+            }
+        }
+
+        function showInviteInfo() {
+            var text = document.getElementById("demo_inviteInfo");
+            if (text.style.display === "none") {
+                text.style.display = "block";
+            } else {
+                text.style.display = "none";
+            }
+        }
+    </script>
+
 </head>
 <body>
 <div class = "main_container">
@@ -47,39 +67,127 @@
             </form>
         </div>
 
+        <!--        personal info box-->
+
+        <div class = "personal_playerName">
+        </div>
+
+        <p class = "personal_playerName_font">Player Name</p>
+
+        <button type='button'  class = "personal_pic_button" onclick="showPersonalInfo()"></button>
+        <div id = "demo_personalInfo" class = "demo_personalInfo" style='display: none'>
+            <p class = "personal_firstName">FIRST NAME:</p>
+            <p class = "personal_lastName">LAST NAME:</p>
+            <p class = "personal_email">EMAIL:</p>
+
+            <!--            hard code-->
+            <p class = "personal_firstName_fill">ALEX</p>
+            <p class = "personal_lastName_fill">SWIFT</p>
+            <p class = "personal_email_fill">alex.swift@gmail.com</p>
+
+            <div class = "personal_edit">
+                <form th:action="@{account_settings}" method="get">
+                    <button class = "personal_font" type="submit">Edit</button>
+                </form>
+            </div>
+            <div class = "personal_logout">
+                <form th:action="@{logout}" method="post">
+                    <button type="submit" class = "personal_font">Logout</button>
+                </form>
+            </div>
+        </div>
+
+
+        <!--invitation Box-->
+        <button type='button'  class = "invite_button" onclick="showInviteInfo()"></button>
+        <div id = "demo_inviteInfo" class = "demo_inviteInfo" style='display: none'>
+            <!--        hard code-->
+            <p class = "inviteInfo_fromPlayer1">@player 1 invite you to game ?</p>
+            <div class = "inviteInfo_accept">
+                <button type="submit" class = "inviteInfo_button_font">ACCEPT</button>
+            </div>
+            <div class = "inviteInfo_cancel">
+                <button type="submit" class = "inviteInfo_button_font">CANCEL</button>
+            </div>
+        </div>
+
 <!--        object list-->
         <div class = "objectPage_objectList">
+            <ul id="objectPage_objectList_objects" class = "objectPage_objectList_objects">
+                <li ><label>Object1<input  type = "checkbox" value="Object1"></label></li>
+                <li><label>Object2<input  type = "checkbox" value="Object2"></label></li>
+                <li><label>Object3<input  type = "checkbox" value="Object3"></label></li>
+                <li><label>Object4<input  type = "checkbox" value="Object4"></label></li>
+                <div id="objectPage_objectList_active" class="objectPage_objectList_active"></div>
+            </ul>
         </div>
+
         <div class = "objectPage_objectList_title">
             <p class = "objectPage_objectList_title_font">OBJECT LIST</p>
+        </div>
+
+        <div class = "objectPage_ownObjectList_create">
+            <!--            <form>-->
+            <input class = "objectPage_ownObjectList_create_font" type="submit" value = "CREATE"/>
+            <!--            </form>-->
+        </div>
+
+        <div class = "objectPage_ownObjectList_use">
+            <!--            <form>-->
+            <input class = "objectPage_ownObjectList_create_font" type="submit" value = "USE"/>
+            <!--            </form>-->
+        </div>
+
+        <div class = "objectPage_ownObjectList_delete">
+            <!--            <form>-->
+            <input class = "objectPage_ownObjectList_create_font" type="submit" value = "DELETE"/>
+            <!--            </form>-->
         </div>
 
 <!--     object generate form-->
         <div class = "objectPage_objectForm">
 <!--<form action="#" th:action="@{/createObject}" method="post">-->
         <form action="#" method="post">
-            <select class="objectPage_form-control" id="objectName" name="objectName">
-                <option disabled> - select objects -
-                </option>
-                <option th:each="objectName : ${objects}" th:value="${objectName}" th:text="${objectName}">
-                </option>
-            </select>
-
-<!--            fill boxes: create by javascript-->
-
-            <div class = "objectPage_Submit">
-            <p><input class = "objectPage_button_font" type="submit" value="Submit"/></p>
+            <div class = "objectPage_objectForm_int">
+                <label  for = "objectPage_objectForm_int_placeholder" class = "objectPage_objectForm_title_font">INT</label>
             </div>
+                <input id = "objectPage_objectForm_int_placeholder" type = "number" class = "objectPage_objectForm_int_placeholder"/>
+
+            <div class = "objectPage_objectForm_string">
+                <label  for = "objectPage_objectForm_string_placeholder" class = "objectPage_objectForm_title_font">String</label>
+            </div>
+            <input id = "objectPage_objectForm_string_placeholder" type = "text" class = "objectPage_objectForm_string_placeholder"/>
+
+            <div class = "objectPage_objectForm_rollWithMode">
+                <label  for = "objectPage_objectForm_rollWithMode_placeholder" class = "objectPage_objectForm_title_font">Roll With Mode</label>
+            </div>
+            <input id = "objectPage_objectForm_rollWithMode_placeholder" type = "text" class = "objectPage_objectForm_rollWithMode_placeholder"/>
+
+            <div class = "objectPage_objectForm_array">
+                <label  for = "objectPage_objectForm_array_placeholder" class = "objectPage_objectForm_title_font">Array</label>
+            </div>
+            <div class = "objectPage_objectForm_array_cycle1">
+                <button class = "objectPage_objectForm_array_button1" type="submit"></button>
+            </div>
+            <div class = "objectPage_objectForm_array_cycle1">
+                <button class = "objectPage_objectForm_array_button2" type="submit"></button>
+            </div>
+            <input id = "objectPage_objectForm_array_placeholder" type = "text" class = "objectPage_objectForm_array_placeholder"/>
+            <input id = "objectPage_objectForm_array_placeholder1" type = "text" class = "objectPage_objectForm_array_placeholder1"/>
+            <input id = "objectPage_objectForm_array_placeholder2" type = "text" class = "objectPage_objectForm_array_placeholder2"/>
+
+            <hr class = "objectPage_objectForm_array_line">
+
+            <div class = "objectPage_objectForm_array_cycle1">
+                <button class = "objectPage_objectForm_array_button3" type="submit"></button>
+            </div>
+            <input id = "objectPage_objectForm_array_placeholder3" type = "text" class = "objectPage_objectForm_array_placeholder3"/>
+
         </form>
         </div>
 
-        <p id="showTheTextMessage"></p>
-        <div class = "objectPage_generateForm">
-            <button class = "objectPage_button_font" onClick="createForm()">generate Form</button>
-        </div>
-
-        <div class = "objectPage_sendObjectName">
-            <button class = "objectPage_button_font" onclick="sendObjectName()">send Object Name</button>
+        <div class = "objectPage_OKbutton_div">
+            <button type='button'  class = "objectPage_OKbutton" onclick="submit()" value="OK">OK</button>
         </div>
 
     </div>

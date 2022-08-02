@@ -1,3 +1,364 @@
+/*index_after_login page*/
+.index_after_login_createGame{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 494px;
+    height: 90px;
+    left: 473px;
+    top: 356px;
+
+    cursor: pointer;
+    text-align: center;
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.index_after_login_joinGame{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 494px;
+    height: 90px;
+    left: 473px;
+    top: 506px;
+
+    cursor: pointer;
+    text-align: center;
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.index_after_login_loadGame{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 494px;
+    height: 90px;
+    left: 473px;
+    top: 649px;
+
+    cursor: pointer;
+    text-align: center;
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.index_after_login_logout{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 494px;
+    height: 90px;
+    left: 473px;
+    top: 772px;
+
+    cursor: pointer;
+    text-align: center;
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.index_after_login_font{
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+
+    color: #000000;
+
+    cursor: pointer;
+    background-color: transparent;
+    border: transparent;
+}
+
+.personal_pic_button{
+    position: absolute;
+    width: 63px;
+    height: 61px;
+    left: 8px;
+    top: 16px;
+
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.5);
+
+    border-radius: 50%;
+}
+
+.personal_playerName{
+    position: absolute;
+    width: 439px;
+    height: 68px;
+    left: 0px;
+    top: 12px;
+
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 60px;
+}
+
+.personal_playerName_font{
+    position: absolute;
+    width: 736px;
+    height: 51px;
+    left: 80px;
+    top: -6px;
+
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+
+    color: #FFFFFF;
+}
+
+.demo_personalInfo{
+    position: absolute;
+    width: 500px;
+    height: 210px;
+    left: 8px;
+    top: 90px;
+
+    display: block;
+    z-index: 999;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 60px;
+}
+
+.personal_firstName{
+    position: absolute;
+    width: 200px;
+    height: 24px;
+    left: 2px;
+    top: 2px;
+
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    /* identical to box height */
+
+    text-align: center;
+
+    color: #FFFFFF;
+}
+
+.personal_firstName_fill{
+    position: absolute;
+    width: 200px;
+    height: 24px;
+    left: 150px;
+    top: 2px;
+
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    /* identical to box height */
+
+    text-align: center;
+
+    color: #FFFFFF;
+}
+
+.personal_lastName{
+    position: absolute;
+    width: 131px;
+    height: 24px;
+    left: 12px;
+    top: 30px;
+
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    /* identical to box height */
+
+    text-align: center;
+
+    color: #FFFFFF;
+}
+
+.personal_lastName_fill{
+    position: absolute;
+    width: 131px;
+    height: 24px;
+    left: 130px;
+    top: 30px;
+
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    /* identical to box height */
+
+    text-align: center;
+
+    color: #FFFFFF;
+}
+
+.personal_email{
+    position: absolute;
+    width: 131px;
+    height: 24px;
+    left: 2px;
+    top: 59px;
+
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    /* identical to box height */
+
+    text-align: center;
+
+    color: #FFFFFF;
+}
+
+.personal_email_fill{
+    position: absolute;
+    width: 131px;
+    height: 24px;
+    left: 140px;
+    top: 59px;
+
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    /* identical to box height */
+
+    text-align: center;
+
+    color: #FFFFFF;
+}
+
+.personal_font{
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    /* identical to box height */
+
+    text-align: center;
+
+    color: #000000;
+
+    cursor: pointer;
+    background-color: transparent;
+    border: transparent;
+}
+
+.personal_edit{
+    position: absolute;
+    width: 97px;
+    height: 29px;
+    left: 20px;
+    top: 150px;
+
+    text-align: center;
+    cursor: pointer;
+
+    background: #D9D9D9;
+}
+
+.personal_logout{
+    position: absolute;
+    width: 97px;
+    height: 29px;
+    left: 180px;
+    top: 150px;
+
+    text-align: center;
+    cursor: pointer;
+
+    background: #D9D9D9;
+}
+
+.invite_button{
+    position: absolute;
+    width: 63px;
+    height: 61px;
+    left: 8px;
+    top: 949px;
+
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.demo_inviteInfo{
+    position: absolute;
+    width: 450px;
+    height: 585px;
+    left: 20px;
+    top: 350px;
+
+    display: block;
+    z-index: 999;
+    background: #1E1E1E;
+    border-radius: 60px;
+}
+
+.inviteInfo_fromPlayer1{
+    position: absolute;
+    width: 257px;
+    height: 20px;
+    left: 27px;
+    top: 5px;
+
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 100;
+    font-size: 20px;
+    line-height: 20px;
+    /* identical to box height */
+    color: #FFFFFF;
+}
+
+.inviteInfo_accept{
+    position: absolute;
+    width: 96px;
+    height: 26px;
+    left: 324px;
+    top: 5px;
+
+    cursor: pointer;
+    background: #D9D9D9;
+}
+
+.inviteInfo_cancel{
+    position: absolute;
+    width: 96px;
+    height: 26px;
+    left: 323px;
+    top: 32px;
+
+    cursor: pointer;
+    background: #D9D9D9;
+}
+
+.inviteInfo_button_font{
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 100;
+    font-size: 20px;
+    line-height: 20px;
+    /* identical to box height */
+    color: #000000;
+
+    cursor: pointer;
+
+}
+
 /*join game page*/
 .joinGamePage_advancedSearch{
     position: absolute;
@@ -49,12 +410,20 @@
     background: rgba(217, 217, 217, 0.5);
     border: 1px solid #000000;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+    /* identical to box height */
+    color: #FFFFFF;
 }
 
 .joinGamePage_id{
     position: absolute;
-    width: 42px;
-    height: 29px;
+    width: 100px;
+    height: 39px;
     left: 126px;
     top: 460px;
 }
@@ -71,6 +440,14 @@
     background: rgba(217, 217, 217, 0.5);
     border: 1px solid #000000;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+    /* identical to box height */
+    color: #FFFFFF;
 }
 
 .joinGamePage_playerNum{
@@ -93,6 +470,14 @@
     background: rgba(217, 217, 217, 0.5);
     border: 1px solid #000000;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+    /* identical to box height */
+    color: #FFFFFF;
 }
 
 .joinGamePage_creator{
@@ -115,6 +500,14 @@
     background: rgba(217, 217, 217, 0.5);
     border: 1px solid #000000;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+    /* identical to box height */
+    color: #FFFFFF;
 }
 
 .joinGamePage_gameList{
@@ -124,7 +517,7 @@
     left: 405px;
     top: 280px;
 
-    overflow: scroll;
+    overflow: auto;
     background: rgba(0, 0, 0, 0.5);
     border-radius: 60px;
 }
@@ -151,7 +544,7 @@
 
 .joinGamePage_gameList_id{
     position: absolute;
-    width: 33px;
+    width: 100px;
     height: 29px;
     left: 250px;
     top: 30px;
@@ -201,6 +594,7 @@ table tr td{
     left: 783px;
     top: 859px;
 
+    cursor: pointer;
     text-align: center;
     background: rgba(217, 217, 217, 0.5);
     border: 1px solid #000000;
@@ -216,6 +610,7 @@ table tr td{
     left: 241px;
     top: 859px;
 
+    cursor: pointer;
     text-align: center;
     background: rgba(217, 217, 217, 0.5);
     border: 1px solid #000000;
@@ -232,6 +627,7 @@ table tr td{
 
     color: #000000;
 
+    cursor: pointer;
     background-color: transparent;
     border: transparent;
 
@@ -297,6 +693,7 @@ table tr td{
     border: transparent;
 }
 
+/*1. result part*/
 .gameCenter_showResult{
     position: absolute;
     width: 372px;
@@ -304,7 +701,7 @@ table tr td{
     left: 1042px;
     top: 100px;
 
-    overflow: scroll;
+    overflow: auto;
     background: rgba(0, 0, 0, 0.5);
     border-radius: 60px;
 }
@@ -313,7 +710,7 @@ table tr td{
     position: absolute;
     width: 72px;
     height: 24.84px;
-    left: 10px;
+    left: 35px;
     top: 10px;
 }
 
@@ -335,6 +732,43 @@ table tr td{
     color: #FFFFFF;
 }
 
+.gameCenter_showResult_text_font{
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 100;
+    font-size: 20px;
+    line-height: 29px;
+
+    color: #FFFFFF;
+}
+
+
+.gameCenter_showResult_name1{
+    position: absolute;
+    width: 72px;
+    height: 24.84px;
+    left: 35px;
+    top: 40px;
+}
+
+.gameCenter_showResult_result1{
+    position: absolute;
+    width: 98px;
+    height: 24.84px;
+    left: 200px;
+    top: 40px;
+}
+
+.gameCenter_showResult_line{
+    position: absolute;
+    top: 75px;
+    left:10px;
+    width: 350px;
+    size: 1px;
+    color: white;
+}
+
+/*2. rollString Square*/
 .gameCenter_rollStr{
     position: absolute;
     width: 372px;
@@ -417,6 +851,46 @@ table tr td{
     top: 850px;
 }
 
+.gameCenter_rollStr_visibility_button{
+    position: absolute;
+    width: 184px;
+    height: 45px;
+    left: 1186px;
+    top: 700px;
+
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 29px;
+    /* identical to box height */
+    color: #000000;
+    background: #D9D9D9;
+
+}
+.gameCenter_rollStr_table td{
+    text-align: left;
+    font-size: 10px;
+    padding: 5px 5px;
+
+}
+
+
+.rollStr_dropDown_table{
+    position: absolute;
+    width: 500px;
+    height: 300px;
+    left: 800px;
+    top: 742.5px;
+
+    overflow: auto;
+    background: #D9D9D9;
+    border-radius: 20px;
+
+    display: block;
+    z-index: 999;
+}
+
 .gameCenter_rollStr_rollButton{
     box-sizing: border-box;
 
@@ -447,6 +921,9 @@ table tr td{
     border: transparent;
 }
 
+
+
+
 .gameCenter_roundEnd{
     position: absolute;
     width: 120px;
@@ -455,6 +932,9 @@ table tr td{
     top: 857px;
 
     background: #39D8E2;
+
+    border-radius: 50%;
+
 }
 
 .gameCenter_roundEnd_button{
@@ -463,6 +943,7 @@ table tr td{
     height: 100px;
     left: 855px;
     top: 885px;
+
 
 }
 
@@ -504,7 +985,7 @@ table tr td{
 
 }
 
-.gameCenter_saveRollList{
+.gameCenter_saveRollList_button{
     position: absolute;
     width: 714px;
     height: 43px;
@@ -513,18 +994,7 @@ table tr td{
 
     background: rgba(0, 0, 0, 0.5);
     border-radius: 60px;
-}
 
-.gameCenter_saveRollList_text{
-    position: absolute;
-    width: 140px;
-    height: 19px;
-    left: 605px;
-    top: 108px;
-
-}
-
-.gameCenter_saveRollList_text_font{
     font-family: 'Bungee Regular';
     font-style: normal;
     font-weight: 400;
@@ -534,6 +1004,26 @@ table tr td{
     color: #FFFFFF;
 }
 
+.saveRollList_table{
+    position: absolute;
+    width: 700px;
+    height: 291px;
+    left: 327px;
+    top: 153px;
+
+    background: #1E1E1E;
+
+    display: block;
+    z-index: 999;
+}
+
+.gameCenter_saveRollList_table td{
+    text-align: left;
+    font-size: 15px;
+    padding: 10px 10px;
+    color: white;
+}
+
 .gameCenter_ownObjectList{
     position: absolute;
     width: 325px;
@@ -541,10 +1031,68 @@ table tr td{
     left: 13px;
     top: 177px;
 
-    overflow: scroll;
+    overflow: auto;
     background: rgba(0, 0, 0, 0.5);
     border-radius: 60px;
 }
+
+.gameCenter_ownObjectList_active{
+    background: #fff;
+    width: 100%;
+    height: 58px;
+    position: absolute;
+    left: 0;
+    top: 2.6%;
+    z-index: -1;
+    border-radius: 6px;
+    box-shadow: 0 5px 10px rgba(255, 255, 255, 0.4);
+    display: none;
+}
+
+.gameCenter_ownObjectList_objects li:hover{
+    color: #0066FF;
+    transition: 0.3s;
+}
+
+.gameCenter_ownObjectList_objects li:hover ~ .gameCenter_ownObjectList_active{
+    display: block;
+}
+
+.gameCenter_ownObjectList_objects li:nth-child(1):hover ~ .gameCenter_ownObjectList_active{
+    top: 2.6%;
+}
+
+.gameCenter_ownObjectList_objects li:nth-child(2):hover ~ .gameCenter_ownObjectList_active{
+    top: 16.9%;
+}
+
+.gameCenter_ownObjectList_objects li:nth-child(3):hover ~ .gameCenter_ownObjectList_active{
+    top: 31.2%;
+}
+
+.gameCenter_ownObjectList_objects li:nth-child(4):hover ~ .gameCenter_ownObjectList_active{
+    top: 45.5%;
+}
+
+.gameCenter_ownObjectList_objects{
+    position: absolute;
+    width: 81px;
+    height: 19px;
+    left: 0px;
+    top: 80px;
+
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+
+    cursor: pointer;
+    color: #FFFFFF;
+
+    padding: 0 100px;
+}
+
 
 .gameCenter_functionList{
     position: absolute;
@@ -553,7 +1101,7 @@ table tr td{
     left: 370px;
     top: 177px;
 
-    overflow: scroll;
+    overflow: auto;
     background: rgba(0, 0, 0, 0.5);
     border-radius: 60px;
 }
@@ -680,6 +1228,67 @@ table tr td{
     border: transparent;
 }
 
+.gameCenter_functionList_active{
+    background: #fff;
+    width: 100%;
+    height: 58px;
+    position: absolute;
+    left: 0;
+    top: 2.6%;
+    z-index: -1;
+    border-radius: 6px;
+    box-shadow: 0 5px 10px rgba(255, 255, 255, 0.4);
+    display: none;
+    cursor: pointer;
+}
+
+.gameCenter_functionList_functions li:hover{
+    color: #0066FF;
+    transition: 0.3s;
+}
+
+.gameCenter_functionList_functions li:hover ~ .gameCenter_functionList_active{
+    display: block;
+}
+
+.gameCenter_functionList_functions li:nth-child(1):hover ~ .gameCenter_functionList_active{
+    top: 2.6%;
+}
+
+.gameCenter_functionList_functions li:nth-child(2):hover ~ .gameCenter_functionList_active{
+    top: 16.9%;
+}
+
+.gameCenter_functionList_functions li:nth-child(3):hover ~ .gameCenter_functionList_active{
+    top: 31.2%;
+}
+
+.gameCenter_functionList_functions li:nth-child(4):hover ~ .gameCenter_functionList_active{
+    top: 45.5%;
+}
+
+.gameCenter_functionList_functions{
+    position: absolute;
+    width: 81px;
+    height: 19px;
+    left: 0px;
+    top: 80px;
+
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+
+    cursor: pointer;
+    color: #FFFFFF;
+
+    padding: 0 100px;
+}
+
+
+
+
 /*object create*/
 .objectPage_back{
     box-sizing: border-box;
@@ -708,6 +1317,7 @@ table tr td{
     border: transparent;
 }
 
+/*object list*/
 .objectPage_objectList{
     position: absolute;
     width: 243px;
@@ -715,7 +1325,7 @@ table tr td{
     left: 8px;
     top: 177px;
 
-    overflow: scroll;
+    overflow: auto;
     background: rgba(0, 0, 0, 0.5);
     border-radius: 60px;
 }
@@ -740,6 +1350,88 @@ table tr td{
     color: #FFFFFF;
 }
 
+.objectPage_objectList_objects{
+    position: absolute;
+    width: 81px;
+    height: 19px;
+    left: 0px;
+    top: 80px;
+
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+
+    cursor: pointer;
+    color: #FFFFFF;
+
+    padding: 0 100px;
+}
+
+.objectPage_ownObjectList_create{
+    position: absolute;
+    width: 49px;
+    height: 30px;
+    left: 22px;
+    top: 620px;
+
+    box-sizing: border-box;
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    cursor: pointer;
+    text-align: center;
+}
+
+.objectPage_ownObjectList_create_font{
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 80;
+    font-size: 11px;
+    line-height: 24px;
+
+    color: #FFFFFF;
+
+    background-color: transparent;
+    border: transparent;
+
+}
+
+.objectPage_ownObjectList_use{
+    position: absolute;
+    width: 57px;
+    height: 33px;
+    left: 84px;
+    top: 620px;
+
+    cursor: pointer;
+    text-align: center;
+
+    box-sizing: border-box;
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.objectPage_ownObjectList_delete{
+    position: absolute;
+    width: 52px;
+    height: 35px;
+    left: 154px;
+    top: 620px;
+
+    cursor: pointer;
+    text-align: center;
+
+    box-sizing: border-box;
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+/*object genereta form*/
+
 .objectPage_objectForm{
     position: absolute;
     width: 995px;
@@ -747,27 +1439,204 @@ table tr td{
     left: 330px;
     top: 150px;
 
-    overflow: scroll;
+    overflow: auto;
     background: rgba(0, 0, 0, 0.5);
     border-radius: 60px;
 }
 
-.objectPage_generateForm{
+.objectPage_objectForm_title_font{
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #FFFFFF;
+}
+
+.objectPage_objectForm_int{
+    position: absolute;
+    width: 42px;
+    height: 19px;
+    left: 50px;
+    top: 40px;
+}
+
+.objectPage_objectForm_int_placeholder{
     box-sizing: border-box;
 
     position: absolute;
-    width: 302px;
-    height: 51px;
-    left: 500px;
-    top: 916px;
+    width: 292px;
+    height: 48px;
+    left: 400px;
+    top: 40px;
 
-    text-align: center;
     background: rgba(217, 217, 217, 0.5);
     border: 1px solid #000000;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.objectPage_sendObjectName{
+.objectPage_objectForm_string{
+    position: absolute;
+    width: 42px;
+    height: 19px;
+    left: 50px;
+    top: 108px;
+}
+
+.objectPage_objectForm_string_placeholder{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 292px;
+    height: 48px;
+    left: 400px;
+    top: 108px;
+
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.objectPage_objectForm_rollWithMode{
+    position: absolute;
+    width: 200px;
+    height: 19px;
+    left: 50px;
+    top: 176px;
+}
+
+.objectPage_objectForm_rollWithMode_placeholder{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 292px;
+    height: 48px;
+    left: 400px;
+    top: 176px;
+
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.objectPage_objectForm_array{
+    position: absolute;
+    width: 200px;
+    height: 19px;
+    left: 50px;
+    top: 244px;
+}
+
+.objectPage_objectForm_array_placeholder{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 292px;
+    height: 48px;
+    left: 400px;
+    top: 244px;
+
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.objectPage_objectForm_array_cycle1{
+    content: "+";
+    color: #1E1E1E;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+}
+
+.objectPage_objectForm_array_button1{
+    position: absolute;
+    width: 43px;
+    height: 44px;
+    left: 200px;
+    top: 244px;
+    background: #00FF0A;
+    border-radius: 50%;
+}
+
+.objectPage_objectForm_array_button2{
+    position: absolute;
+    width: 43px;
+    height: 44px;
+    left: 300px;
+    top: 244px;
+
+    background: #00FF0A;
+    border-radius: 50%;
+}
+
+
+.objectPage_objectForm_array_placeholder1{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 302px;
+    height: 51px;
+    left: 400px;
+    top: 312px;
+
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.objectPage_objectForm_array_placeholder2{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 302px;
+    height: 51px;
+    left: 400px;
+    top: 380px;
+
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.objectPage_objectForm_array_line{
+    position: absolute;
+    top: 420px;
+    left: 400px;
+    width: 350px;
+    size: 1px;
+    color: white;
+}
+
+.objectPage_objectForm_array_button3{
+    position: absolute;
+    width: 43px;
+    height: 44px;
+    left: 300px;
+    top: 448px;
+
+    background: #00FF0A;
+    border-radius: 50%;
+}
+
+.objectPage_objectForm_array_placeholder3{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 302px;
+    height: 51px;
+    left: 400px;
+    top: 448px;
+
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+
+
+.objectPage_OKbutton_div{
     box-sizing: border-box;
 
     position: absolute;
@@ -776,85 +1645,36 @@ table tr td{
     left: 1012px;
     top: 916px;
 
-    text-align: center;
     background: rgba(217, 217, 217, 0.5);
     border: 1px solid #000000;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
-
-.objectPage_Submit{
-
-    box-sizing: border-box;
-
-    position: absolute;
-    width: 302px;
-    height: 49px;
-    left: 20px;
-    top: 600px;
 
     text-align: center;
-    background: rgba(217, 217, 217, 0.5);
-    border: 1px solid #000000;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.objectPage_form-control{
-    position: absolute;
-    left: 20px;
-    top: 580px;
-}
-
-/*dropdown list*/
-.gameCenter_rollStr_dropdown{
-    position: absolute;
-    width: 184px;
-    height: 60px;
-    left: 1186px;
-    top: 700px;
-
-    background: #D9D9D9;
-}
-
-
-.gameCenter_rollStr_dropbtn{
-    background-color: #D9D9D9;
-    color: black;
-    padding: 14px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-
+.objectPage_OKbutton{
     font-family: 'Bungee Regular';
     font-style: normal;
     font-weight: 400;
-    line-height: 19px;
+    font-size: 24px;
+    line-height: 29px;
+    /* identical to box height */
 
+
+    width: 302px;
+    height: 51px;
+
+    cursor: pointer;
+    color: #000000;
+
+    background-color: transparent;
+    border: transparent;
 }
 
-.gameCenter_rollStr_dropbtn:hover, .gameCenter_rollStr_dropbtn:focus {
-    background-color: #D9D9D9;
-}
 
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f1f1f1;
-    min-width: 160px;
-    overflow: auto;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-}
 
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
 
-.dropdown a:hover {background-color: #ddd;}
 
-.show {display: block;}
 
 /*load game Page*/
 .loadGamePage_gameList_blackBg{
@@ -906,6 +1726,7 @@ table tr td{
     height: 18px;
     left: 905px;
     top: 270px;
+    color: #FFFFFF;
 }
 
 .loadGamePage_demo2_position{
@@ -914,6 +1735,7 @@ table tr td{
     height: 18px;
     left: 904px;
     top: 350px;
+    color: #FFFFFF;
 }
 
 
@@ -926,6 +1748,7 @@ table tr td{
     left: 241px;
     top: 880px;
 
+    cursor: pointer;
     text-align: center;
     background: rgba(217, 217, 217, 0.5);
     border: 1px solid #000000;
@@ -941,6 +1764,7 @@ table tr td{
     left: 783px;
     top: 880px;
 
+    cursor: pointer;
     text-align: center;
     background: rgba(217, 217, 217, 0.5);
     border: 1px solid #000000;
@@ -956,8 +1780,13 @@ table tr td{
 
     color: #000000;
 
+    cursor: pointer;
     background-color: transparent;
     border: transparent;
 }
+
+
+
+
 
 
