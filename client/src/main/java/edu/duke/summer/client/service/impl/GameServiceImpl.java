@@ -1,4 +1,4 @@
-package edu.duke.summer.client.service;
+package edu.duke.summer.client.service.impl;
 
 import java.util.*;
 
@@ -7,6 +7,7 @@ import edu.duke.summer.client.database.model.*;
 import edu.duke.summer.client.database.repository.*;
 
 import edu.duke.summer.client.dto.*;
+import edu.duke.summer.client.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 //import org.springframework.security.core.Authentication;

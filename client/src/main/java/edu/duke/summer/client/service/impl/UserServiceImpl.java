@@ -1,8 +1,9 @@
-package edu.duke.summer.client.service;
+package edu.duke.summer.client.service.impl;
 
 import edu.duke.summer.client.database.model.User;
 import edu.duke.summer.client.database.repository.UserRepository;
 import edu.duke.summer.client.dto.SignupDto;
+import edu.duke.summer.client.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
@@ -11,7 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 //TODO:CAN BE DELETED
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 

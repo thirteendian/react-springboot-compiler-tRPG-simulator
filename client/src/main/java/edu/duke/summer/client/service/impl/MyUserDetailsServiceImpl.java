@@ -1,9 +1,11 @@
-package edu.duke.summer.client.service;
+package edu.duke.summer.client.service.impl;
 
 import edu.duke.summer.client.database.model.User;
 import edu.duke.summer.client.database.repository.UserRepository;
 import edu.duke.summer.client.dto.SignupDto;
 import edu.duke.summer.client.exceptions.UserAlreadyExistException;
+import edu.duke.summer.client.service.MyUserDetailsService;
+import edu.duke.summer.client.service.MyUserDtails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
