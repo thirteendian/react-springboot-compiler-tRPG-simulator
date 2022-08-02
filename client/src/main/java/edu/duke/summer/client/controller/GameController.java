@@ -172,5 +172,10 @@ public class GameController {
         return "object";
     }
 
+    @GetMapping("/invitePlayer")
+    public String getInvitePlayer(Model model) {
+        return "invite_player";
+    }
+
 
 }

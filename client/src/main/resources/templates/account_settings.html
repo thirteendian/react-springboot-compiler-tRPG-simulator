@@ -14,34 +14,37 @@
   <link rel="stylesheet" th:href="@{/css/button.css}"/>
   <link rel="stylesheet" href="../static/css/button.css">
 </head>
-<body class = "bg_chapel">
-<div class="head_container_dice_rolling_game">
-  <h1 class="head_dice_rolling_game" >DICE       ROLLING         GAME</h1>
-</div>
+<body>
+<div class = "main_container">
+  <div class="bg_chapel">
 
-<div class = "subhead_accountSetting">
-  <h1 class="subhead_accountSetting_font" >ACCOUNT SETTINGS</h1>
-</div>
+    <div class="accountSettingPage_head_container_dice_rolling_game">
+      <h1 class="head_dice_rolling_game" >DICE       ROLLING         GAME</h1>
+    </div>
 
-<div class = "accountSettingPage_userName">
-  <p class = "accountSettingPage_userName_font">USERNAME: </p>
-</div>
+    <div class = "subhead_accountSetting">
+      <h1 class="subhead_accountSetting_font" >ACCOUNT SETTINGS</h1>
+    </div>
 
-<div class = "accountSettingPage_firstName">
-  <p class = "accountSettingPage_firstName_font">FIRST NAME:</p>
-</div>
+    <div class = "accountSettingPage_userName">
+      <p class = "accountSettingPage_text_font">USERNAME: </p>
+    </div>
 
-<div class = "accountSettingPage_lastName">
-  <p class = "accountSettingPage_lastName_font">SURNAME:</p>
-</div>
+    <div class = "accountSettingPage_firstName">
+      <p class = "accountSettingPage_text_font">FIRST NAME:</p>
+    </div>
 
-<div class = "accountSettingPage_lastName_email">
-  <p class = "accountSettingPage_lastName_email_font">EMAIL:</p>
-</div>
+    <div class = "accountSettingPage_lastName">
+      <p class = "accountSettingPage_text_font">SURNAME:</p>
+    </div>
 
-<div class = "accountSettingPage_uploadProfilePic">
-  <p class = "accountSettingPage_uploadProfilePic_font">Upload your Profile:</p>
-</div>
+    <div class = "accountSettingPage_email">
+      <p class = "accountSettingPage_text_font">EMAIL:</p>
+    </div>
+
+    <div class = "accountSettingPage_uploadProfilePic">
+      <p class = "accountSettingPage_text_font">Upload your Profile:</p>
+    </div>
 
 <form th:action="@{/accountSettings}" th:object="${signupDto}" method="post">
 
@@ -51,15 +54,21 @@
   <input type="text" th:field="*{email}" name="email" placeholder="Email" class = "accountSettingPage_email_placeholder"required>
   <input type="file" name="profile" accept="image/png, image/jpeg" class = "accountSettingPage_profilePic_placeholder"/>
 
+  <div class = "accountSettingPage_profilePic_show">
+  </div>
+
   <div class = "accountSettingPage_submit">
-    <button class = "accountSettingPage_submit_font" type="submit">Save</button>
+    <button class = "accountSettingPage_button_font" type="submit">Save</button>
   </div>
 </form>
 
-<div class = "accountSettingPage_changePassword">
+<div class = "accountSettingPage_back">
   <form th:action="@{/}" method="get">
-    <button class = "accountSettingPage_changePassword_font" type="submit">Back</button>
+    <button class = "accountSettingPage_button_font" type="submit">Back</button>
   </form>
+</div>
+
+  </div>
 </div>
 
 </body>

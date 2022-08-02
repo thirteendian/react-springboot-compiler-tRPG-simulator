@@ -13,42 +13,44 @@
     <link rel="stylesheet" th:href="@{/css/title.css}"/>
     <link rel="stylesheet" th:href="@{/css/button.css}"/>
 </head>
-<body class = "bg_chapel">
-<div class="head_container_dice_rolling_game">
-    <h1 class="head_dice_rolling_game" >DICE       ROLLING         GAME</h1>
-</div>
+<body>
+<div class = "main_container">
+    <div class="bg_chapel">
+        <div class="signupPage_head_container_dice_rolling_game">
+            <h1 class="signupPage_head_dice_rolling_game" >DICE       ROLLING         GAME</h1>
+        </div>
 
-<div class = "subhead_signup">
-    <h1 class="subhead_signup_font" >SIGNUP</h1>
-</div>
+        <div class = "subhead_signup">
+            <h1 class="subhead_signup_font" >SIGNUP</h1>
+        </div>
 
-<div class = "signupPage_email">
-    <p class = "signupPage_email_font">EMAIL:</p>
-</div>
+        <div class = "signupPage_email">
+            <p class = "signupPage_text_font">EMAIL:</p>
+        </div>
 
-<div class = "signupPage_firstName">
-    <p class = "signupPage_firstName_font">FIRST NAME:</p>
-</div>
+        <div class = "signupPage_firstName">
+            <p class = "signupPage_text_font">FIRST NAME:</p>
+        </div>
 
-<div class = "signupPage_lastName">
-    <p class = "signupPage_lastName_font">SURNAME:</p>
-</div>
+        <div class = "signupPage_lastName">
+            <p class = "signupPage_text_font">SURNAME:</p>
+        </div>
 
-<div class = "signupPage_userName">
-    <p class = "signupPage_userName_font">Username:</p>
-</div>
+        <div class = "signupPage_userName">
+            <p class = "signupPage_text_font">Username:</p>
+        </div>
 
-<div class = "signupPage_password">
-    <p class = "signupPage_password_font">Password:</p>
-</div>
+        <div class = "signupPage_password">
+            <p class = "signupPage_text_font">Password:</p>
+        </div>
 
-<div class = "signupPage_password2">
-    <p class = "signupPage_password2_font">Re-Enter Password:</p>
-</div>
+        <div class = "signupPage_password2">
+            <p class = "signupPage_text_font">Re-Enter Password:</p>
+        </div>
 
-<div class = "signupPage_uploadProfilePic">
-    <p class = "signupPage_uploadProfilePic_font">Upload your Profile:</p>
-</div>
+        <div class = "signupPage_uploadProfilePic">
+            <p class = "signupPage_text_font">Upload your Profile:</p>
+        </div>
 
 <form th:action="@{/signup}" th:object="${signupDto}" method="post">
     <input type="email" th:field="*{email}" name="email" placeholder="Email" class = "signupPage_email_placeholder" required>
@@ -74,25 +76,31 @@
     <p th:if="${#fields.hasErrors('reEnterPassword')}" th:class="${#fields.hasErrors('reEnterPassword')}?error">password
         Not Match</p>
 
-    <p>
+
 <!--        <label>Upload your Profiles:</label>-->
-        <input type="file" name="profile" accept="image/png, image/jpeg" class = "signupPage_profilePic_placeholder"/>
+        <div class = "signupPage_profilePic">
+        <input type="file" name="profile" accept="image/png, image/jpeg" class = "signupPage_profilePic_font"/>
+        </div>
+
+        <div class = "signupPage_profilePic_show">
+        </div>
+
+<!--submit button-->
         <div class = "signupPage_submit">
-        <button class = "signupPage_submit_font" type="submit">Sign up</button>
+        <button class = "signupPage_button_font" type="submit">Sign up</button>
         </div>
 </form>
 
+<!--        back botton-->
 <div class = "signupPage_back">
 <form th:action="@{/}" method="get">
-    <button class = "signupPage_back_font" type="submit">Back</button>
+    <button class = "signupPage_button_font" type="submit">Back</button>
 </form>
+</div>
+
+
+    </div>
 </div>
 
 </body>
 </html>
-
-<!--TODO: 1. cursor changes in button-->
-<!--TODO: 2. font change inside form-->
-<!--TODO: 3. text center in button-->
-<!--TODO: 4. button font color black-->
-<!--TODO: 5. change profile upload button and upload show pic -->

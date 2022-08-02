@@ -7,6 +7,28 @@
     <link rel="stylesheet" th:href="@{/css/background.css}"/>
     <link rel="stylesheet" th:href="@{/css/title.css}"/>
     <link rel="stylesheet" th:href="@{/css/button.css}"/>
+    <link rel="stylesheet" th:href="@{/css/button_afterlogin.css}"/>
+
+    <script>
+        // personal info and invite box
+        function showPersonalInfo() {
+            var text = document.getElementById("demo_personalInfo");
+            if (text.style.display === "none") {
+                text.style.display = "block";
+            } else {
+                text.style.display = "none";
+            }
+        }
+
+        function showInviteInfo() {
+            var text = document.getElementById("demo_inviteInfo");
+            if (text.style.display === "none") {
+                text.style.display = "block";
+            } else {
+                text.style.display = "none";
+            }
+        }
+    </script>
 </head>
 <body>
 <div class = "main_container">
@@ -17,7 +39,54 @@
     <div class = "subhead_container_createGame">
         <h1 class="subhead_createGame">Create Game</h1>
     </div>
-    <div class = "createGamePage_gameName">
+
+        <!--        personal info box-->
+
+        <div class = "personal_playerName">
+        </div>
+
+        <p class = "personal_playerName_font">Player Name</p>
+
+        <button type='button'  class = "personal_pic_button" onclick="showPersonalInfo()"></button>
+        <div id = "demo_personalInfo" class = "demo_personalInfo" style='display: none'>
+            <p class = "personal_firstName">FIRST NAME:</p>
+            <p class = "personal_lastName">LAST NAME:</p>
+            <p class = "personal_email">EMAIL:</p>
+
+            <!--            hard code-->
+            <p class = "personal_firstName_fill">ALEX</p>
+            <p class = "personal_lastName_fill">SWIFT</p>
+            <p class = "personal_email_fill">alex.swift@gmail.com</p>
+
+            <div class = "personal_edit">
+                <form th:action="@{account_settings}" method="get">
+                    <button class = "personal_font" type="submit">Edit</button>
+                </form>
+            </div>
+            <div class = "personal_logout">
+                <form th:action="@{logout}" method="post">
+                    <button type="submit" class = "personal_font">Logout</button>
+                </form>
+            </div>
+        </div>
+
+
+        <!--invitation Box-->
+        <button type='button'  class = "invite_button" onclick="showInviteInfo()"></button>
+        <div id = "demo_inviteInfo" class = "demo_inviteInfo" style='display: none'>
+            <!--        hard code-->
+            <p class = "inviteInfo_fromPlayer1">@player 1 invite you to game ?</p>
+            <div class = "inviteInfo_accept">
+                <button type="submit" class = "inviteInfo_button_font">ACCEPT</button>
+            </div>
+            <div class = "inviteInfo_cancel">
+                <button type="submit" class = "inviteInfo_button_font">CANCEL</button>
+            </div>
+        </div>
+
+
+
+        <div class = "createGamePage_gameName">
         <p class = "createGamePage_gameName_font"> GAME NAME:</p>
     </div>
     <div class = "createGamePage_playerNum">
@@ -41,7 +110,7 @@
 
     <div class = "createGamePage_confirm">
         <form th:action="@{/}" method="get">
-            <button type="submit" class = "createGamePage_back_font">Confirm</button>
+            <button type="submit" class = "createGamePage_back_font">CONFIRM</button>
         </form>
     </div>
 
@@ -52,7 +121,7 @@
 
         <div class = "createGamePage_back">
             <form th:action="@{/}" method="get">
-                <button type="submit" class = "createGamePage_back_font">Confirm</button>
+                <button type="submit" class = "createGamePage_back_font">BACK</button>
             </form>
         </div>
 
