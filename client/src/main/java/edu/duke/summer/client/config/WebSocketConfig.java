@@ -1,4 +1,4 @@
-package edu.duke.summer.client.stomp;
+package edu.duke.summer.client.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;

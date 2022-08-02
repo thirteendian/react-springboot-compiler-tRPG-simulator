@@ -1,8 +1,12 @@
-package edu.duke.summer.client.stomp;
+package edu.duke.summer.client.config;
 
 import edu.duke.summer.client.dto.DiceRollingDto;
 import edu.duke.summer.client.dto.ObjectFieldDto;
 import edu.duke.summer.client.service.GameService;
+import edu.duke.summer.client.stomp.ReqDiceRollingString;
+import edu.duke.summer.client.stomp.ReqObjectCreatingName;
+import edu.duke.summer.client.stomp.RespDiceRollingResult;
+import edu.duke.summer.client.stomp.RespObjectCreatingField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -27,7 +31,7 @@ public class DiceRollingController {
      */
     @MessageMapping("/dicerolling_result")
     @SendTo("/dicerolling/result")
-    public RespDiceRollingResult getDiceRollingResult(Principal principal,ReqDiceRollingString message) throws Exception {
+    public RespDiceRollingResult getDiceRollingResult(Principal principal, ReqDiceRollingString message) throws Exception {
         DiceRollingDto diceRollingDto = new DiceRollingDto();
         diceRollingDto.setPlayer(principal.getName());
         diceRollingDto.setGame("game");
