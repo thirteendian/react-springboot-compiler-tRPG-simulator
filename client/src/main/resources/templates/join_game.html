@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Join Game</title>
+    <link rel="stylesheet" th:href="@{/css/font.css}"/>
+    <link rel="stylesheet" th:href="@{/css/background.css}"/>
+    <link rel="stylesheet" th:href="@{/css/title.css}"/>
+    <link rel="stylesheet" th:href="@{/css/button_afterlogin.css}"/>
+<!--    <link rel="stylesheet" th:href="@{/join_game_searchBoxes.js}"/>-->
+<!--    script for search boxes-->
+    <script>
+        function filter_0(index) {
+            var searchBox_1 = document.getElementById("searchBox-1");
+            searchBox_1.addEventListener("keyup", function () {
+                var keyword = this.value;
+                keyword = keyword.toUpperCase();
+                var table_1 = document.getElementById("table");
+                var all_tr = table_1.getElementsByTagName("tr");
+                for (var i = 0; i < all_tr.length; i++) {
+                    var name_column = all_tr[i].getElementsByTagName("td")[index];
+                    if (name_column) {
+                        var name_value = name_column.textContent || name_column.innerText;
+                        name_value = name_value.toUpperCase();
+                        if (name_value.indexOf(keyword) > -1) {
+                            all_tr[i].style.display = ""; // show
+                        } else {
+                            all_tr[i].style.display = "none"; // hide
+                        }
+                    }
+                }
+            });
+        }
+
+        function filter_1(index) {
+            var searchBox_1 = document.getElementById("searchBox-2");
+            searchBox_1.addEventListener("keyup", function () {
+                var keyword = this.value;
+                keyword = keyword.toUpperCase();
+                var table_1 = document.getElementById("table");
+                var all_tr = table_1.getElementsByTagName("tr");
+                for (var i = 0; i < all_tr.length; i++) {
+                    var name_column = all_tr[i].getElementsByTagName("td")[index];
+                    if (name_column) {
+                        var name_value = name_column.textContent || name_column.innerText;
+                        name_value = name_value.toUpperCase();
+                        if (name_value.indexOf(keyword) > -1) {
+                            all_tr[i].style.display = ""; // show
+                        } else {
+                            all_tr[i].style.display = "none"; // hide
+                        }
+                    }
+                }
+            });
+        }
+
+        function filter_2(index) {
+            var searchBox_1 = document.getElementById("searchBox-3");
+            searchBox_1.addEventListener("keyup", function () {
+                var keyword = this.value;
+                keyword = keyword.toUpperCase();
+                var table_1 = document.getElementById("table");
+                var all_tr = table_1.getElementsByTagName("tr");
+                for (var i = 0; i < all_tr.length; i++) {
+                    var name_column = all_tr[i].getElementsByTagName("td")[index];
+                    if (name_column) {
+                        var name_value = name_column.textContent || name_column.innerText;
+                        name_value = name_value.toUpperCase();
+                        if (name_value.indexOf(keyword) > -1) {
+                            all_tr[i].style.display = ""; // show
+                        } else {
+                            all_tr[i].style.display = "none"; // hide
+                        }
+                    }
+                }
+            });
+        }
+
+        function filter_3(index) {
+            var searchBox_1 = document.getElementById("searchBox-4");
+            searchBox_1.addEventListener("keyup", function () {
+                var keyword = this.value;
+                keyword = keyword.toUpperCase();
+                var table_1 = document.getElementById("table");
+                var all_tr = table_1.getElementsByTagName("tr");
+                for (var i = 0; i < all_tr.length; i++) {
+                    var name_column = all_tr[i].getElementsByTagName("td")[index];
+                    if (name_column) {
+                        var name_value = name_column.textContent || name_column.innerText;
+                        name_value = name_value.toUpperCase();
+                        if (name_value.indexOf(keyword) > -1) {
+                            all_tr[i].style.display = ""; // show
+                        } else {
+                            all_tr[i].style.display = "none"; // hide
+                        }
+                    }
+                }
+            });
+        }
+
+
+    </script>
+</head>
+<body>
+<div class = "main_container">
+    <div class="bg_chapel">
+        <div class="head_container_dice_rolling_game">
+            <h1 class="head_dice_rolling_game" >DICE       ROLLING         GAME</h1>
+        </div>
+
+        <div class="subhead_container_joinGame">
+            <h1 class="subhead_joinGame" >Join Game</h1>
+        </div>
+
+<!--        search boxes-->
+        <div class = "joinGamePage_advancedSearch">
+            <p class = "joinGamePage_advancedSearch_font"> ADVANCED SEARCH</p>
+        </div>
+
+        <div class = "joinGamePage_name">
+            <p class = "joinGamePage_searchBox_font">NAME:</p>
+        </div>
+
+        <div class = "joinGamePage_id">
+            <p class = "joinGamePage_searchBox_font">ID:</p>
+        </div>
+
+        <div class = "joinGamePage_playerNum">
+            <p class = "joinGamePage_searchBox_font">NUM OF PLAYER:</p>
+        </div>
+
+        <div class = "joinGamePage_creator">
+            <p class = "joinGamePage_searchBox_font">CREATOR:</p>
+        </div>
+
+        <label for="searchBox-1"></label><input type="text" id="searchBox-1" placeholder="Search NAME" onkeyup="filter_0(0)" class = "joinGamePage_name_placeholder">
+        <label for="searchBox-2"></label><input type="text" id="searchBox-2" placeholder="Search ID" onkeyup="filter_1(1)" class = "joinGamePage_id_placeholder">
+        <label for="searchBox-3"></label><input type="text" id="searchBox-3" placeholder="Search NUM OF PLAYER" onkeyup="filter_2(2)" class = "joinGamePage_numPlayer_placeholder">
+        <label for="searchBox-4"></label><input type="text" id="searchBox-4" placeholder="Search CREATOR" onkeyup="filter_3(3)" class = "joinGamePage_creator_placeholder">
+
+<!--game list-->
+        <div class = "joinGamePage_gameList">
+            <table id = "table">
+                <tr>
+                    <th scope = "row" class = "joinGamePage_gameList_name"><p class = "joinGamePage_gameList_row_font">NAME</p></th>
+                    <th scope = "row" class = "joinGamePage_gameList_id"><p class = "joinGamePage_gameList_row_font">ID</p></th>
+                    <th scope = "row" class = "joinGamePage_gameList_playerNum"><p class = "joinGamePage_gameList_row_font">NUM OF PLAYER</p></th>
+                    <th scope = "row" class = "joinGamePage_gameList_creator"><p class = "joinGamePage_gameList_row_font">CREATOR</p></th>
+
+                </tr>
+
+                <tbody class = "tbody">
+                    <tr>
+                        <td>Game1</td>
+                        <td>1</td>
+                        <td>6</td>
+                        <td>marian@gmail.com</td>
+                        <td><label><input type = "checkbox">Join?</label></td>
+                    </tr>
+                    <tr>
+                        <td>Game2</td>
+                        <td>2</td>
+                        <td>5</td>
+                        <td>alex@gmail.com</td>
+                        <td><label><input type = "checkbox">Join?</label></td>
+                    </tr>
+                    <tr>
+                        <td>Game3</td>
+                        <td>3</td>
+                        <td>4</td>
+                        <td>julie@gmail.com</td>
+                        <td><label><input type = "checkbox">Join?</label></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+<!--        back and ok button-->
+
+        <div class = "joinGamePage_OK">
+            <input class = "joinGamePag_OkBack_font" type="submit" value="OK" />
+        </div>
+
+        <div class = "joinGamePage_back">
+            <form th:action="@{/}" method="get" >
+                <button class = "joinGamePag_OkBack_font" type="submit">BACK</button>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

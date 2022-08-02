@@ -2,9 +2,160 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Game Center</title>
+    <link rel="stylesheet" th:href="@{/css/font.css}"/>
+    <link rel="stylesheet" th:href="@{/css/background.css}"/>
+    <link rel="stylesheet" th:href="@{/css/title.css}"/>
+    <link rel="stylesheet" th:href="@{/css/button_afterlogin.css}"/>
+
+    <script>
+        /* When the user clicks on the button,
+        toggle between hiding and showing the dropdown content */
+        function dropDownFunction() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('.gameCenter_rollStr_dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>
+
 </head>
 <body>
+<div class = "main_container">
+    <div class="bg_chapel">
+        <div class="subhead_HELLFIRE_DRAGON">
+            <h1 class="subhead_HELLFIRE_DRAGON_font">HELL FIRE AND DRAGON</h1>
+        </div>
 
+        <div class = "gameCenter_invite">
+            <form th:action="@{/}" method="get" >
+                <button class = "gameCenter_invite_font" type="submit">INVITE</button>
+            </form>
+        </div>
+
+        <div class = "gameCenter_quit">
+            <form th:action="@{/}" method="get" >
+                <button class = "gameCenter_quit_font" type="submit">QUIT</button>
+            </form>
+        </div>
+
+<!--        show result square-->
+        <div class = "gameCenter_showResult">
+            <div class="gameCenter_showResult_name">
+                <p class = "gameCenter_showResult_font">NAME</p>
+            </div>
+
+            <div class="gameCenter_showResult_result">
+                <p class = "gameCenter_showResult_font">RESULT</p>
+            </div>
+        </div>
+
+<!--        visibility and roll string square-->
+        <div class = "gameCenter_rollStr">
+        </div>
+            <div class="gameCenter_rollStr_visibility">
+                <p class = "gameCenter_rollStr_font">VISIBILITY</p>
+            </div>
+
+            <div class="gameCenter_rollStr_rollString">
+                <p class = "gameCenter_rollStr_font">ROLL STRING:</p>
+            </div>
+
+            <div class="gameCenter_rollStr_check">
+                <p class = "gameCenter_rollStr_font">CHECK?</p>
+            </div>
+
+<!--        <form th:action="@{/gameCenter}" th:object="${xxDto}" method="post">-->
+
+            <div class="gameCenter_rollStr_dropdown">
+                <button onclick="dropDownFunction()" class="gameCenter_rollStr_dropbtn">PLAYER NAME</button>
+                <div id="myDropdown" class="dropdown-content">
+<!--                    need to fix-->
+                    <a href="#PLAYER1">PLAYER 1</a>
+                    <a href="#PLAYER2">PLAYER 2</a>
+                    <a href="#PLAYER3">PLAYER 3</a>
+                </div>
+            </div>
+
+            <input type="text"  name="rollStirng" placeholder="roll string" class = "gameCenter_rollStr_rollString_placeholder" required/>
+            <input type="text"  name="rollName" placeholder="roll name" class = "gameCenter_rollStr_rollName_placeholder" required/>
+            <input type="checkbox" class = "gameCenter_rollStr_check_placeholder" required/>
+
+            <div class = "gameCenter_rollStr_rollButton">
+                <button class = "gameCenter_rollStr_rollButton_font" type="submit">ROLL</button>
+            </div>
+<!--        </form>-->
+
+<!--        round end button-->
+        <div class = "gameCenter_roundEnd">
+        </div>
+        <div class = "gameCenter_roundEnd_button">
+            <button class = "gameCenter_roundEnd_button_font" type="submit">ROUND END</button>
+        </div>
+
+<!--        user profile pic-->
+        <div class = "gameCenter_userProfilePic_pointer">
+        </div>
+        <div class = "gameCenter_userProfilePic">
+        </div>
+
+<!--        saved roll list-->
+        <div class = "gameCenter_saveRollList">
+        </div>
+        <div class = "gameCenter_saveRollList_text">
+            <p class = "gameCenter_saveRollList_text_font">SAVED ROLL</p>
+        </div>
+
+<!--        own object-->
+        <div class = "gameCenter_ownObjectList">
+        </div>
+
+        <div class = "gameCenter_ownObjectList_text">
+            <p class = "gameCenter_ownObjectList_text_font">OWN OBJECTS</p>
+        </div>
+
+        <div class = "gameCenter_ownObjectList_create">
+            <!--            <form>-->
+            <button class = "gameCenter_ownObjectList_create_font" type="submit">CREATE</button>
+            <!--            </form>-->
+        </div>
+
+        <div class = "gameCenter_ownObjectList_use">
+            <!--            <form>-->
+            <button class = "gameCenter_ownObjectList_create_font" type="submit">USE</button>
+            <!--            </form>-->
+        </div>
+
+        <div class = "gameCenter_ownObjectList_delete">
+            <!--            <form>-->
+            <button class = "gameCenter_ownObjectList_create_font" type="submit">DELETE</button>
+            <!--            </form>-->
+        </div>
+
+        <!--        function list-->
+        <div class = "gameCenter_functionList">
+        </div>
+        <div class = "gameCenter_functionList_text">
+            <p class = "gameCenter_functionList_text_font">FUNCTION LIST</p>
+        </div>
+        <div class = "gameCenter_functionList_use">
+            <!--            <form>-->
+            <button class = "gameCenter_functionList_use_font" type="submit">USE</button>
+            <!--            </form>-->
+        </div>
+
+    </div>
+</div>
 </body>
 </html>

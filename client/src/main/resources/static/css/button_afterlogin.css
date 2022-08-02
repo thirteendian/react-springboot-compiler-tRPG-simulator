@@ -1,0 +1,963 @@
+/*join game page*/
+.joinGamePage_advancedSearch{
+    position: absolute;
+    width: 229px;
+    height: 96px;
+    left: 128px;
+    top: 254px;
+
+
+}
+
+.joinGamePage_advancedSearch_font{
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+
+    color: #FFFFFF;
+}
+
+.joinGamePage_name{
+    position: absolute;
+    width: 81px;
+    height: 29px;
+    left: 128px;
+    top: 375px;
+}
+
+.joinGamePage_searchBox_font{
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+    /* identical to box height */
+    color: #FFFFFF;
+}
+
+.joinGamePage_name_placeholder{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 200px;
+    height: 39px;
+    left: 128px;
+    top: 428px;
+
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.joinGamePage_id{
+    position: absolute;
+    width: 42px;
+    height: 29px;
+    left: 126px;
+    top: 460px;
+}
+
+.joinGamePage_id_placeholder{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 200px;
+    height: 39px;
+    left: 128px;
+    top: 524px;
+
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.joinGamePage_playerNum{
+    position: absolute;
+    width: 210px;
+    height: 29px;
+    left: 128px;
+    top: 559px;
+}
+
+.joinGamePage_numPlayer_placeholder{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 200px;
+    height: 39px;
+    left: 128px;
+    top: 620px;
+
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.joinGamePage_creator{
+    position: absolute;
+    width: 126px;
+    height: 58px;
+    left: 128px;
+    top: 652px;
+}
+
+.joinGamePage_creator_placeholder{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 200px;
+    height: 39px;
+    left: 128px;
+    top: 704px;
+
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.joinGamePage_gameList{
+    position: absolute;
+    width: 914px;
+    height: 553px;
+    left: 405px;
+    top: 280px;
+
+    overflow: scroll;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 60px;
+}
+
+.joinGamePage_gameList_name{
+    position: absolute;
+    width: 72px;
+    height: 29px;
+    left: 50px;
+    top: 30px;
+}
+
+.joinGamePage_gameList_row_font{
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+    /* identical to box height */
+
+
+    color: #FFFFFF;
+}
+
+.joinGamePage_gameList_id{
+    position: absolute;
+    width: 33px;
+    height: 29px;
+    left: 250px;
+    top: 30px;
+}
+
+.joinGamePage_gameList_playerNum{
+    position: absolute;
+    width: 202px;
+    height: 29px;
+    left: 380px;
+    top: 30px;
+}
+
+.joinGamePage_gameList_creator{
+    position: absolute;
+    width: 117px;
+    height: 58px;
+    left: 730px;
+    top: 30px;
+}
+
+.tbody{
+    position: absolute;
+    left:0;
+    top:30px;
+}
+
+table tr td{
+    padding: 50px 60px;
+    box-sizing: border-box;
+
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 100;
+    font-size: 24px;
+    line-height: 22px;
+    /* identical to box height */
+    color: #000000;
+}
+
+.joinGamePage_OK{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 494px;
+    height: 90px;
+    left: 783px;
+    top: 859px;
+
+    text-align: center;
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.joinGamePage_back{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 494px;
+    height: 90px;
+    left: 241px;
+    top: 859px;
+
+    text-align: center;
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.joinGamePag_OkBack_font{
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+    /* identical to box height */
+
+    color: #000000;
+
+    background-color: transparent;
+    border: transparent;
+
+}
+
+/*game center*/
+.gameCenter_invite{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 155px;
+    height: 30px;
+    left: 1090px;
+    top: 16px;
+
+    text-align: center;
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.gameCenter_invite_font{
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+    /* identical to box height */
+
+    color: #FFFFFF;
+
+    background-color: transparent;
+    border: transparent;
+}
+
+.gameCenter_quit{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 155px;
+    height: 30px;
+    left: 1259px;
+    top: 16px;
+
+    text-align: center;
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.gameCenter_quit_font{
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+    /* identical to box height */
+
+
+    color: #FF0000;
+
+    background-color: transparent;
+    border: transparent;
+}
+
+.gameCenter_showResult{
+    position: absolute;
+    width: 372px;
+    height: 537px;
+    left: 1042px;
+    top: 100px;
+
+    overflow: scroll;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 60px;
+}
+
+.gameCenter_showResult_name{
+    position: absolute;
+    width: 72px;
+    height: 24.84px;
+    left: 10px;
+    top: 10px;
+}
+
+.gameCenter_showResult_result{
+    position: absolute;
+    width: 98px;
+    height: 24.84px;
+    left: 200px;
+    top: 10px;
+}
+
+.gameCenter_showResult_font{
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+
+    color: #FFFFFF;
+}
+
+.gameCenter_rollStr{
+    position: absolute;
+    width: 372px;
+    height: 322px;
+    left: 1049px;
+    top: 648px;
+
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 60px;
+}
+
+.gameCenter_rollStr_font{
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #FFFFFF;
+}
+
+.gameCenter_rollStr_visibility{
+    position: absolute;
+    width: 106px;
+    height: 19px;
+    left: 1067px;
+    top: 708px;
+}
+
+.gameCenter_rollStr_rollString{
+    position: absolute;
+    width: 72px;
+    height: 38px;
+    left: 1067px;
+    top: 767px;
+}
+
+.gameCenter_rollStr_check{
+    position: absolute;
+    width: 65px;
+    height: 19px;
+    left: 1067px;
+    top: 847px;
+
+}
+
+.gameCenter_rollStr_rollString_placeholder{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 183px;
+    height: 48px;
+    left: 1185px;
+    top: 770px;
+
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.gameCenter_rollStr_rollName_placeholder{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 183px;
+    height: 48px;
+    left: 1185px;
+    top: 833px;
+
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.gameCenter_rollStr_check_placeholder{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: 1150px;
+    top: 850px;
+}
+
+.gameCenter_rollStr_rollButton{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 183px;
+    height: 48px;
+    left: 1143px;
+    top: 908px;
+
+    text-align: center;
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.gameCenter_rollStr_rollButton_font{
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+    /* identical to box height */
+
+
+    color: #FFFFFF;
+
+    background-color: transparent;
+    border: transparent;
+}
+
+.gameCenter_roundEnd{
+    position: absolute;
+    width: 120px;
+    height: 117px;
+    left: 863px;
+    top: 857px;
+
+    background: #39D8E2;
+}
+
+.gameCenter_roundEnd_button{
+    position: absolute;
+    width: 150px;
+    height: 100px;
+    left: 855px;
+    top: 885px;
+
+}
+
+.gameCenter_roundEnd_button_font{
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+
+    color: #0066FF;
+
+    background-color: transparent;
+    border: transparent;
+}
+
+.gameCenter_userProfilePic{
+    display: inline-block;
+    position: absolute;
+    width: 63px;
+    height: 61px;
+    left: 286px;
+    top: 956px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    mix-blend-mode: hard-light;
+}
+
+.gameCenter_userProfilePic_pointer{
+    position: absolute;
+    left: 303px;
+    top: 923px;
+
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 20px solid #39D8E2;
+
+}
+
+.gameCenter_saveRollList{
+    position: absolute;
+    width: 714px;
+    height: 43px;
+    left: 313px;
+    top: 111px;
+
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 60px;
+}
+
+.gameCenter_saveRollList_text{
+    position: absolute;
+    width: 140px;
+    height: 19px;
+    left: 605px;
+    top: 108px;
+
+}
+
+.gameCenter_saveRollList_text_font{
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #FFFFFF;
+}
+
+.gameCenter_ownObjectList{
+    position: absolute;
+    width: 325px;
+    height: 708px;
+    left: 13px;
+    top: 177px;
+
+    overflow: scroll;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 60px;
+}
+
+.gameCenter_functionList{
+    position: absolute;
+    width: 325px;
+    height: 708px;
+    left: 370px;
+    top: 177px;
+
+    overflow: scroll;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 60px;
+}
+
+.gameCenter_ownObjectList_text{
+    position: absolute;
+    width: 178px;
+    height: 14.85px;
+    left: 108px;
+    top: 201.35px;
+}
+
+.gameCenter_ownObjectList_text_font{
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+
+    color: #FFFFFF;
+}
+
+.gameCenter_functionList_text{
+    position: absolute;
+    width: 178px;
+    height: 14.85px;
+    left: 450px;
+    top: 196.35px;
+}
+
+.gameCenter_functionList_text_font{
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+
+    color: #FFFFFF;
+}
+
+.gameCenter_ownObjectList_create{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 103px;
+    height: 32px;
+    left: 49px;
+    top: 829px;
+
+    text-align: center;
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.gameCenter_ownObjectList_create_font{
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+
+    color: #FFFFFF;
+
+    background-color: transparent;
+    border: transparent;
+}
+
+.gameCenter_ownObjectList_use{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 78px;
+    height: 32px;
+    left: 153px;
+    top: 829px;
+
+    text-align: center;
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.gameCenter_ownObjectList_delete{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 82px;
+    height: 32px;
+    left: 235px;
+    top: 829px;
+
+    text-align: center;
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.gameCenter_functionList_use{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 78px;
+    height: 32px;
+    left: 510px;
+    top: 829px;
+
+    text-align: center;
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.gameCenter_functionList_use_font{
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+
+    color: #FFFFFF;
+
+    background-color: transparent;
+    border: transparent;
+}
+
+/*object create*/
+.objectPage_back{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 286px;
+    height: 145px;
+    left: 19px;
+    top: 736px;
+
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.objectPage_button_font{
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+
+    color: #000000;
+
+    background-color: transparent;
+    border: transparent;
+}
+
+.objectPage_objectList{
+    position: absolute;
+    width: 243px;
+    height: 527px;
+    left: 8px;
+    top: 177px;
+
+    overflow: scroll;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 60px;
+}
+
+.objectPage_objectList_title{
+    position: absolute;
+    width: 87.61px;
+    height: 14.74px;
+    left: 81px;
+    top: 195px;
+}
+
+.objectPage_objectList_title_font{
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    /* identical to box height */
+
+
+    color: #FFFFFF;
+}
+
+.objectPage_objectForm{
+    position: absolute;
+    width: 995px;
+    height: 749px;
+    left: 330px;
+    top: 150px;
+
+    overflow: scroll;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 60px;
+}
+
+.objectPage_generateForm{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 302px;
+    height: 51px;
+    left: 500px;
+    top: 916px;
+
+    text-align: center;
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.objectPage_sendObjectName{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 302px;
+    height: 51px;
+    left: 1012px;
+    top: 916px;
+
+    text-align: center;
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.objectPage_Submit{
+
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 302px;
+    height: 49px;
+    left: 20px;
+    top: 600px;
+
+    text-align: center;
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.objectPage_form-control{
+    position: absolute;
+    left: 20px;
+    top: 580px;
+}
+
+/*dropdown list*/
+.gameCenter_rollStr_dropdown{
+    position: absolute;
+    width: 184px;
+    height: 60px;
+    left: 1186px;
+    top: 700px;
+
+    background: #D9D9D9;
+}
+
+
+.gameCenter_rollStr_dropbtn{
+    background-color: #D9D9D9;
+    color: black;
+    padding: 14px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    line-height: 19px;
+
+}
+
+.gameCenter_rollStr_dropbtn:hover, .gameCenter_rollStr_dropbtn:focus {
+    background-color: #D9D9D9;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown a:hover {background-color: #ddd;}
+
+.show {display: block;}
+
+/*load game Page*/
+.loadGamePage_gameList_blackBg{
+    position: absolute;
+    width: 913px;
+    height: 600px;
+    left: 286px;
+    top: 275px;
+
+    overflow: auto;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 60px;
+}
+
+.loadGamePage_tbody{
+    position: absolute;
+    left:0;
+    top:30px;
+}
+
+.loadGamePage_table tr td{
+    padding: 50px 60px;
+    box-sizing: border-box;
+
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 100;
+    font-size: 24px;
+    line-height: 22px;
+    /* identical to box height */
+    color: #000000;
+}
+
+.loadGamePage_gameList_delete{
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    /* identical to box height */
+
+
+    color: #000000;
+}
+
+.loadGamePage_demo1_position{
+    position: absolute;
+    width: 61px;
+    height: 18px;
+    left: 905px;
+    top: 270px;
+}
+
+.loadGamePage_demo2_position{
+    position: absolute;
+    width: 61px;
+    height: 18px;
+    left: 904px;
+    top: 350px;
+}
+
+
+.loadGamePage_back{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 494px;
+    height: 90px;
+    left: 241px;
+    top: 880px;
+
+    text-align: center;
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.loadGamePage_OK{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 494px;
+    height: 90px;
+    left: 783px;
+    top: 880px;
+
+    text-align: center;
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.loadGamePage_button_font{
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+
+    color: #000000;
+
+    background-color: transparent;
+    border: transparent;
+}
+
+

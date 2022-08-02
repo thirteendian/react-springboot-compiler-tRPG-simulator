@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LOAD GAME</title>
+  <link rel="stylesheet" th:href="@{/css/font.css}"/>
+  <link rel="stylesheet" th:href="@{/css/background.css}"/>
+  <link rel="stylesheet" th:href="@{/css/title.css}"/>
+  <link rel="stylesheet" th:href="@{/css/button_afterlogin.css}"/>
+    <script>
+        function deleteReminder1() {
+            var text = document.getElementById("demo1");
+            if (text.style.display === "none") {
+                text.style.display = "block";
+            } else {
+                text.style.display = "none";
+            }
+        }
+
+        function deleteReminder2() {
+            var text = document.getElementById("demo1");
+            if (text.style.display === "none") {
+                text.style.display = "block";
+            } else {
+                text.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+<div class = "main_container">
+    <div class="bg_chapel">
+        <div class="head_container_dice_rolling_game">
+            <h1 class="head_dice_rolling_game" >DICE       ROLLING         GAME</h1>
+        </div>
+
+        <div class="subhead_container_loadGame">
+            <h1 class="subhead_loadGame" >Load Game</h1>
+        </div>
+
+        <!--        hard code part: Game List-->
+        <div class = "loadGamePage_gameList_blackBg">
+        <div class = "loadGamePage_gameList">
+            <table id = "loadGamePage_table" class = "loadGamePage_table">
+<!--                <tr>-->
+<!--                    <th scope = "row" class = "loadPage_gameList_name"><p class = "loadGamePage_gameList_row_font">NAME</p></th>-->
+<!--                    <th scope = "row" class = "loadGamePage_gameList_onlinePlayerNum"><p class = "loadGamePage_gameList_row_font">ONLINE PLAYER NUM</p></th>-->
+<!--                </tr>-->
+
+                <tbody class = "loadGamePage_tbody">
+                <tr>
+                    <td>Game1</td>
+                    <td>Online Player: 4/5</td>
+                    <p id='demo1' style='display: none' class = "loadGamePage_demo1_position">Delete Chosen Game</p>
+                    <td><button type='button'  class = "loadGamePage_gameList_delete" onclick="deleteReminder1()">Delete</button></td>
+                    <td><input type="checkbox" class = "loadGamePage_gameList_checkbox"/>
+                </tr>
+                <tr>
+                    <td>Game2</td>
+                    <td>Online Player: 1/5</td>
+                    <p id='demo2' style='display: none' class = "loadGamePage_demo2_position">Delete Chosen Game</p>
+                    <td><button type='button'  class = "loadGamePage_gameList_delete" onclick="deleteReminder2()">Delete</button></td>
+                    <td><input type="checkbox" class = "loadGamePage_gameList_checkbox"/>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        </div>
+
+        <!--            ok and back buttons-->
+
+        <div class = "loadGamePage_OK">
+            <form>
+                <button class = "loadGamePage_button_font" type="submit">OK</button>
+            </form>
+        </div>
+
+        <div class = "loadGamePage_back">
+            <form th:action="@{/}" method="get">
+                <button class = "loadGamePage_button_font" type="submit">Back</button>
+            </form>
+        </div>
+
+
+    </div>
+</div>
+
+</body>
+</html>

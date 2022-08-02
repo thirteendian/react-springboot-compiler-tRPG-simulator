@@ -1,10 +1,21 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<html lang = "en">
 <head>
+    <meta charset="UTF-8">
     <title>Please Log In</title>
+    <link rel="stylesheet" th:href="@{/css/font.css}"/>
+    <link rel="stylesheet" th:href="@{/css/background.css}"/>
+    <link rel="stylesheet" th:href="@{/css/title.css}"/>
+    <link rel="stylesheet" th:href="@{/css/button.css}"/>
 </head>
-<body>
-<h1>Please Log In</h1>
+<body class="bg_chapel">
+<div class="head_container_dice_rolling_game">
+    <h1 class="head_dice_rolling_game" >DICE       ROLLING         GAME</h1>
+</div>
+<div class = "subhead_container_login">
+    <h1 class="subhead_login" >LOGIN</h1>
+</div>
+
 <!--Error message pop up place-->
 <div th:if="${param.error}">
     Invalid username and password.</div>
@@ -12,19 +23,43 @@
 <div th:if="${param.logout}">
     You have been logged out.</div>
 <!--Form post to /login-->
+<div class="loginPage_email_container">
+    <h1 class = "loginPage_email_font"> EMAIL:</h1>
+</div>
+<div class="loginPage_email_container">
+    <h1 class = "loginPage_email_font"> EMAIL:</h1>
+</div>
+<div class="loginPage_password_container">
+    <h1 class = "loginPage_password_font"> PASSWORD:</h1>
+</div>
+
+
 <form th:action="@{/login}" method="post">
-    <div>
 <!--        username's name should be "username"-->
-        <input type="text" name="username" placeholder="Username"/>
-    </div>
-    <div>
+        <input class = "loginPage_email_placeholder" type="text" name="username" placeholder="Username" />
 <!--        password's name should be "password"-->
-        <input type="password" name="password" placeholder="Password"/>
-    </div>
+        <input type="password" class = "loginPage_password_placeholder" name="password" placeholder="Password"/>
+
     <div>
-        <input type="checkbox" name="remember-me"/> Remember Me
+        <input type="checkbox" class = "loginPage_checkbox" name="remember-me"/>
+        <div class = "loginPage_rememberMe">
+            <p class = "loginPage_rememberMe_font">Remember Me</p>
+        </div>
     </div>
-    <input type="submit" value="Log in" />
+
+    <div class = "loginPage_LoginButton">
+    <input class = "loginPage_Button_font" type="submit" value="Log in" />
+    </div>
 </form>
+
+<div class = "loginPage_BackButton">
+    <form th:action="@{/}" method="get" >
+        <button class = "loginPage_Button_font"type="submit">BACK</button>
+    </form>
+</div>
 </body>
 </html>
+
+<!--TODO: 1. cursor changes in button-->
+<!--TODO: 2. font change inside form-->
+<!--TODO: 3. text center in button-->

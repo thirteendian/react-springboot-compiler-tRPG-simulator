@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org">
+<html lang = "en">
 <head>
     <title>signup</title>
     <style>
@@ -7,46 +7,92 @@
             color: red;
         }
     </style>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/font.css}"/>
+    <link rel="stylesheet" th:href="@{/css/background.css}"/>
+    <link rel="stylesheet" th:href="@{/css/title.css}"/>
+    <link rel="stylesheet" th:href="@{/css/button.css}"/>
 </head>
-<body>
+<body class = "bg_chapel">
+<div class="head_container_dice_rolling_game">
+    <h1 class="head_dice_rolling_game" >DICE       ROLLING         GAME</h1>
+</div>
+
+<div class = "subhead_signup">
+    <h1 class="subhead_signup_font" >SIGNUP</h1>
+</div>
+
+<div class = "signupPage_email">
+    <p class = "signupPage_email_font">EMAIL:</p>
+</div>
+
+<div class = "signupPage_firstName">
+    <p class = "signupPage_firstName_font">FIRST NAME:</p>
+</div>
+
+<div class = "signupPage_lastName">
+    <p class = "signupPage_lastName_font">SURNAME:</p>
+</div>
+
+<div class = "signupPage_userName">
+    <p class = "signupPage_userName_font">Username:</p>
+</div>
+
+<div class = "signupPage_password">
+    <p class = "signupPage_password_font">Password:</p>
+</div>
+
+<div class = "signupPage_password2">
+    <p class = "signupPage_password2_font">Re-Enter Password:</p>
+</div>
+
+<div class = "signupPage_uploadProfilePic">
+    <p class = "signupPage_uploadProfilePic_font">Upload your Profile:</p>
+</div>
+
 <form th:action="@{/signup}" th:object="${signupDto}" method="post">
-    Email: <input type="email" th:field="*{email}" name="email" placeholder="Email" required>
+    <input type="email" th:field="*{email}" name="email" placeholder="Email" class = "signupPage_email_placeholder" required>
     <!--    note that fields.hasErrors check th:object's field name rather than form name-->
     <p th:if="${#fields.hasErrors('email')}" th:class="${#fields.hasErrors('email')}?error">Email Errors</p>
     <!--    The th:class choose css error using regular expression -->
-    <p>
-        First Name: <input type="text" th:field="*{firstName}" name="firstname" placeholder="First Name">
+    <input type="text" th:field="*{firstName}" name="firstname" placeholder="First Name" class = "signupPage_firstName_placeholder">
     <p th:if="${#fields.hasErrors('firstName')}" th:class="${#fields.hasErrors('firstName')}?error"> First Name
         Errors</p>
 
-    <p>
-        Last Name:<input type="text" th:field="*{lastName}" name="lastname" placeholder="Last name" required>
+    <input type="text" th:field="*{lastName}" name="lastname" placeholder="Last name" class = "signupPage_lastName_placeholder" required>
     <p th:if="${#fields.hasErrors('lastName')}" th:class="${#fields.hasErrors('lastName')}?error">LastName Errors</p>
 
-    <p>
-        Username:<input type="text" th:field="*{username}" name="username" placeholder="Username" required>
+    <input type="text" th:field="*{username}" name="username" placeholder="Username" class = "signupPage_username_placeholder"required>
     <p th:if="${#fields.hasErrors('username')}" th:class="${#fields.hasErrors('username')}?error">username Errors</p>
 
-    <p>
-        Password:<input type="password" th:field="*{password}" name="password" placeholder="Password" required>
+    <input type="password" th:field="*{password}" name="password" placeholder="Password" class = "signupPage_password_placeholder"required>
     <p th:if="${#fields.hasErrors('password')}" th:class="${#fields.hasErrors('password')}?error">password Errors</p>
 
 
-    <p>
-        Re-Enter Password:<input type="password" th:field="*{reEnterPassword}" name="repassword" placeholder="Password"
-                                 required>
+    <input type="password" th:field="*{reEnterPassword}" name="repassword" placeholder="Password"
+                                 class = "signupPage_password2_placeholder" required>
     <p th:if="${#fields.hasErrors('reEnterPassword')}" th:class="${#fields.hasErrors('reEnterPassword')}?error">password
         Not Match</p>
 
     <p>
-        <label>Upload your Profiles:</label>
-        <input type="file" name="profile" accept="image/png, image/jpeg"/>
-        <button type="submit">Sign up</button>
+<!--        <label>Upload your Profiles:</label>-->
+        <input type="file" name="profile" accept="image/png, image/jpeg" class = "signupPage_profilePic_placeholder"/>
+        <div class = "signupPage_submit">
+        <button class = "signupPage_submit_font" type="submit">Sign up</button>
+        </div>
 </form>
 
+<div class = "signupPage_back">
 <form th:action="@{/}" method="get">
-    <button type="submit">Back</button>
+    <button class = "signupPage_back_font" type="submit">Back</button>
 </form>
+</div>
 
 </body>
 </html>
+
+<!--TODO: 1. cursor changes in button-->
+<!--TODO: 2. font change inside form-->
+<!--TODO: 3. text center in button-->
+<!--TODO: 4. button font color black-->
+<!--TODO: 5. change profile upload button and upload show pic -->
