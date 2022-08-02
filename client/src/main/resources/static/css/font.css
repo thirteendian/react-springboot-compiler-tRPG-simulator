@@ -6,3 +6,7 @@
     font-family: 'Bungee Inline';
     src: url("/font/bungee/Bungee-Regular-webfont.woff");
 }
+
+.error {
+    color: red;
+}

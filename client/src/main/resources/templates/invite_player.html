@@ -2,26 +2,34 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Join Game</title>
+    <title>Invite Player</title>
     <link rel="stylesheet" th:href="@{/css/font.css}"/>
     <link rel="stylesheet" th:href="@{/css/background.css}"/>
     <link rel="stylesheet" th:href="@{/css/title.css}"/>
     <link rel="stylesheet" th:href="@{/css/button_afterlogin.css}"/>
     <script src="/script/page_uitl.js"></script>
-
 </head>
 <body>
 <div class = "main_container">
     <div class="bg_chapel">
-        <div class="head_container_dice_rolling_game">
-            <h1 class="head_dice_rolling_game" >DICE       ROLLING         GAME</h1>
+        <div class="subhead_HELLFIRE_DRAGON">
+            <h1 class="subhead_HELLFIRE_DRAGON_font">HELL FIRE AND DRAGON</h1>
         </div>
 
-        <div class="subhead_container_joinGame">
-            <h1 class="subhead_joinGame" >Join Game</h1>
+<!--        invite & quit button-->
+        <div class = "gameCenter_invite">
+            <form th:action="@{/}" method="get" >
+                <button class = "gameCenter_invite_font" type="submit">INVITE</button>
+            </form>
         </div>
 
-<!--        personal info and invite boxes-->
+        <div class = "gameCenter_quit">
+            <form th:action="@{/}" method="get" >
+                <button class = "gameCenter_quit_font" type="submit">QUIT</button>
+            </form>
+        </div>
+
+<!--        personal info and invite box-->
         <!--        personal info box-->
 
         <div class = "personal_playerName">
@@ -67,69 +75,74 @@
         </div>
 
 <!--        search boxes-->
+
         <div class = "joinGamePage_advancedSearch">
             <p class = "joinGamePage_advancedSearch_font"> ADVANCED SEARCH</p>
         </div>
 
+<!--        joinGamePage_name -> invitePage_username-->
         <div class = "joinGamePage_name">
-            <p class = "joinGamePage_searchBox_font">NAME:</p>
+            <p class = "joinGamePage_searchBox_font">USERNAME:</p>
         </div>
 
+        <!--        joinGamePage_id -> invitePage_firstName-->
         <div class = "joinGamePage_id">
-            <p class = "joinGamePage_searchBox_font">ID:</p>
+            <p class = "joinGamePage_searchBox_font">FIRST NAME:</p>
         </div>
 
+        <!--        joinGamePage_playerNum -> invitePage_lastName-->
         <div class = "joinGamePage_playerNum">
-            <p class = "joinGamePage_searchBox_font">NUM OF PLAYER:</p>
+            <p class = "joinGamePage_searchBox_font">LAST NAME:</p>
         </div>
 
+        <!--        joinGamePage_creator -> invitePage_email-->
         <div class = "joinGamePage_creator">
-            <p class = "joinGamePage_searchBox_font">CREATOR:</p>
+            <p class = "joinGamePage_searchBox_font">EMAIL:</p>
         </div>
 
-        <label for="searchBox-1"></label><input type="text" id="searchBox-1" placeholder="Search NAME" onkeyup="filter(0, id)" class = "joinGamePage_name_placeholder">
-        <label for="searchBox-2"></label><input type="text" id="searchBox-2" placeholder="Search ID" onkeyup="filter(1,id)" class = "joinGamePage_id_placeholder">
-        <label for="searchBox-3"></label><input type="text" id="searchBox-3" placeholder="Search NUM OF PLAYER" onkeyup="filter(2,id)" class = "joinGamePage_numPlayer_placeholder">
-        <label for="searchBox-4"></label><input type="text" id="searchBox-4" placeholder="Search CREATOR" onkeyup="filter(3,id)" class = "joinGamePage_creator_placeholder">
+        <label for="searchBox-1"></label><input type="text" id="searchBox-1" placeholder="Search USERNAME" onkeyup="filter(0, id)" class = "joinGamePage_name_placeholder">
+        <label for="searchBox-2"></label><input type="text" id="searchBox-2" placeholder="Search FIRST NAME" onkeyup="filter(1,id)" class = "joinGamePage_id_placeholder">
+        <label for="searchBox-3"></label><input type="text" id="searchBox-3" placeholder="Search LAST NAME" onkeyup="filter(2,id)" class = "joinGamePage_numPlayer_placeholder">
+        <label for="searchBox-4"></label><input type="text" id="searchBox-4" placeholder="Search EMAIL" onkeyup="filter(3,id)" class = "joinGamePage_creator_placeholder">
 
-<!--game list-->
+        <!--game list-->
         <div class = "joinGamePage_gameList">
             <table id = "table">
                 <tr>
-                    <th scope = "row" class = "joinGamePage_gameList_name"><p class = "joinGamePage_gameList_row_font">NAME</p></th>
-                    <th scope = "row" class = "joinGamePage_gameList_id"><p class = "joinGamePage_gameList_row_font">ID</p></th>
-                    <th scope = "row" class = "joinGamePage_gameList_playerNum"><p class = "joinGamePage_gameList_row_font">NUM OF PLAYER</p></th>
-                    <th scope = "row" class = "joinGamePage_gameList_creator"><p class = "joinGamePage_gameList_row_font">CREATOR</p></th>
+                    <th scope = "row" class = "joinGamePage_gameList_name"><p class = "joinGamePage_gameList_row_font">USERNAME</p></th>
+                    <th scope = "row" class = "joinGamePage_gameList_id"><p class = "joinGamePage_gameList_row_font">FIRST NAME</p></th>
+                    <th scope = "row" class = "joinGamePage_gameList_playerNum"><p class = "joinGamePage_gameList_row_font">LAST NAME</p></th>
+                    <th scope = "row" class = "joinGamePage_gameList_creator"><p class = "joinGamePage_gameList_row_font">EMAIL</p></th>
 
                 </tr>
 
                 <tbody class = "tbody">
-                    <tr>
-                        <td>Game1</td>
-                        <td>1</td>
-                        <td>6</td>
-                        <td>marian@gmail.com</td>
-                        <td><label><input type = "checkbox">Join?</label></td>
-                    </tr>
-                    <tr>
-                        <td>Game2</td>
-                        <td>2</td>
-                        <td>5</td>
-                        <td>alex@gmail.com</td>
-                        <td><label><input type = "checkbox">Join?</label></td>
-                    </tr>
-                    <tr>
-                        <td>Game3</td>
-                        <td>3</td>
-                        <td>4</td>
-                        <td>julie@gmail.com</td>
-                        <td><label><input type = "checkbox">Join?</label></td>
-                    </tr>
+                <tr>
+                    <td>player1</td>
+                    <td>Swift</td>
+                    <td>marian</td>
+                    <td>marian@gmail.com</td>
+                    <td><label><input type = "checkbox">Join?</label></td>
+                </tr>
+                <tr>
+                    <td>player2</td>
+                    <td>Wong</td>
+                    <td>ALex</td>
+                    <td>alex@gmail.com</td>
+                    <td><label><input type = "checkbox">Join?</label></td>
+                </tr>
+                <tr>
+                    <td>player3</td>
+                    <td>White</td>
+                    <td>Julie</td>
+                    <td>julie@gmail.com</td>
+                    <td><label><input type = "checkbox">Join?</label></td>
+                </tr>
                 </tbody>
             </table>
         </div>
 
-<!--        back and ok button-->
+        <!--        back and ok button-->
 
         <div class = "joinGamePage_OK">
             <input class = "joinGamePag_OkBack_font" type="submit" value="OK" />

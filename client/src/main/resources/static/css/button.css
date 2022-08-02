@@ -7,6 +7,7 @@
     left: 460px;
     top: 351px;
 
+    cursor: pointer;
     text-align: center;
     background: rgba(217, 217, 217, 0.5);
     border: 1px solid #000000;
@@ -21,6 +22,7 @@
     left: 460px;
     top: 507px;
 
+    cursor: pointer;
     text-align: center;
     background: rgba(217, 217, 217, 0.5);
     border: 1px solid #000000;
@@ -35,6 +37,7 @@
     left: 460px;
     top: 641px;
 
+    cursor: pointer;
     text-align: center;
     background: rgba(217, 217, 217, 0.5);
     border: 1px solid #000000;
@@ -49,58 +52,21 @@
     left: 460px;
     top: 775px;
 
+    cursor: pointer;
     text-align: center;
     background: rgba(217, 217, 217, 0.5);
     border: 1px solid #000000;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.index_before_login_login_button_font{
+.index_before_login_button_font{
     font-family: 'Bungee Regular';
     font-style: normal;
     font-weight: 400;
     font-size: 40px;
     line-height: 48px;
 
-    color: #000000;
-
-    background-color: transparent;
-    border: transparent;
-}
-
-.index_before_login_dukeshibboleth_button_font{
-    font-family: 'Bungee Regular';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 40px;
-    line-height: 48px;
-
-    color: #000000;
-
-    background-color: transparent;
-    border: transparent;
-}
-
-.index_before_login_google_button_font{
-    font-family: 'Bungee Regular';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 40px;
-    line-height: 48px;
-
-    color: #000000;
-
-    background-color: transparent;
-    border: transparent;
-}
-
-.index_before_login_createyourcount_button_font{
-    font-family: 'Bungee Regular';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 40px;
-    line-height: 48px;
-
+    cursor: pointer;
     color: #000000;
 
     background-color: transparent;
@@ -109,7 +75,7 @@
 
 /*login Page*/
 
-.loginPage_email_container{
+.loginPage_username_container{
     position: absolute;
     width: 466px;
     height: 90px;
@@ -117,7 +83,7 @@
     top: 416px;
 }
 
-.loginPage_email_font{
+.loginPage_text_font{
     font-family: 'Bungee Regular';
     font-style: normal;
     font-weight: 400;
@@ -134,69 +100,6 @@
     left: 269px;
     top: 542px;
 }
-.loginPage_password_font{
-    font-family: 'Bungee Regular';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 40px;
-    line-height: 48px;
-
-    color: #FFFFFF;
-}
-
-.loginPage_email_fillBox{
-    box-sizing: border-box;
-
-    position: absolute;
-    width: 494px;
-    height: 90px;
-    left: 558px;
-    top: 401px;
-
-    background: rgba(217, 217, 217, 0.5);
-    border: 1px solid #000000;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
-
-.loginPage_password_fillBox{
-    box-sizing: border-box;
-
-    position: absolute;
-    width: 494px;
-    height: 90px;
-    left: 558px;
-    top: 535px;
-
-    background: rgba(217, 217, 217, 0.5);
-    border: 1px solid #000000;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
-
-.loginPage_email_username_font{
-    font-family: 'Bungee Regular';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 40px;
-    line-height: 48px;
-
-    color: #FFFFFF;
-
-    background-color: transparent;
-    border: transparent;
-}
-
-.loginPage_password_password_font{
-    font-family: 'Bungee Regular';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 40px;
-    line-height: 48px;
-
-    color: #FFFFFF;
-
-    background-color: transparent;
-    border: transparent;
-}
 
 .loginPage_LoginButton{
     box-sizing: border-box;
@@ -207,17 +110,14 @@
     left: 824px;
     top: 819px;
 
+    cursor: pointer;
+    text-align: center;
     background: rgba(217, 217, 217, 0.5);
     border: 1px solid #000000;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .loginPage_Button_font{
-    /*position: absolute;*/
-    /*width: 63px;*/
-    /*height: 48px;*/
-    /*left: 688px;*/
-    /*top: 766px;*/
 
     font-family: 'Bungee Regular';
     font-style: normal;
@@ -226,6 +126,7 @@
     line-height: 48px;
     /* identical to box height */
 
+    cursor: pointer;
     background-color: transparent;
     border: transparent;
 
@@ -241,6 +142,8 @@
     left: 213px;
     top: 819px;
 
+    cursor: pointer;
+    text-align: center;
     background: rgba(217, 217, 217, 0.5);
     border: 1px solid #000000;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -269,7 +172,7 @@
     text-align: center;
 }
 
-.loginPage_rememberMe_font{
+.loginPage_text_font{
     font-family: 'Bungee Regular';
     font-style: normal;
     font-weight: 400;
@@ -281,7 +184,7 @@
     color: #FFFFFF;
 }
 
-.loginPage_email_placeholder{
+.loginPage_username_placeholder{
     box-sizing: border-box;
 
     position: absolute;
@@ -290,9 +193,18 @@
     left: 558px;
     top: 401px;
 
+
     background: rgba(217, 217, 217, 0.5);
     border: 1px solid #000000;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+
+    color: #FFFFFF;
 }
 
 .loginPage_password_placeholder{
@@ -307,6 +219,14 @@
     background: rgba(217, 217, 217, 0.5);
     border: 1px solid #000000;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+
+    color: #FFFFFF;
 }
 
 
@@ -322,7 +242,7 @@
     text-align: center;
 }
 
-.signupPage_email_font{
+.signupPage_text_font{
     font-family: 'Bungee Regular';
     font-style: normal;
     font-weight: 400;
@@ -342,15 +262,6 @@
     text-align: center;
 }
 
-.signupPage_firstName_font{
-    font-family: 'Bungee Regular';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 40px;
-    line-height: 48px;
-
-    color: #FFFFFF;
-}
 
 .signupPage_lastName{
     position: absolute;
@@ -362,15 +273,6 @@
 
 }
 
-.signupPage_lastName_font{
-    font-family: 'Bungee Regular';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 40px;
-    line-height: 48px;
-
-    color: #FFFFFF;
-}
 
 .signupPage_userName{
     position: absolute;
@@ -381,15 +283,6 @@
 
 }
 
-.signupPage_userName_font{
-    font-family: 'Bungee Regular';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 40px;
-    line-height: 48px;
-
-    color: #FFFFFF;
-}
 
 .signupPage_password{
     position: absolute;
@@ -401,17 +294,6 @@
 
 }
 
-.signupPage_password_font{
-    font-family: 'Bungee Regular';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 40px;
-    line-height: 48px;
-    /* identical to box height */
-
-
-    color: #FFFFFF;
-}
 
 .signupPage_password2{
     position: absolute;
@@ -421,15 +303,6 @@
     top: 643px;
 }
 
-.signupPage_password2_font{
-    font-family: 'Bungee Regular';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 40px;
-    line-height: 48px;
-
-    color: #FFFFFF;
-}
 
 .signupPage_uploadProfilePic{
     position: absolute;
@@ -439,15 +312,7 @@
     top: 767px;
 }
 
-.signupPage_uploadProfilePic{
-    font-family: 'Bungee Regular';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 40px;
-    line-height: 48px;
 
-    color: #FFFFFF;
-}
 .signupPage_email_placeholder{
     box-sizing: border-box;
 
@@ -460,20 +325,36 @@
     background: rgba(217, 217, 217, 0.5);
     border: 1px solid #000000;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+
+    color: #FFFFFF;
 }
 
 .signupPage_firstName_placeholder{
     box-sizing: border-box;
 
     position: absolute;
-    width: 357px;
+    width: 150px;
     height: 76px;
-    left: 333px;
+    left: 480px;
     top: 343px;
 
     background: rgba(217, 217, 217, 0.5);
     border: 1px solid #000000;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+
+    color: #FFFFFF;
 }
 
 .signupPage_lastName_placeholder{
@@ -488,6 +369,14 @@
     background: rgba(217, 217, 217, 0.5);
     border: 1px solid #000000;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+
+    color: #FFFFFF;
 }
 
 .signupPage_username_placeholder{
@@ -502,6 +391,14 @@
     background: rgba(217, 217, 217, 0.5);
     border: 1px solid #000000;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+
+    color: #FFFFFF;
 }
 
 .signupPage_password_placeholder{
@@ -516,6 +413,14 @@
     background: rgba(217, 217, 217, 0.5);
     border: 1px solid #000000;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+
+    color: #FFFFFF;
 }
 
 .signupPage_password2_placeholder{
@@ -530,16 +435,41 @@
     background: rgba(217, 217, 217, 0.5);
     border: 1px solid #000000;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+
+    color: #FFFFFF;
 }
 
-.signupPage_profilePic_placeholder{
-    position: absolute;
-    width: 121px;
-    height: 118px;
-    left: 889px;
-    top: 767px;
+.signupPage_profilePic{
 
-    background: #D9D9D9;
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 216px;
+    height: 71px;
+    left: 599px;
+    top: 797px;
+
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.signupPage_profilePic_font{
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 200;
+    font-size: 20px;
+    line-height: 48px;
+    /* identical to box height */
+
+
+    color: #FFFFFF;
 }
 
 .signupPage_submit{
@@ -557,7 +487,7 @@
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.signupPage_submit_font{
+.signupPage_button_font{
     font-family: 'Bungee Regular';
     font-style: normal;
     font-weight: 400;
@@ -566,8 +496,8 @@
     /* identical to box height */
 
 
-    color: #FFFFFF;
-
+    color: #000000;
+    cursor: pointer;
     background-color: transparent;
     border: transparent;
 }
@@ -582,24 +512,21 @@
     top: 903px;
 
     text-align: center;
+    cursor: pointer;
     background: rgba(217, 217, 217, 0.5);
     border: 1px solid #000000;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.signupPage_back_font{
-    font-family: 'Bungee Regular';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 40px;
-    line-height: 48px;
-    /* identical to box height */
+.signupPage_profilePic_show{
+    position: absolute;
+    width: 121px;
+    height: 118px;
+    left: 989px;
+    top: 767px;
+    border-radius: 50%;
 
-
-    color: #FFFFFF;
-
-    background-color: transparent;
-    border: transparent;
+    background: #D9D9D9;
 }
 
 /*Account Settings Page*/
@@ -613,7 +540,7 @@
 
 }
 
-.accountSettingPage_userName_font{
+.accountSettingPage_text_font{
     font-family: 'Bungee Regular';
     font-style: normal;
     font-weight: 400;
@@ -625,23 +552,12 @@
 
 .accountSettingPage_firstName{
     position: absolute;
-    width: 466px;
-    height: 90px;
+    width: 250px;
+    height: 200px;
     left: 189px;
     top: 329px;
-
-
 }
 
-.accountSettingPage_firstName_font{
-    font-family: 'Bungee Regular';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 40px;
-    line-height: 48px;
-
-    color: #FFFFFF;
-}
 
 .accountSettingPage_lastName{
     position: absolute;
@@ -653,17 +569,8 @@
 
 }
 
-.accountSettingPage_lastName_font{
-    font-family: 'Bungee Regular';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 40px;
-    line-height: 48px;
 
-    color: #FFFFFF;
-}
-
-.accountSettingPage_lastName_email{
+.accountSettingPage_email{
     position: absolute;
     width: 466px;
     height: 90px;
@@ -673,15 +580,6 @@
 
 }
 
-.accountSettingPage_lastName_email_font{
-    font-family: 'Bungee Regular';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 40px;
-    line-height: 48px;
-
-    color: #FFFFFF;
-}
 
 .accountSettingPage_uploadProfilePic{
     position: absolute;
@@ -691,15 +589,6 @@
     top: 547px;
 }
 
-.accountSettingPage_uploadProfilePic_font{
-    font-family: 'Bungee Regular';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 40px;
-    line-height: 48px;
-
-    color: #FFFFFF;
-}
 
 .accountSettingPage_username_placeholder{
     box-sizing: border-box;
@@ -713,6 +602,14 @@
     background: rgba(217, 217, 217, 0.5);
     border: 1px solid #000000;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+
+    color: #FFFFFF;
 }
 
 .accountSettingPage_firstName_placeholder{
@@ -727,6 +624,14 @@
     background: rgba(217, 217, 217, 0.5);
     border: 1px solid #000000;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+
+    color: #FFFFFF;
 }
 
 .accountSettingPage_lastName_placeholder{
@@ -741,6 +646,14 @@
     background: rgba(217, 217, 217, 0.5);
     border: 1px solid #000000;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+
+    color: #FFFFFF;
 }
 
 .accountSettingPage_email_placeholder{
@@ -755,6 +668,14 @@
     background: rgba(217, 217, 217, 0.5);
     border: 1px solid #000000;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+
+    color: #FFFFFF;
 }
 
 .accountSettingPage_profilePic_placeholder{
@@ -769,6 +690,14 @@
     background: rgba(217, 217, 217, 0.5);
     border: 1px solid #000000;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+
+    color: #FFFFFF;
 }
 
 .accountSettingPage_submit{
@@ -781,12 +710,13 @@
     top: 789px;
 
     text-align: center;
+    cursor: pointer;
     background: rgba(217, 217, 217, 0.5);
     border: 1px solid #000000;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.accountSettingPage_submit_font{
+.accountSettingPage_button_font{
 
     font-family: 'Bungee Regular';
     font-style: normal;
@@ -796,14 +726,14 @@
     /* identical to box height */
 
 
-    color: #FFFFFF;
+    color: #000000;
 
-
+    cursor: pointer;
     background-color: transparent;
     border: transparent;
 }
 
-.accountSettingPage_changePassword{
+.accountSettingPage_back{
     box-sizing: border-box;
 
     position: absolute;
@@ -818,17 +748,18 @@
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.accountSettingPage_changePassword_font{
-    font-family: 'Bungee Regular';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 40px;
-    line-height: 48px;
+.accountSettingPage_profilePic_show{
 
-    color: #FFFFFF;
+    position: absolute;
+    width: 121px;
+    height: 118px;
+    left: 946px;
+    top: 557px;
 
-    background-color: transparent;
-    border: transparent;
+    background: #D9D9D9;
+
+
+    border-radius: 50%;
 }
 
 /*changePassword Page*/
@@ -841,7 +772,7 @@
 
 
 }
-.changePasswordPage_oldPassword_font{
+.changePasswordPage_text_font{
     font-family: 'Bungee Regular';
     font-style: normal;
     font-weight: 400;
@@ -857,15 +788,7 @@
     left: 188px;
     top: 331px;
 }
-.changePasswordPage_newPassword_font{
-    font-family: 'Bungee Regular';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 40px;
-    line-height: 48px;
 
-    color: #FFFFFF;
-}
 .changePasswordPage_newPassword2{
     position: absolute;
     width: 466px;
@@ -875,15 +798,7 @@
 
 
 }
-.changePasswordPage_newPassword2_font{
-    font-family: 'Bungee Regular';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 40px;
-    line-height: 48px;
 
-    color: #FFFFFF;
-}
 
 .changePasswordPage_oldPassword_placeholder{
     box-sizing: border-box;
@@ -897,6 +812,14 @@
     background: rgba(217, 217, 217, 0.5);
     border: 1px solid #000000;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+
+    color: #FFFFFF;
 }
 
 .changePasswordPage_newPassword_placeholder{
@@ -911,6 +834,14 @@
     background: rgba(217, 217, 217, 0.5);
     border: 1px solid #000000;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+
+    color: #FFFFFF;
 }
 
 .changePasswordPage_newPassword2_placeholder{
@@ -925,6 +856,14 @@
     background: rgba(217, 217, 217, 0.5);
     border: 1px solid #000000;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+
+    color: #FFFFFF;
 }
 
 .changePasswordPage_back{
@@ -937,12 +876,13 @@
     top: 789px;
 
     text-align: center;
+    cursor: pointer;
     background: rgba(217, 217, 217, 0.5);
     border: 1px solid #000000;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.changePasswordPage_back_font{
+.changePasswordPage_button_font{
     font-family: 'Bungee Regular';
     font-style: normal;
     font-weight: 400;
@@ -951,8 +891,8 @@
     /* identical to box height */
 
 
-    color: #FFFFFF;
-
+    color: #000000;
+    cursor: pointer;
     background-color: transparent;
     border: transparent;
 }
@@ -967,25 +907,10 @@
     top: 789px;
 
     text-align: center;
+    cursor: pointer;
     background: rgba(217, 217, 217, 0.5);
     border: 1px solid #000000;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
-
-.changePasswordPage_OK_font{
-
-    font-family: 'Bungee Regular';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 40px;
-    line-height: 48px;
-
-    color: #FFFFFF;
-
-
-
-    background-color: transparent;
-    border: transparent;
 }
 
 /*create game*/
@@ -1034,6 +959,14 @@
     background: rgba(217, 217, 217, 0.5);
     border: 1px solid #000000;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+
+    color: #FFFFFF;
 }
 
 .createGamePage_playerNum_placeholder{
@@ -1048,6 +981,14 @@
     background: rgba(217, 217, 217, 0.5);
     border: 1px solid #000000;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+
+    color: #FFFFFF;
 }
 
 .createGamePage_loadPreSetting_placeholder{
@@ -1062,6 +1003,14 @@
     background: rgba(217, 217, 217, 0.5);
     border: 1px solid #000000;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+
+    color: #FFFFFF;
 }
 
 .createGamePage_fileContent{
@@ -1085,6 +1034,7 @@
     top: 859px;
 
     text-align: center;
+    cursor: pointer;
     background: rgba(217, 217, 217, 0.5);
     border: 1px solid #000000;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -1096,6 +1046,7 @@
     font-weight: 400;
     font-size: 40px;
     line-height: 48px;
+    cursor: pointer;
     /* identical to box height */
 
 
@@ -1114,80 +1065,11 @@
     left: 783px;
     top: 859px;
 
+    cursor: pointer;
     text-align: center;
     background: rgba(217, 217, 217, 0.5);
     border: 1px solid #000000;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-/*index_after_login page*/
-.index_after_login_createGame{
-    box-sizing: border-box;
 
-    position: absolute;
-    width: 494px;
-    height: 90px;
-    left: 473px;
-    top: 356px;
-
-    text-align: center;
-    background: rgba(217, 217, 217, 0.5);
-    border: 1px solid #000000;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
-.index_after_login_joinGame{
-    box-sizing: border-box;
-
-    position: absolute;
-    width: 494px;
-    height: 90px;
-    left: 473px;
-    top: 506px;
-
-    text-align: center;
-    background: rgba(217, 217, 217, 0.5);
-    border: 1px solid #000000;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
-.index_after_login_loadGame{
-    box-sizing: border-box;
-
-    position: absolute;
-    width: 494px;
-    height: 90px;
-    left: 473px;
-    top: 649px;
-
-    text-align: center;
-    background: rgba(217, 217, 217, 0.5);
-    border: 1px solid #000000;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
-.index_after_login_logout{
-    box-sizing: border-box;
-
-    position: absolute;
-    width: 494px;
-    height: 90px;
-    left: 473px;
-    top: 772px;
-
-    text-align: center;
-    background: rgba(217, 217, 217, 0.5);
-    border: 1px solid #000000;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
-
-.index_after_login_font{
-    font-family: 'Bungee Regular';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 40px;
-    line-height: 48px;
-
-    color: #000000;
-
-    background-color: transparent;
-    border: transparent;
-
-}

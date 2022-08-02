@@ -10,12 +10,6 @@
 }
 
 .head_dice_rolling_game {
-    /*padding: 30px;*/
-    /*font-size: 90px;*/
-    /*color: #FFFFFF;*/
-    /*word-spacing: 20px;*/
-    /*font-family: "Bungee Spice";*/
-    /*font-weight: bold;*/
     font-family: 'Bungee Regular';
     font-style: normal;
     font-weight: 400;
@@ -53,12 +47,34 @@
     color: #FFFFFF;
 }
 
+/*signup page*/
+
+.signupPage_head_container_dice_rolling_game {
+    /*text-align: center;*/
+    /*margin: 0 auto;*/
+    position: absolute;
+    width: 1317px;
+    height: 118px;
+    left: 62px;
+    top: 50px;
+}
+
+.signupPage_head_dice_rolling_game {
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 80px;
+    line-height: 96px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
 .subhead_signup{
     position: absolute;
     width: 961px;
     height: 78px;
     left: 254px;
-    top: 210px;
+    top: 150px;
 
     text-align: center;
 
@@ -74,13 +90,20 @@
     color: #FFFFFF;
 }
 
+.accountSettingPage_head_container_dice_rolling_game{
+    position: absolute;
+    width: 1317px;
+    height: 118px;
+    left: 62px;
+    top: 10px;
+}
+
 .subhead_accountSetting{
     position: absolute;
-    width: 360px;
+    width: 700px;
     height: 43px;
-    left: 549px;
-    top: 139px;
-
+    left: 500px;
+    top: 120px;
 }
 
 .subhead_accountSetting_font{
@@ -94,13 +117,20 @@
     color: #FFFFFF;
 }
 
+.changePasswordPage_head_container_dice_rolling_game{
+    position: absolute;
+    width: 1317px;
+    height: 118px;
+    left: 62px;
+    top: 40px;
+}
+
 .subhead_container_changePassword{
     position: absolute;
     width: 368px;
     height: 43px;
     left: 545px;
-    top: 180px;
-
+    top: 140px;
 }
 
 .subhead_changePassword{
@@ -119,7 +149,7 @@
     width: 299px;
     height: 43px;
     left: 570px;
-    top: 180px;
+    top: 200px;
 }
 
 .subhead_createGame{
