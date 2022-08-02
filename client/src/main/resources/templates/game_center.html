@@ -7,45 +7,7 @@
     <link rel="stylesheet" th:href="@{/css/background.css}"/>
     <link rel="stylesheet" th:href="@{/css/title.css}"/>
     <link rel="stylesheet" th:href="@{/css/button_afterlogin.css}"/>
-
-    <script>
-        function showPersonalInfo() {
-            var text = document.getElementById("demo_personalInfo");
-            if (text.style.display === "none") {
-                text.style.display = "block";
-            } else {
-                text.style.display = "none";
-            }
-        }
-
-        function showInviteInfo() {
-            var text = document.getElementById("demo_inviteInfo");
-            if (text.style.display === "none") {
-                text.style.display = "block";
-            } else {
-                text.style.display = "none";
-            }
-        }
-
-        function showPlayerList() {
-            var text = document.getElementById("demo_rollStr_dropDown_table");
-            if (text.style.display === "none") {
-                text.style.display = "block";
-            } else {
-                text.style.display = "none";
-            }
-        }
-
-        function showSavedRollList(){
-            var text = document.getElementById("demo_saveRollList");
-            if (text.style.display === "none") {
-                text.style.display = "block";
-            } else {
-                text.style.display = "none";
-            }
-        }
-
-    </script>
+    <script src="/script/page_uitl.js"></script>
 
 </head>
 <body>
