@@ -5,12 +5,9 @@ import edu.duke.summer.client.service.MyUserDtails;
 import edu.duke.summer.client.dto.SignupDto;
 import edu.duke.summer.client.service.MyUserDetailsService;
 import edu.duke.summer.client.exceptions.UserAlreadyExistException;
-import edu.duke.summer.client.service.StorageService;
 import edu.duke.summer.client.service.WebsocketService;
-import edu.duke.summer.client.stomp.TestMessageSent;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -18,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.security.Principal;
 
@@ -32,7 +30,6 @@ public class AuthenticationController {
     @Autowired
     private MyUserDetailsService myUserDetailsService;
     private Boolean isSignUp = false;
-    private StorageService storageService;
 
     @Autowired
     private WebsocketService websocketService;
@@ -40,29 +37,41 @@ public class AuthenticationController {
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
 
+
     @GetMapping("/")
-    public String index(Model model) {
+    public String index(Model model, HttpSession httpSession) {
+        //If Authenticated
         if (myUserDetailsService.isUserAuthenticated()) {
+            //Init User Info
             MyUserDtails myUserDtails = myUserDetailsService.loadMyUserDetailsOfCurrentUser();
-            model.addAttribute("uuid",myUserDtails.getUuid());
+            httpSession.setAttribute("USER_UUID",myUserDtails.getUuid());
+            model.addAttribute("uuid",httpSession.getAttribute("USER_UUID"));
+
+            //IF Admin
             if(myUserDetailsService.isUserhasRole("ROLE_ADMIN")){
+                System.out.println("Controller./()admin [session:]"+httpSession.getId());
                 return"redirect:/admin/"+myUserDtails.getUuid()+ "/index_after_login";
             }
+            //IF User
+            System.out.println("Controller./()user [session:]"+httpSession.getId());
             return "redirect:/user/" + myUserDtails.getUuid() + "/index_after_login";
         }
+        //If not Authenticated
+        System.out.println("Controller./() [session:]"+httpSession.getId());
         return "index_before_login";
     }
 
     @GetMapping("/login")
-    public String login() {
+    public String login(HttpSession httpSession) {
         if (myUserDetailsService.isUserAuthenticated()) {
             return "redirect:/";
         }
+        System.out.println("Controller.login() [session:]"+httpSession.getId());
         return "login";
     }
 
     @GetMapping("/user/{uuid}/index_after_login")
-    public String indexAfterLogin(HttpServletRequest request, @PathVariable String uuid, Model model) {
+    public String userindexAfterLogin(HttpServletRequest request, @PathVariable String uuid, Model model) {
         model.addAttribute("myuuid",uuid);
         return "index_after_login";
     }
@@ -73,14 +82,17 @@ public class AuthenticationController {
      * Role: ROLE_ADMIN
      */
     @GetMapping("/admin/{uuid}/index_after_login")
-    public String indexAfterLoginAdmin(HttpServletRequest request, @PathVariable String uuid, Model model) {
+    public String adminIndexAfterLogin(HttpServletRequest request, @PathVariable String uuid, Model model) {
         model.addAttribute("uuid",uuid);
+        System.out.println("Controller.adminIndexAfterLogin() [session:]"+request.getSession().getId());
         return "admin_index_after_login";
     }
 
     @GetMapping("/admin/{uuid}/systeminfo")
-    public String getAdminSystemInfo(HttpServletRequest request, @PathVariable String uuid, Model model) {
+    public String adminGetSystemInfo(HttpServletRequest request, @PathVariable String uuid, Model model) {
+        request.getSession(true);
         model.addAttribute("uuid",uuid);
+        System.out.println("Controller.adminGetSystemInfo() [session:]"+request.getSession().getId());
         return "admin_system_info";
     }
 
@@ -90,14 +102,14 @@ public class AuthenticationController {
      * Role: ROLE_ALL
      */
     @GetMapping("/signup")
-    public String getSignup(Model model) {
+    public String allGetSignup(Model model) {
         model.addAttribute("signupDto", new SignupDto());
         return "signup";
     }
 
     @PostMapping("/signup")
     //@RequestParam("profile") MultipartFile multipartFile
-    public String postSignup(@ModelAttribute("signupDto") @Valid SignupDto signupDto, HttpServletRequest request, Errors errors) {
+    public String allPostSignup(@ModelAttribute("signupDto") @Valid SignupDto signupDto, HttpServletRequest request, Errors errors) {
         //Profile Upload
 //        String filename =StringUtils.cleanPath(multipartFile.getOriginalFilename());
 //        signupDto.setProfile(filename);

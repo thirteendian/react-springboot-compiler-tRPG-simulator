@@ -1,11 +1,12 @@
-package edu.duke.summer.client.stomp;
+package edu.duke.summer.client.inteceptor;
 
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.messaging.support.ChannelInterceptor;
 
-public class SocketChannelIntecepter implements ChannelInterceptor {
+public class SocketChannelInteceptor implements ChannelInterceptor {
+
 
     /**
      * used before message actually be sent to the channel
@@ -15,9 +16,10 @@ public class SocketChannelIntecepter implements ChannelInterceptor {
         return ChannelInterceptor.super.preSend(message, channel);
     }
 
-    private void connect(String sessionID){
-        System.out.println("SocketChannelIntecepter.postSend()->disconnect [SessionID:]"+sessionID);
+    private void connect(String sessionID) {
+        System.out.println("        .connect()---[SessionID:]" + sessionID);
     }
+
     /**
      * call this method after .send is called
      */
@@ -25,11 +27,12 @@ public class SocketChannelIntecepter implements ChannelInterceptor {
     public void postSend(Message<?> message, MessageChannel channel, boolean sent) {
 
         StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(message);
-        if(headerAccessor.getCommand() == null) return ;// avoid no stomp message(heartbeat etc.)
+        if (headerAccessor.getCommand() == null) return;// avoid no stomp message(heartbeat etc.)
         String sessionID = headerAccessor.getSessionAttributes().get("sessionID").toString();
-        System.out.println("SocketChannelIntecepter.postSend(); [sessionID]: "+ sessionID);
-        switch (headerAccessor.getCommand()){
+        System.out.println("SocketChannelIntecepter.postSend()---[sessionID]: " + sessionID);
+        switch (headerAccessor.getCommand()) {
             case CONNECT:
+                connect(sessionID);
                 break;
             case DISCONNECT:
                 break;

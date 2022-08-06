@@ -17,7 +17,6 @@ import java.util.Arrays;
 
 @SpringBootApplication
 @EnableJpaRepositories(basePackageClasses = UserRepository.class)
-@EnableScheduling
 public class ClientApplication {
 
 	public static void main(String[] args) {

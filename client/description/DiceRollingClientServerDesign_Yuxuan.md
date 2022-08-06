@@ -10,9 +10,17 @@ Table of Contents
    3. [2.3 STOMP](#23-stomp)
    4. [2.4 broadcast](#24-broadcast-way)
 3. [3. Websocket with Java SpringBoot](#3-websocket-with-java-springboot)
-   1. [3.0 Message, Server, Servlet, Request, Response](#30-message-server-servlet-request-response) 
+   1. [3.0 Message, Server, Servlet, Request, Response](#30-message-server-servlet-request-response)
+      1. [3.0.1 JavaEE Servlets](#301-javaee-servlets)
+      2. [3.0.2 Apache Http Components Library](#302-apache-http-components-library)
    2. [3.1 configureMessageBroker](#31-configuremessagebroker)
    3. [3.2 registerStompEndpoints](#32-registerstompendpoints)
+   4. [3.3 EventListener and HeadAccessor](#33-eventlistener-and-headaccessor)
+   5. [3.4 Scheduling](#34-scheduling)
+   6. [3.5 Interceptor](#35-interceptor)
+      1. [3.5.1 Channel Interceptor](#351-channel-interceptor)
+      2. [3.5.2 Handshake Interceptor](#352-handshake-interceptor)
+4. [4. Game Server Design](#4-game-server-design)
 ## 1. Communication Mode
 
 A very essential part in designing webgame is to keep information synchronized 
@@ -181,14 +189,24 @@ For more information referred to [Stomp over Websocket](http://jmesnil.net/stomp
 - Broadcast: everyone
 - Multicast: point to Groups
 
-##3 Websocket With Java Springboot
+##3. Websocket With Java Springboot
 
-Springboot has `WebSocketMessageBrokerConfigurer` to provide the method of Endpoint and broker configuration for Websocket.
+Websocket has two Functionalities that can be use:
+* **Event Methods**, that trigger event within Websocket, such as :
+CONNECT, SEND, CLOSE...
+* **Listener Methods**, that listen for events that has been triggered,
+such as : OnOpen, OnConnect, OnClose...
+
+The supportive document: [WebSockets API Document](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API)
+
+Springboot has `WebSocketMessageBrokerConfigurer` 
+to provide the method of Endpoint and broker configuration,
+as well as Interceptor and EventListener for Websocket.
 
 * The annotation `@EnableWebSocketMessageBroker`defined **class** of configuration.
 * `configureMessageBroker(MessageBrokerRegistry config)` function configure broker
 * `registerStompEndpoints(StompEndpointRegistry registry)` function configure message Endpoint
-* `HandshakeInterceptor` define before and after handshake interceptor
+* `HandshakeInterceptor` and `ChannelInterceptor` define before and after handshake interceptor
 * `EventListener` after handshake on four events.
 ###3.0 Message, Server, Servlet, Request, Response
 Historically, there're two parallel package to hold HTTP Request/Response:
@@ -311,56 +329,6 @@ var socket = new SockJS('/endpoint_url');
     stompClient = Stomp.over(socket);
 ```
 
-By adding HandshakeInterceptor can prevent user's entering from unauthorized condition.
-```java
-//Java Spring @Override registerStompEndpoints
-StompEndpointRegistry
-        .addEndpoint("/endpoint_url")
-        .addInterceptors(new Interceptor())
-        .withSockJS();
-```
-
-For implementing of Interceptor, we choose to implement HandshakeInterceptor,
-which has two method to override: `beforeHandshake` and `afterHandshake`.
-In `beforeHandshake`, we can also fetch necessary information and put them into
-`Map<String, Object> attributes`, and get the value at other position such as 
-`StompHeaderAccessor.getSessionAttribute().get()`.
-
-Http Session is defined as a series of related browser requests that come from the same client during a certain time period.
-Session tracking ties together a series of browser requests—think of these requests as pages—that may have some meaning as a whole, 
-such as a shopping cart application.
-For example, for session id, as we mentioned in 
-[3.0.2 Apache Http Components Library](#302-apache-http-components-library),
-since only `ServletServerHttpRequest` has method ".getServletRequest()",
-but the override handshake are using `ServerHttpRequest` which does not contain
-Servlet information, as well as it's rather impossible to get `HttpServletRequest`
-from `ServerHttpRequest`,
-we need to firstly convert `ServerHttpRequest` to `ServletServerHttpRequest`.
-
-
-```java
-@Override
-    public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler, Map<String, Object> attributes) throws Exception {
-        if(request instanceof ServletServerHttpRequest){
-        //if request exist
-            ServletServerHttpRequest servletServerHttpRequest = (ServletServerHttpRequest) request;
-            //get ServletServerHttpRequest from ServerHttpRequest
-            HttpSession session = servletServerHttpRequest.getServletRequest().getSession();
-            //get Session from ServletRequest
-            String sessionId= session.getId();
-            //Get Session id from Session
-            attributes.put("sessionID",sessionId);
-            //Add sessionID into attributes
-        }
-        return true;
-    }
-```
-and at any four events, the listener can get SessionID from `StompHeaderAccessor` by
-```java
-StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());
-headerAccessor.getSessionAttributes().get("sessionID");
-```
-
 ###3.3 EventListener and HeadAccessor
 Springboot has `ApplicationListener<>` to provide the method of
 listen on 4 Websocket events.
@@ -389,4 +357,127 @@ we need to add annotation `@EnableScheduling`in front of Spring main function.
 
 Note that If method was scheduled, it should not have any parameter.
 
-###3.5 Inteceptor
+###3.5 Interceptor
+After adding interceptor on Websocket,
+the message now is passing through the way as:
+>`message`--->`HandshakeInterceptor`--->`ChannelInterceptor`
+####3.5.1 Channel Interceptor
+Spring use `Message` to represent information with header and payload,
+and it was sent through `MessageChannel`. `ChannelInterceptor` provides 
+a way to capture information before and after `Message` is sending through channel,
+and we can configure it through it's inplementation(see `ChannelInterceptor` Interface).
+
+Note that if messages are comming from Websocket, we also need to register
+interceptor in Websocket Configuration through implementation of `WebSocketMessageBrokerConfigurer`
+by override corresponding methods, as following:
+```java
+@Override
+    public void configureClientInboundChannel(ChannelRegistration registration) {
+        WebSocketMessageBrokerConfigurer.super.configureClientInboundChannel(registration);
+        registration.interceptors(new SocketChannelInteceptor());
+    }
+    @Override
+    public void configureClientOutboundChannel(ChannelRegistration registration) {
+        WebSocketMessageBrokerConfigurer.super.configureClientOutboundChannel(registration);
+        registration.interceptors(new SocketChannelInteceptor());
+    }
+```
+####3.5.2 Handshake Interceptor
+
+By adding HandshakeInterceptor,one can prevent user's entering from unauthorized condition,
+note that HandshakeInterceptor can be registered directly with Endpoint.
+
+```java
+//Java Spring @Override registerStompEndpoints
+StompEndpointRegistry
+        .addEndpoint("/endpoint_url")
+        .addInterceptors(new Interceptor())
+        .withSockJS();
+```
+
+The HandshakeInterceptor,
+which has two method to override: `beforeHandshake` and `afterHandshake`.
+In `beforeHandshake`, we can also fetch necessary information and put them into
+`Map<String, Object> attributes`, and get the value at other position such as
+`StompHeaderAccessor.getSessionAttribute().get()`.
+
+For example, for Http Session, 
+which is defined as a series of related browser requests that come from the same client during a certain time period.
+Session tracking ties together a series of browser requests—think of these requests as pages—that may have some meaning as a whole,
+such as a shopping cart application.
+
+For session id, as we mentioned in
+[3.0.2 Apache Http Components Library](#302-apache-http-components-library),
+since only `ServletServerHttpRequest` has method ".getServletRequest()",
+but the override handshake are using `ServerHttpRequest` which does not contain
+Servlet information, as well as it's rather impossible to get `HttpServletRequest`
+from `ServerHttpRequest`,
+we need to firstly convert `ServerHttpRequest` to `ServletServerHttpRequest`.
+
+```java
+@Override
+    public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler, Map<String, Object> attributes) throws Exception {
+        if(request instanceof ServletServerHttpRequest){
+        //if request exist
+            ServletServerHttpRequest servletServerHttpRequest = (ServletServerHttpRequest) request;
+            //get ServletServerHttpRequest from ServerHttpRequest
+            HttpSession session = servletServerHttpRequest.getServletRequest().getSession();
+            //get Session from ServletRequest
+            String sessionId= session.getId();
+            //Get Session id from Session
+            attributes.put("sessionID",sessionId);
+            //Add sessionID into attributes
+        }
+        return true;
+    }
+```
+and at any four events, the listener can get SessionID from `StompHeaderAccessor` by
+```java
+StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());
+headerAccessor.getSessionAttributes().get("sessionID");
+```
+
+##4. Game Server Design
+
+There are normally two ways to design game server:
+* **Local Player Hosted Gamer Servers**, server run client side,
+and game communication throw "server-to-server", for example,
+Minecraft. Each server holds a game session to allow other
+server as players to join in.
+* **Cloud Game Servers**, server hold remotely
+
+We choose Cloud Game server approaches since web game client as
+browsers, and connected to our Spring framework server.
+
+There are two ways of connections between server and clients:
+* **Non-Persistent Connections**, connection exists only
+if data need to be transfered, for example, send a email.
+* **Persistent Connections**, server client will keep connected,
+unless it requires disconnect.
+
+Obviously, web page use non-persistent connection,
+while `WebSocket` applications use **persistent connection** in a game session.
+In multiplayer's game server, after user entering the game,
+we must continuously manage each player.
+
+###4.1 Create Game
+
+###4.2 In Game
+A playerDataDTO must be provided to transfer player's data
+through json.
+
+On Server Side:
+1. After player is OnConnect, server should give
+player a player unique id to represent player in this game session,
+this unique id should be sent back to client for reference.
+2. OnMessage to retrieves message through playerDataDTO
+3. OnClose when client disconnects, cleanup and remove this player.
+
+On Client Side:
+1. Client request Websocket Connect to Server. Check 
+connections and error response(not connected etc.).
+2. provide onMessage method, get unique player ID dispatched by Server.
+Parse Server instruction
+3. provide update methods, when any update happened on client side,
+send current state to Server.
+4. provide OnClose method, when server side is disconnected

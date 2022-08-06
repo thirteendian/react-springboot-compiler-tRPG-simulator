@@ -1,16 +1,18 @@
 package edu.duke.summer.client.config;
 
-import edu.duke.summer.client.stomp.HttpHandShakeIntecepter;
-import edu.duke.summer.client.stomp.SocketChannelIntecepter;
+import edu.duke.summer.client.inteceptor.HttpHandShakeInteceptor;
+import edu.duke.summer.client.inteceptor.SocketChannelInteceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.ChannelRegistration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
 
 @Configuration
 @EnableWebSocketMessageBroker
+@EnableScheduling
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
 
@@ -50,20 +52,23 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
      */
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/gs-guide-websocket").withSockJS();
-        registry.addEndpoint("/admin_endpoint").addInterceptors(new HttpHandShakeIntecepter()).withSockJS();
+        registry.addEndpoint("/gs-guide-websocket")
+                .withSockJS();
+        registry.addEndpoint("/admin_endpoint")
+                .addInterceptors(new HttpHandShakeInteceptor())
+                .withSockJS();
     }
 
 
     @Override
     public void configureClientInboundChannel(ChannelRegistration registration) {
         WebSocketMessageBrokerConfigurer.super.configureClientInboundChannel(registration);
-        registration.interceptors(new SocketChannelIntecepter());
+        registration.interceptors(new SocketChannelInteceptor());
     }
 
     @Override
     public void configureClientOutboundChannel(ChannelRegistration registration) {
         WebSocketMessageBrokerConfigurer.super.configureClientOutboundChannel(registration);
-        registration.interceptors(new SocketChannelIntecepter());
+        registration.interceptors(new SocketChannelInteceptor());
     }
 }
