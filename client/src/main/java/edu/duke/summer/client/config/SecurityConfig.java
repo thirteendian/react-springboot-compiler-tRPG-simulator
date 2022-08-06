@@ -74,10 +74,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.jdbcAuthentication()
-//                .dataSource(dataSource)
-//                .usersByUsernameQuery("select username,password,enabled from myuser where username=?")
-//                .authoritiesByUsernameQuery("select username,authority from authorities where username=?");
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
@@ -103,13 +99,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/index_after_login").hasAnyRole("USER","ADMIN")
                 .antMatchers("/admin").hasRole("ADMIN")
 
+                //Logout delete Cookies
                 .and()
                 .logout()
                 .deleteCookies("JSESSIONID")
                 .logoutSuccessUrl("/")
 
                 .and()
-                .rememberMe().key("uniqueAndSecret")
+                .rememberMe().rememberMeParameter("remember-me")
+                .key("uniqueAndSecret")
                 .tokenValiditySeconds(86400)//valid for a day
 
 

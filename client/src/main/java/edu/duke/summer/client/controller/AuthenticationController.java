@@ -37,7 +37,15 @@ public class AuthenticationController {
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
 
-
+    /**
+     * Page: index_before_login.html
+     *       index_after_login.html
+     *       admin_index_after_login.html
+     * Role:
+     *       index_before_login(ROLE_ALL)
+     *       index_after_login(ROLE_USER)
+     *       admin_index_after_login.html(ROLE_ADMIN)
+     */
     @GetMapping("/")
     public String index(Model model, HttpSession httpSession) {
         //If Authenticated
@@ -61,6 +69,10 @@ public class AuthenticationController {
         return "index_before_login";
     }
 
+    /**
+     * Page: login.html
+     * Role: ROLE_ALL
+     */
     @GetMapping("/login")
     public String login(HttpSession httpSession) {
         if (myUserDetailsService.isUserAuthenticated()) {
@@ -69,33 +81,6 @@ public class AuthenticationController {
         System.out.println("Controller.login() [session:]"+httpSession.getId());
         return "login";
     }
-
-    @GetMapping("/user/{uuid}/index_after_login")
-    public String userindexAfterLogin(HttpServletRequest request, @PathVariable String uuid, Model model) {
-        model.addAttribute("myuuid",uuid);
-        return "index_after_login";
-    }
-
-
-    /**
-     * Page: admin_index_after_login.html
-     * Role: ROLE_ADMIN
-     */
-    @GetMapping("/admin/{uuid}/index_after_login")
-    public String adminIndexAfterLogin(HttpServletRequest request, @PathVariable String uuid, Model model) {
-        model.addAttribute("uuid",uuid);
-        System.out.println("Controller.adminIndexAfterLogin() [session:]"+request.getSession().getId());
-        return "admin_index_after_login";
-    }
-
-    @GetMapping("/admin/{uuid}/systeminfo")
-    public String adminGetSystemInfo(HttpServletRequest request, @PathVariable String uuid, Model model) {
-        request.getSession(true);
-        model.addAttribute("uuid",uuid);
-        System.out.println("Controller.adminGetSystemInfo() [session:]"+request.getSession().getId());
-        return "admin_system_info";
-    }
-
 
     /**
      * Page: signup.html
@@ -107,6 +92,10 @@ public class AuthenticationController {
         return "signup";
     }
 
+    /**
+     * Page: signup.html
+     * Role: ROLE_ALL
+     */
     @PostMapping("/signup")
     //@RequestParam("profile") MultipartFile multipartFile
     public String allPostSignup(@ModelAttribute("signupDto") @Valid SignupDto signupDto, HttpServletRequest request, Errors errors) {
@@ -126,19 +115,41 @@ public class AuthenticationController {
         return "redirect:/";
     }
 
-    @GetMapping("/user")
-    public String user(Principal principal) {
-        return "<h1>Welcome name: " + principal.getName() + "</h1>";
-    }
 
-    @GetMapping("/admin")
-    public String admin() {
-        return ("<h1>Welcome Admin</h1>");
-    }
-
-    /*
-    html Frame work
+    /**
+     * Page: index_after_login.html
+     * Role: ROLE_USER
      */
+    @GetMapping("/user/{uuid}/index_after_login")
+    public String userindexAfterLogin(HttpServletRequest request, @PathVariable String uuid, Model model) {
+        model.addAttribute("myuuid",uuid);
+        return "index_after_login";
+    }
+
+
+    /**
+     * Page: admin_index_after_login.html
+     * Role: ROLE_ADMIN
+     */
+    @GetMapping("/admin/{uuid}/index_after_login")
+    public String adminIndexAfterLogin(HttpServletRequest request, @PathVariable String uuid, Model model) {
+        model.addAttribute("uuid",uuid);
+        System.out.println("Controller.adminIndexAfterLogin() [session:]"+request.getSession().getId());
+        return "admin_index_after_login";
+    }
+
+    /**
+     * Page: admin_system_info.html
+     * Role: ROLE_ADMIN
+     */
+    @GetMapping("/admin/{uuid}/systeminfo")
+    public String adminGetSystemInfo(HttpServletRequest request, @PathVariable String uuid, Model model) {
+        request.getSession(true);
+        model.addAttribute("uuid",uuid);
+        System.out.println("Controller.adminGetSystemInfo() [session:]"+request.getSession().getId());
+        return "admin_system_info";
+    }
+
     @GetMapping("/accountSettings")
     public String getAccountSettings(Model model) {
         model.addAttribute("signupDto", new SignupDto());
