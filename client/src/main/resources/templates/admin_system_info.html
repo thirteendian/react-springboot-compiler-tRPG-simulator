@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin</title>
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <script src="/script/websocket.js"></script>
+</head>
+<body>
+    This is Admin Page
+<input type="hidden" th:value="${uuid}"/>
+
+    <table id="conversion" class="table-striped">
+        <thread>
+            <tr>
+                Messages:
+            </tr>
+        </thread>
+        <tbody id="received_message">
+        </tbody>
+    </table>
+</body>
+</html>

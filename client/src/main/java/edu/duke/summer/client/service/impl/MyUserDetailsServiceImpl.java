@@ -51,6 +51,13 @@ public class MyUserDetailsServiceImpl implements MyUserDetailsService {
     }
 
     @Override
+    public boolean isUserhasRole(String inputRole) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        boolean hasRole = authentication.getAuthorities().stream().anyMatch(r-> r.getAuthority().equals(inputRole));
+        return hasRole;
+    }
+
+    @Override
     public MyUserDtails loadMyUserDetailsOfCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();

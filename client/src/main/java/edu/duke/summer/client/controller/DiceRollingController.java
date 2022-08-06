@@ -1,8 +1,9 @@
-package edu.duke.summer.client.config;
+package edu.duke.summer.client.controller;
 
 import edu.duke.summer.client.dto.DiceRollingDto;
 import edu.duke.summer.client.dto.ObjectFieldDto;
 import edu.duke.summer.client.service.GameService;
+import edu.duke.summer.client.service.WebsocketService;
 import edu.duke.summer.client.stomp.ReqDiceRollingString;
 import edu.duke.summer.client.stomp.ReqObjectCreatingName;
 import edu.duke.summer.client.stomp.RespDiceRollingResult;
@@ -21,6 +22,7 @@ import java.util.List;
 public class DiceRollingController {
     @Autowired
     private GameService gameService;
+
 
 
     /**

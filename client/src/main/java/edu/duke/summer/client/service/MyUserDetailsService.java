@@ -9,9 +9,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 public interface MyUserDetailsService extends UserDetailsService {
     boolean isUserAuthenticated();
+    boolean isUserhasRole(String inputRole);
     MyUserDtails loadMyUserDetailsOfCurrentUser();
     User signupNewUser(SignupDto signupDto) throws UserAlreadyExistException;
-
     @Override
     UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
 

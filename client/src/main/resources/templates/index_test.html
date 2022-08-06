@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <script src="/script/websocket.js"></script>
+</head>
+<body>
+<input type="hidden" id="myuuid" th:value="${myuuid}"/>
+<input type="text" id="chatuuid" placeholder="Chat person UUID"/>
+<input type="text" id="content" placeholder="message content"/>
+<button onclick="sendTestMessage()" value="send">Send</button>
+
+
+<table id="conversion" class="table-striped">
+    <thread>
+        <tr>
+            Messages:
+        </tr>
+    </thread>
+    <tbody id="received_message">
+    </tbody>
+</table>
+</body>
+</html>

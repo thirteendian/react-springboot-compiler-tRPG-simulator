@@ -6,8 +6,11 @@ import edu.duke.summer.client.dto.SignupDto;
 import edu.duke.summer.client.service.MyUserDetailsService;
 import edu.duke.summer.client.exceptions.UserAlreadyExistException;
 import edu.duke.summer.client.service.StorageService;
+import edu.duke.summer.client.service.WebsocketService;
+import edu.duke.summer.client.stomp.TestMessageSent;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -32,6 +35,9 @@ public class AuthenticationController {
     private StorageService storageService;
 
     @Autowired
+    private WebsocketService websocketService;
+
+    @Autowired
     private StringRedisTemplate stringRedisTemplate;
 
     @GetMapping("/")
@@ -39,6 +45,9 @@ public class AuthenticationController {
         if (myUserDetailsService.isUserAuthenticated()) {
             MyUserDtails myUserDtails = myUserDetailsService.loadMyUserDetailsOfCurrentUser();
             model.addAttribute("uuid",myUserDtails.getUuid());
+            if(myUserDetailsService.isUserhasRole("ROLE_ADMIN")){
+                return"redirect:/admin/"+myUserDtails.getUuid()+ "/index_after_login";
+            }
             return "redirect:/user/" + myUserDtails.getUuid() + "/index_after_login";
         }
         return "index_before_login";
@@ -53,18 +62,38 @@ public class AuthenticationController {
     }
 
     @GetMapping("/user/{uuid}/index_after_login")
-    public String indexAfterLogin(HttpServletRequest request, @PathVariable String uuid) {
-//        System.out.println(request.getRequestURL().toString());
-//        + "?" + request.getQueryString();
+    public String indexAfterLogin(HttpServletRequest request, @PathVariable String uuid, Model model) {
+        model.addAttribute("myuuid",uuid);
         return "index_after_login";
     }
 
+
+    /**
+     * Page: admin_index_after_login.html
+     * Role: ROLE_ADMIN
+     */
+    @GetMapping("/admin/{uuid}/index_after_login")
+    public String indexAfterLoginAdmin(HttpServletRequest request, @PathVariable String uuid, Model model) {
+        model.addAttribute("uuid",uuid);
+        return "admin_index_after_login";
+    }
+
+    @GetMapping("/admin/{uuid}/systeminfo")
+    public String getAdminSystemInfo(HttpServletRequest request, @PathVariable String uuid, Model model) {
+        model.addAttribute("uuid",uuid);
+        return "admin_system_info";
+    }
+
+
+    /**
+     * Page: signup.html
+     * Role: ROLE_ALL
+     */
     @GetMapping("/signup")
     public String getSignup(Model model) {
         model.addAttribute("signupDto", new SignupDto());
         return "signup";
     }
-
 
     @PostMapping("/signup")
     //@RequestParam("profile") MultipartFile multipartFile
