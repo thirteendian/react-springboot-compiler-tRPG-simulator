@@ -25,9 +25,9 @@ Table of Contents
 4. [4. (Server)Game Server Design](#4-game-server-design)
 5. [5. (Client)Game Client Design](#5-game-client-design)
     1. [5.1 Few problems on JS](#51-few-problems-on-js)
-       1. [5.1.1 `__proto__` & `prototype` & `constructor`](#511-__proto__--prototype--constructor)
-       2. [5.1.2 5.1.2 `this` in JS](#512-this-in-js)
-       3. [5.1.3 Closure](#513-closure)
+        1. [5.1.1 `__proto__` & `prototype` & `constructor`](#511-__proto__--prototype--constructor)
+        2. [5.1.2 5.1.2 `this` in JS](#512-this-in-js)
+        3. [5.1.3 Closure](#513-closure)
 
 ## 1. Communication Mode
 
@@ -585,20 +585,15 @@ Note 2. & 3. are describing same thing.
    reference point to
    `Object.prototype`.
 4. Similar to Java, `Object.prototype` contains many predefined method such as `toString()`.
-5. Since `f Function()` is also considered to be constructed, 
-and it's constructor is in `f Function.prototype`.
-That is to say, `f Function.prototype.constructor` is used as all function's
-   constructor, that is construct by expression "var example = function(){}".
+5. Since `f Function()` is also considered to be constructed, and it's constructor is in `f Function.prototype`. That is
+   to say, `f Function.prototype.constructor` is used as all function's constructor, that is construct by expression "
+   var example = function(){}".
 
-_**So when we say "use function as
-constructor", means use Function.prototype.constructor()!!!**_
+_**So when we say "use function as constructor", means use Function.prototype.constructor()!!!**_
 
-For example, suppose define function `Parent()`, 
-using constructor `Function.prototype.constructor()`, 
-in another word, function `Parent` inherited from object `Function.prototype`, 
-and `Parent` has reference `Parent.__proto__`
-point to object `Function.prototype`. 
-Also, according to the previous analogy, all function's prototype is inherited
+For example, suppose define function `Parent()`, using constructor `Function.prototype.constructor()`, in another word,
+function `Parent` inherited from object `Function.prototype`, and `Parent` has reference `Parent.__proto__`
+point to object `Function.prototype`. Also, according to the previous analogy, all function's prototype is inherited
 from `Object.prototype`, so does `Function.prototype`.
 
 ```js
@@ -633,8 +628,27 @@ var p1 = new Parent();
 // p1 has reference p1.__proto__ to Parent.prototype
 ```
 
-Note that the following map when say function(object) constructor,
-that means use it's function(object).prototype.constructor!
+If one want to put value not in prototype but in it's own instantiation, a single assignment to an variable is
+necessary:
+
+```js
+class A
+
+()
+{
+    constructor()
+    {
+    }
+    a = 1;
+//constructor will construct a=1 in new instantiation
+//but we cannot find a=1 in instantiation.__proto__
+//(or A.prototype)
+}
+
+```
+
+Note that the following map when say function(object) constructor, that means use it's function(object)
+.prototype.constructor!
 ![](48568374-4a2ca8b9a839496e_fix732.webp)
 
 #### 5.1.2 `this` in JS
@@ -643,14 +657,16 @@ To justify `this` referece.
 
 In no-strict mode, undefined normally be `window`; In strict mode is undefined.
 
+* Inside of function EventHandler, is the element.
 * Outside of function, strict/no-strict, is global object. For example, window
 * Inside of function, no-strict, is global object. For example, window.
 * Inside of function, strict, is undefined. **Note Babel will translate component function to be strict mode**
-* Inside of class, is object. Not include static methods.
-* Inside of function as object's method, is the object.(Normally object's method is set to be strict automatically, thus
-  is undefined)
-* Inside of function constructor, is new object(instantiation). If have return, the new object value is defined by return
-* Inside of function EventHandler, is the element.
+* Inside of object, is object. Not include static methods.
+* As object's method, is the object.(Normally object's method is set to be strict automatically, thus is undefined)
+* As of function(object)'s constructor, is new object(instantiation). If have return, the new object value is defined by
+  return
+* As object's own method(not in prototype),
+  **defined by "()=>"**, is outside scope(the object instantiation)
 * Can be changed by bind()
 
 An example about object's method
@@ -682,7 +698,8 @@ const test2 = test1.example()
 test2()//undefined
 ```
 
-To solve this problem, we can bind the function's to it's instantiation as following:
+To solve this problem, we can bind the function's to it's instantiation, or use "()=>" to define the function as
+following:
 
 ```js
 class A {
@@ -697,6 +714,13 @@ class A {
     example1(...) {
         console.log(this);
     }
+
+    //this is not a function defination
+    //but a assignment expression
+    //this can not be tracked by instantiation.__proto__
+    example3 = () => {
+        console.log(this);
+    };
 }
 
 //Call directly
@@ -715,6 +739,15 @@ test2()//class A
 //give it to prototype's example2.
 //When new A() is called, 
 // example2 is constructed out by constructor from prototype
+
+
+//example is an instantiation method, defined by ()=>
+//so "this" is pointed to outsider scope which is the 
+//instantiation 
+const test3 = new A().example3()
+test3()//class A
+
+
 ```
 
 **Note that object do not have it's constructor, the constructor is on `object.prototype`, while methods is defined
@@ -762,3 +795,114 @@ babel.min.js has two functionality:
 react.development.js is React Core
 
 react-dom.development.js is React extension for Dom
+
+For react component, constructor is called once during initialization, instantiation is got by react, everytime when
+state is changing, spring will call render once().
+
+To avoid the changing of `this` in object method, one can defined the method by assignment `()=>`.
+
+`react.development.js` and `babel.min.js` combined has several grammer sugar, for example, JS does not support the
+Spread syntax(...)
+to be used directly(Only in ReactDom.render to give component label), but react support in JS
+
+```js
+var p = new A();
+console.log(...p)
+//error, since ...p is illegal
+
+var d = {...p, additional: "something"}
+//correct, since grammer of deep copy an object
+```
+
+in JSX+react
+
+```jsx
+console.log(...p)
+//correct, since react support the usage of ... directly
+//BUT no output
+//React only support label to use ... directly
+```
+
+Note that to comment on jsx return command of structure, we need to translate to js first by `()` then use JS normal way
+to comment it
+
+```jsx
+render()
+{
+    return (
+        (/*<input ref={(currNode)=>{this.refinput = currNode}}*/)
+        //now it is commentted successfully
+    )
+```
+
+#### 5.2.2 Three essential properties
+
+For refs, It's not recommended to use too much. The input parameter is the current element node it self, there are three ways:
+```jsx
+////////////////////////
+//For Arrow function way
+class example extends React.Component {
+    render() {
+        return (
+            <input ref={(currNode) => {
+                this.refinput = currNode
+            }}/>
+            //here the currNode is <input...> it self    
+            //we now add this ref to this class instantiation as refinput
+            //And this ()=>{} function will be called twice when render() the page
+            //because each time it's a new function
+            //react will send null first to make sure it's clear
+        )
+    }
+}
+
+reactDOM.render(<example/>, document.getElementById('test'))
+////////////////////
+//Bound this function in class
+class example extends React.Component {
+    refFunction = (currNode) => {
+        this.example = currNode;
+    }
+
+    render() {
+        return (
+            <input ref={this.refFunction}/>
+        )
+    }
+}
+
+reactDOM.render(<example/>, document.getElementById('test'))
+
+//////////////////
+//use createRef
+class example extends React.Component {
+    //create a container get all refs
+    //but this container will be covered if the label name is the same
+    //So we need to singly call createRef()
+    refFunction = React.createRef()
+    refFunction1 = React.createRef()
+    render() {
+        return (
+            <input ref={this.refFunction}/>
+            <input ref={this.refFunction1}/>
+        )
+    }
+}
+
+reactDOM.render(<example/>, document.getElementById('test'))
+```
+
+If the event is on the element that call ref itself, the ref is not necessary to define, since
+render will return `event` to the same name function as input, and we can get the element by`event.target`
+
+#### 5.2.3 Event
+
+The Event process
+...
+
+Event is rewrite by React(for example, onclick is "onClick"" in react),
+and give the event to the very outsider element.
+
+#### 5.2.4 diff algorithm
+
+Virtual DOM use label as a comparable minimum element. And compare label from outside to inside.
