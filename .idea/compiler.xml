@@ -8,7 +8,7 @@
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.postgresql/postgresql/42.3.4/4fc2f1f47f685cf06ba684564ec6be8ed18791a7/postgresql-42.3.4.jar" />
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.checkerframework/checker-qual/3.5.0/2f50520c8abea66fbd8d26e481d3aef5c673b510/checker-qual-3.5.0.jar" />
         </processorPath>
-        <module name="dicerolling.client.main" />
+        <module name="dicerolling.server.main" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="17" />
