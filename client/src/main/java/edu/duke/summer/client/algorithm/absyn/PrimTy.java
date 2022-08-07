@@ -1,9 +1,13 @@
 package edu.duke.summer.client.algorithm.absyn;
 
-import edu.duke.summer.client.algorithm.RollState;
+import edu.duke.summer.client.algorithm.StateInfo;
 import edu.duke.summer.client.algorithm.RuleInfo;
 import edu.duke.summer.client.algorithm.Symbol.Symbol;
+import edu.duke.summer.client.algorithm.VarEntry;
+import edu.duke.summer.client.algorithm.value.IntValue;
+import edu.duke.summer.client.algorithm.value.StringValue;
 import edu.duke.summer.client.algorithm.value.Value;
+import edu.duke.summer.client.algorithm.value.VoidValue;
 
 import java.util.HashMap;
 import java.util.Random;
@@ -31,7 +35,16 @@ public class PrimTy extends Ty{
     }
 
     @Override
-    public Value eval(HashMap<String, Value> vars, Random randNumGen, RuleInfo info, RollState state) {
-        return null;
+    public Value getInitValue() {
+       if(name.toString().equals("int")){
+           return new IntValue(0);
+       }else{
+           return new StringValue("");
+       }
+    }
+
+    @Override
+    public Value eval(VarEntry varEntry, Random randNumGen, RuleInfo info, StateInfo state) {
+        return new VoidValue();
     }
 }

@@ -1,8 +1,12 @@
 package edu.duke.summer.client.algorithm.absyn;
-import edu.duke.summer.client.algorithm.RollState;
+
+import edu.duke.summer.client.algorithm.StateInfo;
 import edu.duke.summer.client.algorithm.RuleInfo;
 import edu.duke.summer.client.algorithm.Symbol.Symbol;
+import edu.duke.summer.client.algorithm.VarEntry;
+import edu.duke.summer.client.algorithm.value.BooleanValue;
 import edu.duke.summer.client.algorithm.value.Value;
+import edu.duke.summer.client.algorithm.value.VoidValue;
 
 import java.util.HashMap;
 import java.util.Random;
@@ -29,7 +33,12 @@ public class BooleanTy extends Ty{
     }
 
     @Override
-    public Value eval(HashMap<String, Value> vars, Random randNumGen, RuleInfo info, RollState state) {
-        return null;
+    public Value getInitValue() {
+        return new BooleanValue(false);
+    }
+
+    @Override
+    public Value eval(VarEntry varEntry, Random randNumGen, RuleInfo info, StateInfo state) {
+        return new VoidValue();
     }
 }

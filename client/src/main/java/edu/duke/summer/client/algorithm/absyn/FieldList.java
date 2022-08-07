@@ -1,8 +1,9 @@
 package edu.duke.summer.client.algorithm.absyn;
 
-import edu.duke.summer.client.algorithm.RollState;
+import edu.duke.summer.client.algorithm.StateInfo;
 import edu.duke.summer.client.algorithm.RuleInfo;
 import edu.duke.summer.client.algorithm.Symbol.Symbol;
+import edu.duke.summer.client.algorithm.VarEntry;
 import edu.duke.summer.client.algorithm.value.*;
 
 import java.util.HashMap;
@@ -20,24 +21,7 @@ public class FieldList extends Absyn {
 
    public boolean escape = true;
 
-   public Symbol getName() {
-      return name;
-   }
-
-   public Symbol getTyp() {
-      return typ;
-   }
-
-   public Ty getType() {
-      return type;
-   }
-
-   public FieldList getTail() {
-      return tail;
-   }
-
-
-   public FieldList(int p, Symbol n, Symbol t,FieldList x) {
+   public FieldList(int p, Symbol n, Symbol t, FieldList x) {
       pos=p; name=n; typ=t; tail=x;
    }
 
@@ -46,12 +30,10 @@ public class FieldList extends Absyn {
    }
 
    public void append(FieldList list){
-      FieldList mark = tail;
       while(tail != null){
          tail = tail.tail;
       }
       tail = list;
-      tail = mark;
    }
 
    public void printInfo(){
@@ -66,7 +48,12 @@ public class FieldList extends Absyn {
       FieldList mark = tail;
       System.out.println(i + ": name:" + name);
       System.out.println(type.toString());
-      System.out.println(type.getName() + " " + type.getKey());
+      while(type instanceof OptionTy || type instanceof ArrayTy){
+         System.out.println("option/array -key:" + type.getKey());
+         System.out.println("option/array -elem: " + type.getElem());
+         type = type.getElem();
+      }
+      System.out.println("name:" + type.getName() + " key: "  + type.getKey());
       while(tail != null){
          i++;
          System.out.println(i + ": name:" + tail.name);
@@ -78,34 +65,15 @@ public class FieldList extends Absyn {
             tmp = tmp.getElem();
          }
          System.out.println("name:" + tmp.getName() + " key: "  + tmp.getKey());
-//         while((tmp instanceof ArrayTy) || (tmp instanceof OptionTy)){
-//            if((tmp instanceof ArrayTy)){
-//               System.out.println("key: "  + ((ArrayTy) tmp).getKey().toString());
-//               System.out.println(((ArrayTy) tmp).elem.toString());
-//               tmp = ((ArrayTy) tmp).elem;
-//            }else{
-//               System.out.println("key: "  + ((OptionTy) tmp).getKey().toString());
-//               System.out.println(((OptionTy) tmp).elem.toString());
-//               tmp = ((OptionTy) tmp).elem;
-//            }
-//         }
-//         if(tmp instanceof PrimTy){
-//            System.out.println("name: " + ((PrimTy) tmp).name );
-//            System.out.println("key: " + ((PrimTy) tmp).key);
-//         }
-//         if(tmp instanceof BooleanTy) {
-//            System.out.println("name: " + ((BooleanTy) tmp).name );
-//            System.out.println("key: " + ((BooleanTy) tmp).key);
-//         }
          tail = tail.tail;
       }
       tail = mark;
    }
 
    @Override
-   public Value eval(HashMap<String, Value> vars, Random randNumGen, RuleInfo info, RollState state) {
+   public Value eval(VarEntry varEntry, Random randNumGen, RuleInfo info, StateInfo state) {
       if(type instanceof NameTy){
-         String str = ((NameTy) type).getName().toString();
+         String str = type.getName();
          if(!(info.getTypes().containsKey(str))){
             throw new IllegalArgumentException("Using undefined type in type declaration!");
          }

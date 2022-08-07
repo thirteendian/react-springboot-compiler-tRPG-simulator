@@ -9,11 +9,12 @@ import edu.duke.summer.client.algorithm.value.VoidValue;
 import java.util.HashMap;
 import java.util.Random;
 
-public class NilExp extends Exp {
-  public NilExp(int p) {pos=p;}
+public class BreakStmt extends Stmt {
+   public BreakStmt(int p) {pos=p;}
 
-  @Override
-  public Value eval(VarEntry varEntry, Random randNumGen, RuleInfo info, StateInfo state) {
-    return new VoidValue();
-  }
+   @Override
+   public Value eval(VarEntry varEntry, Random randNumGen, RuleInfo info, StateInfo state) {
+      state.setBreakMark(true);
+      return new VoidValue();
+   }
 }

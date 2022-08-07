@@ -3,19 +3,26 @@ package edu.duke.summer.client.algorithm.absyn;
 import edu.duke.summer.client.algorithm.StateInfo;
 import edu.duke.summer.client.algorithm.RuleInfo;
 import edu.duke.summer.client.algorithm.VarEntry;
-import edu.duke.summer.client.algorithm.value.BooleanValue;
 import edu.duke.summer.client.algorithm.value.Value;
+import edu.duke.summer.client.algorithm.value.VoidValue;
 
 import java.util.HashMap;
 import java.util.Random;
 
-public class BoolExp extends Exp{
-    public Boolean value;
+public class DecStmt extends Stmt{
 
-    public BoolExp(int p, Boolean v) {pos=p; value=v;}
+    Dec dec;
+
+    public DecStmt(int p, Dec d){
+        pos = p;
+        dec = d;
+    }
 
     @Override
     public Value eval(VarEntry varEntry, Random randNumGen, RuleInfo info, StateInfo state) {
-        return new BooleanValue(value);
+        if(state.getBreakMark()){
+            return new VoidValue();
+        }
+        return dec.eval(varEntry, randNumGen, info, state);
     }
 }

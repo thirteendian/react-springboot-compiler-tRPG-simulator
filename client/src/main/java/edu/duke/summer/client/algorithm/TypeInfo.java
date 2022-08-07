@@ -25,10 +25,13 @@ public class TypeInfo {
         }else if(str.equals("boolean")){
             type = new BooleanTy(-1, primType, Symbol.symbol("boolean"));
             fields = new FieldList(-1, Symbol.symbol(str), Symbol.symbol(str), type, null);
+        }else if(str.equals("void")) {
+            type = new BooleanTy(-1, primType, Symbol.symbol("void"));
+            fields = new FieldList(-1, Symbol.symbol(str), Symbol.symbol(str), type, null);
         }else{
-            throw new IllegalArgumentException("Invalid basic type used in TypeInfo!");
+                throw new IllegalArgumentException("Invalid basic type used in TypeInfo!");
+            }
         }
-    }
 
     public TypeInfo(String id, Ty t, RuleInfo info){
         typeId = id;
