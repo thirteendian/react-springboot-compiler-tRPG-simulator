@@ -6,10 +6,26 @@
     <script src="/webjars/jquery/jquery.min.js"></script>
     <script src="/webjars/sockjs-client/sockjs.min.js"></script>
     <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+<!--    Import React Core-->
+    <script src="/script/react_core/react.development.js"></script>
+    <script src="/script/react_core/react-dom.development.js"></script>
+    <script src="/script/react_core/babel.min.js"></script>
+<!--    Import Websocket-->
     <script src="/script/websocket.js"></script>
+<!--    Import react JS-->
+    <script type="text/babel">
+        //create virtual DOM
+        const virtualDOM = (
+            <h1>This is Admin Page</h1>
+        )
+        //render virtual DOM to page
+        ReactDOM.render(virtualDOM,document.getElementById('test'))
+    </script>
 </head>
 <body>
-    This is Admin Page
+
+<div id="test"></div>
+
 <input type="hidden" th:value="${uuid}"/>
 
     <table id="conversion" class="table-striped">
@@ -22,4 +38,5 @@
         </tbody>
     </table>
 </body>
+
 </html>
