@@ -1,20 +1,25 @@
 package edu.duke.summer.client.algorithm.absyn;
 
-import edu.duke.summer.client.algorithm.RollState;
+import edu.duke.summer.client.algorithm.StateInfo;
 import edu.duke.summer.client.algorithm.RuleInfo;
-import edu.duke.summer.client.algorithm.Symbol.Symbol;
+import edu.duke.summer.client.algorithm.VarEntry;
 import edu.duke.summer.client.algorithm.value.Value;
 
 import java.util.HashMap;
 import java.util.Random;
 
 public class ArrayExp extends Exp {
-   public Symbol typ;
-   public Exp size, init;
-   public ArrayExp(int p, Symbol t, Exp s, Exp i) {pos=p; typ=t; size=s; init=i;}
+   public Ty typ;
+   //todo: deal with the assignment without init typeId
+   public Exp size;
+   //todo: deal with declaration with size
+   public Exp init;
+   //initArrayExp
+   public ArrayExp(int p, Ty t, Exp i) {pos=p; typ=t; init=i;}
 
    @Override
-   public Value eval(HashMap<String, Value> vars, Random randNumGen, RuleInfo info, RollState state) {
-      return null;
+   public Value eval(VarEntry varEntry, Random randNumGen, RuleInfo info, StateInfo state) {
+      Value v = init.eval(varEntry, randNumGen, info, state);
+      return v;
    }
 }

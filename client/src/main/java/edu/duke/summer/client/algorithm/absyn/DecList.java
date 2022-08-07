@@ -6,10 +6,8 @@ public class DecList {
    public DecList(Dec h, DecList t) {head=h; tail=t;}
 
    public void printInfo(){
-      if(head instanceof TypeDec)System.out.println(((TypeDec) head).typeId);
       DecList curr = tail;
       while(curr != null){
-         if(head instanceof TypeDec)System.out.println(((TypeDec) curr.head).typeId);
          curr = curr.tail;
       }
    }

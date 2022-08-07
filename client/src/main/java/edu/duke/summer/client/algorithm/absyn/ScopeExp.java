@@ -1,7 +1,8 @@
 package edu.duke.summer.client.algorithm.absyn;
 
-import edu.duke.summer.client.algorithm.RollState;
+import edu.duke.summer.client.algorithm.StateInfo;
 import edu.duke.summer.client.algorithm.RuleInfo;
+import edu.duke.summer.client.algorithm.VarEntry;
 import edu.duke.summer.client.algorithm.value.*;
 
 import java.util.HashMap;
@@ -25,13 +26,13 @@ public class ScopeExp extends Exp {
    }
 
    @Override
-   public Value eval(HashMap<String, Value> vars, Random randNumGen, RuleInfo info, RollState state) {
+   public Value eval(VarEntry varEntry, Random randNumGen, RuleInfo info, StateInfo state) {
       DecList curr = decs;
       while(curr != null){
-         curr.head.eval(vars, randNumGen, info, state);
+         curr.head.eval(varEntry, randNumGen, info, state);
          curr = curr.tail;
       }
-      if(body != null) body.eval(vars, randNumGen, info, state);
+      if(body != null) body.eval(varEntry, randNumGen, info, state);
       return new VoidValue();
    }
 }

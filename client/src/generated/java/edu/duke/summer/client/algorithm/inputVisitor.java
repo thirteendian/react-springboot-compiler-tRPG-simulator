@@ -122,6 +122,20 @@ public interface inputVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStructExp(inputParser.StructExpContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code optionExp}
+	 * labeled alternative in {@link inputParser#exp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOptionExp(inputParser.OptionExpContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code strExp}
+	 * labeled alternative in {@link inputParser#exp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStrExp(inputParser.StrExpContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code simpleVarExp}
 	 * labeled alternative in {@link inputParser#exp}.
 	 * @param ctx the parse tree
@@ -142,20 +156,6 @@ public interface inputVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitConditionalExp(inputParser.ConditionalExpContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code stringExp}
-	 * labeled alternative in {@link inputParser#exp}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitStringExp(inputParser.StringExpContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code quoStrExp}
-	 * labeled alternative in {@link inputParser#exp}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitQuoStrExp(inputParser.QuoStrExpContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code intExp}
 	 * labeled alternative in {@link inputParser#exp}.
@@ -178,11 +178,11 @@ public interface inputVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFieldFunCallExp(inputParser.FieldFunCallExpContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link inputParser#strExp}.
+	 * Visit a parse tree produced by {@link inputParser#optionVal}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitStrExp(inputParser.StrExpContext ctx);
+	T visitOptionVal(inputParser.OptionValContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link inputParser#dec}.
 	 * @param ctx the parse tree
@@ -359,12 +359,6 @@ public interface inputVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitForStmt(inputParser.ForStmtContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link inputParser#printStmt}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitPrintStmt(inputParser.PrintStmtContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link inputParser#returnStmt}.
 	 * @param ctx the parse tree

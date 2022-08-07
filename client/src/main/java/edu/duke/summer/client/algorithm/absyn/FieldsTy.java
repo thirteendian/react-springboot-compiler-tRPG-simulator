@@ -1,7 +1,8 @@
 package edu.duke.summer.client.algorithm.absyn;
 
-import edu.duke.summer.client.algorithm.RollState;
+import edu.duke.summer.client.algorithm.StateInfo;
 import edu.duke.summer.client.algorithm.RuleInfo;
+import edu.duke.summer.client.algorithm.VarEntry;
 import edu.duke.summer.client.algorithm.value.*;
 
 import java.util.HashMap;
@@ -28,20 +29,16 @@ public class FieldsTy extends Ty {
       return ans;
    }
 
-   public FieldList getFieldList() {
-      return fields;
-   }
-
    public void printInfo(){
       System.out.println("-------FieldsTy-------");
       fields.printInfo();
    }
 
    @Override
-   public Value eval(HashMap<String, Value> vars, Random randNumGen, RuleInfo info, RollState state) {
+   public Value eval(VarEntry varEntry, Random randNumGen, RuleInfo info, StateInfo state) {
       FieldList list = fields;
       while(list != null){
-         fields.eval(vars, randNumGen, info, state);
+         fields.eval(varEntry, randNumGen, info, state);
          list = list.tail;
       }
       return new VoidValue();
@@ -60,5 +57,10 @@ public class FieldsTy extends Ty {
    @Override
    public Ty getElem() {
       return null;
+   }
+
+   @Override
+   public Value getInitValue() {
+      throw new IllegalArgumentException("Some inner problem happened!");
    }
 }

@@ -13,13 +13,13 @@ exp : ROLL                                                          # rollExp
     | leftExp = exp op = (PLUS|MINUS) rightExp = exp                # arithmeticExp
     | leftExp = exp op = (AND|OR) rightExp = exp                    # arithmeticExp
     | leftExp = exp op = (EQ|NE|LT|LE|GT|GE) rightExp = exp         # arithmeticExp
+    | leftExp = exp op = MOD rightExp = exp                         # arithmeticExp
     | LPAREN exp RPAREN                                             # parensExp
     | ID                                                            # simpleVarExp
     | exp DOT LENGTH                                                # lenExp
     | exp DOT ID LPAREN exps RPAREN                                 # fieldFunCallExp
     | value = INT                                                   # intExp
-    | STRING                                                        # stringExp
-    | strExp                                                        # quoStrExp
+    | STRING                                                        # strExp
     | TRUE                                                          # trueExp
     | FALSE                                                         # falseExp
     | '!' exp                                                       # nonExp
@@ -31,11 +31,14 @@ exp : ROLL                                                          # rollExp
     | DEFSTRUCTKEY ID LBRACE finalFields RBRACE                     # structExp
     | lvalue                                                        # lvalueExp
     | assign                                                        # assignExp
+    | optionVal                                                     # optionExp
     ;
-//stringExp
-strExp : QUO ID QUO
-        |QUO STRING QUO
-        |QUO INT QUO;
+
+
+//optionExp
+optionVal : SOME LPAREN exp RPAREN
+           |NONE
+;
 
 //declaration
 dec : defType
@@ -78,8 +81,10 @@ paramRest : COMMA typeID ID;
 
 //vars declaration
 defVar : DEFVARKEY ID ASSIGN exp
-        |DEFVARKEY ID COLON ID ASSIGN exp
-        |DEFVARKEY ID COLON ID
+        |DEFVARKEY ID COLON typeID ASSIGN exp
+        |DEFVARKEY ID COLON typeID ASSIGN LBRACE initArray RBRACE
+        |DEFVARKEY ID ASSIGN LBRACE initArray RBRACE
+        |DEFVARKEY ID COLON typeID
         ;
 
 //function call
@@ -112,11 +117,9 @@ ifStmt : IF LPAREN condExp = exp RPAREN THEN op1 = stmts ELSE op2 = stmts
        | IF LPAREN condExp = exp RPAREN THEN op1 = stmts
        ;
 
-whileStmt : WHILE LPAREN exp RPAREN DO stmts;
+whileStmt : WHILE LPAREN exp RPAREN stmts;
 
 forStmt : FOR LPAREN ID COLON exp RPAREN stmts;
-
-printStmt : PRINT LPAREN exp RPAREN SEMICOLON;
 
 returnStmt : RETURN exp SEMICOLON;
 
@@ -128,7 +131,6 @@ stmts: LBRACE stmts* RBRACE
       |ifStmt
       |whileStmt
       |forStmt
-      |printStmt
       |returnStmt
       |decStmt
       |BREAK SEMICOLON
@@ -137,7 +139,6 @@ stmts: LBRACE stmts* RBRACE
 
 defFun : DEFFUNKEY typeID ID LPAREN paramList RPAREN LBRACE decStmt* stmts* returnStmt RBRACE;
 
-QUO: '"';
 EQ: '==';
 NE: '!=';
 PLUS: '+';
@@ -166,6 +167,8 @@ NEW: 'new' ;
 ROLL: INT ROLLKEY INT ;
 SINGLEROLL: ROLLKEY INT;
 ROLLKEY: [d|D] ;
+SOME: 'some'|'SOME';
+NONE: 'NONE';
 IF: 'if';
 THEN: 'then';
 ELSE: 'else';
@@ -188,5 +191,9 @@ DEFVARKEY: 'var';
 DEFSTRUCTKEY: 'struct';
 INT: [0-9]+ ;
 ID: [a-zA-Z][0-9a-zA-Z]* ;
-STRING:[0-9a-zA-Z]+ ;
+STRING: '"' (ESC|.)*? '"' ;
+fragment
+ESC : '\\"' | '\\\\' ;
 WS: [ \t\r\n]+ -> skip ;
+LINE_COMMENT : '//' .*? '\r'? '\n' -> skip ;
+COMMENT      : '/*' .*? '*/'       -> skip ;

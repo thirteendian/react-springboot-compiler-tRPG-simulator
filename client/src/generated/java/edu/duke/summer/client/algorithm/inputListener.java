@@ -197,6 +197,30 @@ public interface inputListener extends ParseTreeListener {
 	 */
 	void exitStructExp(inputParser.StructExpContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code optionExp}
+	 * labeled alternative in {@link inputParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void enterOptionExp(inputParser.OptionExpContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code optionExp}
+	 * labeled alternative in {@link inputParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void exitOptionExp(inputParser.OptionExpContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code strExp}
+	 * labeled alternative in {@link inputParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void enterStrExp(inputParser.StrExpContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code strExp}
+	 * labeled alternative in {@link inputParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void exitStrExp(inputParser.StrExpContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code simpleVarExp}
 	 * labeled alternative in {@link inputParser#exp}.
 	 * @param ctx the parse tree
@@ -232,30 +256,6 @@ public interface inputListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitConditionalExp(inputParser.ConditionalExpContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code stringExp}
-	 * labeled alternative in {@link inputParser#exp}.
-	 * @param ctx the parse tree
-	 */
-	void enterStringExp(inputParser.StringExpContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code stringExp}
-	 * labeled alternative in {@link inputParser#exp}.
-	 * @param ctx the parse tree
-	 */
-	void exitStringExp(inputParser.StringExpContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code quoStrExp}
-	 * labeled alternative in {@link inputParser#exp}.
-	 * @param ctx the parse tree
-	 */
-	void enterQuoStrExp(inputParser.QuoStrExpContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code quoStrExp}
-	 * labeled alternative in {@link inputParser#exp}.
-	 * @param ctx the parse tree
-	 */
-	void exitQuoStrExp(inputParser.QuoStrExpContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code intExp}
 	 * labeled alternative in {@link inputParser#exp}.
@@ -293,15 +293,15 @@ public interface inputListener extends ParseTreeListener {
 	 */
 	void exitFieldFunCallExp(inputParser.FieldFunCallExpContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link inputParser#strExp}.
+	 * Enter a parse tree produced by {@link inputParser#optionVal}.
 	 * @param ctx the parse tree
 	 */
-	void enterStrExp(inputParser.StrExpContext ctx);
+	void enterOptionVal(inputParser.OptionValContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link inputParser#strExp}.
+	 * Exit a parse tree produced by {@link inputParser#optionVal}.
 	 * @param ctx the parse tree
 	 */
-	void exitStrExp(inputParser.StrExpContext ctx);
+	void exitOptionVal(inputParser.OptionValContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link inputParser#dec}.
 	 * @param ctx the parse tree
@@ -600,16 +600,6 @@ public interface inputListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitForStmt(inputParser.ForStmtContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link inputParser#printStmt}.
-	 * @param ctx the parse tree
-	 */
-	void enterPrintStmt(inputParser.PrintStmtContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link inputParser#printStmt}.
-	 * @param ctx the parse tree
-	 */
-	void exitPrintStmt(inputParser.PrintStmtContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link inputParser#returnStmt}.
 	 * @param ctx the parse tree

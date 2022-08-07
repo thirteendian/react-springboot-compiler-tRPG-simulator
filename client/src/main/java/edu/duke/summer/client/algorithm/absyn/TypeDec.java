@@ -1,9 +1,10 @@
 package edu.duke.summer.client.algorithm.absyn;
 
-import edu.duke.summer.client.algorithm.RollState;
+import edu.duke.summer.client.algorithm.StateInfo;
 import edu.duke.summer.client.algorithm.RuleInfo;
 import edu.duke.summer.client.algorithm.Symbol.Symbol;
 import edu.duke.summer.client.algorithm.TypeInfo;
+import edu.duke.summer.client.algorithm.VarEntry;
 import edu.duke.summer.client.algorithm.value.*;
 
 import java.util.HashMap;
@@ -17,14 +18,14 @@ public class TypeDec extends Dec {
    public TypeDec(int p, Symbol n, Ty t) {pos=p; typeId=n; ty=t;}
 
    @Override
-   public Value eval(HashMap<String, Value> vars, Random randNumGen, RuleInfo info, RollState state) {
-       ty.eval(vars, randNumGen, info, state);
+   public Value eval(VarEntry varEntry, Random randNumGen, RuleInfo info, StateInfo state) {
+       ty.eval(varEntry, randNumGen, info, state);
      if(ty instanceof FieldsTy){
         TypeInfo typeinfo = new TypeInfo(typeId.toString(), ty, info);
         info.addTypes(typeinfo);
      }else if(ty instanceof NameTy){
          //check whether the type exists
-         ty.eval(vars,randNumGen,info,state);
+         ty.eval(varEntry,randNumGen,info,state);
          String id = ((NameTy) ty).name.toString();
         if(info.getTypes().containsKey(id)){
            TypeInfo referInfo = info.getTypes().get(id);

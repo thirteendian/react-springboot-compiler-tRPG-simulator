@@ -14,10 +14,8 @@ public class ExpList {
    }
 
    public void printInfo(){
-      System.out.println(head.toString());
       ExpList curr= tail;
       while(curr != null){
-         System.out.println(curr.head.toString());
          curr = curr.tail;
 
       }
