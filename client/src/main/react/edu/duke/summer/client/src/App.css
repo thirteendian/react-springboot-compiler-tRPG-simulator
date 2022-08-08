@@ -1,0 +1,30 @@
+body, html {
+    background-color:#1E1E1E;
+    margin: 0;
+    overflow: auto;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+
+.main_container{
+    /*position: relative;*/
+    margin: 5% auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
+}
+@font-face {
+    font-family: 'Bungee Regular';
+    src: url("../public/font/bungee/Bungee-Regular-webfont.woff");
+}
+@font-face {
+    font-family: 'Bungee Inline';
+    src: url("../public/font/bungee/Bungee-Inline-webfont.woff");
+}
+
+.error {
+    color: red;
+}

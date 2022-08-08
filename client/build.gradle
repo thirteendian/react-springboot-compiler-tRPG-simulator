@@ -8,7 +8,6 @@
 
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
-    id "application"
     id 'org.siouan.frontend-jdk11'version "6.0.0"
 }
 
@@ -41,10 +40,6 @@ dependencies {
 
 }
 
-application {
-    // Define the main class for the application.
-    mainClass = 'edu.duke.ece568.client.Client'
-}
 
 tasks.named('test') {
     // Use JUnit Platform for unit tests.

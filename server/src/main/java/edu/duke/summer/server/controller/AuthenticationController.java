@@ -45,28 +45,28 @@ public class AuthenticationController {
      *       index_after_login(ROLE_USER)
      *       admin_index_after_login.html(ROLE_ADMIN)
      */
-    @GetMapping("/")
-    public String index(Model model, HttpSession httpSession) {
-        //If Authenticated
-        if (myUserDetailsService.isUserAuthenticated()) {
-            //Init User Info
-            MyUserDtails myUserDtails = myUserDetailsService.loadMyUserDetailsOfCurrentUser();
-            httpSession.setAttribute("USER_UUID",myUserDtails.getUuid());
-            model.addAttribute("uuid",httpSession.getAttribute("USER_UUID"));
-
-            //IF Admin
-            if(myUserDetailsService.isUserhasRole("ROLE_ADMIN")){
-                System.out.println("Controller./()admin [session:]"+httpSession.getId());
-                return"redirect:/admin/"+myUserDtails.getUuid()+ "/index_after_login";
-            }
-            //IF User
-            System.out.println("Controller./()user [session:]"+httpSession.getId());
-            return "redirect:/user/" + myUserDtails.getUuid() + "/index_after_login";
-        }
-        //If not Authenticated
-        System.out.println("Controller./() [session:]"+httpSession.getId());
-        return "index_before_login";
-    }
+//    @GetMapping("/")
+//    public String index(Model model, HttpSession httpSession) {
+//        //If Authenticated
+//        if (myUserDetailsService.isUserAuthenticated()) {
+//            //Init User Info
+//            MyUserDtails myUserDtails = myUserDetailsService.loadMyUserDetailsOfCurrentUser();
+//            httpSession.setAttribute("USER_UUID",myUserDtails.getUuid());
+//            model.addAttribute("uuid",httpSession.getAttribute("USER_UUID"));
+//
+//            //IF Admin
+//            if(myUserDetailsService.isUserhasRole("ROLE_ADMIN")){
+//                System.out.println("Controller./()admin [session:]"+httpSession.getId());
+//                return"redirect:/admin/"+myUserDtails.getUuid()+ "/index_after_login";
+//            }
+//            //IF User
+//            System.out.println("Controller./()user [session:]"+httpSession.getId());
+//            return "redirect:/user/" + myUserDtails.getUuid() + "/index_after_login";
+//        }
+//        //If not Authenticated
+//        System.out.println("Controller./() [session:]"+httpSession.getId());
+//        return "index_before_login";
+//    }
 
     /**
      * Page: login.html

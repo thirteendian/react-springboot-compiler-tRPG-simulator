@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-fs.copyFile('src/main/frontend/src/index.html', 'build/www/index.html', (err) => {
+fs.copyFile('src/main/frontend/public/index.html', 'build/www/index.html', (err) => {
     if (err) {
         throw err;
     }

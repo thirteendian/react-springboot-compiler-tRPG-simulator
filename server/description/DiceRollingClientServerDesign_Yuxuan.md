@@ -785,6 +785,7 @@ Note that to delete closure function variable to prevent memory leaking.
 
 ### 5.2 React
 
+
 #### 5.2.0 Spring Cross Origin
 
 [React.js and Spring Data REST](https://spring.io/guides/tutorials/react-and-spring-data-rest/)
@@ -924,3 +925,44 @@ and give the event to the very outsider element.
 #### 5.2.4 diff algorithm
 
 Virtual DOM use label as a comparable minimum element. And compare label from outside to inside.
+
+
+
+For react, where accept the data, where need to define data method.
+
+
+For CORS problem, is able to send, but not possible to receive
+The proxy is running on the proxy server is the same port as client,
+but do not have ajax wall.
+
+
+####Fetch and sync await
+Separation of Concerns, Fetch and XHR(HMLHttpRequest):
+XHR and it's related method(jQuary & Axios) is not suitable for SoC.
+Fetch will seperate XHR connect and request data into few steps. May combine
+await sync function to curry the responce info and try catch to solve throw error
+
+```jsx
+//async function
+async ()=>{
+    try(){
+    const response = await fetch("/url")//step 1 connect Promise
+        //response is the first step pending Promise
+    const data = await response.json()//step 2 fetch data Promise
+    console.log(data)
+    }catch (e) {
+        //solve error that throwed by above two steps
+    }
+}
+```
+
+####Router
+
+SPA single page application through router. 
+SPA urls(actually called path, because do not have actual html page url) 
+now corresponding to multiple Component(or Functions).
+* Backend Router, key is path, value is function, like spring controller
+* Frontend Router(Hash Router with #), key is component. Corresponding to browser's history(BOM's history).
+
+
+

@@ -21,7 +21,6 @@ public class ClientApplication {
 	}
 
 
-
 	@Bean
 	public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
 		return args -> {
