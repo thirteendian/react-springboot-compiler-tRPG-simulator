@@ -93,7 +93,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/")
 
                 .and()
-                .rememberMe().rememberMeParameter("remember-me")
+                .rememberMe().rememberMeParameter("remember_me")
                 .key("uniqueAndSecret")
                 .tokenValiditySeconds(86400)//valid for a day
 

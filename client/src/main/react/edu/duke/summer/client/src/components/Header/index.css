@@ -1,0 +1,198 @@
+.header_dice_rolling_game {
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 96px;
+    text-align: center;
+    color: #FFFFFF;
+
+    /*text-align: center;*/
+    /*margin: 0 auto;*/
+    position: absolute;
+    width: 1317px;
+    height: 118px;
+    left: 62px;
+    top: 80px;
+}
+
+.header_login{
+    font-family: 'Bungee Inline',serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 43px;
+    text-align: center;
+
+    color: #FFFFFF;
+
+    position: absolute;
+    width: 1000px;
+    height: 117px;
+    left: 242px;
+    top: 200px;
+}
+
+.header_login_username{
+    font-family: 'Bungee Regular', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 48px;
+
+    position: absolute;
+    width: 466px;
+    height: 90px;
+    left: 269px;
+    top: 400px;
+    color: #FFFFFF;
+}
+
+.header_login_password{
+    font-family: 'Bungee Regular', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 48px;
+    color: #FFFFFF;
+
+    position: absolute;
+    width: 466px;
+    height: 90px;
+    left: 269px;
+    top: 550px;
+}
+
+.header_rememberme{
+    font-family: 'Bungee Regular', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 48px;
+    color: #FFFFFF;
+
+    position: absolute;
+    width: 400px;
+    height: 48px;
+    left: 300px;
+    top: 660px;
+    text-align: center;
+}
+
+
+.header_signup{
+    font-family: 'Bungee Inline',serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 43px;
+    text-align: center;
+
+    color: #FFFFFF;
+
+    position: absolute;
+    width: 1000px;
+    height: 117px;
+    left: 242px;
+    top: 200px;
+}
+
+
+.header_signup_email{
+    font-family: 'Bungee Regular', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 48px;
+
+    position: absolute;
+    width: 466px;
+    height: 90px;
+    left: 200px;
+    top: 270px;
+    color: #FFFFFF;
+}
+.header_signup_firstname{
+    font-family: 'Bungee Regular', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 48px;
+
+    position: absolute;
+    width: 466px;
+    height: 90px;
+    left: 200px;
+    top: 370px;
+    color: #FFFFFF;
+}
+.header_signup_surname{
+    font-family: 'Bungee Regular', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 48px;
+
+    position: absolute;
+    width: 466px;
+    height: 90px;
+    left: 850px;
+    top: 370px;
+    color: #FFFFFF;
+}
+.header_signup_username{
+    font-family: 'Bungee Regular', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 48px;
+
+    position: absolute;
+    width: 466px;
+    height: 90px;
+    left: 200px;
+    top: 470px;
+    color: #FFFFFF;
+}
+.header_signup_password{
+    font-family: 'Bungee Regular', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 48px;
+
+    position: absolute;
+    width: 466px;
+    height: 90px;
+    left: 200px;
+    top: 570px;
+    color: #FFFFFF;
+}
+.header_signup_reEnterPassword{
+    font-family: 'Bungee Regular', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 48px;
+
+    position: absolute;
+    width: 466px;
+    height: 90px;
+    left: 200px;
+    top: 670px;
+    color: #FFFFFF;
+}
+.header_signup_upload_your_profile{
+    font-family: 'Bungee Regular', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 48px;
+
+    position: absolute;
+    width: 466px;
+    height: 90px;
+    left: 200px;
+    top: 770px;
+    color: #FFFFFF;
+}

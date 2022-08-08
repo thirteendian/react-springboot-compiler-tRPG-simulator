@@ -149,28 +149,7 @@
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.loginPage_checkbox{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 0px;
 
-    position: absolute;
-    width: 16px;
-    height: 16px;
-    left: 574px;
-    top: 743px;
-}
-
-.loginPage_rememberMe{
-    position: absolute;
-    width: 316px;
-    height: 48px;
-    left: 623px;
-    top: 695px;
-
-    text-align: center;
-}
 
 .loginPage_text_font{
     font-family: 'Bungee Regular';

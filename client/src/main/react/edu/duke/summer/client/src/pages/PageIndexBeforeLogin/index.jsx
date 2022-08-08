@@ -1,22 +1,22 @@
 import React, {Component} from 'react';
-import HeaderDiceRollingGame from "../../components/HeaderDiceRollingGame";
-import ButtonNavigation from "../../components/ButtonNavigation";
+import {Route, Routes} from "react-router-dom";
 import "./index.css";
-import {NavLink,Route,Routes} from "react-router-dom";
-import FormLogin from "../../components/FormLogin";
-
+import Header from "../../components/Header";
+import Login from "../../assemblies/Login";
+import NavigationBeforeLogin from "../../assemblies/NavigationBeforeLogin";
+import Signup from "../../assemblies/Signup";
 
 class Index extends Component {
+
     render() {
         return (
             <div>
                 <div className="bg_chapel">
-                    <HeaderDiceRollingGame content={"Dice Rolling Game"}/>
-                    <NavLink className="index_before_login_login_button_container" to={"/login"} >
-                        Login
-                    </NavLink>
+                    <Header className={"header_dice_rolling_game"}>Dice Rolling Game</Header>
                     <Routes>
-                        <Route path="/login" element={<FormLogin/>}/>
+                        <Route path="/" element={<NavigationBeforeLogin/>}/>
+                        <Route path="/login" element={<Login/>}/>
+                        <Route path="/signup" element={<Signup/>}/>
                     </Routes>
                 </div>
             </div>

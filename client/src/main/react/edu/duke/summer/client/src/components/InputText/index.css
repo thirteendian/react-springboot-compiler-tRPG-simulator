@@ -1,0 +1,200 @@
+.input_login_username{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 494px;
+    height: 90px;
+    left: 558px;
+    top: 400px;
+
+
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    font-family: 'Bungee Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+
+    color: #FFFFFF;
+}
+
+.input_login_password{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 494px;
+    height: 90px;
+    left: 558px;
+    top: 550px;
+
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    font-family: 'Bungee Regular', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+
+    color: #FFFFFF;
+}
+
+
+.input_signup_email{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 770px;
+    height: 90px;
+    left: 500px;
+    top: 270px;
+
+
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    font-family: 'Bungee Regular', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+
+    color: #FFFFFF;
+}
+.input_signup_firstname{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 340px;
+    height: 90px;
+    left: 500px;
+    top: 370px;
+
+
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    font-family: 'Bungee Regular', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+
+    color: #FFFFFF;
+}
+.input_signup_surname{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 190px;
+    height: 90px;
+    left: 1080px;
+    top: 370px;
+
+
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    font-family: 'Bungee Regular', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+
+    color: #FFFFFF;
+}
+.input_signup_username{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 770px;
+    height: 90px;
+    left: 500px;
+    top: 470px;
+
+
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    font-family: 'Bungee Regular', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+
+    color: #FFFFFF;
+}
+.input_signup_password{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 770px;
+    height: 90px;
+    left: 500px;
+    top: 570px;
+
+
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    font-family: 'Bungee Regular', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+
+    color: #FFFFFF;
+}
+.input_signup_reEnter{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 770px;
+    height: 90px;
+    left: 500px;
+    top: 670px;
+
+
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    font-family: 'Bungee Regular', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+
+    color: #FFFFFF;
+}
+.input_signup_uploadProfile{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 770px;
+    height: 90px;
+    left: 500px;
+    top: 770px;
+
+
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    font-family: 'Bungee Regular', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+
+    color: #FFFFFF;
+}

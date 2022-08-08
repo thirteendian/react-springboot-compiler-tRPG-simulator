@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import axios from "axios";
-import HeaderDiceRollingGame from "./components/HeaderDiceRollingGame";
-import { BrowserRouter as Router, Routes, Route,NavLink} from 'react-router-dom';
+import { BrowserRouter as Router} from 'react-router-dom';
 import "./App.css"
 import PageIndexBeforeLogin from "./pages/PageIndexBeforeLogin";
 
