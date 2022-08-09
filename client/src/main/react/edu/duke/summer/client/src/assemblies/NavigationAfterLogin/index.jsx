@@ -9,7 +9,7 @@ class Index extends Component {
             <div>
                 <Header className={"header_dice_rolling_game"}>Dice Rolling Game</Header>
 
-                    <MyNavLink className={"myNavLink_createGame"} to={"/user/createGame"}>
+                    <MyNavLink className={"myNavLink_createGame1"} to={"/user/createGame"}>
                         Create Game
                     </MyNavLink>
 

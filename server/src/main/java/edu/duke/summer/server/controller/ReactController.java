@@ -66,8 +66,33 @@ public class ReactController {
 
 
     @GetMapping(value = "/rollwithmod")
-    public ObjectFieldDto getRollWithMod(){
-        return gameService.getObjectFields("1","rollwithmod");
+    public RespObjectCreatingField getRollWithMod(){
+        String test = "{type rollwithmod {\n" +
+                "    numdice:int,\n" +
+                "    numsides:int option option [],\n" +
+                "    modifier:int [][][] option\n" +
+                "    }\n" +
+                "type test = rollwithmod;\n" +
+                "type newType {\n" +
+                "    a:rollwithmod,\n" +
+                "    b:string option [] option,\n" +
+                "    c:boolean option []\n" +
+                "    }\n" +
+                "}";
+        CreateGameDto createGameDto = new CreateGameDto();
+        createGameDto.setGameName("asdf");
+        createGameDto.setId("1");
+        createGameDto.setPlayerNum(1);
+        gameService.createNewGame(createGameDto);
+        gameService.createObjects("1", test);
+
+        ObjectFieldDto objectFieldDto = gameService.getObjectFields("1","rollwithmod");
+        RespObjectCreatingField respObjectCreatingField = new RespObjectCreatingField();
+        //List of field(Order)
+        respObjectCreatingField.setObjectField(objectFieldDto.getObjectField());
+        //Hashmap of Type(Self FK)
+        respObjectCreatingField.setFieldType(objectFieldDto.getFieldType());
+        return respObjectCreatingField;
 
     }
     //

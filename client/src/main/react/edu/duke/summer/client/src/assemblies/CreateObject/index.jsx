@@ -1,40 +1,41 @@
 import React, {Component} from 'react';
-import"./index.css";
+import "./index.css";
 import Header from "../../components/Header";
-import axios from "axios";
+import List from "../../components/List";
+import InputText from "../../components/InputText";
 
 class Index extends Component {
-    objectRollwithmod = async () => {
-        const url = "http://localhost:12345/test/rollwithmod";
-        const response = await axios(url);
-        const axiosValue = response.data;
-        console.log(axiosValue.fieldType);
+    state = {
+        rollwithmod: false,
+        newtype: false,
+        test: false,
+        toarray: [
+            {id: "001", name: "At Moment"},
+            {id: "002", name: "Yesterday"},
+            {id: "003", name: "Tomorrow"},
+        ]
     }
-    objectNewType = async () => {
-        const url = "http://localhost:12345/test/newtype";
-        const object = JSON.stringify( {
-            gamename: this.state.gamename,
-            numplayer: this.state.numplayer,
-        })
-        console.log(object)
-        const response = await axios.post(url, {});
-        const axiosValue = response.data;
-        // const fieldType = new Map(Object.entries(JSON.parse(axiosValue).fieldType));
-        console.log(axiosValue);
+
+    objectRollwithmod = () => {
+        this.setState({rollwithmod: true})
+        this.setState({newtype: false})
+        this.setState({test: false})
+
+        console.log(this.state.rollwithmod);
     }
-    objectTest = async () => {
-        const url = "http://localhost:12345/test/testtype";
-        const object = JSON.stringify( {
-            gamename: this.state.gamename,
-            numplayer: this.state.numplayer,
-        })
-        console.log(object)
-        const response = await axios.post(url, {});
-        const axiosValue = response.data;
-        // const fieldType = new Map(Object.entries(JSON.parse(axiosValue).fieldType));
-        console.log(axiosValue);
+    objectNewType = () => {
+        this.setState({rollwithmod: false})
+        this.setState({newtype: true})
+        this.setState({test: false})
     }
+    objectTest = () => {
+        this.setState({rollwithmod: false})
+        this.setState({newtype: false})
+        this.setState({test: true})
+    }
+
     render() {
+        const {rollwithmod, newtype, test,toarray} = this.state;
         return (
             <div>
                 <Header className={"header_dice_rolling_game"}>Dice Rolling Game</Header>
@@ -43,10 +44,33 @@ class Index extends Component {
                 <button className={"createObject_C"} onClick={this.objectTest}>test</button>
 
                 <div className="objectGenerateBackground">
+                    {
+                        rollwithmod && (
+                            <div>
+                                <List toarray={toarray}/>
 
+                            </div>
+                        )
+                    }
+                    {
+                        newtype && (
+                            <div>
+
+                            </div>
+                        )
+                    }
+                    {
+                        test && (
+                            <div>
+
+                            </div>
+                        )
+                    }
                 </div>
+
             </div>
-        );
+
+        )
     }
 }
 

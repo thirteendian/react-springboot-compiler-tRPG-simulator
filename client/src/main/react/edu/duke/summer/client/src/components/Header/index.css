@@ -267,3 +267,20 @@
 
     color: #FFFFFF;
 }
+
+
+
+.header_createObject_a{
+    font-family: 'Bungee Regular', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 48px;
+
+    position: absolute;
+    width: 466px;
+    height: 90px;
+    left: 200px;
+    top: 270px;
+    color: #FFFFFF;
+}
