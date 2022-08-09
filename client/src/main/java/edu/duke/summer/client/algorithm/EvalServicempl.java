@@ -55,7 +55,7 @@ public class EvalServicempl implements EvalService{
     @Override
     public FuncCallResult getFunResult(String ruleStr, String funcName, HashMap<String, Value> params, StateInfo state) {
         RuleInfo ruleInfo = saveRules(ruleStr);
-        return ruleInfo.getFuncs().get("testRoll").getResult(params, state);
+        return ruleInfo.getFuncs().get(funcName).getResult(params, state);
     }
 
 

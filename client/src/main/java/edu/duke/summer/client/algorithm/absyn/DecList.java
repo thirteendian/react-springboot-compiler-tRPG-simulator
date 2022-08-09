@@ -12,12 +12,12 @@ public class DecList {
       }
    }
 
-   public void append(DecList list){
-     // DecList mark = tail;
-      while(tail != null){
-         tail = tail.tail;
+   public DecList append(DecList list){
+      if(tail != null){
+         tail = tail.append(list);
+      }else{
+         tail = list;
       }
-      tail = list;
-      //tail = mark;
+      return this;
    }
 }

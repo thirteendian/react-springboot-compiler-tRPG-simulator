@@ -327,7 +327,7 @@ public class BuildASTVisitor extends inputBaseVisitor<Absyn>{
         Ty type = (Ty) visit(ctx.typeID());
         FieldList list = new FieldList(ctx.start.getLine(),Symbol.symbol(Id), Symbol.symbol(typeId), type, null);
         for(inputParser.ParamRestContext subCtx : ctx.paramRest()){
-            list.append((FieldList) visitParamRest(subCtx));
+            list = list.append((FieldList) visitParamRest(subCtx));
         }
         return list;
     }
@@ -378,7 +378,7 @@ public class BuildASTVisitor extends inputBaseVisitor<Absyn>{
         DecList list = new DecList(dec, null);
         ScopeExp scope = new ScopeExp(ctx.start.getLine(), list, null);
         if(ctx.decs() != null){
-            scope.append((ScopeExp)visit(ctx.decs()));
+            scope = scope.append((ScopeExp)visit(ctx.decs()));
         }
         return scope;
     }
@@ -498,7 +498,7 @@ public class BuildASTVisitor extends inputBaseVisitor<Absyn>{
         ExpList expList = new ExpList(head, null);
         SeqExp seq = new SeqExp(ctx.start.getLine(), expList);
         if(ctx.exps() != null){
-            seq.append((SeqExp) visitExps(ctx.exps()));
+            seq = seq.append((SeqExp) visitExps(ctx.exps()));
         }
         return seq;
     }
@@ -513,7 +513,7 @@ public class BuildASTVisitor extends inputBaseVisitor<Absyn>{
     public Absyn visitMulParam(inputParser.MulParamContext ctx){
         ExpList list = new ExpList((Exp)visit(ctx.exp()), null);
         SeqExp seq = new SeqExp(ctx.exp().start.getLine(), list);
-        seq.append((SeqExp)visit(ctx.params()));
+        seq = seq.append((SeqExp)visit(ctx.params()));
         return seq;
     }
 
