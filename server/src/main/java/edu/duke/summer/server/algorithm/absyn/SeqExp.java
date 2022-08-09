@@ -1,10 +1,9 @@
 package edu.duke.summer.server.algorithm.absyn;
 
-import edu.duke.summer.server.algorithm.RollState;
+import edu.duke.summer.server.algorithm.StateInfo;
 import edu.duke.summer.server.algorithm.RuleInfo;
+import edu.duke.summer.server.algorithm.VarEntry;
 import edu.duke.summer.server.algorithm.value.*;
-import edu.duke.summer.server.algorithm.value.Value;
-import edu.duke.summer.server.algorithm.value.VoidValue;
 
 import java.util.HashMap;
 import java.util.Random;
@@ -12,8 +11,9 @@ import java.util.Random;
 public class SeqExp extends Exp {
    public ExpList list;
    public SeqExp(int p, ExpList l) {pos=p; list=l;}
-   public void append(SeqExp tail){
-      list.append(tail.list);
+   public SeqExp append(SeqExp tail){
+      list = list.append(tail.list);
+      return this;
    }
 
    public void printInfo(){
@@ -31,10 +31,10 @@ public class SeqExp extends Exp {
    }
 
    @Override
-   public Value eval(HashMap<String, Value> vars, Random randNumGen, RuleInfo info, RollState state) {
+   public Value eval(VarEntry varEntry, Random randNumGen, RuleInfo info, StateInfo state) {
       ExpList curr = list;
       while(curr != null){
-         curr.head.eval(vars,randNumGen,info,state);
+         curr.head.eval(varEntry,randNumGen,info,state);
          curr = curr.tail;
       }
       return new VoidValue();

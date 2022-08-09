@@ -125,6 +125,10 @@ public class Print {
     say(")");
   }
 
+  void prStmt(BreakStmt e, int d) {
+    sayln("BreakStmt");
+  }
+
   void prStmt(WhileStmt e, int d) {
     sayln("WhileExp(");
     prExp(e.test, d+1); sayln(",");
@@ -132,16 +136,11 @@ public class Print {
   }
 
   void prStmt(ForStmt e, int d) {
-    sayln("ForExp(");
-    indent(d+1); prDec(e.var, d+1); sayln(",");
-    prExp(e.scope, d+1); sayln(",");
-    prStmt(e.body, d+1); say(")");
+//    sayln("ForExp(");
+//    indent(d+1); prDec(e.var, d+1); sayln(",");
+//    prExp(e.scope, d+1); sayln(",");
+//    prStmt(e.body, d+1); say(")");
   }
-
-  void prExp(BreakExp e, int d) {
-    say("BreakExp()");
-  }
-
   void prExp(ScopeExp e, int d) {
     say("LetExp("); sayln("");
     prDecList(e.decs, d+1); sayln(",");
@@ -157,6 +156,7 @@ public class Print {
     if (e instanceof IfStmt) prStmt((IfStmt) e, d);
     else if (e instanceof WhileStmt) prStmt((WhileStmt) e, d);
     else if (e instanceof ForStmt) prStmt((ForStmt) e, d);
+    else if (e instanceof BreakStmt) prStmt((BreakStmt) e, d);
   }
   /* Print Exp class types. Indent d spaces. */
   public void prExp(Exp e, int d) {
@@ -170,7 +170,6 @@ public class Print {
     else if (e instanceof StructExp) prExp((StructExp) e, d);
     else if (e instanceof SeqExp) prExp((SeqExp) e, d);
     else if (e instanceof AssignExp) prExp((AssignExp) e, d);
-    else if (e instanceof BreakExp) prExp((BreakExp) e, d);
     else if (e instanceof ScopeExp) prExp((ScopeExp) e, d);
     else if (e instanceof ArrayExp) prExp((ArrayExp) e, d);
     else throw new Error("Print.prExp");
@@ -182,7 +181,7 @@ public class Print {
       sayln(d.name.toString());
       prFieldlist(d.params, i+1); sayln(",");
       if (d.result!=null) {
-	indent(i+1); sayln(d.result.name.toString());
+	indent(i+1); sayln(d.result.toString());
       }
       prStmt(d.body, i+1); sayln(",");
       indent(i+1);
@@ -193,7 +192,7 @@ public class Print {
   void prDec(VarDec d, int i) {
     say("VarDec("); say(d.name.toString()); sayln(",");
     if (d.typ!=null) {
-      indent(i+1); say(d.typ.name.toString());  sayln(",");
+      indent(i+1); say(d.typ.toString());  sayln(",");
     }
     prExp(d.init, i+1); sayln(",");
     indent(i+1); say(d.escape); say(")");
@@ -228,7 +227,7 @@ public class Print {
   }
 
   void prTy(ArrayTy t, int i) {
-    say("ArrayTy("); say(t.getTyName().toString()); say(")");
+    say("ArrayTy("); say(t.getName().toString()); say(")");
   }
 
   void prTy(Ty t, int i) {
