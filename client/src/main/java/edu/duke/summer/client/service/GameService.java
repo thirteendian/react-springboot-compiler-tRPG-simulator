@@ -63,12 +63,12 @@ public interface GameService {
   List<Player> getAllPlayers(String game);
 
   /**
-   * Create and store object types & fields through the code provided by the game creator
+   * Create and store the information of objects & functions through the code provided by the game creator
    *
    * @param gameId the game that the creator is involved in
-   * @param code the code that contains the description of objects
+   * @param code the code that contains the description of objects & functions
    */
-  void createObjects(String gameId, String code);
+  void initializeGame(String gameId, String code);
 
   /**
    * Get all object types in the game

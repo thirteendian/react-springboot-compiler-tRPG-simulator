@@ -180,10 +180,14 @@ public class GameServiceImpl implements GameService {
     return playerRepository.findAllByGame(game);
   }
 
-  public void createObjects(String gameId, String code) {
+  public void initializeGame(String gameId, String code) {
     EvalServicempl evalService = new EvalServicempl();
     RuleInfo ruleInfo = evalService.saveRules(code);
-    HashMap<String, TypeInfo> types = ruleInfo.getTypes();
+    createObjects(gameId, ruleInfo.getTypes());
+    createFunctions(gameId, ruleInfo.getFuncs());
+  }
+
+  public void createObjects(String gameId, HashMap<String, TypeInfo> types) {
     for (String type : types.keySet()) {
       if (!type.equals("int") && !type.equals("boolean") && !type.equals("string")) {
         //System.out.println(type);
@@ -195,9 +199,26 @@ public class GameServiceImpl implements GameService {
     }
   }
 
+  public void createFunctions(String gameId, HashMap<String, FuncInfo> functions) {
+    for (String func : functions.keySet()) {
+      FuncInfo funcInfo = functions.get(func);
+      String funcName = funcInfo.getFuncName();
+      if (!funcName.equals("output") && !funcName.equals("roll") && !funcName.equals("oneUserOption") && !funcName.equals("userOption")) {
+        System.out.println("function name: " + funcInfo.getFuncName());
+        FieldList param = funcInfo.getParams();
+        while (param != null) {
+          System.out.println("parameter: " + param.getName().toString());
+          System.out.println("type: " + param.getType().getName());
+          System.out.println("key: " + param.getType().getKey());
+          param = param.getTail();
+        }
+      }
+    }
+  }
+
   public void traverseFields(String gameId, String typeName, int fieldNum, FieldList fields) {
     if (fields != null) {
-      System.out.println("fieldName: " + fields.getName().toString());
+      //System.out.println("fieldName: " + fields.getName().toString());
       Ty ty  =fields.getType();
       String fieldType = traverseTypes(ty);
       ObjectField objectField = new ObjectField();

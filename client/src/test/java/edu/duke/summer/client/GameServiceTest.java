@@ -115,7 +115,7 @@ public class GameServiceTest {
                 "    c:boolean option []\n" +
                 "    }\n" +
                 "}";
-        gameService.createObjects("1", code);
+        gameService.initializeGame("1", code);
         assertEquals(6, objectFieldRepository.findByGameId("1").size());
         List<ObjectField> objectFields = objectFieldRepository.findByGameId("1");
         for (ObjectField objectField : objectFields) {
@@ -154,7 +154,7 @@ public class GameServiceTest {
                 "     addonsneak: rollwithmod,\n" +
                 "     addoncritsneak:rollwithmod\n" +
                 "};\n}";
-        gameService.createObjects("2", code);
+        gameService.initializeGame("2", code);
         ObjectFieldDto attackField = gameService.getObjectFields("2", "attack");
         assertEquals(8, attackField.getObjectField().size());
         assertEquals(8, attackField.getFieldType().size());
@@ -179,7 +179,7 @@ public class GameServiceTest {
                 "    c:boolean option []\n" +
                 "    }\n" +
                 "}";
-        gameService.createObjects("3", code);
+        gameService.initializeGame("3", code);
         gameService.deleteObjectField("3", "newType", "a");
 
         String codeAdd = "{type rollwithmod {\n" +
@@ -249,5 +249,31 @@ public class GameServiceTest {
         assertEquals(3, objectArrayValueRepository.findByGameId("3").size());
         ObjectValueDto result = gameService.getArrayValues("3",  "2");
         assertEquals(3, result.getFieldValue().size());
+    }
+
+    @Test
+    public void createFunctionsTest() {
+        String ruleStr = "{ fun int cal(int a){\n" +
+                "    var b = 0;\n" +
+                "    var anArray:int [] = {1};\n" +
+                "    var sum = 0;\n" +
+                "    var opti: int option;\n" +
+                "    var userTest : newType;\n" +
+                "    userTest.a.numdice = 5;\n" +
+                "    opti = SOME(1);\n" +
+                "    opti = NONE;\n" +
+                "    anArray = {1,2,3,7,10};\n" +
+                "    anArray[3] = 10;\n" +
+                "    output(a);\n" +
+                "    for(i : anArray){\n" +
+                "        sum = sum + i;\n" +
+                "        if (sum > 10) then { break;}\n" +
+                "    }\n" +
+                "    a = 1;\n" +
+                "    output(a);\n" +
+                "    return sum;\n" +
+                "    }\n" +
+                "}";
+        gameService.initializeGame("1", ruleStr);
     }
 }
