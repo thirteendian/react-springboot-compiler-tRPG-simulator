@@ -36,6 +36,7 @@ public class AuthenticationController {
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
 
+
     /**
      * Page: index_before_login.html
      *       index_after_login.html
@@ -46,7 +47,7 @@ public class AuthenticationController {
      *       admin_index_after_login.html(ROLE_ADMIN)
      */
 //    @GetMapping("/")
-//    public String index(Model model, HttpSession httpSession) {
+//    public MyUserDtails index(Model model, HttpSession httpSession) {
 //        //If Authenticated
 //        if (myUserDetailsService.isUserAuthenticated()) {
 //            //Init User Info
@@ -57,15 +58,27 @@ public class AuthenticationController {
 //            //IF Admin
 //            if(myUserDetailsService.isUserhasRole("ROLE_ADMIN")){
 //                System.out.println("Controller./()admin [session:]"+httpSession.getId());
-//                return"redirect:/admin/"+myUserDtails.getUuid()+ "/index_after_login";
+//                return myUserDtails;//"redirect:/admin/"+myUserDtails.getUuid()+ "/index_after_login";
 //            }
 //            //IF User
 //            System.out.println("Controller./()user [session:]"+httpSession.getId());
-//            return "redirect:/user/" + myUserDtails.getUuid() + "/index_after_login";
+//            return myUserDtails;//"redirect:/user/" + myUserDtails.getUuid() + "/index_after_login";
 //        }
 //        //If not Authenticated
 //        System.out.println("Controller./() [session:]"+httpSession.getId());
-//        return "index_before_login";
+//
+//        User testUser = new User(
+//                "user@duke.edu",
+//                "test_username",
+//                "test_FirstName",
+//                "test_LastName",
+//                "pass",
+//                "ROLE_USER",
+//                true
+//        );
+//        MyUserDtails myUserDtails = new MyUserDtails(testUser);
+//
+//        return myUserDtails;//"index_before_login";
 //    }
 
     /**
@@ -78,7 +91,7 @@ public class AuthenticationController {
             return "redirect:/";
         }
         System.out.println("Controller.login() [session:]"+httpSession.getId());
-        return "login";
+        return "/login.html";
     }
 
     /**

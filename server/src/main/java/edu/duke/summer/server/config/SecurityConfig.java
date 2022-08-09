@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
 
 @Configuration
 @EnableWebSecurity
@@ -80,7 +81,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        http.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues())
+                .and().csrf().disable().authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/user/**").hasRole("USER")
                 .antMatchers("/index_after_login").hasAnyRole("USER","ADMIN")
