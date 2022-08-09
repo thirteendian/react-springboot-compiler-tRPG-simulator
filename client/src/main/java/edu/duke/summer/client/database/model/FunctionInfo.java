@@ -7,7 +7,7 @@ import java.lang.*;
 
 @Entity
 @Table(name = "functionInfo")
-@IdClass(ObjectField.class)
+@IdClass(FunctionInfo.class)
 public class FunctionInfo implements Serializable {
 
     @Id

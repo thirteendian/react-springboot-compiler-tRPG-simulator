@@ -253,7 +253,7 @@ public class GameServiceTest {
 
     @Test
     public void createFunctionsTest() {
-        String ruleStr = "{ fun int cal(int a){\n" +
+        String ruleStr = "{ fun int cal(int a, int x, int y, int z){\n" +
                 "    var b = 0;\n" +
                 "    var anArray:int [] = {1};\n" +
                 "    var sum = 0;\n" +
