@@ -1,7 +1,9 @@
 package edu.duke.summer.server.algorithm.absyn;
 
-import edu.duke.summer.server.algorithm.RollState;
+import edu.duke.summer.server.algorithm.StateInfo;
 import edu.duke.summer.server.algorithm.RuleInfo;
+import edu.duke.summer.server.algorithm.VarEntry;
+import edu.duke.summer.server.algorithm.value.ArrayValue;
 import edu.duke.summer.server.algorithm.value.Value;
 
 import java.util.ArrayList;
@@ -12,7 +14,7 @@ public class InitArrayExp extends Exp{
     ArrayList<Exp> list;
 
     public InitArrayExp(){
-        list = new ArrayList<Exp>();
+        list = new ArrayList<>();
     }
 
     public void add(Exp ele){
@@ -20,7 +22,13 @@ public class InitArrayExp extends Exp{
     }
 
     @Override
-    public Value eval(HashMap<String, Value> vars, Random randNumGen, RuleInfo info, RollState state) {
-        return null;
+    public Value eval(VarEntry varEntry, Random randNumGen, RuleInfo info, StateInfo state) {
+        ArrayList<Value> input = new ArrayList<>();
+        for(Exp e : list){
+            Value val = e.eval(varEntry, randNumGen, info, state);
+            input.add(val);
+        }
+        ArrayValue res = new ArrayValue(input);
+        return res;
     }
 }
