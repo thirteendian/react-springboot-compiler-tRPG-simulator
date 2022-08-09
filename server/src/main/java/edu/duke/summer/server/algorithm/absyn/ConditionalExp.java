@@ -1,11 +1,9 @@
 package edu.duke.summer.server.algorithm.absyn;
 
-import edu.duke.summer.server.algorithm.RollState;
+import edu.duke.summer.server.algorithm.StateInfo;
 import edu.duke.summer.server.algorithm.RuleInfo;
+import edu.duke.summer.server.algorithm.VarEntry;
 import edu.duke.summer.server.algorithm.value.*;
-import edu.duke.summer.server.algorithm.value.BoolValue;
-import edu.duke.summer.server.algorithm.value.IntValue;
-import edu.duke.summer.server.algorithm.value.Value;
 
 import java.util.HashMap;
 import java.util.Random;
@@ -31,19 +29,19 @@ public class ConditionalExp extends Exp {
     }
 
     @Override
-    public Value eval(HashMap<String, Value> vars, Random randNumGen, RuleInfo info, RollState state) {
-        Value cond = condExp.eval(vars, randNumGen, info, state);
+    public Value eval(VarEntry varEntry, Random randNumGen, RuleInfo info, StateInfo state) {
+        Value cond = condExp.eval(varEntry, randNumGen, info, state);
         if(cond instanceof IntValue){
             if(((IntValue) cond).getValue() != 0){
-                return opt1Exp.eval(vars, randNumGen, info, state);
+                return opt1Exp.eval(varEntry, randNumGen, info, state);
             }else{
-                return opt2Exp.eval(vars, randNumGen, info, state);
+                return opt2Exp.eval(varEntry, randNumGen, info, state);
             }
-        }else if (cond instanceof BoolValue) {
-            if(((BoolValue) cond).getValue()){
-                return opt1Exp.eval(vars, randNumGen, info, state);
+        }else if (cond instanceof BooleanValue) {
+            if(((BooleanValue) cond).getValue()){
+                return opt1Exp.eval(varEntry, randNumGen, info, state);
             }else{
-                return opt2Exp.eval(vars, randNumGen, info, state);
+                return opt2Exp.eval(varEntry, randNumGen, info, state);
             }
         }
         throw new IllegalArgumentException("Require boolean type for conditional Exp!");

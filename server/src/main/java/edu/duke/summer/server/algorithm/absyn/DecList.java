@@ -6,20 +6,18 @@ public class DecList {
    public DecList(Dec h, DecList t) {head=h; tail=t;}
 
    public void printInfo(){
-      if(head instanceof TypeDec)System.out.println(((TypeDec) head).typeId);
       DecList curr = tail;
       while(curr != null){
-         if(head instanceof TypeDec)System.out.println(((TypeDec) curr.head).typeId);
          curr = curr.tail;
       }
    }
 
-   public void append(DecList list){
-     // DecList mark = tail;
-      while(tail != null){
-         tail = tail.tail;
+   public DecList append(DecList list){
+     if(tail != null){
+         tail = tail.append(list);
+      }else{
+         tail = list;
       }
-      tail = list;
-      //tail = mark;
+     return this;
    }
 }

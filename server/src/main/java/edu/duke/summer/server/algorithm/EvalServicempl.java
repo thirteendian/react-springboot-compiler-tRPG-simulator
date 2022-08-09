@@ -1,10 +1,9 @@
+
 package edu.duke.summer.server.algorithm;
 
 import edu.duke.summer.server.algorithm.absyn.Absyn;
 import edu.duke.summer.server.algorithm.absyn.Exp;
 import edu.duke.summer.server.algorithm.value.*;
-import edu.duke.summer.server.algorithm.value.IntValue;
-import edu.duke.summer.server.algorithm.value.Value;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 
@@ -26,19 +25,19 @@ public class EvalServicempl implements EvalService{
     }
 
     @Override
-    public Integer evalRoll(String rollStr, HashMap<String, Integer> vars, Random randNumGen){
+    public Value evalRoll(String rollStr, HashMap<String, Value> vars, Random randNumGen){
         Exp node = (Exp)buildAstVisitor(rollStr);
         RuleInfo info = new RuleInfo();
-        RollState state = new RollState();
-        HashMap<String, Value> vals = new HashMap<>();
-        for(Map.Entry<String, Integer> entry : vars.entrySet()){
-            vals.put(entry.getKey(), new IntValue(entry.getValue()));
+        StateInfo state = new StateInfo();
+        VarEntry varEntry = new VarEntry();
+        for(Map.Entry<String, Value> entry : vars.entrySet()){
+            varEntry.addVar(state.getBlockId(),entry.getKey(), entry.getValue());
         }
-        Value nodeValue = node.eval(vals, randNumGen,info,state);
+        Value nodeValue = node.eval(varEntry, randNumGen,info,state);
         if(nodeValue instanceof IntValue) {
             int result = ((IntValue) nodeValue).getValue();
             System.out.println(result);
-            return result;
+            return new IntValue(result);
         }else{
             throw new IllegalArgumentException(" Require Integer type for evalRoll interface!");
         }
@@ -46,12 +45,17 @@ public class EvalServicempl implements EvalService{
     @Override
     public RuleInfo saveRules(String ruleStr){
         RuleInfo info = new RuleInfo();
-        RollState state = new RollState();
-        HashMap<String, Value> VarEntry = new HashMap<String, Value>();
+        StateInfo state = new StateInfo();
+        VarEntry varEntry = new VarEntry();
         Absyn node = buildAstVisitor(ruleStr);
-        node.eval(VarEntry, new Random(), info, state);
-        //info.printInfo();
+        node.eval(varEntry, new Random(), info, state);
         return info;
+    }
+
+    @Override
+    public FuncCallResult getFunResult(String ruleStr, String funcName, HashMap<String, Value> params, StateInfo state) {
+        RuleInfo ruleInfo = saveRules(ruleStr);
+        return ruleInfo.getFuncs().get(funcName).getResult(params, state);
     }
 
 }

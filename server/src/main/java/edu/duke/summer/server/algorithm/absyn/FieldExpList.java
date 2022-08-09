@@ -1,8 +1,9 @@
 package edu.duke.summer.server.algorithm.absyn;
 
-import edu.duke.summer.server.algorithm.RollState;
+import edu.duke.summer.server.algorithm.StateInfo;
 import edu.duke.summer.server.algorithm.RuleInfo;
 import edu.duke.summer.server.algorithm.Symbol.Symbol;
+import edu.duke.summer.server.algorithm.VarEntry;
 import edu.duke.summer.server.algorithm.value.Value;
 
 import java.util.HashMap;
@@ -17,7 +18,7 @@ public class FieldExpList extends Absyn {
    }
 
    @Override
-   public Value eval(HashMap<String, Value> vars, Random randNumGen, RuleInfo info, RollState state) {
+   public Value eval(VarEntry varEntry, Random randNumGen, RuleInfo info, StateInfo state) {
       return null;
    }
 }
