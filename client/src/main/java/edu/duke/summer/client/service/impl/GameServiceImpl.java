@@ -318,6 +318,22 @@ public class GameServiceImpl implements GameService {
     }
   }
 
+  public void createFunction(String gameId, String code) {
+    RuleInfo ruleInfo = new EvalServicempl().saveRules(code);
+    HashMap<String, FuncInfo> funcs = ruleInfo.getFuncs();
+    for (String name: funcs.keySet()) {
+      FuncInfo funcInfo = funcs.get(name);
+      System.out.println("funcname"+funcInfo.getFuncName());
+      FieldList fieldList = funcInfo.getParams();
+      while(fieldList!=null) {
+        Ty ty = fieldList.getType();
+        //System.out.print("name"+ty.getName());
+        //System.out.print("key"+ty.getKey());
+        fieldList = fieldList.getTail();
+      }
+    }
+  }
+
   public String saveObjects(ObjectValueDto objectValueDto) {
     List<String> fieldValues = objectValueDto.getFieldValue();
     int fieldNum = 0;

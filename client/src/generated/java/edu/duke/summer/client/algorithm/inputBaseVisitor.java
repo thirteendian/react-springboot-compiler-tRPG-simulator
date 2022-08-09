@@ -1,4 +1,4 @@
-// Generated from edu/duke/summer/client/algorithm/input.g4 by ANTLR 4.5
+// Generated from edu\duke\summer\client\algorithm\input.g4 by ANTLR 4.5
 package edu.duke.summer.client.algorithm;
 import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;

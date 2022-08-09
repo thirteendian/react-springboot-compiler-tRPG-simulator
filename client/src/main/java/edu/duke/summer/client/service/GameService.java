@@ -2,6 +2,7 @@ package edu.duke.summer.client.service;
 
 import java.util.List;
 
+import edu.duke.summer.client.algorithm.RuleInfo;
 import edu.duke.summer.client.database.model.Game;
 import edu.duke.summer.client.database.model.DiceRolling;
 import edu.duke.summer.client.database.model.MagicCheck;
@@ -147,4 +148,5 @@ public interface GameService {
    */
   ObjectValueDto getArrayValues(String gameId, String valueNum);
 
+  public void createFunction(String gameId, String code);
 }
