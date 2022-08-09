@@ -2,91 +2,108 @@ package edu.duke.summer.server.config;
 
 
 import edu.duke.summer.server.controller.LoginSuccessHandler;
+import edu.duke.summer.server.jwt.AuthEntryPointJwt;
+import edu.duke.summer.server.jwt.AuthTokenFilter;
+import edu.duke.summer.server.service.impl.MyUserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
+//enables @PreAuthorize, @PostAuthorize
+//supports JSR-250
+@EnableGlobalMethodSecurity(
+        // securedEnabled = true,
+        // jsr250Enabled = true,
+        prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    /**
-     * A Configuration of Spring Security
-     * <p>
-     *     Security Process contains two part:
-     *     <ul>
-     *         <li>Authentication(configured by AuthenticationMangerBuilder)</li>
-     *         <li>Authorization(configured by HttpSecurity)</li>
-     *     </ul>
-     * </p>
-     */
-    @Autowired
-    UserDetailsService userDetailsService;
+
 
     /**
-     * Gets the PasswordEncoder for springframework.security.
-     * <p>
-     * This method was used by springframework.security to encode string password into 60 length encoded string.
+     * Following two will Help DaoAuthenticationProvider in AuthenticationManager to validate
+     * UsernamePasswordAuthenticationToken
      * @return
      */
+    @Autowired
+    MyUserDetailsServiceImpl myUserDetailsService;
+
+    @Autowired
+    private AuthEntryPointJwt unauthorizedHandler;
+
+    @Bean
+    public AuthTokenFilter authenticationJwtTokenFilter() {
+        return new AuthTokenFilter();
+    }
+
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
 
     /**
-     * <p>
-     *     AUTHENTICATION
-     *     submit form->
-     *     <ul>
-     *         <li>UsernamePasswordAuthenticationFilter-></li>
-     *         <li>UsernamePasswordAuthenticationToken-></li>
-     *         <li>AuthenticationManager-></li>
-     *         <li>User Info Storage</li>
-     *         <li>Fail->AuthenticationFailureHandler</li>
-     *         <li>Success->SecurityContextHolder-></li>
-     *         <li>InteractiveAuthenticationSuccessEvent-></li>
-     *         <li>AuthenticationSuccessHandler(saved by ExceptionTranslationFilter)</li>
-     *     </ul>
-     * </p>
-     * @param auth
-     * @throws Exception
+     * Will UserDetailsServer to build Authentication object
+     * with the help of PasswordEncoder
+     *
+     * First, after API(with login request) entering, OncePerRequestFilter will use
+     * doFilterInternal() to load Userdetail(help of UserDetailsService)
+     *
+     * Second, will use UsernamePasswordAuthenticationToken to get {password,username} from login request
+     * and authenticate an account
+     *
+     * Third, will use DaoAuthenticationProvider to valid UsernamePasswordAuthenticationToken
+     * return Authentication object
+     *
+     * Fourth, AuthenticationEntryPoint catch unauthorized error and return 401
+     * @param auth build AuthenticationManager
      */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(myUserDetailsService).passwordEncoder(passwordEncoder());
+    }
+
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 
     /**
-     * Settings for authorization
-     * using HttpSecurity to setup roles for each
-     * <p>
-     *     AUTHORIZATION
-     *     Unauthenticated Requests->
-     *     <ul>
-     *         <li>FilterSecurityInterceptor-></li>
-     *         <li>ExceptionTranslationFilter(throw AccessDeniedException) -></li>
-     *         <li>AuthenticationEntryPoint(render login page ***HttpSecurity.formLogin())</li>
-     *     </ul>
-     * </p>
+     *
+     * @param http HttpSecurity, used for configure "cors", "csrf","session management" and "authorization"
      */
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues())
-                .and().csrf().disable().authorizeRequests()
+
+        http    //config cors
+                .cors()
+                //config csrf
+                .and()
+                .csrf().disable()
+
+                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler)
+
+                .and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+
+                .and()
+                .authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/user/**").hasRole("USER")
-                .antMatchers("/index_after_login").hasAnyRole("USER","ADMIN")
-                .antMatchers("/admin").hasRole("ADMIN")
+                .anyRequest().authenticated()
+//                .antMatchers("/user/**").hasRole("USER")
+//                .antMatchers("/index_after_login").hasAnyRole("USER","ADMIN")
+//                .antMatchers("/admin").hasRole("ADMIN")
 
                 //Logout delete Cookies
                 .and()
@@ -98,15 +115,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .rememberMe().rememberMeParameter("remember_me")
                 .key("uniqueAndSecret")
                 .tokenValiditySeconds(86400)//valid for a day
-
-
-                .and().formLogin(
-                        form->form.loginPage("/login")
-                                .permitAll()
-                                .defaultSuccessUrl("/")
-                                .failureUrl("/login.html?error=true")
-                )
+//                .and().formLogin(
+//                        form->form.loginPage("/login")
+//                                .permitAll()
+//                                .defaultSuccessUrl("/")
+//                                .failureUrl("/login.html?error=true")
+//                )
                 ;
+        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
 

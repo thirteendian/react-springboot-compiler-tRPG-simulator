@@ -5,7 +5,6 @@ import edu.duke.summer.server.database.repository.UserRepository;
 import edu.duke.summer.server.dto.SignupDto;
 import edu.duke.summer.server.exceptions.UserAlreadyExistException;
 import edu.duke.summer.server.service.MyUserDetailsService;
-import edu.duke.summer.server.service.MyUserDtails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,7 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import javax.transaction.Transactional;
 
 @Service
 public class MyUserDetailsServiceImpl implements MyUserDetailsService {
@@ -24,6 +23,7 @@ public class MyUserDetailsServiceImpl implements MyUserDetailsService {
 
     @Autowired
     PasswordEncoder passwordEncoder;
+
     /**
      * Construct UserDetails by username
      *
@@ -32,12 +32,12 @@ public class MyUserDetailsServiceImpl implements MyUserDetailsService {
      * @throws UsernameNotFoundException
      */
     @Override
+    @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> user = userRepository.findByEmail(username);
+        User user = userRepository.findByUsername(username).orElseThrow(
+                () -> new UsernameNotFoundException("Email Not Found with username: " + username));
 
-        user.orElseThrow(() -> new UsernameNotFoundException("Not found: " + username));
-
-        return user.map(MyUserDtails::new).get();
+        return MyUserDetailsImpl.build(user);
     }
 
     @Override
@@ -53,33 +53,32 @@ public class MyUserDetailsServiceImpl implements MyUserDetailsService {
     @Override
     public boolean isUserhasRole(String inputRole) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        boolean hasRole = authentication.getAuthorities().stream().anyMatch(r-> r.getAuthority().equals(inputRole));
+        boolean hasRole = authentication.getAuthorities().stream().anyMatch(r -> r.getAuthority().equals(inputRole));
         return hasRole;
     }
 
     @Override
-    public MyUserDtails loadMyUserDetailsOfCurrentUser() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName();
-        Optional<User> user = userRepository.findByEmail(username);
-        return user.map(MyUserDtails::new).get();
+    public MyUserDetailsImpl loadMyUserDetailsOfCurrentUser() {
+        return null;
     }
+
 
     @Override
     public User signupNewUser(SignupDto signupDto) throws UserAlreadyExistException {
-        if (userRepository.findByEmail(signupDto.getEmail()).isPresent()) {
+        if (userRepository.findByUsername(signupDto.getEmail()).isPresent()) {
             throw new UserAlreadyExistException(
                     "Your email has already been registered!");
         }
         User newUser = new User();
         newUser.setEmail(signupDto.getEmail());
-        newUser.setUserName(signupDto.getUsername());
+        newUser.setUsername(signupDto.getUsername());
         newUser.setFirstName(signupDto.getFirstName());
         newUser.setLastName(signupDto.getLastName());
-        newUser.setRoles("ROLE_USER");
         newUser.setActive(true);
         newUser.setPassword(passwordEncoder.encode(signupDto.getPassword()));
         return userRepository.save(newUser);
     }
+
+
 
 }

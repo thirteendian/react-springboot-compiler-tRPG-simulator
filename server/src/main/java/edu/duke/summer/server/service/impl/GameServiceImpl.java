@@ -4,27 +4,15 @@ import java.util.*;
 
 import edu.duke.summer.server.algorithm.EvalServicempl;
 import edu.duke.summer.server.algorithm.RuleInfo;
-import edu.duke.summer.server.database.model.*;
-import edu.duke.summer.server.database.repository.*;
-
-import edu.duke.summer.server.dto.*;
 import edu.duke.summer.server.algorithm.TypeInfo;
 import edu.duke.summer.server.algorithm.absyn.FieldList;
 import edu.duke.summer.server.algorithm.absyn.Ty;
-import edu.duke.summer.server.service.GameService;
 import edu.duke.summer.server.database.model.*;
 import edu.duke.summer.server.database.repository.*;
 import edu.duke.summer.server.dto.*;
+import edu.duke.summer.server.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-//import org.springframework.security.core.Authentication;
-//import org.springframework.security.core.context.SecurityContextHolder;
-//import org.springframework.security.core.session.SessionRegistry;
-//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import edu.duke.summer.server.algorithm.*;
-import edu.duke.summer.server.algorithm.absyn.*;
 
 @Service
 public class GameServiceImpl implements GameService {

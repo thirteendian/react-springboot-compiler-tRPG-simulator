@@ -4,14 +4,19 @@ import edu.duke.summer.server.annotation.ValidEmail;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
- * A Table in Postgresql named users
- * <p>
- *     Note that it should not be named as user, or it will conflict with the original user created by spring security
+ * DATABASE
+ * TABLE "users"
+ * Note that it should not be named as user, or it will conflict with the original user created by spring security
  */
 @Entity
-@Table(name = "users")
+@Table(name = "users",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = "username"),
+                @UniqueConstraint(columnNames = "email")})
 public class User {
     @Id
     @GeneratedValue(generator = "system-uuid")
@@ -20,12 +25,12 @@ public class User {
 //    @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
 
+    @Column(nullable = true)
+    private String username;
+
     @Column
     @ValidEmail
     private String email;
-
-    @Column(nullable = true)
-    private String userName;
 
     @Column(nullable = false)
     private String firstName;
@@ -36,8 +41,11 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = true)
-    private String roles;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 
     @Column(nullable = false)
     private boolean active;
@@ -45,12 +53,40 @@ public class User {
     @Column(nullable = true)
     private String profile;
 
+
+    public User() {
+    }
+
+    public User(String email, String username, String firstName, String lastName, String password, boolean active) {
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.active = active;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getFirstName() {
@@ -77,6 +113,14 @@ public class User {
         this.password = password;
     }
 
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
     public boolean isActive() {
         return active;
     }
@@ -85,48 +129,12 @@ public class User {
         this.active = active;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getRoles() {
-        return roles;
-    }
-
-    public void setRoles(String roles) {
-        this.roles = roles;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
     public String getProfile() {
         return profile;
     }
 
     public void setProfile(String profile) {
         this.profile = profile;
-    }
-
-    public User() {
-    }
-
-    public User(String email, String username, String firstName, String lastName, String password, String roles, boolean active) {
-        this.email = email;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.password = password;
-        this.roles = roles;
-        this.active = active;
     }
 
     @Override

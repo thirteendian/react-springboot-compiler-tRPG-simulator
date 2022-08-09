@@ -2,12 +2,11 @@ package edu.duke.summer.server.service;
 
 import java.util.List;
 
-import edu.duke.summer.server.database.model.Game;
 import edu.duke.summer.server.database.model.DiceRolling;
+import edu.duke.summer.server.dto.*;
+import edu.duke.summer.server.database.model.Game;
 import edu.duke.summer.server.database.model.MagicCheck;
 import edu.duke.summer.server.database.model.Player;
-import edu.duke.summer.server.dto.*;
-import edu.duke.summer.server.dto.*;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -44,6 +43,7 @@ public interface GameService {
    * @param player the player that seek for recent 20 visible dice-rolling results
    * @return recent 20 visible dice-rolling results
    */
+
   List<DiceRolling> getPlayerResults(String game, String player);
 
   /**

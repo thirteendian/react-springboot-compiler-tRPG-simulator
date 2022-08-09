@@ -1,21 +1,13 @@
 package edu.duke.summer.server.controller;
 
-import edu.duke.summer.server.dto.DiceRollingDto;
 import edu.duke.summer.server.dto.ObjectFieldDto;
 import edu.duke.summer.server.service.GameService;
-import edu.duke.summer.server.stomp.ReqDiceRollingString;
 import edu.duke.summer.server.stomp.ReqObjectCreatingName;
-import edu.duke.summer.server.stomp.RespDiceRollingResult;
 import edu.duke.summer.server.stomp.RespObjectCreatingField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.util.HtmlUtils;
-
-import java.security.Principal;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class DiceRollingController {
@@ -30,21 +22,21 @@ public class DiceRollingController {
      * @return
      * @throws Exception
      */
-    @MessageMapping("/dicerolling_result")
-    @SendTo("/dicerolling/result")
-    public RespDiceRollingResult getDiceRollingResult(Principal principal, ReqDiceRollingString message) throws Exception {
-        DiceRollingDto diceRollingDto = new DiceRollingDto();
-        diceRollingDto.setPlayer(principal.getName());
-        diceRollingDto.setGame("game");
-        List<String> visibles = new ArrayList<>();
-        visibles.add("user1");
-        visibles.add("user2");
-        diceRollingDto.setVisibles(visibles);
-        diceRollingDto.setMagicCheck(message.getMagicCheck());
-        diceRollingDto.setRawData(message.getRawString());
-        System.out.println("The Magic Check is "+ gameService.getMagicCheckData("game",principal.getName()));
-        return new RespDiceRollingResult(HtmlUtils.htmlEscape(message.getRawString()),gameService.getDiceRollingResults(diceRollingDto).getResult(),gameService.getMagicCheckData("game",principal.getName()));
-    }
+//    @MessageMapping("/dicerolling_result")
+//    @SendTo("/dicerolling/result")
+//    public RespDiceRollingResult getDiceRollingResult(Principal principal, ReqDiceRollingString message) throws Exception {
+//        DiceRollingDto diceRollingDto = new DiceRollingDto();
+//        diceRollingDto.setPlayer(principal.getName());
+//        diceRollingDto.setGame("game");
+//        List<String> visibles = new ArrayList<>();
+//        visibles.add("user1");
+//        visibles.add("user2");
+//        diceRollingDto.setVisibles(visibles);
+//        diceRollingDto.setMagicCheck(message.getMagicCheck());
+//        diceRollingDto.setRawData(message.getRawString());
+//        System.out.println("The Magic Check is "+ gameService.getMagicCheckData("game",principal.getName()));
+//        return new RespDiceRollingResult(HtmlUtils.htmlEscape(message.getRawString()),gameService.getDiceRollingResults(diceRollingDto).getResult(),gameService.getMagicCheckData("game",principal.getName()));
+//    }
 
     @MessageMapping("/createobject_name")
     @SendTo("/objectcreate/field")

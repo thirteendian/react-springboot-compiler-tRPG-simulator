@@ -1,7 +1,7 @@
 package edu.duke.summer.server.config;
 
-import edu.duke.summer.server.database.model.User;
-import edu.duke.summer.server.database.repository.UserRepository;
+import edu.duke.summer.server.database.model.Role;
+import edu.duke.summer.server.database.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -10,36 +10,55 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 
+import static edu.duke.summer.server.database.model.ERole.ROLE_USER;
+
 @Configuration
 public class UserConfig {
     @Autowired
     PasswordEncoder passwordEncoder;
+
     @Bean
-    CommandLineRunner commandLineRunnerUser(UserRepository repository){
+    CommandLineRunner commandLineRunnerRoles(RoleRepository roleRepository) {
         return args -> {
-            User testUser = new User(
-                    "user@duke.edu",
-                    "test_username",
-                    "test_FirstName",
-                    "test_LastName",
-                    passwordEncoder.encode("pass"),
-                    "ROLE_USER",
-                    true
+            Role role_user = new Role(
+                    ROLE_USER
+            );
+            Role role_moderator = new Role(
+                    ROLE_USER
+            );
+            Role role_admin = new Role(
+                    ROLE_USER
             );
 
-            User Admin = new User(
-                    "admin@duke.edu",
-                    "admin",
-                    "---",
-                    "---",
-                    passwordEncoder.encode("admin"),
-                    "ROLE_ADMIN",
-                    true
-            );
-            repository.saveAll(
-                    List.of(testUser, Admin)
-            );
+            roleRepository.saveAll(List.of(role_user, role_moderator, role_admin));
         };
     }
+//    @Bean
+//    CommandLineRunner commandLineRunnerUser(UserRepository repository){
+//        return args -> {
+//            User testUser = new User(
+//                    "user@duke.edu",
+//                    "test_username",
+//                    "test_FirstName",
+//                    "test_LastName",
+//                    passwordEncoder.encode("pass"),
+//                    "ROLE_USER",
+//                    true
+//            );
+//
+//            User Admin = new User(
+//                    "admin@duke.edu",
+//                    "admin",
+//                    "---",
+//                    "---",
+//                    passwordEncoder.encode("admin"),
+//                    "ROLE_ADMIN",
+//                    true
+//            );
+//            repository.saveAll(
+//                    List.of(testUser, Admin)
+//            );
+//        };
+//    }
 
 }
