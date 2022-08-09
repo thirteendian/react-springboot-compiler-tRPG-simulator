@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
 import"./index.css";
 import Header from "../../components/Header";
+import axios from "axios";
 
 class Index extends Component {
     objectRollwithmod = async () => {
         const url = "http://localhost:12345/test/rollwithmod";
         const response = await axios(url);
         const axiosValue = response.data;
-        console.log(axiosValue);
+        console.log(axiosValue.fieldType);
     }
     objectNewType = async () => {
         const url = "http://localhost:12345/test/newtype";

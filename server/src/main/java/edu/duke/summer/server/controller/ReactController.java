@@ -1,5 +1,6 @@
 package edu.duke.summer.server.controller;
 
+import edu.duke.summer.server.dto.CreateGameDto;
 import edu.duke.summer.server.dto.ObjectFieldDto;
 import edu.duke.summer.server.dto.ObjectFieldTypeDto;
 import edu.duke.summer.server.payload.request.GameCreateRequest;
@@ -54,21 +55,19 @@ public class ReactController {
                 "    c:boolean option []\n" +
                 "    }\n" +
                 "}";
+        CreateGameDto createGameDto = new CreateGameDto();
+        createGameDto.setGameName("asdf");
+        createGameDto.setId("1");
+        createGameDto.setPlayerNum(1);
+        gameService.createNewGame(createGameDto);
         gameService.createObjects("1", test);
-//        List<String> objects  =  gameService.getObjectsList("1");
-//        ObjectFieldDto objectFieldDto = gameService.getObjectFields("1",objects.get(1));
-//        RespObjectCreatingField respObjectCreatingField = new RespObjectCreatingField();
-//        //List of field(Order)
-//        respObjectCreatingField.setObjectField(objectFieldDto.getObjectField());
-//        //Hashmap of Type(Self FK)
-//        respObjectCreatingField.setFieldType(objectFieldDto.getFieldType());
         return  "Success";
     }
 
 
     @GetMapping(value = "/rollwithmod")
-    public ObjectFieldTypeDto getRollWithMod(){
-        return gameService.getObjectFields("1","rollwithmod").getFieldType()
+    public ObjectFieldDto getRollWithMod(){
+        return gameService.getObjectFields("1","rollwithmod");
 
     }
     //
