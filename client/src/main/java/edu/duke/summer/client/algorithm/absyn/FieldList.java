@@ -41,11 +41,13 @@ public class FieldList extends Absyn {
       pos=p; name=n; typ=t; tail=x; type = ty;
    }
 
-   public void append(FieldList list){
-      while(tail != null){
-         tail = tail.tail;
+   public FieldList append(FieldList list){
+      if(tail != null){
+         tail = tail.append(list);
+      }else{
+         tail = list;
       }
-      tail = list;
+      return this;
    }
 
    public void printInfo(){

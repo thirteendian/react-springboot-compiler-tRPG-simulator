@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Random;
 import static org.mockito.Mockito.*;
 
+import edu.duke.summer.client.algorithm.absyn.FieldList;
 import edu.duke.summer.client.algorithm.value.IntValue;
 import edu.duke.summer.client.algorithm.value.Value;
 import org.junit.jupiter.api.Test;
@@ -45,7 +46,7 @@ public class EvalServicemplTest {
                 "    b:string option [] option,\n" +
                 "    c:boolean option []\n" +
                 "    }\n" +
-                " fun int cal(int a){\n" +
+                " fun int cal(int a, int x, int y, int z){\n" +
                 "    var b = 0;\n" +
                 "    var anArray:int [] = {1};\n" +
                 "    var sum = 0;\n" +
@@ -101,8 +102,16 @@ public class EvalServicemplTest {
         IntValue value = new IntValue(10);
         IntValue value1 = new IntValue(20);
         params.put("a", value);
+        params.put("x", value);
+        params.put("y", value);
+        params.put("z", value);
         params1.put("i", value1);
         FuncCallResult res = info.getFuncs().get("cal").getResult(params, new StateInfo());
+        FuncInfo calInfo = info.getFuncs().get("cal");
+        FieldList list = calInfo.getParams();
+        System.out.println("list------");
+        list.printInfo();
+        System.out.println("list------");
         Value returnValue = res.getVal();
         FuncCallResult res1 = info.getFuncs().get("test").getResult(params1, new StateInfo());
         FuncCallResult res2 = info.getFuncs().get("testCallExp").getResult(params2, new StateInfo());
@@ -134,7 +143,7 @@ public class EvalServicemplTest {
                 "    b:string option [] option,\n" +
                 "    c:boolean option []\n" +
                 "    }\n" +
-                " fun int cal(int a){\n" +
+                " fun int cal(int a, int x, int y, int z){\n" +
                 "    var b = 0;\n" +
                 "    var anArray:int [] = {1};\n" +
                 "    var sum = 0;\n" +
@@ -181,7 +190,7 @@ public class EvalServicemplTest {
                 "        output(\"force reroll\");\n" +
                 "        return i;\n" +
                 "   }\n" +
-                "}", "testRoll", params2, state);
+                "}", "cal", params, state);
         System.out.println("finalResult:" + ((IntValue)funRes.val).getValue());
     }
 

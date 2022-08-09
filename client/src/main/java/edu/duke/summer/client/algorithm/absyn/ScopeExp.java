@@ -12,8 +12,9 @@ public class ScopeExp extends Exp {
    public DecList decs;
    public Exp body;
    public ScopeExp(int p, DecList d, Exp b) {pos=p; decs=d; body=b;}
-   public void append(ScopeExp exp){
-      decs.append(exp.decs);
+   public ScopeExp append(ScopeExp exp){
+      decs = decs.append(exp.decs);
+      return this;
    }
    public void printInfo(){
       System.out.println("-----scopeExp-----");
