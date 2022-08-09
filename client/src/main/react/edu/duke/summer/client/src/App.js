@@ -1,57 +1,36 @@
 import React, {Component} from 'react';
-// import axios from "axios";
-import {BrowserRouter as Router} from 'react-router-dom';
 import "./App.css"
-import PageIndexBeforeLogin from "./pages/PageIndexBeforeLogin";
+import {Route, Routes} from "react-router-dom";
+import NavigationBeforeLogin from "./assemblies/NavigationBeforeLogin";
+import Login from "./assemblies/Login";
+import Signup from "./assemblies/Signup";
+import NavigationAfterLogin from "./assemblies/NavigationAfterLogin";
+import CreateGame from "./assemblies/CreateGame";
+import CreateObject from "./assemblies/CreateObject";
 
 class App extends Component {
-
-
-    // getUserInformation = () => {
-    //     axios.get('http://localhost:12345/')
-    //         .then(
-    //             response => {
-    //                 console.log("success", response.data);
-    //             },
-    //             error => {
-    //                 console.log("error", error);
-    //             }
-    //         )
-    // }
-    state={sessionID:""};
-
-    componentDidMount() {
-        if (this.state.sessionID==="") {
-            const reqBody = {
-                username: "admin@duke.edu",
-                password: "pass"
-            };
-            fetch("http://localhost:12345/login", {
-                headers: {"Content-Type": "application/json"},
-                method: "post",
-                body: JSON.stringify(reqBody)
-            }).then(
-                (response) => Promise.all([response.json(), response.headers]))
-                .then(
-                    ([body, headers]) => {
-                        this.setState({sessionID:headers.get("authorization")})
-                    }
-                )
-        }
-
+    state={
+        isLogin: false
     }
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
+    login=()=>{
+        this.setState({isLogin:true});
     }
-
     render() {
-        console.log(this.state.sessionID);
+       console.log(this.state.isLogin);
         return (
-            <Router>
                 <div className="main_container">
-                    <PageIndexBeforeLogin/>
+                    <div className="bg_chapel">
+                        <Routes>
+                            <Route path="/" element={<NavigationBeforeLogin/>}/>
+                            <Route path="/login" element={<Login/>}/>
+                            <Route path="/signup" element={<Signup/>}/>
+                            <Route path="/user/index_after_login" element={<NavigationAfterLogin/>}/>
+                            <Route path="/user/createGame" element={<CreateGame/>}/>
+                            <Route path="/user/createObject" element={<CreateObject/>}/>
+
+                        </Routes>
+                    </div>
                 </div>
-            </Router>
         );
     }
 }

@@ -5,6 +5,7 @@ import Header from "../../components/Header";
 import Login from "../../assemblies/Login";
 import NavigationBeforeLogin from "../../assemblies/NavigationBeforeLogin";
 import Signup from "../../assemblies/Signup";
+import CreateGame from "../../assemblies/CreateGame";
 
 class Index extends Component {
 

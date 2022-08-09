@@ -37,6 +37,8 @@ class Index extends Component {
     render() {
         return (
             <div>
+                <Header className={"header_dice_rolling_game"}>Dice Rolling Game</Header>
+
                 <Header className={"header_login"}>Login</Header>
 
                 <Header className={"header_login_username"}>Email:</Header>
@@ -45,11 +47,10 @@ class Index extends Component {
 
                 <Header className={"header_login_password"}>PASSWORD:</Header>
                 <InputPassword className={"input_login_password"} onChange={this.onPasswordChange}
-                           placeholder={"Enter Password"}/>
-
+                               placeholder={"Enter Password"}/>
                 <Header className={"header_rememberme"}>Remember me:</Header>
                 <InputCheckBox className={"inputCheckBox_login_rememberme"} onChange={this.onRememberMeChange}/>
-                <MyNavLink className={"myNavLink_login_login"} onClick={this.onSubmit} to={"/"}>Login</MyNavLink>
+                <MyNavLink className={"myNavLink_login_login"} onClick={this.props.login} to={"/user/index_after_login"}>Login</MyNavLink>
                 <MyNavLink className={"myNavLink_login_back"} to={"/"}>Back</MyNavLink>
             </div>
         );

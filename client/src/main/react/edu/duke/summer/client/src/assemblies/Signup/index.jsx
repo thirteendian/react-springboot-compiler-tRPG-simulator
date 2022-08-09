@@ -44,6 +44,7 @@ class Index extends Component {
     render() {
         return (
             <div>
+                <Header className={"header_dice_rolling_game"}>Dice Rolling Game</Header>
 
                 <Header className={"header_signup"}>Signup</Header>
 

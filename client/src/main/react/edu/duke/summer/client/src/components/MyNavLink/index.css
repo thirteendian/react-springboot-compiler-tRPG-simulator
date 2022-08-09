@@ -136,3 +136,171 @@
     border: 1px solid #000000;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
+
+
+
+
+
+
+
+
+
+.myNavLink_createGame{
+    font-family: 'Bungee Regular', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    color: #000000;
+
+    line-height: 48px;
+
+    box-sizing: border-box;
+    position: absolute;
+    width: 520px;
+    height: 89px;
+    left: 460px;
+    top: 350px;
+
+    cursor: pointer;
+    text-align: center;
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.myNavLink_joinGame{
+    font-family: 'Bungee Regular', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    color: #000000;
+
+    line-height: 48px;
+
+    box-sizing: border-box;
+    position: absolute;
+    width: 520px;
+    height: 89px;
+    left: 460px;
+    top: 480px;
+
+    cursor: pointer;
+    text-align: center;
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.myNavLink_loadGame{
+    font-family: 'Bungee Regular', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    color: #000000;
+
+    line-height: 48px;
+
+    box-sizing: border-box;
+    position: absolute;
+    width: 520px;
+    height: 89px;
+    left: 460px;
+    top: 610px;
+
+    cursor: pointer;
+    text-align: center;
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.myNavLink_logout{
+    font-family: 'Bungee Regular', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    color: #000000;
+
+    line-height: 48px;
+
+    box-sizing: border-box;
+    position: absolute;
+    width: 520px;
+    height: 89px;
+    left: 460px;
+    top: 740px;
+
+    cursor: pointer;
+    text-align: center;
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+
+.myNavLink_playerInfo_edit{
+    font-family: 'Bungee Regular', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    color: #000000;
+
+    line-height: 48px;
+
+    box-sizing: border-box;
+    position: absolute;
+    width: 80px;
+    height: 40px;
+    left: 50px;
+    top: 150px;
+
+    cursor: pointer;
+    text-align: center;
+    background: rgba(217, 217, 217, 1);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.myNavLink_playerInfo_logout{
+    font-family: 'Bungee Regular', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    color: #000000;
+
+    line-height: 48px;
+
+    box-sizing: border-box;
+    position: absolute;
+    width: 80px;
+    height: 40px;
+    left: 250px;
+    top: 150px;
+
+    cursor: pointer;
+    text-align: center;
+    background: rgba(217,217,217,1);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+
+.myNavLink_createGame{
+    font-family: 'Bungee Regular', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    color: #000000;
+
+    line-height: 48px;
+
+    box-sizing: border-box;
+    position: absolute;
+    width: 400px;
+    height: 74px;
+    left: 800px;
+    top: 800px;
+
+    cursor: pointer;
+    text-align: center;
+    background: rgba(217, 217, 217, 0.5);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}

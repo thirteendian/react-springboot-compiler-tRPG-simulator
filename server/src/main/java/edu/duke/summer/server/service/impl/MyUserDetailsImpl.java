@@ -13,13 +13,14 @@ import java.util.stream.Collectors;
 
 
 public class MyUserDetailsImpl implements UserDetails {
-
     private static final long serialVersionUID = 1L;
     private String uuid;
     private String email;
     @JsonIgnore
     private String password;
+
     private String username;
+
     private String firstname;
     private String lastname;
     private boolean active;
@@ -70,6 +71,15 @@ public class MyUserDetailsImpl implements UserDetails {
 //    }
 
 
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public void setUuid(String uuid) {
         this.uuid = uuid;
     }
@@ -86,9 +96,6 @@ public class MyUserDetailsImpl implements UserDetails {
         this.password = password;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
     public void setFirstname(String firstname) {
         this.firstname = firstname;
@@ -123,12 +130,6 @@ public class MyUserDetailsImpl implements UserDetails {
     public String getPassword() {
         return password;
     }
-
-    @Override
-    public String getUsername() {
-        return email;
-    }
-
     public String getFirstname() {
         return firstname;
     }

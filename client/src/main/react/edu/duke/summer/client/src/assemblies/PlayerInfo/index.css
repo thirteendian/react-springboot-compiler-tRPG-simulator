@@ -1,0 +1,21 @@
+.playerInfo_default{
+    position: absolute;
+    width: 439px;
+    height: 68px;
+    left: 0px;
+    top: 12px;
+
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 60px;
+}
+
+.playerInfo_unfold{
+    position: absolute;
+    width: 431px;
+    height: 210px;
+    left: 8px;
+    top: 16px;
+
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 60px;
+}

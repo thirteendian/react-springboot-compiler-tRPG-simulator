@@ -38,8 +38,10 @@ import java.util.stream.Collectors;
 /**
  * Handle Signup/login request & authorized requests
  */
-@RestController
+
 @CrossOrigin(origins = "http://localhost:3000")
+@RestController
+@RequestMapping("/api/auth")
 //@RequestMapping("/api/auth")
 public class AuthenticationController {
     @Autowired
@@ -65,6 +67,13 @@ public class AuthenticationController {
     private StringRedisTemplate stringRedisTemplate;
 
 
+    /**
+     * The user must use header
+     * {"Authorization" : "Bearer _token_"} to access corresponding page
+     *
+     * @param loginRequest
+     * @return
+     */
     @PostMapping("/signin")
     public ResponseEntity<?> postSignIn(@Valid @RequestBody LoginRequest loginRequest) {
         Authentication authentication = authenticationManager
@@ -76,6 +85,8 @@ public class AuthenticationController {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         MyUserDetailsImpl userDetails = (MyUserDetailsImpl) authentication.getPrincipal();
+        System.out.println("The Incomming SignIn User is :");
+        System.out.println(userDetails.getUuid());
         String jwt = jwtUtils.generateJwtToken(userDetails);
         List<String> roles = userDetails.getAuthorities().stream().map(item -> item.getAuthority())
                 .collect(Collectors.toList());
@@ -95,19 +106,18 @@ public class AuthenticationController {
         }
 
         // Create new user's account
-        //    public User(String email,
+        //    String email,
         //    String username,
         //    String firstName,
         //    String lastName,
         //    String password,
-        //    boolean active) {
+        //    boolean active
         User user = new User(
                 signUpRequest.getEmail(),
                 signUpRequest.getUsername(),
                 signUpRequest.getFirstname(),
                 signUpRequest.getLastname(),
-                encoder.encode(signUpRequest.getPassword()),false);
-
+                encoder.encode(signUpRequest.getPassword()),true);
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();
 

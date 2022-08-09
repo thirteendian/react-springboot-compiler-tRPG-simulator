@@ -196,3 +196,74 @@
     top: 770px;
     color: #FFFFFF;
 }
+
+
+
+
+
+
+
+
+
+.header_playerInfo{
+    position: absolute;
+    width: 736px;
+    height: 51px;
+    left: 80px;
+    top: -6px;
+
+    font-family: 'Bungee Regular', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 48px;
+
+    color: #FFFFFF;
+}
+
+.header_playerInfo_firstName{
+    position: absolute;
+    width: 736px;
+    height: 51px;
+    left: 50px;
+    top: 20px;
+
+    font-family: 'Bungee Regular', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 48px;
+
+    color: #FFFFFF;
+}
+
+.header_playerInfo_lastName{
+    position: absolute;
+    width: 736px;
+    height: 51px;
+    left: 50px;
+    top: 50px;
+
+    font-family: 'Bungee Regular', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 48px;
+
+    color: #FFFFFF;
+}
+.header_playerInfo_Email{
+    position: absolute;
+    width: 736px;
+    height: 51px;
+    left: 50px;
+    top: 80px;
+
+    font-family: 'Bungee Regular', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 48px;
+
+    color: #FFFFFF;
+}

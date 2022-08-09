@@ -97,24 +97,30 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 
+
                 .and()
-                .authorizeRequests()
-                .antMatchers("/").permitAll()
-                .anyRequest().authenticated()
+                .authorizeRequests().antMatchers("/api/auth/**").permitAll()
+                .antMatchers("/api/test/**").permitAll()
+                .antMatchers("/react/**").permitAll()
+//                .anyRequest().authenticated();
+//                .and()
+//                .authorizeRequests()
+//                .antMatchers("/").permitAll()
+//                .anyRequest().authenticated()
 //                .antMatchers("/user/**").hasRole("USER")
 //                .antMatchers("/index_after_login").hasAnyRole("USER","ADMIN")
 //                .antMatchers("/admin").hasRole("ADMIN")
 
                 //Logout delete Cookies
-                .and()
-                .logout()
-                .deleteCookies("JSESSIONID")
-                .logoutSuccessUrl("/")
-
-                .and()
-                .rememberMe().rememberMeParameter("remember_me")
-                .key("uniqueAndSecret")
-                .tokenValiditySeconds(86400)//valid for a day
+//                .and()
+//                .logout()
+//                .deleteCookies("JSESSIONID")
+//                .logoutSuccessUrl("/")
+//
+//                .and()
+//                .rememberMe().rememberMeParameter("remember_me")
+//                .key("uniqueAndSecret")
+//                .tokenValiditySeconds(86400)//valid for a day
 //                .and().formLogin(
 //                        form->form.loginPage("/login")
 //                                .permitAll()
@@ -126,13 +132,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 
-    /**
-     * This is a special Component extends method of
-     * onAuthenticationSuccess
-     * that will be used by HttpSecurity....formLogin().successHandler();
-     */
-    @Autowired
-    private LoginSuccessHandler loginSuccessHandler;
+//    /**
+//     * This is a special Component extends method of
+//     * onAuthenticationSuccess
+//     * that will be used by HttpSecurity....formLogin().successHandler();
+//     */
+//    @Autowired
+//    private LoginSuccessHandler loginSuccessHandler;
 
 
 

@@ -10,7 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 
-import static edu.duke.summer.server.database.model.ERole.ROLE_USER;
+import static edu.duke.summer.server.database.model.ERole.*;
 
 @Configuration
 public class UserConfig {
@@ -24,10 +24,10 @@ public class UserConfig {
                     ROLE_USER
             );
             Role role_moderator = new Role(
-                    ROLE_USER
+                    ROLE_MODERATOR
             );
             Role role_admin = new Role(
-                    ROLE_USER
+                    ROLE_ADMIN
             );
 
             roleRepository.saveAll(List.of(role_user, role_moderator, role_admin));
