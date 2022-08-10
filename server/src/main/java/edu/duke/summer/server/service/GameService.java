@@ -7,25 +7,18 @@ import edu.duke.summer.server.database.model.DiceRolling;
 import edu.duke.summer.server.database.model.MagicCheck;
 import edu.duke.summer.server.database.model.Player;
 import edu.duke.summer.server.dto.*;
-import edu.duke.summer.server.dto.Object.ObjectDto;
-import edu.duke.summer.server.dto.Request.*;
-import edu.duke.summer.server.dto.Response.*;
 import org.springframework.stereotype.Service;
 
 @Service
 public interface GameService {
 
-  CreateGameResponseDto createNewGame(final CreateGameRequestDto createGameRequestDto);
+  Game createNewGame(final CreateGameDto createGameDto);
 
   List<Game> filterGame(final GameFilterDto gameFilterDto);
 
-  JoinGameResponseDto joinGame(final JoinGameRequestDto createGameRequestDto);
+  Game joinGame(final CreateGameDto createGameDto);
 
-   void deleteGame(final Game game);
-
-   GameStartResponseDto startGame(final GameStartRequestDto gameStartRequestDto);
-
-   CreateObjectResponseDto createObject(final CreateObjectRequestDto createObjectRequestDto);
+  void deleteGame(final Game game);
 
   /**
    * Get result of the dice-rolling
@@ -64,10 +57,18 @@ public interface GameService {
   /**
    * Get all players that are involved in the game
    *
-   * @param gameId the game that the player is involved in
+   * @param game the game that the player is involved in
    * @return list of players in the game
    */
-  List<Player> getAllPlayers(String gameId);
+  List<Player> getAllPlayers(String game);
+
+  /**
+   * Create and store the information of objects & functions through the code provided by the game creator
+   *
+   * @param gameId the game that the creator is involved in
+   * @param code the code that contains the description of objects & functions
+   */
+  void initializeGame(String gameId, String code);
 
   /**
    * Get all object types in the game
@@ -84,7 +85,7 @@ public interface GameService {
    * @param typeName the object type to get its field name & field type
    * @return objectFieldDto that contains all field information of the object type in this game
    */
-  ObjectDto getObjectFields(String gameId, String typeName);
+  ObjectFieldDto getObjectFields(String gameId, String typeName);
 
   /**
    * Check whether a new object is required to be created for this object field
@@ -112,20 +113,20 @@ public interface GameService {
   /**
    * Store field values of one object
    *
-   * @param createObjectRequestDto the Dto that contains all the information of one specific object,
+   * @param objectValueDto the Dto that contains all the information of one specific object,
    * including game ID, type name and field values
    * @return the value number of the object in database
    */
-  String saveObjects(CreateObjectRequestDto createObjectRequestDto);
+  String saveObjects(ObjectValueDto objectValueDto);
 
   /**
    * Store field values of one array
    *
-   * @param createObjectRequestDto the Dto that contains all the information of one specific array,
+   * @param objectValueDto the Dto that contains all the information of one specific array,
    * including game ID, elt name and field values
    * @return the value number of the array in database
    */
-  String saveArrays(CreateObjectRequestDto createObjectRequestDto);
+  String saveArrays(ObjectValueDto objectValueDto);
 
   /**
    * Get all field values of one object type in the game
@@ -135,7 +136,7 @@ public interface GameService {
    * @param valueNum the value number of the object
    * @return objectFieldDto that contains all field information of the object in this game
    */
-  CreateObjectRequestDto getObjectValues(String gameId, String typeName, String valueNum);
+  ObjectValueDto getObjectValues(String gameId, String typeName, String valueNum);
 
   /**
    * Get all field values of one array object type in the game
@@ -144,8 +145,6 @@ public interface GameService {
    * @param valueNum the value number of the array
    * @return objectFieldDto that contains all field information of the array in this game
    */
-  CreateObjectRequestDto getArrayValues(String gameId, String valueNum);
-
-  void callFunction(String gameId, String funcName);
+  ObjectValueDto getArrayValues(String gameId, String valueNum);
 
 }
