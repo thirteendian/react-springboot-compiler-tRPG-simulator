@@ -2,17 +2,22 @@ package edu.duke.summer.server.service.impl;
 
 import java.util.*;
 
-import edu.duke.summer.server.algorithm.EvalServicempl;
 import edu.duke.summer.server.algorithm.RuleInfo;
-import edu.duke.summer.server.algorithm.TypeInfo;
-import edu.duke.summer.server.algorithm.absyn.FieldList;
-import edu.duke.summer.server.algorithm.absyn.Ty;
 import edu.duke.summer.server.database.model.*;
 import edu.duke.summer.server.database.repository.*;
+
 import edu.duke.summer.server.dto.*;
 import edu.duke.summer.server.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+//import org.springframework.security.core.Authentication;
+//import org.springframework.security.core.context.SecurityContextHolder;
+//import org.springframework.security.core.session.SessionRegistry;
+//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import edu.duke.summer.server.algorithm.*;
+import edu.duke.summer.server.algorithm.absyn.*;
 
 @Service
 public class GameServiceImpl implements GameService {
@@ -175,10 +180,14 @@ public class GameServiceImpl implements GameService {
     return playerRepository.findAllByGame(game);
   }
 
-  public void createObjects(String gameId, String code) {
+  public void initializeGame(String gameId, String code) {
     EvalServicempl evalService = new EvalServicempl();
     RuleInfo ruleInfo = evalService.saveRules(code);
-    HashMap<String, TypeInfo> types = ruleInfo.getTypes();
+    createObjects(gameId, ruleInfo.getTypes());
+    createFunctions(gameId, ruleInfo.getFuncs());
+  }
+
+  public void createObjects(String gameId, HashMap<String, TypeInfo> types) {
     for (String type : types.keySet()) {
       if (!type.equals("int") && !type.equals("boolean") && !type.equals("string")) {
         //System.out.println(type);
@@ -186,6 +195,23 @@ public class GameServiceImpl implements GameService {
         FieldList fields = typeDefNode.getFields();
         traverseFields(gameId, type, 0, fields);
         //System.out.println();
+      }
+    }
+  }
+
+  public void createFunctions(String gameId, HashMap<String, FuncInfo> functions) {
+    for (String func : functions.keySet()) {
+      FuncInfo funcInfo = functions.get(func);
+      String funcName = funcInfo.getFuncName();
+      if (!funcName.equals("output") && !funcName.equals("roll") && !funcName.equals("oneUserOption") && !funcName.equals("userOption")) {
+        System.out.println("function name: " + funcInfo.getFuncName());
+        FieldList param = funcInfo.getParams();
+        while (param != null) {
+          System.out.println("parameter: " + param.getName().toString());
+          System.out.println("type: " + param.getType().getName());
+          System.out.println("key: " + param.getType().getKey());
+          param = param.getTail();
+        }
       }
     }
   }
@@ -409,3 +435,4 @@ public class GameServiceImpl implements GameService {
     return objectValueDto;
   }
 }
+
