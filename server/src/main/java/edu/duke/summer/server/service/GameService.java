@@ -2,16 +2,16 @@ package edu.duke.summer.server.service;
 
 import java.util.List;
 
-import edu.duke.summer.server.database.model.DiceRolling;
-import edu.duke.summer.server.dto.*;
 import edu.duke.summer.server.database.model.Game;
+import edu.duke.summer.server.database.model.DiceRolling;
 import edu.duke.summer.server.database.model.MagicCheck;
 import edu.duke.summer.server.database.model.Player;
+import edu.duke.summer.server.dto.*;
 import org.springframework.stereotype.Service;
 
 @Service
 public interface GameService {
-  
+
   Game createNewGame(final CreateGameDto createGameDto);
 
   List<Game> filterGame(final GameFilterDto gameFilterDto);
@@ -43,7 +43,6 @@ public interface GameService {
    * @param player the player that seek for recent 20 visible dice-rolling results
    * @return recent 20 visible dice-rolling results
    */
-
   List<DiceRolling> getPlayerResults(String game, String player);
 
   /**
@@ -64,12 +63,12 @@ public interface GameService {
   List<Player> getAllPlayers(String game);
 
   /**
-   * Create and store object types & fields through the code provided by the game creator
+   * Create and store the information of objects & functions through the code provided by the game creator
    *
    * @param gameId the game that the creator is involved in
-   * @param code the code that contains the description of objects
+   * @param code the code that contains the description of objects & functions
    */
-  void createObjects(String gameId, String code);
+  void initializeGame(String gameId, String code);
 
   /**
    * Get all object types in the game
@@ -147,6 +146,5 @@ public interface GameService {
    * @return objectFieldDto that contains all field information of the array in this game
    */
   ObjectValueDto getArrayValues(String gameId, String valueNum);
-
 
 }
