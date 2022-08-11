@@ -23,11 +23,11 @@ public class ForStmt extends Stmt {
          return new VoidValue();
       }
       Value value = scope.eval(varEntry, randNumGen, info, state);
-      HashMap<String, Value> vars = varEntry.getVars(state.getBlockId());
       int flag = 0;
       String varName = ((SimpleVar)var).name.toString();
       if(value instanceof ArrayValue){
          ArrayList<Value> list = ((ArrayValue) value).getValue();
+         HashMap<String, Value> vars = varEntry.getCurrScopeVars();
          if(vars.get(varName) == null && list.size() > 0){
             vars.put(varName, list.get(0));
             flag = 1;

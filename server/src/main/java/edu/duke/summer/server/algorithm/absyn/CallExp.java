@@ -29,7 +29,8 @@ public class CallExp extends Exp {
             FieldList params = funInfo.getParams();
             HashMap<String, Value> paramList = new HashMap<>();
             String name = params.name.toString();
-            paramList.put(name, args.head.eval(varEntry, randNumGen, info, state));
+            Value value = args.head.eval(varEntry, randNumGen, info, state);
+            paramList.put(name, value);
             FieldList fieldTail = params.tail;
             ExpList expTail = args.tail;
             while (fieldTail != null && expTail != null) {

@@ -16,10 +16,9 @@ public class BuildInFuncStmt extends Stmt{
     }
     @Override
     public Value eval(VarEntry varEntry, Random randNumGen, RuleInfo info, StateInfo state) {
-        HashMap<String, Value> vars = varEntry.getVars(state.getBlockId());
         if(funcName.equals("output")){
             String name = params.name.toString();
-            Value val = vars.get(name);
+            Value val = varEntry.getVar(name);
             if(val == null){
                 throw new IllegalArgumentException("Parameters needed is not passed for function " + funcName + ".");
             }else{
@@ -27,28 +26,22 @@ public class BuildInFuncStmt extends Stmt{
             }
         }else if(funcName.equals("roll")){
             String paramName = params.name.toString();
-            Value rollInfo = vars.get(paramName);
+            Value rollInfo = varEntry.getVar(paramName);
             if(rollInfo instanceof StringValue){
                 String rollStr = ((StringValue)rollInfo).getValue();
+                HashMap<String , Value> vars = varEntry.getAllVars();
                 Value res = new EvalServicempl().evalRoll(rollStr, vars, new Random());
                 state.pushSubState("r");
                 String id = state.getCurrState();
                 //System.out.println(rollStr + ": rollId:"+ id);
                 HashMap<String, Integer> rollVals = state.getRolls();
                 ArrayList<String> reRollDices = state.getReRollDices();
-                for(int i = 0; i < reRollDices.size(); i++){
-                    if(!rollVals.containsKey(reRollDices.get(i))){
-                        throw new IllegalArgumentException("the reRollDice Id not exist in the rollVals HashMap");
+                if(reRollDices.contains(id) || reRollDices.size() == 0 || !rollVals.containsKey(id)){
+                    if(res instanceof IntValue){
+                        state.addRoll(id, ((IntValue) res).getValue());
                     }else{
-                        if(res instanceof IntValue){
-                            rollVals.replace(reRollDices.get(i), ((IntValue) res).getValue());
-                        }else{
-                            throw new IllegalArgumentException("invalid reroll value!");
-                        }
+                        throw new IllegalArgumentException("invalid reroll value!");
                     }
-                }
-                if(!rollVals.containsKey(id)){
-                    state.addRoll(id, ((IntValue) res).getValue());
                 }
                 return res;
             }else{
@@ -57,7 +50,7 @@ public class BuildInFuncStmt extends Stmt{
 
         }else if(funcName.equals("oneUserOption")){
             String objectName = params.name.toString();
-            Value objectInfo = vars.get(objectName);
+            Value objectInfo = varEntry.getVar(objectName);
             state.pushSubState("u");
             String id = state.getCurrState();
             //System.out.println("oneUserOption:"+ id);
@@ -71,7 +64,7 @@ public class BuildInFuncStmt extends Stmt{
             String msg = "";
             while(params.tail != null){
                 String msgName = params.tail.name.toString();
-                Value msgVal = vars.get(msgName);
+                Value msgVal = varEntry.getVar(msgName);
                 if(msgVal instanceof StringValue){
                     msg = ((StringValue) msgVal).getValue();
                 }else{
@@ -89,7 +82,7 @@ public class BuildInFuncStmt extends Stmt{
             return new BooleanValue(false);
         }else if(funcName.equals("userOption")){
             String msgName = params.name.toString();
-            Value msgVal = vars.get(msgName);
+            Value msgVal = varEntry.getVar(msgName);
             state.pushSubState("u");
             String id = state.getCurrState();
            // System.out.println("userOption:"+ id);

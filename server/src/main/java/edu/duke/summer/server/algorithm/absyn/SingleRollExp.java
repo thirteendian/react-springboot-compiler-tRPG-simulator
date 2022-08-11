@@ -5,6 +5,7 @@ import edu.duke.summer.server.algorithm.RuleInfo;
 import edu.duke.summer.server.algorithm.VarEntry;
 import edu.duke.summer.server.algorithm.value.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 

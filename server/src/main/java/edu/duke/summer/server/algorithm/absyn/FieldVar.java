@@ -18,10 +18,9 @@ public class FieldVar extends Var {
    public FieldVar(int p, Var v, Symbol f) {pos=p; var=v; field=f;}
 
    public Value getStruct(VarEntry varEntry, Random randNumGen, RuleInfo info, StateInfo state){
-      HashMap<String, Value> vars = varEntry.getVars(state.getBlockId());
       if(var instanceof SimpleVar){
          String keyName = ((SimpleVar) var).name.toString();
-         Value val = vars.get(keyName);
+         Value val = varEntry.getVar(keyName);
          if(val instanceof TypeValue){
             return val;
          }else{

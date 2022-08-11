@@ -1,6 +1,7 @@
 package edu.duke.summer.server.algorithm;
 
 import edu.duke.summer.server.algorithm.absyn.*;
+import edu.duke.summer.server.algorithm.value.IntValue;
 import edu.duke.summer.server.algorithm.value.Value;
 
 import java.util.HashMap;
@@ -62,11 +63,12 @@ public class FuncInfo {
     }
 
     public FuncCallResult getResult(HashMap<String, Value> params, StateInfo info){
-        calInfo.varEntry.getVars(info.getBlockId()).putAll(params);
-        Value returnValue = body.eval(calInfo.varEntry, calInfo.randNumGen, calInfo.info, info);
-        for(Map.Entry<String, Value> entry : params.entrySet()){
-            calInfo.varEntry.getVars(info.getBlockId()).remove(entry.getKey());
+        calInfo.varEntry.startBlock();
+        for(Map.Entry<String, Value> entry: params.entrySet()){
+            calInfo.varEntry.addVar(entry.getKey(), entry.getValue());
         }
+        Value returnValue = body.eval(calInfo.varEntry, calInfo.randNumGen, calInfo.info, info);
+        calInfo.varEntry.endBlock();
         info.setReturnMark(false);
         info.setBreakMark(false);
 

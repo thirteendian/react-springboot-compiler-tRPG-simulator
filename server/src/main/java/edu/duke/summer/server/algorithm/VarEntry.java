@@ -1,95 +1,64 @@
 package edu.duke.summer.server.algorithm;
 
-import edu.duke.summer.server.algorithm.value.IntValue;
-import edu.duke.summer.server.algorithm.value.Value;
+import edu.duke.summer.server.algorithm.value.*;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class VarEntry {
-    String blockId;
-
-    HashMap<String, HashMap<String, Value>> blockVars;
-
-    HashMap<String, HashMap<String, Value>> currBlockVars;
+    Deque<HashMap<String, Value>> vars;
 
     public VarEntry(){
-         blockId = "Init";
-         blockVars = new HashMap<>();
-         currBlockVars = new HashMap<>();
+         vars = new ArrayDeque<>();
     }
 
-    public void popBlockId(){
-        blockId.substring(0, blockId.length() - 2);
+    public void startBlock(){
+        vars.push(new HashMap<>());
     }
 
-    public HashMap<String, Value> getCurrBlockVars(String id){
-        HashMap<String, Value> vars =  currBlockVars.get(id);
-        if(vars == null){
-            return new HashMap<>();
+    public void endBlock(){
+       vars.pop();
+    }
+
+    public HashMap<String, Value> getCurrScopeVars() {
+        return vars.peek();
+    }
+
+    public void addVar(String name, Value val){
+        HashMap<String, Value> stackTop = vars.pop();
+        if(stackTop.containsKey(name)){
+            throw new IllegalArgumentException("The variable name " + name + " has already been used in this scope!");
         }else{
-            return vars;
+            stackTop.put(name, val);
+            vars.push(stackTop);
         }
     }
 
-    public void addCurrBlockVars(String id, String name, Value val){
-        HashMap<String, Value> vars = getCurrBlockVars(id);
-        if(vars.containsKey(name)){
-            throw new IllegalArgumentException("The variable has already been defined in this scope!");
-        }else{
-            vars.put(name, val);
-        }
-        currBlockVars.put(id, vars);
+    public void forceAddVar(String name, Value val){
+        HashMap<String, Value> stackTop = vars.pop();
+        stackTop.put(name, val);
+        vars.push(stackTop);
     }
 
-    public HashMap<String, Value> getVars(String id) {
-        HashMap<String, Value> vars =  blockVars.get(id);
-        if(vars == null){
-            vars = new HashMap<>();
+    public Value getVar(String name){
+        for(HashMap<String, Value> var : vars){
+            if(var.containsKey(name)){
+                return var.get(name);
+            }
         }
-        for(Map.Entry<String, HashMap<String, Value>> entry : blockVars.entrySet()){
-            if(id.length() == entry.getKey().length() + 1){
-                for(Map.Entry<String, Value> subEntry: entry.getValue().entrySet()){
-                    if(vars.containsKey(subEntry.getKey()))continue;
-                    vars.put(subEntry.getKey(),subEntry.getValue());
+        throw new IllegalArgumentException("Undefined variable " + name + " used!");
+    }
+
+    public HashMap<String, Value> getAllVars(){
+        HashMap<String, Value> allVars = new HashMap<>();
+        for(HashMap<String, Value> var : vars){
+            for(Map.Entry<String, Value>entry : var.entrySet()){
+                if(allVars.containsKey(entry.getKey())) continue;
+                else{
+                    allVars.put(entry.getKey(), entry.getValue());
                 }
             }
         }
-        blockVars.put(id, vars);
-        Value val = vars.get("i");
-        Integer i = 0;
-        if(val != null){
-            if(val instanceof IntValue){
-                i = ((IntValue) val).getValue();
-            }
-        }
-        return vars;
-    }
+        return allVars;
 
-    public void addBlockId(String str){
-        blockId = blockId.concat(str);
-    }
-
-    public String getBlockId(){
-        return blockId;
-    }
-
-    public void addVar(String id, String name, Value val){
-        addCurrBlockVars(id, name, val);
-        HashMap<String, Value> vals = blockVars.get(id);
-        for(Map.Entry<String, HashMap<String, Value>> entry : blockVars.entrySet()){
-            for(Map.Entry<String, Value> subEntry: entry.getValue().entrySet()){
-                if(vals.containsKey(subEntry.getKey()))continue;
-                vals.put(subEntry.getKey(),subEntry.getValue());
-            }
-        }
-        if(vals == null){
-            vals = new HashMap<>();
-            vals.put(name, val);
-            blockVars.put(id, new HashMap<>(vals));
-        }else{
-            vals.put(name, val);
-            blockVars.put(id, vals);
-        }
     }
 }

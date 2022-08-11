@@ -30,10 +30,12 @@ public class EvalServicempl implements EvalService{
         RuleInfo info = new RuleInfo();
         StateInfo state = new StateInfo();
         VarEntry varEntry = new VarEntry();
+        varEntry.startBlock();
         for(Map.Entry<String, Value> entry : vars.entrySet()){
-            varEntry.addVar(state.getBlockId(),entry.getKey(), entry.getValue());
+            varEntry.addVar(entry.getKey(), entry.getValue());
         }
         Value nodeValue = node.eval(varEntry, randNumGen,info,state);
+        varEntry.endBlock();
         if(nodeValue instanceof IntValue) {
             int result = ((IntValue) nodeValue).getValue();
             System.out.println(result);
