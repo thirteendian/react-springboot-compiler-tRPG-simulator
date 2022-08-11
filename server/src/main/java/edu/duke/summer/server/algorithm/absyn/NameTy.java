@@ -1,11 +1,10 @@
 package edu.duke.summer.server.algorithm.absyn;
 
-import edu.duke.summer.server.algorithm.RollState;
+import edu.duke.summer.server.algorithm.StateInfo;
 import edu.duke.summer.server.algorithm.RuleInfo;
 import edu.duke.summer.server.algorithm.Symbol.Symbol;
+import edu.duke.summer.server.algorithm.VarEntry;
 import edu.duke.summer.server.algorithm.value.*;
-import edu.duke.summer.server.algorithm.value.Value;
-import edu.duke.summer.server.algorithm.value.VoidValue;
 
 import java.util.HashMap;
 import java.util.Random;
@@ -28,7 +27,12 @@ public class NameTy extends Ty {
    }
 
    @Override
-   public Value eval(HashMap<String, Value> vars, Random randNumGen, RuleInfo info, RollState state) {
+   public Value getInitValue() {
+      throw new IllegalArgumentException("Some inner problem happened!");
+   }
+
+   @Override
+   public Value eval(VarEntry varEntry, Random randNumGen, RuleInfo info, StateInfo state) {
       if(!(info.getTypes().containsKey(name.toString()))){
          throw new IllegalArgumentException("Using undefined type:" + name.toString() + "!");
       }

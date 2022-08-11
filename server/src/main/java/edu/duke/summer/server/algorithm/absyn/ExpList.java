@@ -4,20 +4,18 @@ public class ExpList {
    public Exp head;
    public ExpList tail;
    public ExpList(Exp h, ExpList t) {head=h; tail=t;}
-   public void append(ExpList list){
-     // ExpList mark = tail;
-      while(tail != null){
-         tail = tail.tail;
+   public ExpList append(ExpList list){
+      if(tail != null){
+         tail = tail.append(list);
+      }else{
+         tail = list;
       }
-      tail = list;
-      //tail = mark;
+      return this;
    }
 
    public void printInfo(){
-      System.out.println(head.toString());
       ExpList curr= tail;
       while(curr != null){
-         System.out.println(curr.head.toString());
          curr = curr.tail;
 
       }

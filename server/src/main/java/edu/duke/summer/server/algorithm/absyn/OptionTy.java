@@ -1,9 +1,13 @@
 package edu.duke.summer.server.algorithm.absyn;
 
-import edu.duke.summer.server.algorithm.RollState;
+import edu.duke.summer.server.algorithm.StateInfo;
 import edu.duke.summer.server.algorithm.RuleInfo;
 import edu.duke.summer.server.algorithm.Symbol.Symbol;
+import edu.duke.summer.server.algorithm.VarEntry;
+import edu.duke.summer.server.algorithm.value.OptionValue;
+import edu.duke.summer.server.algorithm.value.StringValue;
 import edu.duke.summer.server.algorithm.value.Value;
+import edu.duke.summer.server.algorithm.value.VoidValue;
 
 import java.util.HashMap;
 import java.util.Random;
@@ -44,20 +48,11 @@ public class OptionTy extends Ty{
             elem = (OptionTy) a;
             tyName = Symbol.symbol(tmpTyp);
         }
-        else if(a instanceof NameTy){
-            String tmpTyp = ((NameTy) a).getName().toString() + " option";
-            elem = (NameTy) a;
+        else if(a instanceof NameTy || a instanceof PrimTy || a instanceof BooleanTy){
+            String tmpTyp = ((Ty) a).getName() + " option";
+            elem = (Ty)a;
             tyName = Symbol.symbol(tmpTyp);
 
-        }else if(a instanceof PrimTy) {
-            String tmpTyp = ((PrimTy) a).getName().toString() + " option";
-            elem = (PrimTy) a;
-            tyName = Symbol.symbol(tmpTyp);
-
-        }else if(a instanceof BooleanTy) {
-            String tmpTyp = ((BooleanTy) a).getName().toString() + " option";
-            elem = (BooleanTy) a;
-            tyName = Symbol.symbol(tmpTyp);
         }else{
             throw new IllegalArgumentException("Invalid option declaration!");
         }
@@ -78,7 +73,12 @@ public class OptionTy extends Ty{
     }
 
     @Override
-    public Value eval(HashMap<String, Value> vars, Random randNumGen, RuleInfo info, RollState state) {
-        return null;
+    public Value getInitValue() {
+        return new OptionValue(elem);
+    }
+
+    @Override
+    public Value eval(VarEntry varEntry, Random randNumGen, RuleInfo info, StateInfo state) {
+        return new VoidValue();
     }
 }
