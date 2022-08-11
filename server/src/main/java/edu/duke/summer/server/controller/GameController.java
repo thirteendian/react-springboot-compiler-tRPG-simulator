@@ -65,7 +65,7 @@ public class GameController {
             e.printStackTrace();
         }
 
-        gameService.createObjects(createGameDto.getId(), uploadString);
+        gameService.initializeGame(createGameDto.getId(), uploadString);
         return "redirect:/user/" + uuid + "/" + createGameDto.getId() + "/gamecenter";
     }
 
@@ -129,7 +129,7 @@ public class GameController {
 
         // return success response
         attributes.addFlashAttribute("message", "You successfully uploaded " + fileName + '!');
-        gameService.createObjects("1", uploadString);
+        gameService.initializeGame("1", uploadString);
         System.out.println("Successfully Create Objects, the Objects List:");
         System.out.println(gameService.getObjectsList("1"));
         return "redirect:/createobject";

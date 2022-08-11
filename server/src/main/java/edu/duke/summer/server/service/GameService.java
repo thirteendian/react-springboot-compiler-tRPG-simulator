@@ -147,4 +147,6 @@ public interface GameService {
    */
   ObjectValueDto getArrayValues(String gameId, String valueNum);
 
+  void callFunction(String gameId, String funcName);
+
 }
