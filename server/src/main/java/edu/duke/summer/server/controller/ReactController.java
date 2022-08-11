@@ -55,12 +55,7 @@ public class ReactController {
                 "    c:boolean option []\n" +
                 "    }\n" +
                 "}";
-        CreateGameDto createGameDto = new CreateGameDto();
-        createGameDto.setGameName("asdf");
-        createGameDto.setId("1");
-        createGameDto.setPlayerNum(1);
-        gameService.createNewGame(createGameDto);
-        gameService.createObjects("1", test);
+
         return  "Success";
     }
 
@@ -79,20 +74,9 @@ public class ReactController {
                 "    c:boolean option []\n" +
                 "    }\n" +
                 "}";
-        CreateGameDto createGameDto = new CreateGameDto();
-        createGameDto.setGameName("asdf");
-        createGameDto.setId("1");
-        createGameDto.setPlayerNum(1);
-        gameService.createNewGame(createGameDto);
-        gameService.createObjects("1", test);
 
-        ObjectFieldDto objectFieldDto = gameService.getObjectFields("1","rollwithmod");
-        RespObjectCreatingField respObjectCreatingField = new RespObjectCreatingField();
-        //List of field(Order)
-        respObjectCreatingField.setObjectField(objectFieldDto.getObjectField());
-        //Hashmap of Type(Self FK)
-        respObjectCreatingField.setFieldType(objectFieldDto.getFieldType());
-        return respObjectCreatingField;
+
+        return null;
 
     }
     //
