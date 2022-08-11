@@ -4,8 +4,8 @@ import edu.duke.summer.server.config.SpringConfig;
 import edu.duke.summer.server.database.model.*;
 import edu.duke.summer.server.database.repository.*;
 import edu.duke.summer.server.dto.DiceRollingDto;
-import edu.duke.summer.server.dto.ObjectFieldDto;
-import edu.duke.summer.server.dto.ObjectValueDto;
+import edu.duke.summer.server.dto.Object.ObjectDto;
+import edu.duke.summer.server.dto.Request.CreateObjectRequestDto;
 import edu.duke.summer.server.service.GameService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,15 +85,15 @@ public class GameServiceTest {
     @Test
     public void getAllPlayersTest() {
         Player player1 = new Player();
-        player1.setGame("test1");
+        player1.setGameId("test1");
         player1.setUserId("user1");
         playerRepository.save(player1);
         Player player2 = new Player();
-        player2.setGame("test2");
+        player2.setGameId("test2");
         player2.setUserId("user2");
         playerRepository.save(player2);
         Player player3 = new Player();
-        player3.setGame("test1");
+        player3.setGameId("test1");
         player3.setUserId("user3");
         playerRepository.save(player3);
         assertEquals(2, gameService.getAllPlayers("test1").size());
@@ -130,8 +130,8 @@ public class GameServiceTest {
         for (ObjectFieldType objectFieldType : objectFieldTypes) {
             System.out.println(objectFieldType.toString());
         }
-        ObjectFieldDto objectFieldDto = gameService.getObjectFields("1", "newType");
-        System.out.println(objectFieldDto.toString());
+        ObjectDto objectDto = gameService.getObjectFields("1", "newType");
+        System.out.println(objectDto.toString());
     }
 
     @Test
@@ -194,15 +194,15 @@ public class GameServiceTest {
                 "     addoncritsneak:rollwithmod\n" +
                 "};\n}";
         gameService.initializeGame("2", code);
-        ObjectFieldDto attackField = gameService.getObjectFields("2", "attack");
-        assertEquals(8, attackField.getObjectField().size());
+        ObjectDto attackField = gameService.getObjectFields("2", "attack");
+        assertEquals(8, attackField.getFieldNames().size());
         assertEquals(8, attackField.getFieldType().size());
-        ObjectFieldDto rollwithmodField = gameService.getObjectFields("2", "rollwithmod");
-        assertEquals(3, rollwithmodField.getObjectField().size());
+        ObjectDto rollwithmodField = gameService.getObjectFields("2", "rollwithmod");
+        assertEquals(3, rollwithmodField.getFieldNames().size());
         assertEquals(3, rollwithmodField.getFieldType().size());
-        ObjectFieldDto objectFieldDto = gameService.getObjectFields("2", "rollwithmod");
-        assertEquals("2", objectFieldDto.getGameId());
-        System.out.println(objectFieldDto.toString());
+        ObjectDto objectDto = gameService.getObjectFields("2", "rollwithmod");
+        assertEquals("2", objectDto.getGameId());
+        System.out.println(objectDto.toString());
     }
 
     @Test
@@ -240,53 +240,53 @@ public class GameServiceTest {
 
     @Test
     public void saveObjectsTest() {
-        ObjectValueDto objectValueDto = new ObjectValueDto();
-        objectValueDto.setGameId("1");
-        objectValueDto.setTypeName("rollwithmod");
-        objectValueDto.addFieldValue("2");
-        objectValueDto.addFieldValue("6");
-        objectValueDto.addFieldValue("1");
-        gameService.saveObjects(objectValueDto);
+        CreateObjectRequestDto createObjectRequestDto = new CreateObjectRequestDto();
+        createObjectRequestDto.setGameId("1");
+        createObjectRequestDto.setTypeName("rollwithmod");
+        createObjectRequestDto.addFieldValue("2");
+        createObjectRequestDto.addFieldValue("6");
+        createObjectRequestDto.addFieldValue("1");
+        gameService.saveObjects(createObjectRequestDto);
         assertEquals(3, objectValueRepository.findByGameId("1").size());
     }
 
     @Test
     public void saveArraysTest() {
-        ObjectValueDto objectValueDto = new ObjectValueDto();
-        objectValueDto.setGameId("1");
-        objectValueDto.setTypeName("int");
-        objectValueDto.addFieldValue("1");
-        objectValueDto.addFieldValue("4");
-        objectValueDto.addFieldValue("7");
-        gameService.saveArrays(objectValueDto);
+        CreateObjectRequestDto createObjectRequestDto = new CreateObjectRequestDto();
+        createObjectRequestDto.setGameId("1");
+        createObjectRequestDto.setTypeName("int");
+        createObjectRequestDto.addFieldValue("1");
+        createObjectRequestDto.addFieldValue("4");
+        createObjectRequestDto.addFieldValue("7");
+        gameService.saveArrays(createObjectRequestDto);
         assertEquals(3, objectArrayValueRepository.findByGameId("1").size());
     }
 
     @Test
     public void getObjectValuesTest() {
-        ObjectValueDto objectValueDto = new ObjectValueDto();
-        objectValueDto.setGameId("2");
-        objectValueDto.setTypeName("rollwithmod");
-        objectValueDto.addFieldValue("2");
-        objectValueDto.addFieldValue("6");
-        objectValueDto.addFieldValue("1");
-        gameService.saveObjects(objectValueDto);
+        CreateObjectRequestDto createObjectRequestDto = new CreateObjectRequestDto();
+        createObjectRequestDto.setGameId("2");
+        createObjectRequestDto.setTypeName("rollwithmod");
+        createObjectRequestDto.addFieldValue("2");
+        createObjectRequestDto.addFieldValue("6");
+        createObjectRequestDto.addFieldValue("1");
+        gameService.saveObjects(createObjectRequestDto);
         assertEquals(3, objectValueRepository.findByGameId("2").size());
-        ObjectValueDto result = gameService.getObjectValues("2", "rollwithmod", "0");
+        CreateObjectRequestDto result = gameService.getObjectValues("2", "rollwithmod", "0");
         assertEquals(3, result.getFieldValue().size());
     }
 
     @Test
     public void getArrayValuesTest() {
-        ObjectValueDto objectValueDto = new ObjectValueDto();
-        objectValueDto.setGameId("3");
-        objectValueDto.setTypeName("int");
-        objectValueDto.addFieldValue("1");
-        objectValueDto.addFieldValue("4");
-        objectValueDto.addFieldValue("7");
-        gameService.saveArrays(objectValueDto);
+        CreateObjectRequestDto createObjectRequestDto = new CreateObjectRequestDto();
+        createObjectRequestDto.setGameId("3");
+        createObjectRequestDto.setTypeName("int");
+        createObjectRequestDto.addFieldValue("1");
+        createObjectRequestDto.addFieldValue("4");
+        createObjectRequestDto.addFieldValue("7");
+        gameService.saveArrays(createObjectRequestDto);
         assertEquals(3, objectArrayValueRepository.findByGameId("3").size());
-        ObjectValueDto result = gameService.getArrayValues("3",  "2");
+        CreateObjectRequestDto result = gameService.getArrayValues("3",  "2");
         assertEquals(3, result.getFieldValue().size());
     }
 

@@ -1,6 +1,6 @@
 package edu.duke.summer.server.stomp;
 
-import edu.duke.summer.server.dto.ObjectFieldTypeDto;
+import edu.duke.summer.server.dto.Object.ObjectFieldTypeDto;
 
 import java.util.HashMap;
 import java.util.List;
