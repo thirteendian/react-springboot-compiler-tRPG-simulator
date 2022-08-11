@@ -19,7 +19,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 
-@Controller
+@RestController
 public class GameController {
 
     @Autowired
@@ -34,6 +34,7 @@ public class GameController {
         model.addAttribute("createGameDto", new CreateGameDto());
         return "create_game";
     }
+
 
     @PostMapping("/user/{uuid}/creategame")
     public String postCreateGame(@RequestParam("file") MultipartFile file, RedirectAttributes attributes,
