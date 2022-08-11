@@ -25,8 +25,6 @@ public interface GameService {
 
    GameStartResponseDto startGame(final GameStartRequestDto gameStartRequestDto);
 
-   CreateObjectResponseDto createObject(final CreateObjectRequestDto createObjectRequestDto);
-
   /**
    * Get result of the dice-rolling
    *
@@ -145,8 +143,6 @@ public interface GameService {
    * @return objectFieldDto that contains all field information of the array in this game
    */
   CreateObjectRequestDto getArrayValues(String gameId, String valueNum);
-
-  void callFunction(String gameId, String funcName);
 
   void callFunction(String gameId, String funcName);
 
