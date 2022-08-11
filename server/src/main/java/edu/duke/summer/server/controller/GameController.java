@@ -1,7 +1,7 @@
 package edu.duke.summer.server.controller;
 
 import edu.duke.summer.server.database.repository.GameRepository;
-import edu.duke.summer.server.dto.Request.CreateGameRequestDto;
+import edu.duke.summer.server.dto.CreateGameDto;
 import edu.duke.summer.server.service.GameService;
 import edu.duke.summer.server.service.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 
-@RestController
+@Controller
 public class GameController {
 
     @Autowired
@@ -31,15 +31,14 @@ public class GameController {
     @GetMapping("/user/{uuid}/creategame")
     public String getCreateGame(@PathVariable String uuid, Model model) {
         model.addAttribute("uuid", uuid);
-        model.addAttribute("createGameDto", new CreateGameRequestDto());
+        model.addAttribute("createGameDto", new CreateGameDto());
         return "create_game";
     }
 
-
     @PostMapping("/user/{uuid}/creategame")
     public String postCreateGame(@RequestParam("file") MultipartFile file, RedirectAttributes attributes,
-                                 @PathVariable String uuid, @ModelAttribute @Valid CreateGameRequestDto createGameRequestDto) {
-        gameService.createNewGame(createGameRequestDto);
+                                 @PathVariable String uuid, @ModelAttribute @Valid CreateGameDto createGameDto) {
+        gameService.createNewGame(createGameDto);
         // check if file is empty
         if (file.isEmpty()) {
             attributes.addFlashAttribute("message", "Please select a file to upload.");
@@ -65,8 +64,8 @@ public class GameController {
             e.printStackTrace();
         }
 
-        gameService.initializeGame(createGameRequestDto.getId(), uploadString);
-        return "redirect:/user/" + uuid + "/" + createGameRequestDto.getId() + "/gamecenter";
+        gameService.initializeGame(createGameDto.getId(), uploadString);
+        return "redirect:/user/" + uuid + "/" + createGameDto.getId() + "/gamecenter";
     }
 
     @GetMapping("/user/{uuid}/{gameid}/gamecenter")
