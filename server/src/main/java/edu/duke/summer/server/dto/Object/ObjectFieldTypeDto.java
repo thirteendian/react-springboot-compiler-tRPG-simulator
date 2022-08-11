@@ -1,4 +1,4 @@
-package edu.duke.summer.server.dto;
+package edu.duke.summer.server.dto.Object;
 
 import javax.persistence.Column;
 
@@ -7,12 +7,16 @@ public class ObjectFieldTypeDto {
     @Column(nullable = false)
     private String id;
 
+    // key: primitive, boolean, array, user, option
     @Column(nullable = false)
     private String k;
 
+    // while name is not null, it would be primitive, boolean, or user
+    // either name or elem would be null
     @Column
     private String name;
 
+    // while elem is not null, it would be either array or option
     @Column
     private ObjectFieldTypeDto elem;
 
