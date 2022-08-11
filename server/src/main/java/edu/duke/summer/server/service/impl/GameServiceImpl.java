@@ -37,6 +37,9 @@ public class GameServiceImpl implements GameService {
   private GameRepository gameRepository;
 
   @Autowired
+  private GameCodeRepository gameCodeRepository;
+
+  @Autowired
   private ObjectFieldRepository objectFieldRepository;
 
   @Autowired
@@ -47,6 +50,12 @@ public class GameServiceImpl implements GameService {
 
   @Autowired
   private ObjectArrayValueRepository objectArrayValueRepository;
+
+  @Autowired
+  private FunctionInfoRepository functionInfoRepository;
+
+  @Autowired
+  private ParamInfoRepository paramInfoRepository;
 
   @Override
   public Game createNewGame(final CreateGameDto createGameDto) {
@@ -185,11 +194,15 @@ public class GameServiceImpl implements GameService {
     RuleInfo ruleInfo = evalService.saveRules(code);
     createObjects(gameId, ruleInfo.getTypes());
     createFunctions(gameId, ruleInfo.getFuncs());
+    GameCode gameCode = new GameCode();
+    gameCode.setGameId(gameId);
+    gameCode.setCode(code);
+    gameCodeRepository.save(gameCode);
   }
 
   public void createObjects(String gameId, HashMap<String, TypeInfo> types) {
     for (String type : types.keySet()) {
-      if (!type.equals("int") && !type.equals("boolean") && !type.equals("string")) {
+      if (!type.equals("int") && !type.equals("boolean") && !type.equals("string") && !type.equals("void")) {
         //System.out.println(type);
         TypeInfo typeDefNode = types.get(type);
         FieldList fields = typeDefNode.getFields();
@@ -199,28 +212,11 @@ public class GameServiceImpl implements GameService {
     }
   }
 
-  public void createFunctions(String gameId, HashMap<String, FuncInfo> functions) {
-    for (String func : functions.keySet()) {
-      FuncInfo funcInfo = functions.get(func);
-      String funcName = funcInfo.getFuncName();
-      if (!funcName.equals("output") && !funcName.equals("roll") && !funcName.equals("oneUserOption") && !funcName.equals("userOption")) {
-        System.out.println("function name: " + funcInfo.getFuncName());
-        FieldList param = funcInfo.getParams();
-        while (param != null) {
-          System.out.println("parameter: " + param.getName().toString());
-          System.out.println("type: " + param.getType().getName());
-          System.out.println("key: " + param.getType().getKey());
-          param = param.getTail();
-        }
-      }
-    }
-  }
-
   public void traverseFields(String gameId, String typeName, int fieldNum, FieldList fields) {
     if (fields != null) {
       System.out.println("fieldName: " + fields.getName().toString());
       Ty ty  =fields.getType();
-      String fieldType = traverseTypes(ty);
+      String fieldType = traverseFieldTypes(ty);
       ObjectField objectField = new ObjectField();
       objectField.setGameId(gameId);
       objectField.setTypeName(typeName);
@@ -232,7 +228,7 @@ public class GameServiceImpl implements GameService {
     }
   }
 
-  public String traverseTypes(Ty ty) {
+  public String traverseFieldTypes(Ty ty) {
     //System.out.println("k: " + ty.getKey());
     ObjectFieldType objectFieldType = new ObjectFieldType();
     objectFieldType.setK(ty.getKey());
@@ -244,11 +240,57 @@ public class GameServiceImpl implements GameService {
     else {
       //System.out.println("elem: ");
       Ty elem = ty.getElem();
-      String elemId = traverseTypes(elem);
+      String elemId = traverseFieldTypes(elem);
       objectFieldType.setElem(elemId);
       objectFieldTypeRepository.save(objectFieldType);
     }
     return objectFieldType.getId();
+  }
+
+  public void createFunctions(String gameId, HashMap<String, FuncInfo> functions) {
+    for (String func : functions.keySet()) {
+      FuncInfo funcInfo = functions.get(func);
+      String funcName = funcInfo.getFuncName();
+      if (!funcName.equals("output") && !funcName.equals("roll") && !funcName.equals("oneUserOption") && !funcName.equals("userOption")) {
+        //System.out.println("function name: " + funcInfo.getFuncName());
+        FieldList param = funcInfo.getParams();
+        traverseParams(gameId, funcName, 0, param);
+      }
+    }
+  }
+
+  public void traverseParams(String gameId, String funcName, int fieldNum, FieldList param) {
+    if (param != null) {
+      Ty ty  =param.getType();
+      String paramType = traverseParamTypes(ty);
+      FunctionInfo funcInfo = new FunctionInfo();
+      funcInfo.setGameId(gameId);
+      funcInfo.setFuncName(funcName);
+      funcInfo.setParamNum(Integer.toString(fieldNum++));
+      funcInfo.setParamName(param.getName().toString());
+      funcInfo.setParamType(paramType);
+      functionInfoRepository.save(funcInfo);
+      traverseParams(gameId, funcName, fieldNum, param.getTail());
+    }
+  }
+
+  public String traverseParamTypes(Ty ty) {
+    //System.out.println("k: " + ty.getKey());
+    ParamInfo paramInfo = new ParamInfo();
+    paramInfo.setK(ty.getKey());
+    if (ty.getName() != null) {
+      //System.out.println("name: " + ty.getName());
+      paramInfo.setName(ty.getName());
+      paramInfoRepository.save(paramInfo);
+    }
+    else {
+      //System.out.println("elem: ");
+      Ty elem = ty.getElem();
+      String elemId = traverseParamTypes(elem);
+      paramInfo.setElem(elemId);
+      paramInfoRepository.save(paramInfo);
+    }
+    return paramInfo.getId();
   }
 
   public List<String> getObjectsList(String gameId) {
@@ -433,6 +475,12 @@ public class GameServiceImpl implements GameService {
       }
     }
     return objectValueDto;
+  }
+
+  public void callFunction(String gameId, String funcName) {
+    String code= gameCodeRepository.findByGameId(gameId).getCode();
+    EvalServicempl evalService = new EvalServicempl();
+    FuncCallResult result = evalService.getFunResult(code, funcName, new HashMap<>(), new StateInfo());
   }
 }
 
