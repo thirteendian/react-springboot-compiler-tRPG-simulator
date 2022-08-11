@@ -1,10 +1,7 @@
 package edu.duke.summer.server;
 
 import edu.duke.summer.server.config.SpringConfig;
-import edu.duke.summer.server.database.model.DiceRolling;
-import edu.duke.summer.server.database.model.ObjectField;
-import edu.duke.summer.server.database.model.ObjectFieldType;
-import edu.duke.summer.server.database.model.Player;
+import edu.duke.summer.server.database.model.*;
 import edu.duke.summer.server.database.repository.*;
 import edu.duke.summer.server.dto.DiceRollingDto;
 import edu.duke.summer.server.dto.ObjectFieldDto;
@@ -38,6 +35,12 @@ public class GameServiceTest {
 
     @Autowired
     private ObjectArrayValueRepository objectArrayValueRepository;
+
+    @Autowired
+    private FunctionInfoRepository functionInfoRepository;
+
+    @Autowired
+    private ParamInfoRepository paramInfoRepository;
 
     @Test
     public void getDiceRollingResultsTest() {
@@ -115,8 +118,8 @@ public class GameServiceTest {
                 "    c:boolean option []\n" +
                 "    }\n" +
                 "}";
-        gameService.createObjects("1", code);
-        assertEquals(6, objectFieldRepository.findByGameId("1").size());
+        gameService.initializeGame("1", code);
+        //assertEquals(6, objectFieldRepository.findByGameId("1").size());
         List<ObjectField> objectFields = objectFieldRepository.findByGameId("1");
         for (ObjectField objectField : objectFields) {
             System.out.println(objectField.toString());
@@ -129,6 +132,42 @@ public class GameServiceTest {
         }
         ObjectFieldDto objectFieldDto = gameService.getObjectFields("1", "newType");
         System.out.println(objectFieldDto.toString());
+    }
+
+    @Test
+    public void createFunctionsTest() {
+        String ruleStr = "{ fun int cal(int a, int option option [] x, int [][][] option y, string option [] option z){\n" +
+                "    var b = 0;\n" +
+                "    var anArray:int [] = {1};\n" +
+                "    var sum = 0;\n" +
+                "    var opti: int option;\n" +
+                "    var userTest : newType;\n" +
+                "    userTest.a.numdice = 5;\n" +
+                "    opti = SOME(1);\n" +
+                "    opti = NONE;\n" +
+                "    anArray = {1,2,3,7,10};\n" +
+                "    anArray[3] = 10;\n" +
+                "    output(a);\n" +
+                "    for(i : anArray){\n" +
+                "        sum = sum + i;\n" +
+                "        if (sum > 10) then { break;}\n" +
+                "    }\n" +
+                "    a = 1;\n" +
+                "    output(a);\n" +
+                "    return sum;\n" +
+                "    }\n" +
+                "}";
+        gameService.initializeGame("5", ruleStr);
+        //assertEquals(4, functionInfoRepository.findByGameId("5").size());
+        List<FunctionInfo> functionInfos = functionInfoRepository.findByGameId("5");
+        for (FunctionInfo functionInfo : functionInfos) {
+            System.out.println(functionInfo.toString());
+        }
+        System.out.println();
+        List<ParamInfo> paramInfos = paramInfoRepository.findAll();
+        for (ParamInfo paramInfo : paramInfos) {
+            System.out.println(paramInfo.toString());
+        }
     }
 
     @Test
@@ -154,7 +193,7 @@ public class GameServiceTest {
                 "     addonsneak: rollwithmod,\n" +
                 "     addoncritsneak:rollwithmod\n" +
                 "};\n}";
-        gameService.createObjects("2", code);
+        gameService.initializeGame("2", code);
         ObjectFieldDto attackField = gameService.getObjectFields("2", "attack");
         assertEquals(8, attackField.getObjectField().size());
         assertEquals(8, attackField.getFieldType().size());
@@ -179,7 +218,7 @@ public class GameServiceTest {
                 "    c:boolean option []\n" +
                 "    }\n" +
                 "}";
-        gameService.createObjects("3", code);
+        gameService.initializeGame("3", code);
         gameService.deleteObjectField("3", "newType", "a");
 
         String codeAdd = "{type rollwithmod {\n" +
@@ -250,4 +289,5 @@ public class GameServiceTest {
         ObjectValueDto result = gameService.getArrayValues("3",  "2");
         assertEquals(3, result.getFieldValue().size());
     }
+
 }
