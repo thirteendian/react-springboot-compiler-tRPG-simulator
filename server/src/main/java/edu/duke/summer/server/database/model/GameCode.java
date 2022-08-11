@@ -9,15 +9,14 @@ import java.lang.*;
 
 @Entity
 @Table(name = "gameCode")
-@IdClass(GameCode.class)
 public class GameCode implements Serializable {
 
     @Id
     @Column(nullable = false)
     private String gameId;
 
-    @Id
     @Column(nullable = false)
+    @Lob
     private String code;
 
     public void setGameId(String gameId) {
