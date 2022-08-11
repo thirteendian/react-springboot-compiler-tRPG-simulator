@@ -549,5 +549,11 @@ public class GameServiceImpl implements GameService {
     EvalServicempl evalService = new EvalServicempl();
     FuncCallResult result = evalService.getFunResult(code, funcName, new HashMap<>(), new StateInfo());
   }
+
+  public void callFunction(String gameId, String funcName) {
+    String code= gameCodeRepository.findByGameId(gameId).getCode();
+    EvalServicempl evalService = new EvalServicempl();
+    FuncCallResult result = evalService.getFunResult(code, funcName, new HashMap<>(), new StateInfo());
+  }
 }
 
