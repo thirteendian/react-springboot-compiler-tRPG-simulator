@@ -60,7 +60,7 @@ public class ReactController {
         createGameDto.setId("1");
         createGameDto.setPlayerNum(1);
         gameService.createNewGame(createGameDto);
-        gameService.createObjects("1", test);
+        gameService.initializeGame("1", test);
         return  "Success";
     }
 
@@ -84,7 +84,7 @@ public class ReactController {
         createGameDto.setId("1");
         createGameDto.setPlayerNum(1);
         gameService.createNewGame(createGameDto);
-        gameService.createObjects("1", test);
+        gameService.initializeGame("1", test);
 
         ObjectFieldDto objectFieldDto = gameService.getObjectFields("1","rollwithmod");
         RespObjectCreatingField respObjectCreatingField = new RespObjectCreatingField();
