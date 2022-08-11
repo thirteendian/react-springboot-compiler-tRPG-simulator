@@ -26,6 +26,13 @@ public class CreateGameDto {
   @Column(nullable = false)
   private String gameSettings;
 
+  public CreateGameDto(String id, int playerNum, String gameName, String gameSettings) {
+    this.id = id;
+    this.playerNum = playerNum;
+    this.gameName = gameName;
+    this.gameSettings = gameSettings;
+  }
+
   public String getId() {
     return id;
   }
@@ -34,19 +41,21 @@ public class CreateGameDto {
     this.id = id;
   }
 
+  public int getPlayerNum() {
+    return playerNum;
+  }
+
+  public void setPlayerNum(int playerNum) {
+    this.playerNum = playerNum;
+  }
+
   public String getGameName() {
     return gameName;
   }
 
-
-  public Integer getPlayerNum() {return playerNum;}
-
-
   public void setGameName(String gameName) {
     this.gameName = gameName;
   }
-
-  public void setPlayerNum(int playerNum) {this.playerNum = playerNum;}
 
   public String getGameSettings() {
     return gameSettings;
@@ -55,22 +64,5 @@ public class CreateGameDto {
   public void setGameSettings(String gameSettings) {
     this.gameSettings = gameSettings;
   }
-
-  @Override
-  public int hashCode() {
-    return toString().hashCode();
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    if (obj.getClass().equals(getClass())) {
-      Game game = (Game) obj;
-      if (this.id.equals(game.getId())) {
-        return true;
-      }
-    }
-    return false;
-  }
-
 
 }
