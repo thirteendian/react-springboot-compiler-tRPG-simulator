@@ -1,6 +1,6 @@
 package edu.duke.summer.server.controller;
 
-import edu.duke.summer.server.dto.ObjectFieldDto;
+import edu.duke.summer.server.dto.Object.ObjectDto;
 import edu.duke.summer.server.service.GameService;
 import edu.duke.summer.server.stomp.ReqObjectCreatingName;
 import edu.duke.summer.server.stomp.RespObjectCreatingField;
@@ -42,12 +42,12 @@ public class DiceRollingController {
     @SendTo("/objectcreate/field")
     public RespObjectCreatingField getObjectCreatingField(ReqObjectCreatingName reqObjectCreatingName){
         System.out.println("ObjectName:" + reqObjectCreatingName.getObjectName());
-        ObjectFieldDto objectFieldDto = gameService.getObjectFields("1",reqObjectCreatingName.getObjectName());
+        ObjectDto objectDto = gameService.getObjectFields("1",reqObjectCreatingName.getObjectName());
         RespObjectCreatingField respObjectCreatingField = new RespObjectCreatingField();
         //List of field(Order)
-        respObjectCreatingField.setObjectField(objectFieldDto.getObjectField());
+        respObjectCreatingField.setObjectField(objectDto.getFieldNames());
         //Hashmap of Type(Self FK)
-        respObjectCreatingField.setFieldType(objectFieldDto.getFieldType());
+        respObjectCreatingField.setFieldType(objectDto.getFieldType());
         return respObjectCreatingField;
     }
 

@@ -1,39 +1,22 @@
-package edu.duke.summer.server.database.model;
+package edu.duke.summer.server.dto.Request;
 
-import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.*;
-
-import java.lang.*;
-import java.util.*;
+import org.antlr.v4.runtime.misc.NotNull;
 
 import javax.persistence.*;
 
+public class CreateGameRequestDto {
 
-@Entity
-@Table(name = "games")
-public class Game {
-
-  @Id @GeneratedValue(generator = "system-uuid")
-  @GenericGenerator(name = "system-uuid",strategy = "uuid")
-  @Column(unique = true, nullable = false, insertable = false, updatable = false)
-  private String id;
-
-  @Column(nullable = false, unique = true, length = 45)
+  @NotNull
   private String hostUuid;
 
-  @Column(nullable = false, length = 45)
+  @NotNull
   private String gameName;
 
-  @Column(nullable = false)
+  @NotNull
   private int playerNum;
 
-  @Column(nullable = false, length = 45)
+  @NotNull
   private String code;
-
-  public String getId() {
-    return id;
-  }
 
   public String getHostUuid() {
     return hostUuid;
@@ -67,13 +50,12 @@ public class Game {
     this.code = code;
   }
 
-  public Game() {}
+  public CreateGameRequestDto() {}
 
-  public Game(String hostUuid, String gameName, int playerNum, String code) {
+  public CreateGameRequestDto(String hostUuid, String gameName, int playerNum, String code) {
     this.hostUuid = hostUuid;
     this.gameName = gameName;
     this.playerNum = playerNum;
     this.code = code;
   }
 }
-

@@ -7,6 +7,15 @@ import edu.duke.summer.server.database.model.*;
 import edu.duke.summer.server.database.repository.*;
 
 import edu.duke.summer.server.dto.*;
+import edu.duke.summer.server.dto.Object.ObjectDto;
+import edu.duke.summer.server.dto.Object.ObjectFieldTypeDto;
+import edu.duke.summer.server.dto.Request.CreateGameRequestDto;
+import edu.duke.summer.server.dto.Request.GameStartRequestDto;
+import edu.duke.summer.server.dto.Request.JoinGameRequestDto;
+import edu.duke.summer.server.dto.Request.CreateObjectRequestDto;
+import edu.duke.summer.server.dto.Response.CreateGameResponseDto;
+import edu.duke.summer.server.dto.Response.GameStartResponseDto;
+import edu.duke.summer.server.dto.Response.JoinGameResponseDto;
 import edu.duke.summer.server.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -37,9 +46,6 @@ public class GameServiceImpl implements GameService {
   private GameRepository gameRepository;
 
   @Autowired
-  private GameCodeRepository gameCodeRepository;
-
-  @Autowired
   private ObjectFieldRepository objectFieldRepository;
 
   @Autowired
@@ -58,16 +64,19 @@ public class GameServiceImpl implements GameService {
   private ParamInfoRepository paramInfoRepository;
 
   @Override
-  public Game createNewGame(final CreateGameDto createGameDto) {
-    if (gameRepository.existsById(createGameDto.getId())) {
-      throw new IllegalArgumentException("Game ID already exists!");
-    }
-    final Game game = new Game();
-    game.setId(createGameDto.getId());
-    game.setCreatorEmail("0");
-    game.setGameName(createGameDto.getGameName());
-    game.setPlayerNum(createGameDto.getPlayerNum());
-    return gameRepository.save(game);
+  public CreateGameResponseDto createNewGame(final CreateGameRequestDto createGameRequestDto) {
+    Game game = new Game();
+    game.setHostUuid(createGameRequestDto.getHostUuid());
+    game.setGameName(createGameRequestDto.getGameName());
+    game.setPlayerNum(createGameRequestDto.getPlayerNum());
+    game.setCode(createGameRequestDto.getCode());
+    gameRepository.save(game);
+    initializeGame(game.getId(), game.getCode());
+    CreateGameResponseDto createGameResponseDto = new CreateGameResponseDto();
+    createGameResponseDto.setGameId(game.getId());
+    createGameResponseDto.setGameName(createGameRequestDto.getGameName());
+    createGameResponseDto.setPlayerNum(createGameRequestDto.getPlayerNum());
+    return createGameResponseDto;
   }
 
   @Override
@@ -117,17 +126,29 @@ public class GameServiceImpl implements GameService {
   }
 
   @Override
-  public Game joinGame(final CreateGameDto createGameDto) {
-    if (!gameRepository.existsById(createGameDto.getId())) {
+  public JoinGameResponseDto joinGame(JoinGameRequestDto joinGameRequestDto) {
+    if (!gameRepository.existsById(joinGameRequestDto.getGameId())) {
       throw new IllegalArgumentException("Game does not exists!");
     }
-    return gameRepository.findById(createGameDto.getId());
+    Game game = gameRepository.findById(joinGameRequestDto.getGameId());
+    JoinGameResponseDto joinGameResponseDto = new JoinGameResponseDto();
+    joinGameResponseDto.setGameName(game.getGameName());
+    joinGameResponseDto.setPlayerNum(game.getPlayerNum());
+    Player player = new Player();
+    player.setGameId(game.getId());
+    player.setUserId(joinGameRequestDto.getPlayerUuid());
+    playerRepository.save(player);
+    return joinGameResponseDto;
   }
-
 
   @Override
   public void deleteGame(final Game game) {
     gameRepository.delete(game);
+  }
+
+  @Override
+  public GameStartResponseDto startGame(GameStartRequestDto gameStartRequestDto) {
+    return null;
   }
 
   @Override
@@ -185,8 +206,8 @@ public class GameServiceImpl implements GameService {
   }
 
   @Override
-  public List<Player> getAllPlayers(String game) {
-    return playerRepository.findAllByGame(game);
+  public List<Player> getAllPlayers(String gameId) {
+    return playerRepository.findAllByGame(gameId);
   }
 
   public void initializeGame(String gameId, String code) {
@@ -194,10 +215,6 @@ public class GameServiceImpl implements GameService {
     RuleInfo ruleInfo = evalService.saveRules(code);
     createObjects(gameId, ruleInfo.getTypes());
     createFunctions(gameId, ruleInfo.getFuncs());
-    GameCode gameCode = new GameCode();
-    gameCode.setGameId(gameId);
-    gameCode.setCode(code);
-    gameCodeRepository.save(gameCode);
   }
 
   public void createObjects(String gameId, HashMap<String, TypeInfo> types) {
@@ -298,23 +315,23 @@ public class GameServiceImpl implements GameService {
     return objectsList;
   }
 
-  public ObjectFieldDto getObjectFields(String gameId, String typeName) {
-    ObjectFieldDto objectFieldDto = new ObjectFieldDto();
-    objectFieldDto.setGameId(gameId);
-    objectFieldDto.setTypeName(typeName);
+  public ObjectDto getObjectFields(String gameId, String typeName) {
+    ObjectDto objectDto = new ObjectDto();
+    objectDto.setGameId(gameId);
+    objectDto.setTypeName(typeName);
     List<String> objectIdList = objectValueRepository.findIdList(gameId, typeName);
     if (!objectIdList.isEmpty()) {
-      objectFieldDto.addObjectIdList(typeName, objectIdList);
+      objectDto.addObjectIdList(typeName, objectIdList);
     }
     List<ObjectField> objectFields = objectFieldRepository.findObjectFieldList(gameId, typeName);
     for (ObjectField objectField : objectFields) {
-      objectFieldDto.addObjectField(objectField.getFieldName());
+      objectDto.addObjectField(objectField.getFieldName());
       String fieldTypeId = objectField.getFieldType();
       ObjectFieldType objectFieldType = objectFieldTypeRepository.findById(fieldTypeId);
       ObjectFieldTypeDto objectFieldTypeDto = saveObjectFieldTypeToDto(objectFieldType);
-      objectFieldDto.addFieldType(objectField.getFieldName(), objectFieldTypeDto);
+      objectDto.addFieldType(objectField.getFieldName(), objectFieldTypeDto);
     }
-    return objectFieldDto;
+    return objectDto;
   }
 
   private ObjectFieldTypeDto saveObjectFieldTypeToDto(ObjectFieldType objectFieldType) {
@@ -381,14 +398,14 @@ public class GameServiceImpl implements GameService {
     }
   }
 
-  public String saveObjects(ObjectValueDto objectValueDto) {
-    List<String> fieldValues = objectValueDto.getFieldValue();
+  public String saveObjects(CreateObjectRequestDto createObjectRequestDto) {
+    List<String> fieldValues = createObjectRequestDto.getFieldValue();
     int fieldNum = 0;
     for (String value : fieldValues) {
       final ObjectValue objectValue = new ObjectValue();
-      objectValue.setGameId(objectValueDto.getGameId());
-      objectValue.setTypeName(objectValueDto.getTypeName());
-      objectValue.setValueNum(objectValueDto.getValueNum());
+      objectValue.setGameId(createObjectRequestDto.getGameId());
+      objectValue.setTypeName(createObjectRequestDto.getTypeName());
+      objectValue.setValueNum(createObjectRequestDto.getValueNum());
       objectValue.setFieldNum(String.valueOf(fieldNum++));
       if (value.equals("true") || value.equals("false")) {
         objectValue.setBoolVal(value);
@@ -403,17 +420,17 @@ public class GameServiceImpl implements GameService {
       }
       objectValueRepository.save(objectValue);
     }
-    return objectValueDto.getValueNum();
+    return createObjectRequestDto.getValueNum();
   }
 
-  public String saveArrays(ObjectValueDto objectValueDto) {
-    List<String> fieldValues = objectValueDto.getFieldValue();
+  public String saveArrays(CreateObjectRequestDto createObjectRequestDto) {
+    List<String> fieldValues = createObjectRequestDto.getFieldValue();
     int index = 0;
     for (String value : fieldValues) {
       final ObjectArrayValue objectArrayValue = new ObjectArrayValue();
-      objectArrayValue.setGameId(objectValueDto.getGameId());
-      objectArrayValue.setEltType(objectValueDto.getTypeName());
-      objectArrayValue.setValueNum(objectValueDto.getValueNum());
+      objectArrayValue.setGameId(createObjectRequestDto.getGameId());
+      objectArrayValue.setEltType(createObjectRequestDto.getTypeName());
+      objectArrayValue.setValueNum(createObjectRequestDto.getValueNum());
       objectArrayValue.setIndex(String.valueOf(index++));
       if (value.equals("true") || value.equals("false")) {
         objectArrayValue.setBoolVal(value);
@@ -428,57 +445,57 @@ public class GameServiceImpl implements GameService {
       }
       objectArrayValueRepository.save(objectArrayValue);
     }
-    return objectValueDto.getValueNum();
+    return createObjectRequestDto.getValueNum();
   }
 
-  public ObjectValueDto getObjectValues(String gameId, String typeName, String valueNum) {
+  public CreateObjectRequestDto getObjectValues(String gameId, String typeName, String valueNum) {
     List<ObjectValue> objectValues = objectValueRepository.findObjectValue(gameId, typeName, valueNum);
     if (objectValues.isEmpty()) {
       return null;
     }
-    ObjectValueDto objectValueDto = new ObjectValueDto();
-    objectValueDto.setGameId(objectValues.get(0).getGameId());
-    objectValueDto.setTypeName(objectValues.get(0).getTypeName());
-    objectValueDto.setValueNum(objectValues.get(0).getValueNum());
+    CreateObjectRequestDto createObjectRequestDto = new CreateObjectRequestDto();
+    createObjectRequestDto.setGameId(objectValues.get(0).getGameId());
+    createObjectRequestDto.setTypeName(objectValues.get(0).getTypeName());
+    createObjectRequestDto.setValueNum(objectValues.get(0).getValueNum());
     for(ObjectValue objectValue : objectValues) {
       if (!objectValue.getIntVal().equals("null")) {
-        objectValueDto.addFieldValue(objectValue.getIntVal());
+        createObjectRequestDto.addFieldValue(objectValue.getIntVal());
       }
       else if (!objectValue.getStringVal().equals("null")) {
-        objectValueDto.addFieldValue(objectValue.getStringVal());
+        createObjectRequestDto.addFieldValue(objectValue.getStringVal());
       }
       else {
-        objectValueDto.addFieldValue(objectValue.getBoolVal());
+        createObjectRequestDto.addFieldValue(objectValue.getBoolVal());
       }
     }
-    return objectValueDto;
+    return createObjectRequestDto;
   }
 
-  public ObjectValueDto getArrayValues(String gameId, String valueNum) {
+  public CreateObjectRequestDto getArrayValues(String gameId, String valueNum) {
     List<ObjectArrayValue> arrayValues = objectArrayValueRepository.findArrayValue(gameId, valueNum);
     if (arrayValues.isEmpty()) {
       return null;
     }
-    ObjectValueDto objectValueDto = new ObjectValueDto();
-    objectValueDto.setGameId(arrayValues.get(0).getGameId());
-    objectValueDto.setTypeName(arrayValues.get(0).getEltType());
-    objectValueDto.setValueNum(arrayValues.get(0).getValueNum());
+    CreateObjectRequestDto createObjectRequestDto = new CreateObjectRequestDto();
+    createObjectRequestDto.setGameId(arrayValues.get(0).getGameId());
+    createObjectRequestDto.setTypeName(arrayValues.get(0).getEltType());
+    createObjectRequestDto.setValueNum(arrayValues.get(0).getValueNum());
     for(ObjectArrayValue arrayValue : arrayValues) {
       if (!arrayValue.getIntVal().equals("null")) {
-        objectValueDto.addFieldValue(arrayValue.getIntVal());
+        createObjectRequestDto.addFieldValue(arrayValue.getIntVal());
       }
       else if (!arrayValue.getStringVal().equals("null")) {
-        objectValueDto.addFieldValue(arrayValue.getStringVal());
+        createObjectRequestDto.addFieldValue(arrayValue.getStringVal());
       }
       else {
-        objectValueDto.addFieldValue(arrayValue.getBoolVal());
+        createObjectRequestDto.addFieldValue(arrayValue.getBoolVal());
       }
     }
-    return objectValueDto;
+    return createObjectRequestDto;
   }
 
   public void callFunction(String gameId, String funcName) {
-    String code= gameCodeRepository.findByGameId(gameId).getCode();
+    String code = null;
     EvalServicempl evalService = new EvalServicempl();
     FuncCallResult result = evalService.getFunResult(code, funcName, new HashMap<>(), new StateInfo());
   }
