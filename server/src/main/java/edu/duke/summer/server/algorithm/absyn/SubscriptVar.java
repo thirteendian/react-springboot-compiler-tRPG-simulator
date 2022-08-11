@@ -25,11 +25,10 @@ public class SubscriptVar extends Var {
    }
 
    public Value getArray(VarEntry varEntry, Random randNumGen, RuleInfo info, StateInfo state){
-      HashMap<String, Value> vars = varEntry.getVars(state.getBlockId());
       //getElem
       if(var instanceof SimpleVar){
          String keyName = ((SimpleVar) var).name.toString();
-         Value val = vars.get(keyName);
+         Value val = varEntry.getVar(keyName);
          if(val instanceof ArrayValue){
             return val;
          }else{

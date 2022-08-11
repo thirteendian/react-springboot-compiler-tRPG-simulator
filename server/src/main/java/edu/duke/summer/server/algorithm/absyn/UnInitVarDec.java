@@ -19,33 +19,28 @@ public class UnInitVarDec extends Dec{
 
     @Override
     public Value eval(VarEntry varEntry, Random randNumGen, RuleInfo info, StateInfo state) {
-        HashMap<String, Value> vars = varEntry.getVars(state.getBlockId());
-        if(vars.containsKey(name.toString())){
-            throw new IllegalArgumentException("The name of the variable " + name.toString() + " has already been used before!");
-        }else{
-            Value val;
-            if(typ instanceof ArrayTy){
-                val = new ArrayValue(((ArrayTy) typ).elem);
-            }else if (typ instanceof OptionTy){
-                val = new OptionValue(((OptionTy) typ).elem);
-            }else if (typ instanceof BooleanTy){
-                val = new BooleanValue();
-            }else if (typ instanceof NameTy){
-                String TypeId = typ.getName();
-                TypeInfo typeinfo = info.getTypes().get(TypeId);
-                FieldList list = typeinfo.getFields();
-                val = new TypeValue(TypeId, list, info);
-            }else if (typ instanceof PrimTy) {
-                if(typ.getName().equals("int")){
-                    val = new IntValue();
-                }else{
-                    val = new StringValue();
-                }
+        Value val;
+        if(typ instanceof ArrayTy){
+            val = new ArrayValue(((ArrayTy) typ).elem);
+        }else if (typ instanceof OptionTy){
+            val = new OptionValue(((OptionTy) typ).elem);
+        }else if (typ instanceof BooleanTy){
+            val = new BooleanValue();
+        }else if (typ instanceof NameTy){
+            String TypeId = typ.getName();
+            TypeInfo typeinfo = info.getTypes().get(TypeId);
+            FieldList list = typeinfo.getFields();
+            val = new TypeValue(TypeId, list, info);
+        }else if (typ instanceof PrimTy) {
+            if(typ.getName().equals("int")){
+                val = new IntValue();
             }else{
-                throw new IllegalArgumentException("Invalid field type of type " + typ.getName());
+                val = new StringValue();
             }
-            vars.put(name.toString(), val);
+        }else{
+            throw new IllegalArgumentException("Invalid field type of type " + typ.getName());
         }
+        varEntry.addVar(name.toString(), val);
         return new VoidValue();
     }
 }

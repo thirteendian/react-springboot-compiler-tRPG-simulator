@@ -22,17 +22,7 @@ public class VarDec extends Dec {
    @Override
    public Value eval(VarEntry varEntry, Random randNumGen, RuleInfo info, StateInfo state) {
       Value initValue = init.eval(varEntry, randNumGen, info, state);
-      HashMap<String, Value> vars = varEntry.getVars(state.getBlockId());
-      if(vars.containsKey(name.toString())){
-         HashMap<String, Value> currBlockVars = varEntry.getCurrBlockVars(state.getBlockId());
-         if(currBlockVars.containsKey(name.toString())){
-            throw new IllegalArgumentException("The name of the variable " + name.toString() + " has already been used before!");
-         }else{
-           varEntry.addVar(state.getBlockId(), name.toString(), initValue);
-         }
-      }else{
-         varEntry.addVar(state.getBlockId(),name.toString(), initValue);
-      }
+      varEntry.addVar(name.toString(), initValue);
       return new VoidValue();
    }
 }

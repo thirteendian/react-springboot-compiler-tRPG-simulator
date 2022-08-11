@@ -17,8 +17,7 @@ public class Block extends Stmt{
 
     @Override
     public Value eval(VarEntry varEntry, Random randNumGen, RuleInfo info, StateInfo state) {
-        state.addBlockId("b");
-        varEntry.addBlockId("b");
+        varEntry.startBlock();
         if(state.getReturnMark()){
             return new VoidValue();
         }
@@ -42,8 +41,7 @@ public class Block extends Stmt{
                state.setBreakMark(true);
             }
         }
-        varEntry.popBlockId();
-        state.popBlockId();
+        varEntry.endBlock();
         return returnValue;
     }
 }

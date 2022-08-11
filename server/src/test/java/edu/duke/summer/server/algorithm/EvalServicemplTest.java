@@ -112,6 +112,7 @@ class EvalServicemplTest {
                 "    }\n" +
                 "    fun int testRoll(){\n" +
                 "        var i = roll(\"d100\");\n" +
+                "        output(i);\n" +
                 "        if(userOption(\"Reroll?\")) then{\n" +
                 "            var i = 1;\n" +
                 "            output(i);\n" +
@@ -138,23 +139,27 @@ class EvalServicemplTest {
         params.put("y", value);
         params.put("z", value);
         params1.put("i", value1);
-        FuncCallResult res = info.getFuncs().get("cal").getResult(params, new StateInfo());
-        FuncInfo calInfo = info.getFuncs().get("cal");
-        FieldList list = calInfo.getParams();
-        System.out.println("list------");
-        list.printInfo();
-        System.out.println("list------");
-        Value returnValue = res.getVal();
-        FuncCallResult res1 = info.getFuncs().get("test").getResult(params1, new StateInfo());
-        FuncCallResult res2 = info.getFuncs().get("testCallExp").getResult(params2, new StateInfo());
+//        FuncCallResult res = info.getFuncs().get("cal").getResult(params, new StateInfo());
+//        FuncInfo calInfo = info.getFuncs().get("cal");
+//        FieldList list = calInfo.getParams();
+//        System.out.println("list------");
+//        list.printInfo();
+//        System.out.println("list------");
+//        Value returnValue = res.getVal();
+//        FuncCallResult res1 = info.getFuncs().get("test").getResult(params1, new StateInfo());
+//        FuncCallResult res2 = info.getFuncs().get("testCallExp").getResult(params2, new StateInfo());
         StateInfo state = new StateInfo();
         state.addTrueUserOption("ru");
+        state.addReRollDice("r");
+        state.addRoll("r", 41);
+        state.addRoll("ruitr", 9);
         FuncCallResult res3 = info.getFuncs().get("testRoll").getResult(params2, state);
         System.out.println("----finalResult----");
-        System.out.println(((IntValue)returnValue).getValue());
-        System.out.println(((IntValue)res1.val).getValue());
-        System.out.println(((IntValue)res2.val).getValue());
+//        System.out.println(((IntValue)returnValue).getValue());
+//        System.out.println(((IntValue)res1.val).getValue());
+//        System.out.println(((IntValue)res2.val).getValue());
         System.out.println(((IntValue)res3.val).getValue());
+        res3.printInfo();
         System.out.println("----resInfo----");
         //res3.printInfo();
         ArrayList<String> outputs = res3.getOutput();

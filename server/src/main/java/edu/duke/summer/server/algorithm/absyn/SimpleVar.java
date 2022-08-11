@@ -20,21 +20,16 @@ public class SimpleVar extends Var {
 
    @Override
    public Value eval(VarEntry varEntry, Random randNumGen, RuleInfo info, StateInfo state) {
-      HashMap<String, Value> vars = varEntry.getVars(state.getBlockId());
-      Value value = vars.get(name.toString());
-      if (value == null){
-         throw new IllegalArgumentException("the var " + name.toString() + " does not exist in the vars map!");
-      } else {
-         return value;
-      }
+      Value value = varEntry.getVar(name.toString());
+      return value;
    }
 
    @Override
    public void setVal(VarEntry varEntry, Random randNumGen, RuleInfo info, StateInfo state, Value val) {
-      HashMap<String, Value> vars = varEntry.getVars(state.getBlockId());
-      if(vars.get(name.toString()) == null){
+      HashMap<String, Value> vars = varEntry.getAllVars();
+      if(!vars.containsKey(name.toString())){
          throw new IllegalArgumentException("Var " + name.toString() + " not exist in the scope.");
       }
-      vars.replace(name.toString(), val);
+      varEntry.forceAddVar(name.toString(), val);
    }
 }

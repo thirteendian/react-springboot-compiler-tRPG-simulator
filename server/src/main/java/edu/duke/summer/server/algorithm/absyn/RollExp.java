@@ -5,6 +5,7 @@ import edu.duke.summer.server.algorithm.RuleInfo;
 import edu.duke.summer.server.algorithm.VarEntry;
 import edu.duke.summer.server.algorithm.value.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -18,7 +19,6 @@ public class RollExp extends Exp {
         pos = p;
         rollStr = trimFirstAndLastChar(rollStr, "\"");
         int index = rollStr.indexOf("d");
-        int len = rollStr.length();
         String substr_t = rollStr.substring(0,index);
         String substr_s = rollStr.substring(index + 1);
         times = Integer.parseInt(substr_t);
@@ -28,7 +28,6 @@ public class RollExp extends Exp {
 
     @Override
     public Value eval(VarEntry varEntry, Random randNumGen, RuleInfo info, StateInfo state) {
-        state.pushSubState("r");
         Integer randomResult = 0;
         for(int i = 0; i < times; i++){
             //set upper limit for the random numbers
@@ -38,5 +37,6 @@ public class RollExp extends Exp {
         state.addRoll(state.getCurrState(), randomResult);
         IntValue res = new IntValue(randomResult);
         return res;
+
     }
 }

@@ -42,9 +42,11 @@ public class FuncCallResult {
     }
 
     public void printInfo(){
+        System.out.println("------rollInfo in funcCallResult------");
         for(Map.Entry<String, Integer> entry : rolls.entrySet()){
             System.out.println(entry.getKey() + " " + entry.getValue());
         }
+        System.out.println("------userOptionInfo in funcCallResult------");
         for(Map.Entry<String, UserOptionInfo> entry : userOptions.entrySet()){
             System.out.println(entry.getKey() + ":");
             entry.getValue().printInfo();

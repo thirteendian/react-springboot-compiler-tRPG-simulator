@@ -20,6 +20,6 @@ public class UserOptionInfo {
 
     public void printInfo(){
         System.out.println("------UserOptionInfo------");
-        System.out.println(gameId + objectId + promptMsg);
+        System.out.println(gameId + " " + objectId + " " + promptMsg);
     }
 }

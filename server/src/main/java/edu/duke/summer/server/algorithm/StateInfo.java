@@ -23,23 +23,12 @@ public class StateInfo {
     ArrayList<String> outputMsgs;
 
 
-
-    String blockId;
     Boolean returnMark;
     Boolean breakMark;
 
     String currState;
     Stack<String> subState;
 
-
-
-    public void addBlockId(String str){
-        blockId = blockId.concat(str);
-    }
-
-    public String getBlockId(){
-        return blockId;
-    }
 
     public ArrayList<String> getOutputMsgs() {
         return outputMsgs;
@@ -120,11 +109,6 @@ public class StateInfo {
         userOptions = new HashMap<>();
         trueUserOptions = new ArrayList<>();
         reRollDices = new ArrayList<>();
-        blockId = "Init";
-    }
-
-    public void popBlockId(){
-        blockId.substring(0, blockId.length() - 2);
     }
 
     public void printInfo(){

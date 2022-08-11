@@ -22,7 +22,6 @@ public class WhileStmt extends Stmt {
          return new VoidValue();
       }
       Value value = test.eval(varEntry, randNumGen, info, state);
-      HashMap<String, Value> vars = varEntry.getVars(state.getBlockId());
       if(value instanceof BooleanValue){
          while(((BooleanValue) value).getValue().equals(true)){
             if(state.getBreakMark()){
