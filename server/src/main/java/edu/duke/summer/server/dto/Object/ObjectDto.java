@@ -15,8 +15,4 @@ public class ObjectDto {
     @NotNull
     private List<ObjectFieldDto> fields;
 
-
-
-
-
 }
