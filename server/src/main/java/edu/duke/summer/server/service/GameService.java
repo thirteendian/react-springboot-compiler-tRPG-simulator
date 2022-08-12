@@ -148,10 +148,4 @@ public interface GameService {
 
   void callFunction(String gameId, String funcName);
 
-  void callFunction(String gameId, String funcName);
-
-  void callFunction(String gameId, String funcName);
-
-  void callFunction(String gameId, String funcName);
-
 }

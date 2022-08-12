@@ -47,9 +47,6 @@ public class GameServiceImpl implements GameService {
   private GameRepository gameRepository;
 
   @Autowired
-  private GameCodeRepository gameCodeRepository;
-
-  @Autowired
   private ObjectFieldRepository objectFieldRepository;
 
   @Autowired
@@ -224,10 +221,6 @@ public class GameServiceImpl implements GameService {
     RuleInfo ruleInfo = evalService.saveRules(code);
     createObjects(gameId, ruleInfo.getTypes());
     createFunctions(gameId, ruleInfo.getFuncs());
-    GameCode gameCode = new GameCode();
-    gameCode.setGameId(gameId);
-    gameCode.setCode(code);
-    gameCodeRepository.save(gameCode);
   }
 
   public void createObjects(String gameId, HashMap<String, TypeInfo> types) {
@@ -534,24 +527,6 @@ public class GameServiceImpl implements GameService {
 
   public void callFunction(String gameId, String funcName) {
     String code = null;
-    EvalServicempl evalService = new EvalServicempl();
-    FuncCallResult result = evalService.getFunResult(code, funcName, new HashMap<>(), new StateInfo());
-  }
-
-  public void callFunction(String gameId, String funcName) {
-    String code= gameCodeRepository.findByGameId(gameId).getCode();
-    EvalServicempl evalService = new EvalServicempl();
-    FuncCallResult result = evalService.getFunResult(code, funcName, new HashMap<>(), new StateInfo());
-  }
-
-  public void callFunction(String gameId, String funcName) {
-    String code= gameCodeRepository.findByGameId(gameId).getCode();
-    EvalServicempl evalService = new EvalServicempl();
-    FuncCallResult result = evalService.getFunResult(code, funcName, new HashMap<>(), new StateInfo());
-  }
-
-  public void callFunction(String gameId, String funcName) {
-    String code= gameCodeRepository.findByGameId(gameId).getCode();
     EvalServicempl evalService = new EvalServicempl();
     FuncCallResult result = evalService.getFunResult(code, funcName, new HashMap<>(), new StateInfo());
   }
