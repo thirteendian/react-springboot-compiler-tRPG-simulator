@@ -19,6 +19,7 @@ import edu.duke.summer.server.service.MyUserDetailsService;
 import edu.duke.summer.server.service.impl.MyUserDetailsImpl;
 import edu.duke.summer.server.service.impl.RefreshTokenService;
 import edu.duke.summer.server.service.WebsocketService;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
