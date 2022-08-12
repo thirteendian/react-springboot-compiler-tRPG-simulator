@@ -25,6 +25,8 @@ public interface GameService {
 
    GameStartResponseDto startGame(final GameStartRequestDto gameStartRequestDto);
 
+   CreateObjectResponseDto createObject(final CreateObjectRequestDto createObjectRequestDto);
+
   /**
    * Get result of the dice-rolling
    *
