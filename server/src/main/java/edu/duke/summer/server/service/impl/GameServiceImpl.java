@@ -237,7 +237,7 @@ public class GameServiceImpl implements GameService {
 
   public void traverseFields(String gameId, String typeName, int fieldNum, FieldList fields) {
     if (fields != null) {
-      //System.out.println("fieldName: " + fields.getName().toString());
+      System.out.println("fieldName: " + fields.getName().toString());
       Ty ty  =fields.getType();
       String fieldType = traverseFieldTypes(ty);
       ObjectField objectField = new ObjectField();
