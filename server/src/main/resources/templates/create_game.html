@@ -77,7 +77,7 @@
         <p class = "createGamePage_gameName_font"> LOAD YOUR PRE SETTINGS:</p>
     </div>
 
-<form th:action="@{'/user/'+${uuid}+'/creategame'}" th:object="${createGameDto}" enctype="multipart/form-data" method="post">
+<form th:action="@{'/user/'+${uuid}+'/creategame'}" th:object="${createGameRequestDto}" enctype="multipart/form-data" method="post">
     <input type="text" th:field="*{gameName}" name="gameName" placeholder="Game Name" class = "createGamePage_gameName_placeholder"  required>
     <p th:if="${#fields.hasErrors('gameName')}" th:class="${#fields.hasErrors('gameName')}?error">Game Name too short</p>
 

@@ -5,9 +5,6 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 
 import java.lang.*;
-import java.util.*;
-
-import javax.persistence.*;
 
 @Entity
 @Table(name = "players")
@@ -18,15 +15,15 @@ public class Player {
     private String id;
 
     @Column(nullable = false)
-    private String game;
+    private String gameId;
 
     @Column(nullable = false)
     private String userId;
 
     public Player() {}
 
-    public Player(String game, String userId) {
-        this.game = game;
+    public Player(String gameId, String userId) {
+        this.gameId = gameId;
         this.userId = userId;
     }
 
@@ -35,9 +32,9 @@ public class Player {
         return id;
     }
 
-    public String getGame() { return game; }
+    public String getGameId() { return gameId; }
 
-    public void setGame(String game) { this.game = game; }
+    public void setGameId(String gameId) { this.gameId = gameId; }
 
     public String getUserId() { return userId; }
 
@@ -47,7 +44,7 @@ public class Player {
     public String toString() {
         return "Player{" +
                 "id=" + id +
-                ", game='" + game + '\'' +
+                ", game='" + gameId + '\'' +
                 ", user='" + userId + '\'' +
                 '}';
     }
