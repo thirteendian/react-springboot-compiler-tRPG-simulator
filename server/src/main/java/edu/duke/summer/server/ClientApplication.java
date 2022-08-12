@@ -1,18 +1,24 @@
 package edu.duke.summer.server;
 
+import edu.duke.summer.server.database.model.MongoDBTest;
+import edu.duke.summer.server.database.repository.MyMongoRepository;
 import edu.duke.summer.server.database.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 import java.util.Arrays;
 
 @SpringBootApplication
 @EnableJpaRepositories(basePackageClasses = UserRepository.class)
+@EnableMongoRepositories(basePackageClasses = MyMongoRepository.class)
 public class ClientApplication {
+
 
 	public static void main(String[] args) {
 

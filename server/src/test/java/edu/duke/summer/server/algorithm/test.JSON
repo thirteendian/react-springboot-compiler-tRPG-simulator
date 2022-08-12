@@ -1,0 +1,33 @@
+{
+  "object1": {
+    "field1": {
+      "id": 1,
+      "type": "prim",
+      "elem": "null",
+      "value": "value1"
+    },
+    "field2": {
+      "id": 1,
+      "type": "user",
+      "elem": "null",
+      "value": "value"
+    },
+    "field3": {
+      "id": 1,
+      "type": "array",
+      "elem": {
+        "id": 1,
+        "type": "array",
+        "elem": {"id": 1,
+                "type": "array",
+                "elem": null
+        }
+      },
+      "value": {
+        object
+      }
+    }
+  },
+  "object2": {},
+  "object3": {}
+}
