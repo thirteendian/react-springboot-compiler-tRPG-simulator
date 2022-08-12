@@ -26,6 +26,9 @@ public class CreateGameDto {
   @Column(nullable = false)
   private String gameSettings;
 
+  public CreateGameDto() {
+  }
+
   public CreateGameDto(String id, int playerNum, String gameName, String gameSettings) {
     this.id = id;
     this.playerNum = playerNum;
