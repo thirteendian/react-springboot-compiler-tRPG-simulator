@@ -1,0 +1,17 @@
+.bg_chapel {
+    /* The image used */
+    background-image: url("../../../public/background.png");
+    /* Full height */
+    position: relative;
+    width: 1440px;
+    height: 1035px;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: auto auto;
+    /*display: flex;*/
+    /*justify-content: center;*/
+    /*align-items: center;*/
+}
+

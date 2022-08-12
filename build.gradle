@@ -97,20 +97,20 @@ subprojects {
     }
 }
 
-// Project specific stuff
-
-    project(':shared') {
-    }
-    project(':server') {
-        dependencies {
-            implementation project(':shared')
-        }
-    }
-    project(':client') {
-        dependencies {
-            implementation project(':shared')
-        }
-    }
+//// Project specific stuff
+//
+//    project(':shared') {
+//    }
+//    project(':server') {
+//        dependencies {
+//            implementation project(':shared')
+//        }
+//    }
+//    project(':client') {
+//        dependencies {
+//            implementation project(':shared')
+//        }
+//    }
 //    clover {
 //        report {
 //            xml = true

@@ -1,6 +1,6 @@
 FROM ubuntu:20.04
 
-MAINTAINER Xuhui Gong
+MAINTAINER Yuxuan Yang
 
 USER root
 
