@@ -14,6 +14,7 @@ import edu.duke.summer.server.dto.Request.GameStartRequestDto;
 import edu.duke.summer.server.dto.Request.JoinGameRequestDto;
 import edu.duke.summer.server.dto.Request.CreateObjectRequestDto;
 import edu.duke.summer.server.dto.Response.CreateGameResponseDto;
+import edu.duke.summer.server.dto.Response.CreateObjectResponseDto;
 import edu.duke.summer.server.dto.Response.GameStartResponseDto;
 import edu.duke.summer.server.dto.Response.JoinGameResponseDto;
 import edu.duke.summer.server.service.GameService;
@@ -148,6 +149,11 @@ public class GameServiceImpl implements GameService {
 
   @Override
   public GameStartResponseDto startGame(GameStartRequestDto gameStartRequestDto) {
+    return null;
+  }
+
+  @Override
+  public CreateObjectResponseDto createObject(CreateObjectRequestDto createObjectRequestDto) {
     return null;
   }
 
@@ -315,24 +321,29 @@ public class GameServiceImpl implements GameService {
     return objectsList;
   }
 
+  @Override
   public ObjectDto getObjectFields(String gameId, String typeName) {
-    ObjectDto objectDto = new ObjectDto();
-    objectDto.setGameId(gameId);
-    objectDto.setTypeName(typeName);
-    List<String> objectIdList = objectValueRepository.findIdList(gameId, typeName);
-    if (!objectIdList.isEmpty()) {
-      objectDto.addObjectIdList(typeName, objectIdList);
-    }
-    List<ObjectField> objectFields = objectFieldRepository.findObjectFieldList(gameId, typeName);
-    for (ObjectField objectField : objectFields) {
-      objectDto.addObjectField(objectField.getFieldName());
-      String fieldTypeId = objectField.getFieldType();
-      ObjectFieldType objectFieldType = objectFieldTypeRepository.findById(fieldTypeId);
-      ObjectFieldTypeDto objectFieldTypeDto = saveObjectFieldTypeToDto(objectFieldType);
-      objectDto.addFieldType(objectField.getFieldName(), objectFieldTypeDto);
-    }
-    return objectDto;
+    return null;
   }
+
+//  public ObjectDto getObjectFields(String gameId, String typeName) {
+//    ObjectDto objectDto = new ObjectDto();
+//    objectDto.setGameId(gameId);
+//    objectDto.setTypeName(typeName);
+//    List<String> objectIdList = objectValueRepository.findIdList(gameId, typeName);
+//    if (!objectIdList.isEmpty()) {
+//      objectDto.addObjectIdList(typeName, objectIdList);
+//    }
+//    List<ObjectField> objectFields = objectFieldRepository.findObjectFieldList(gameId, typeName);
+//    for (ObjectField objectField : objectFields) {
+//      objectDto.addObjectField(objectField.getFieldName());
+//      String fieldTypeId = objectField.getFieldType();
+//      ObjectFieldType objectFieldType = objectFieldTypeRepository.findById(fieldTypeId);
+//      ObjectFieldTypeDto objectFieldTypeDto = saveObjectFieldTypeToDto(objectFieldType);
+//      objectDto.addFieldType(objectField.getFieldName(), objectFieldTypeDto);
+//    }
+//    return objectDto;
+//  }
 
   private ObjectFieldTypeDto saveObjectFieldTypeToDto(ObjectFieldType objectFieldType) {
     ObjectFieldTypeDto objectFieldTypeDto = new ObjectFieldTypeDto();
@@ -398,101 +409,121 @@ public class GameServiceImpl implements GameService {
     }
   }
 
+  @Override
   public String saveObjects(CreateObjectRequestDto createObjectRequestDto) {
-    List<String> fieldValues = createObjectRequestDto.getFieldValue();
-    int fieldNum = 0;
-    for (String value : fieldValues) {
-      final ObjectValue objectValue = new ObjectValue();
-      objectValue.setGameId(createObjectRequestDto.getGameId());
-      objectValue.setTypeName(createObjectRequestDto.getTypeName());
-      objectValue.setValueNum(createObjectRequestDto.getValueNum());
-      objectValue.setFieldNum(String.valueOf(fieldNum++));
-      if (value.equals("true") || value.equals("false")) {
-        objectValue.setBoolVal(value);
-      }
-      else {
-        try {
-          int val = Integer.parseInt(value);
-          objectValue.setIntVal(value);
-        } catch (NumberFormatException nfe) {
-          objectValue.setStringVal(value);
-        }
-      }
-      objectValueRepository.save(objectValue);
-    }
-    return createObjectRequestDto.getValueNum();
+    return null;
   }
 
+  @Override
   public String saveArrays(CreateObjectRequestDto createObjectRequestDto) {
-    List<String> fieldValues = createObjectRequestDto.getFieldValue();
-    int index = 0;
-    for (String value : fieldValues) {
-      final ObjectArrayValue objectArrayValue = new ObjectArrayValue();
-      objectArrayValue.setGameId(createObjectRequestDto.getGameId());
-      objectArrayValue.setEltType(createObjectRequestDto.getTypeName());
-      objectArrayValue.setValueNum(createObjectRequestDto.getValueNum());
-      objectArrayValue.setIndex(String.valueOf(index++));
-      if (value.equals("true") || value.equals("false")) {
-        objectArrayValue.setBoolVal(value);
-      }
-      else {
-        try {
-          int val = Integer.parseInt(value);
-          objectArrayValue.setIntVal(value);
-        } catch (NumberFormatException nfe) {
-          objectArrayValue.setStringVal(value);
-        }
-      }
-      objectArrayValueRepository.save(objectArrayValue);
-    }
-    return createObjectRequestDto.getValueNum();
+    return null;
   }
 
+  @Override
   public CreateObjectRequestDto getObjectValues(String gameId, String typeName, String valueNum) {
-    List<ObjectValue> objectValues = objectValueRepository.findObjectValue(gameId, typeName, valueNum);
-    if (objectValues.isEmpty()) {
-      return null;
-    }
-    CreateObjectRequestDto createObjectRequestDto = new CreateObjectRequestDto();
-    createObjectRequestDto.setGameId(objectValues.get(0).getGameId());
-    createObjectRequestDto.setTypeName(objectValues.get(0).getTypeName());
-    createObjectRequestDto.setValueNum(objectValues.get(0).getValueNum());
-    for(ObjectValue objectValue : objectValues) {
-      if (!objectValue.getIntVal().equals("null")) {
-        createObjectRequestDto.addFieldValue(objectValue.getIntVal());
-      }
-      else if (!objectValue.getStringVal().equals("null")) {
-        createObjectRequestDto.addFieldValue(objectValue.getStringVal());
-      }
-      else {
-        createObjectRequestDto.addFieldValue(objectValue.getBoolVal());
-      }
-    }
-    return createObjectRequestDto;
+    return null;
   }
 
+  @Override
   public CreateObjectRequestDto getArrayValues(String gameId, String valueNum) {
-    List<ObjectArrayValue> arrayValues = objectArrayValueRepository.findArrayValue(gameId, valueNum);
-    if (arrayValues.isEmpty()) {
-      return null;
-    }
-    CreateObjectRequestDto createObjectRequestDto = new CreateObjectRequestDto();
-    createObjectRequestDto.setGameId(arrayValues.get(0).getGameId());
-    createObjectRequestDto.setTypeName(arrayValues.get(0).getEltType());
-    createObjectRequestDto.setValueNum(arrayValues.get(0).getValueNum());
-    for(ObjectArrayValue arrayValue : arrayValues) {
-      if (!arrayValue.getIntVal().equals("null")) {
-        createObjectRequestDto.addFieldValue(arrayValue.getIntVal());
-      }
-      else if (!arrayValue.getStringVal().equals("null")) {
-        createObjectRequestDto.addFieldValue(arrayValue.getStringVal());
-      }
-      else {
-        createObjectRequestDto.addFieldValue(arrayValue.getBoolVal());
-      }
-    }
-    return createObjectRequestDto;
+    return null;
   }
+
+//  public String saveObjects(CreateObjectRequestDto createObjectRequestDto) {
+//    List<String> fieldValues = createObjectRequestDto.getFieldValue();
+//    int fieldNum = 0;
+//    for (String value : fieldValues) {
+//      final ObjectValue objectValue = new ObjectValue();
+//      objectValue.setGameId(createObjectRequestDto.getGameId());
+//      objectValue.setTypeName(createObjectRequestDto.getTypeName());
+//      objectValue.setValueNum(createObjectRequestDto.getValueNum());
+//      objectValue.setFieldNum(String.valueOf(fieldNum++));
+//      if (value.equals("true") || value.equals("false")) {
+//        objectValue.setBoolVal(value);
+//      }
+//      else {
+//        try {
+//          int val = Integer.parseInt(value);
+//          objectValue.setIntVal(value);
+//        } catch (NumberFormatException nfe) {
+//          objectValue.setStringVal(value);
+//        }
+//      }
+//      objectValueRepository.save(objectValue);
+//    }
+//    return createObjectRequestDto.getValueNum();
+//  }
+
+//  public String saveArrays(CreateObjectRequestDto createObjectRequestDto) {
+//    List<String> fieldValues = createObjectRequestDto.getFieldValue();
+//    int index = 0;
+//    for (String value : fieldValues) {
+//      final ObjectArrayValue objectArrayValue = new ObjectArrayValue();
+//      objectArrayValue.setGameId(createObjectRequestDto.getGameId());
+//      objectArrayValue.setEltType(createObjectRequestDto.getTypeName());
+//      objectArrayValue.setValueNum(createObjectRequestDto.getValueNum());
+//      objectArrayValue.setIndex(String.valueOf(index++));
+//      if (value.equals("true") || value.equals("false")) {
+//        objectArrayValue.setBoolVal(value);
+//      }
+//      else {
+//        try {
+//          int val = Integer.parseInt(value);
+//          objectArrayValue.setIntVal(value);
+//        } catch (NumberFormatException nfe) {
+//          objectArrayValue.setStringVal(value);
+//        }
+//      }
+//      objectArrayValueRepository.save(objectArrayValue);
+//    }
+//    return createObjectRequestDto.getValueNum();
+//  }
+
+//  public CreateObjectRequestDto getObjectValues(String gameId, String typeName, String valueNum) {
+//    List<ObjectValue> objectValues = objectValueRepository.findObjectValue(gameId, typeName, valueNum);
+//    if (objectValues.isEmpty()) {
+//      return null;
+//    }
+//    CreateObjectRequestDto createObjectRequestDto = new CreateObjectRequestDto();
+//    createObjectRequestDto.setGameId(objectValues.get(0).getGameId());
+//    createObjectRequestDto.setTypeName(objectValues.get(0).getTypeName());
+//    createObjectRequestDto.setValueNum(objectValues.get(0).getValueNum());
+//    for(ObjectValue objectValue : objectValues) {
+//      if (!objectValue.getIntVal().equals("null")) {
+//        createObjectRequestDto.addFieldValue(objectValue.getIntVal());
+//      }
+//      else if (!objectValue.getStringVal().equals("null")) {
+//        createObjectRequestDto.addFieldValue(objectValue.getStringVal());
+//      }
+//      else {
+//        createObjectRequestDto.addFieldValue(objectValue.getBoolVal());
+//      }
+//    }
+//    return createObjectRequestDto;
+//  }
+
+//  public CreateObjectRequestDto getArrayValues(String gameId, String valueNum) {
+//    List<ObjectArrayValue> arrayValues = objectArrayValueRepository.findArrayValue(gameId, valueNum);
+//    if (arrayValues.isEmpty()) {
+//      return null;
+//    }
+//    CreateObjectRequestDto createObjectRequestDto = new CreateObjectRequestDto();
+//    createObjectRequestDto.setGameId(arrayValues.get(0).getGameId());
+//    createObjectRequestDto.setTypeName(arrayValues.get(0).getEltType());
+//    createObjectRequestDto.setValueNum(arrayValues.get(0).getValueNum());
+//    for(ObjectArrayValue arrayValue : arrayValues) {
+//      if (!arrayValue.getIntVal().equals("null")) {
+//        createObjectRequestDto.addFieldValue(arrayValue.getIntVal());
+//      }
+//      else if (!arrayValue.getStringVal().equals("null")) {
+//        createObjectRequestDto.addFieldValue(arrayValue.getStringVal());
+//      }
+//      else {
+//        createObjectRequestDto.addFieldValue(arrayValue.getBoolVal());
+//      }
+//    }
+//    return createObjectRequestDto;
+//  }
 
   public void callFunction(String gameId, String funcName) {
     String code = null;
