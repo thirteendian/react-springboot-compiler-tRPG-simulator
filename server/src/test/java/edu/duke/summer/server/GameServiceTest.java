@@ -82,15 +82,15 @@ public class GameServiceTest {
     @Test
     public void getAllPlayersTest() {
         Player player1 = new Player();
-        player1.setGame("test1");
+        player1.setGameId("test1");
         player1.setUserId("user1");
         playerRepository.save(player1);
         Player player2 = new Player();
-        player2.setGame("test2");
+        player2.setGameId("test2");
         player2.setUserId("user2");
         playerRepository.save(player2);
         Player player3 = new Player();
-        player3.setGame("test1");
+        player3.setGameId("test1");
         player3.setUserId("user3");
         playerRepository.save(player3);
         assertEquals(2, gameService.getAllPlayers("test1").size());

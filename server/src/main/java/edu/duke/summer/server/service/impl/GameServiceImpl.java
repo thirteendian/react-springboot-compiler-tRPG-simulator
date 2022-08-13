@@ -117,13 +117,20 @@ public class GameServiceImpl implements GameService {
   }
 
   @Override
-  public Game joinGame(final CreateGameDto createGameDto) {
-    if (!gameRepository.existsById(createGameDto.getId())) {
+  public JoinGameResponseDto joinGame(JoinGameRequestDto joinGameRequestDto) {
+    if (!gameRepository.existsById(joinGameRequestDto.getGameId())) {
       throw new IllegalArgumentException("Game does not exists!");
     }
-    return gameRepository.findById(createGameDto.getId());
+    Game game = gameRepository.findById(joinGameRequestDto.getGameId());
+    JoinGameResponseDto joinGameResponseDto = new JoinGameResponseDto();
+    joinGameResponseDto.setGameName(game.getGameName());
+    joinGameResponseDto.setPlayerNum(game.getPlayerNum());
+    Player player = new Player();
+    player.setGameId(game.getId());
+    player.setUserId(joinGameRequestDto.getPlayerUuid());
+    playerRepository.save(player);
+    return joinGameResponseDto;
   }
-
 
   @Override
   public void deleteGame(final Game game) {

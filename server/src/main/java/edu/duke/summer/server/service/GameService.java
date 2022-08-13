@@ -18,7 +18,7 @@ public interface GameService {
 
   List<Game> filterGame(final GameFilterDto gameFilterDto);
 
-  Game joinGame(final CreateGameDto createGameDto);
+  JoinGameResponseDto joinGame(final JoinGameRequestDto createGameRequestDto);
 
   void deleteGame(final Game game);
 
