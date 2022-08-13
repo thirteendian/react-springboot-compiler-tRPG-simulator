@@ -2,10 +2,13 @@ package edu.duke.summer.server;
 
 import edu.duke.summer.server.config.SpringConfig;
 import edu.duke.summer.server.database.model.DiceRolling;
+import edu.duke.summer.server.database.model.ObjectValue;
 import edu.duke.summer.server.database.model.Player;
 import edu.duke.summer.server.database.repository.*;
 import edu.duke.summer.server.dto.DiceRollingDto;
 import edu.duke.summer.server.dto.ObjectValueDto;
+import edu.duke.summer.server.dto.Request.CreateObjectRequestDto;
+import edu.duke.summer.server.dto.Response.CreateObjectResponseDto;
 import edu.duke.summer.server.service.GameService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +35,6 @@ public class GameServiceTest {
 
     @Autowired
     private ObjectValueRepository objectValueRepository;
-
-    @Autowired
-    private ObjectArrayValueRepository objectArrayValueRepository;
 
     @Test
     public void getDiceRollingResultsTest() {
@@ -186,54 +186,14 @@ public class GameServiceTest {
 //    }
 
     @Test
-    public void saveObjectsTest() {
-        ObjectValueDto objectValueDto = new ObjectValueDto();
-        objectValueDto.setGameId("1");
-        objectValueDto.setTypeName("rollwithmod");
-        objectValueDto.addFieldValue("2");
-        objectValueDto.addFieldValue("6");
-        objectValueDto.addFieldValue("1");
-        gameService.saveObjects(objectValueDto);
-        assertEquals(3, objectValueRepository.findByGameId("1").size());
+    public void createObjectTest() {
+        CreateObjectRequestDto createObjectRequestDto = new CreateObjectRequestDto();
+        createObjectRequestDto.setGameId("2");
+        createObjectRequestDto.setPlayerUuid("002");
+        createObjectRequestDto.setObjectName("dragon");
+        createObjectRequestDto.setObjectValue("[height: 2m, weight: 10t]");
+        CreateObjectResponseDto createObjectResponseDto = gameService.createObject(createObjectRequestDto);
+        System.out.println(createObjectResponseDto.getMyObjectList());
     }
 
-    @Test
-    public void saveArraysTest() {
-        ObjectValueDto objectValueDto = new ObjectValueDto();
-        objectValueDto.setGameId("1");
-        objectValueDto.setTypeName("int");
-        objectValueDto.addFieldValue("1");
-        objectValueDto.addFieldValue("4");
-        objectValueDto.addFieldValue("7");
-        gameService.saveArrays(objectValueDto);
-        assertEquals(3, objectArrayValueRepository.findByGameId("1").size());
-    }
-
-    @Test
-    public void getObjectValuesTest() {
-        ObjectValueDto objectValueDto = new ObjectValueDto();
-        objectValueDto.setGameId("2");
-        objectValueDto.setTypeName("rollwithmod");
-        objectValueDto.addFieldValue("2");
-        objectValueDto.addFieldValue("6");
-        objectValueDto.addFieldValue("1");
-        gameService.saveObjects(objectValueDto);
-        assertEquals(3, objectValueRepository.findByGameId("2").size());
-        ObjectValueDto result = gameService.getObjectValues("2", "rollwithmod", "0");
-        assertEquals(3, result.getFieldValue().size());
-    }
-
-    @Test
-    public void getArrayValuesTest() {
-        ObjectValueDto objectValueDto = new ObjectValueDto();
-        objectValueDto.setGameId("3");
-        objectValueDto.setTypeName("int");
-        objectValueDto.addFieldValue("1");
-        objectValueDto.addFieldValue("4");
-        objectValueDto.addFieldValue("7");
-        gameService.saveArrays(objectValueDto);
-        assertEquals(3, objectArrayValueRepository.findByGameId("3").size());
-        ObjectValueDto result = gameService.getArrayValues("3",  "2");
-        assertEquals(3, result.getFieldValue().size());
-    }
 }

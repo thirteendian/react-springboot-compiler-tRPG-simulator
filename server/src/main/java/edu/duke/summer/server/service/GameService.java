@@ -32,6 +32,8 @@ public interface GameService {
    */
   List<String> getObjectTypes(String gameId);
 
+  CreateObjectResponseDto createObject(final CreateObjectRequestDto createObjectRequestDto);
+
   /**
    * Get result of the dice-rolling
    *
@@ -97,42 +99,5 @@ public interface GameService {
    *             should be the same format as createObjects function
    */
   void addObjectFields(String gameId, String code);
-
-  /**
-   * Store field values of one object
-   *
-   * @param objectValueDto the Dto that contains all the information of one specific object,
-   * including game ID, type name and field values
-   * @return the value number of the object in database
-   */
-  String saveObjects(ObjectValueDto objectValueDto);
-
-  /**
-   * Store field values of one array
-   *
-   * @param objectValueDto the Dto that contains all the information of one specific array,
-   * including game ID, elt name and field values
-   * @return the value number of the array in database
-   */
-  String saveArrays(ObjectValueDto objectValueDto);
-
-  /**
-   * Get all field values of one object type in the game
-   *
-   * @param gameId the game which the object is created in
-   * @param typeName the object type to get its field values
-   * @param valueNum the value number of the object
-   * @return objectFieldDto that contains all field information of the object in this game
-   */
-  ObjectValueDto getObjectValues(String gameId, String typeName, String valueNum);
-
-  /**
-   * Get all field values of one array object type in the game
-   *
-   * @param gameId the game which the array is created in
-   * @param valueNum the value number of the array
-   * @return objectFieldDto that contains all field information of the array in this game
-   */
-  ObjectValueDto getArrayValues(String gameId, String valueNum);
 
 }

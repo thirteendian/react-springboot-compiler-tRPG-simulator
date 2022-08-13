@@ -50,9 +50,6 @@ public class GameServiceImpl implements GameService {
   private ObjectValueRepository objectValueRepository;
 
   @Autowired
-  private ObjectArrayValueRepository objectArrayValueRepository;
-
-  @Autowired
   private FunctionInfoRepository functionInfoRepository;
 
   @Autowired
@@ -180,7 +177,7 @@ public class GameServiceImpl implements GameService {
       }
     }
     if (gameFilterDto.getCreatorEmail() != null) {
-      gameFilterByEmail = gameRepository.findByCreatorEmailStartsWith(gameFilterDto.getCreatorEmail());
+      gameFilterByEmail = gameRepository.findByHostUuidStartsWith(gameFilterDto.getCreatorEmail());
       if (gameFilterByEmail.isEmpty()) {
         return null;
       }
@@ -293,6 +290,29 @@ public class GameServiceImpl implements GameService {
     return objectList;
   }
 
+  public CreateObjectResponseDto createObject(final CreateObjectRequestDto createObjectRequestDto) {
+    ObjectValue objectValue = new ObjectValue();
+    objectValue.setGameId(createObjectRequestDto.getGameId());
+    objectValue.setPlayerUuid(createObjectRequestDto.getPlayerUuid());
+    objectValue.setObjectName(createObjectRequestDto.getObjectName());
+    objectValue.setObjectValue(createObjectRequestDto.getObjectValue());
+    objectValueRepository.save(objectValue);
+    StringBuilder myObjectList = new StringBuilder();
+    myObjectList.append('[');
+    List<ObjectValue> objects = objectValueRepository.findMyObjects(createObjectRequestDto.getGameId(), createObjectRequestDto.getPlayerUuid());
+    for (ObjectValue object : objects) {
+      StringBuilder myObject = new StringBuilder();
+      myObject.append('{');
+      myObject.append("\"uuid\":\"").append(object.getId()).append("\",");
+      myObject.append("\"name\":\"").append(object.getObjectName()).append("\",");
+      myObject.append("\"value\":").append(object.getObjectValue());
+      myObject.append("}, ");
+      myObjectList.append(myObject.toString());
+    }
+    myObjectList.setCharAt(myObjectList.length() - 2, ']');
+    return new CreateObjectResponseDto(myObjectList.substring(0, myObjectList.length() - 2));
+  }
+
   @Override
   public DiceRolling getDiceRollingResults(DiceRollingDto diceRollingDto) {
     if (diceRollingDto.getMagicCheck()) {
@@ -349,7 +369,7 @@ public class GameServiceImpl implements GameService {
 
   @Override
   public List<Player> getAllPlayers(String game) {
-    return playerRepository.findAllByGame(game);
+    return playerRepository.findAllByGameId(game);
   }
 
 
@@ -417,99 +437,4 @@ public class GameServiceImpl implements GameService {
     }
   }
 
-  public String saveObjects(ObjectValueDto objectValueDto) {
-    List<String> fieldValues = objectValueDto.getFieldValue();
-    int fieldNum = 0;
-    for (String value : fieldValues) {
-      final ObjectValue objectValue = new ObjectValue();
-      objectValue.setGameId(objectValueDto.getGameId());
-      objectValue.setTypeName(objectValueDto.getTypeName());
-      objectValue.setValueNum(objectValueDto.getValueNum());
-      objectValue.setFieldNum(String.valueOf(fieldNum++));
-      if (value.equals("true") || value.equals("false")) {
-        objectValue.setBoolVal(value);
-      }
-      else {
-        try {
-          int val = Integer.parseInt(value);
-          objectValue.setIntVal(value);
-        } catch (NumberFormatException nfe) {
-          objectValue.setStringVal(value);
-        }
-      }
-      objectValueRepository.save(objectValue);
-    }
-    return objectValueDto.getValueNum();
-  }
-
-  public String saveArrays(ObjectValueDto objectValueDto) {
-    List<String> fieldValues = objectValueDto.getFieldValue();
-    int index = 0;
-    for (String value : fieldValues) {
-      final ObjectArrayValue objectArrayValue = new ObjectArrayValue();
-      objectArrayValue.setGameId(objectValueDto.getGameId());
-      objectArrayValue.setEltType(objectValueDto.getTypeName());
-      objectArrayValue.setValueNum(objectValueDto.getValueNum());
-      objectArrayValue.setIndex(String.valueOf(index++));
-      if (value.equals("true") || value.equals("false")) {
-        objectArrayValue.setBoolVal(value);
-      }
-      else {
-        try {
-          int val = Integer.parseInt(value);
-          objectArrayValue.setIntVal(value);
-        } catch (NumberFormatException nfe) {
-          objectArrayValue.setStringVal(value);
-        }
-      }
-      objectArrayValueRepository.save(objectArrayValue);
-    }
-    return objectValueDto.getValueNum();
-  }
-
-  public ObjectValueDto getObjectValues(String gameId, String typeName, String valueNum) {
-    List<ObjectValue> objectValues = objectValueRepository.findObjectValue(gameId, typeName, valueNum);
-    if (objectValues.isEmpty()) {
-      return null;
-    }
-    ObjectValueDto objectValueDto = new ObjectValueDto();
-    objectValueDto.setGameId(objectValues.get(0).getGameId());
-    objectValueDto.setTypeName(objectValues.get(0).getTypeName());
-    objectValueDto.setValueNum(objectValues.get(0).getValueNum());
-    for(ObjectValue objectValue : objectValues) {
-      if (!objectValue.getIntVal().equals("null")) {
-        objectValueDto.addFieldValue(objectValue.getIntVal());
-      }
-      else if (!objectValue.getStringVal().equals("null")) {
-        objectValueDto.addFieldValue(objectValue.getStringVal());
-      }
-      else {
-        objectValueDto.addFieldValue(objectValue.getBoolVal());
-      }
-    }
-    return objectValueDto;
-  }
-
-  public ObjectValueDto getArrayValues(String gameId, String valueNum) {
-    List<ObjectArrayValue> arrayValues = objectArrayValueRepository.findArrayValue(gameId, valueNum);
-    if (arrayValues.isEmpty()) {
-      return null;
-    }
-    ObjectValueDto objectValueDto = new ObjectValueDto();
-    objectValueDto.setGameId(arrayValues.get(0).getGameId());
-    objectValueDto.setTypeName(arrayValues.get(0).getEltType());
-    objectValueDto.setValueNum(arrayValues.get(0).getValueNum());
-    for(ObjectArrayValue arrayValue : arrayValues) {
-      if (!arrayValue.getIntVal().equals("null")) {
-        objectValueDto.addFieldValue(arrayValue.getIntVal());
-      }
-      else if (!arrayValue.getStringVal().equals("null")) {
-        objectValueDto.addFieldValue(arrayValue.getStringVal());
-      }
-      else {
-        objectValueDto.addFieldValue(arrayValue.getBoolVal());
-      }
-    }
-    return objectValueDto;
-  }
 }

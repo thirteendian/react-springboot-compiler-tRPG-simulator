@@ -1,30 +1,21 @@
-package edu.duke.summer.server.database.model;
+package edu.duke.summer.server.dto.Request;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.springframework.data.mongodb.core.mapping.Document;
+import org.antlr.v4.runtime.misc.NotNull;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+public class CreateObjectRequestDto {
 
-
-@Document
-public class ObjectValue {
-
-    @Id @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid",strategy = "uuid")
-    private String id;
-
+    @NotNull
     private String gameId;
 
+    @NotNull
     private String playerUuid;
 
+    @NotNull
     private String objectName;
 
+    @NotNull
+    // JSON object
     private String objectValue;
-
-    public String getId() {
-        return id;
-    }
 
     public String getGameId() {
         return gameId;
@@ -58,9 +49,9 @@ public class ObjectValue {
         this.objectValue = objectValue;
     }
 
-    public ObjectValue() {}
+    public CreateObjectRequestDto() {}
 
-    public ObjectValue(String gameId, String playerUuid, String objectName, String objectValue) {
+    public CreateObjectRequestDto(String gameId, String playerUuid, String objectName, String objectValue) {
         this.gameId = gameId;
         this.playerUuid = playerUuid;
         this.objectName = objectName;
@@ -69,12 +60,12 @@ public class ObjectValue {
 
     @Override
     public String toString() {
-        return "ObjectValue{" +
-                "id='" + id + '\'' +
-                ", gameId='" + gameId + '\'' +
+        return "CreateObjectRequestDto{" +
+                "gameId='" + gameId + '\'' +
                 ", playerUuid='" + playerUuid + '\'' +
                 ", objectName='" + objectName + '\'' +
                 ", objectValue='" + objectValue + '\'' +
                 '}';
     }
 }
+
