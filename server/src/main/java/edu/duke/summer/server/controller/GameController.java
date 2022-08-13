@@ -137,14 +137,14 @@ public class GameController {
         attributes.addFlashAttribute("message", "You successfully uploaded " + fileName + '!');
         //gameService.initializeGame("1", uploadString);
         System.out.println("Successfully Create Objects, the Objects List:");
-        System.out.println(gameService.getObjectsList("1"));
+        System.out.println(gameService.getObjectTypes("1"));
         return "redirect:/createobject";
     }
 
     //TODO: This get method should be merged into GamePage
     @GetMapping("/createobject")
     public String createObject(Model model) {
-        List<String> objects = gameService.getObjectsList("1");
+        List<String> objects = gameService.getObjectTypes("1");
         model.addAttribute("objects", objects);
         return "object";//TODO:This should be redirected to Game Page
     }

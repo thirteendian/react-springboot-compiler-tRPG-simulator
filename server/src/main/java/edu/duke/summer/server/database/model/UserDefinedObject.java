@@ -1,16 +1,14 @@
 package edu.duke.summer.server.database.model;
 
-import edu.duke.summer.server.dto.Object.ObjectFieldDto;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
-import java.io.Serializable;
 import java.lang.*;
 
 @Entity
-@Table(name = "object")
-public class Object {
+@Table(name = "UserDefinedObject")
+public class UserDefinedObject {
 
     @Id
     @GeneratedValue(generator = "system-uuid")
@@ -44,9 +42,9 @@ public class Object {
         this.objectName = objectName;
     }
 
-    public Object() {}
+    public UserDefinedObject() {}
 
-    public Object(String id, String gameId, String objectName) {
+    public UserDefinedObject(String id, String gameId, String objectName) {
         this.id = id;
         this.gameId = gameId;
         this.objectName = objectName;
@@ -54,7 +52,7 @@ public class Object {
 
     @Override
     public String toString() {
-        return "Object{" +
+        return "UserDefinedObject{" +
                 "id='" + id + '\'' +
                 ", gameId='" + gameId + '\'' +
                 ", objectName='" + objectName + '\'' +

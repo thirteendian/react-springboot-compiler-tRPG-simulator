@@ -138,10 +138,4 @@ public class User {
         this.profile = profile;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (!getClass().equals(o.getClass())) return false;
-        User user = (User) o;
-        return email.equals(user.getEmail());
-    }
 }

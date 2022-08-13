@@ -1,34 +1,10 @@
 package edu.duke.summer.server.controller;
 
-import edu.duke.summer.server.dto.CreateGameDto;
-import edu.duke.summer.server.dto.ObjectFieldDto;
-import edu.duke.summer.server.dto.ObjectFieldTypeDto;
-import edu.duke.summer.server.payload.request.GameCreateRequest;
 import edu.duke.summer.server.service.GameService;
 import edu.duke.summer.server.service.MyUserDetailsService;
-import edu.duke.summer.server.service.impl.MyUserDetailsImpl;
 import edu.duke.summer.server.stomp.RespObjectCreatingField;
-import org.hibernate.annotations.GeneratorType;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")

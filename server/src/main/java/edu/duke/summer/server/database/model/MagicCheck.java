@@ -39,19 +39,7 @@ public class MagicCheck {
 
     public MagicCheck() {}
 
-    @Override
-    public int hashCode() {
-        return toString().hashCode();
-    }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj.getClass().equals(getClass())) {
-            MagicCheck magicCheck = (MagicCheck) obj;
-            return this.id.equals(magicCheck.getId());
-        }
-        return false;
-    }
 
     @Override
     public String toString() {

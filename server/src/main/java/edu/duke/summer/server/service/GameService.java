@@ -25,6 +25,14 @@ public interface GameService {
   GameStartResponseDto startGame(final GameStartRequestDto gameStartRequestDto);
 
   /**
+   * Get all types of objects in the game
+   *
+   * @param gameId the game to get all types of objects involved in
+   * @return list of object types in the game
+   */
+  List<String> getObjectTypes(String gameId);
+
+  /**
    * Get result of the dice-rolling
    *
    * @param diceRollingDto the diceRollingDto contains information of player, game and raw string with visibilities and the choice of magicCheck
@@ -66,24 +74,6 @@ public interface GameService {
    * @return list of players in the game
    */
   List<Player> getAllPlayers(String game);
-
-  /**
-   * Get all object types in the game
-   *
-   * @param gameId the game to get all the object types involved in
-   * @return list of object types in the game
-   */
-  List<String> getObjectsList(String gameId);
-
-
-  /**
-   * Get all field names & field types of one object type in the game
-   *
-   * @param gameId the game to get the object fields
-   * @param typeName the object type to get its field name & field type
-   * @return objectFieldDto that contains all field information of the object type in this game
-   */
-  ObjectFieldDto getObjectFields(String gameId, String typeName);
 
   /**
    * Check whether a new object is required to be created for this object field

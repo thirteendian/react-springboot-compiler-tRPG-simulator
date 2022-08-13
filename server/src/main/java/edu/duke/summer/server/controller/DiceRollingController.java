@@ -1,6 +1,5 @@
 package edu.duke.summer.server.controller;
 
-import edu.duke.summer.server.dto.ObjectFieldDto;
 import edu.duke.summer.server.service.GameService;
 import edu.duke.summer.server.stomp.ReqObjectCreatingName;
 import edu.duke.summer.server.stomp.RespObjectCreatingField;
@@ -38,18 +37,18 @@ public class DiceRollingController {
 //        return new RespDiceRollingResult(HtmlUtils.htmlEscape(message.getRawString()),gameService.getDiceRollingResults(diceRollingDto).getResult(),gameService.getMagicCheckData("game",principal.getName()));
 //    }
 
-    @MessageMapping("/createobject_name")
-    @SendTo("/objectcreate/field")
-    public RespObjectCreatingField getObjectCreatingField(ReqObjectCreatingName reqObjectCreatingName){
-        System.out.println("ObjectName:" + reqObjectCreatingName.getObjectName());
-        ObjectFieldDto objectFieldDto = gameService.getObjectFields("1",reqObjectCreatingName.getObjectName());
-        RespObjectCreatingField respObjectCreatingField = new RespObjectCreatingField();
-        //List of field(Order)
-        respObjectCreatingField.setObjectField(objectFieldDto.getObjectField());
-        //Hashmap of Type(Self FK)
-        respObjectCreatingField.setFieldType(objectFieldDto.getFieldType());
-        return respObjectCreatingField;
-    }
+//    @MessageMapping("/createobject_name")
+//    @SendTo("/objectcreate/field")
+//    public RespObjectCreatingField getObjectCreatingField(ReqObjectCreatingName reqObjectCreatingName){
+//        System.out.println("ObjectName:" + reqObjectCreatingName.getObjectName());
+//        ObjectFieldDto objectFieldDto = gameService.getObjectFields("1",reqObjectCreatingName.getObjectName());
+//        RespObjectCreatingField respObjectCreatingField = new RespObjectCreatingField();
+//        //List of field(Order)
+//        respObjectCreatingField.setObjectField(objectFieldDto.getObjectField());
+//        //Hashmap of Type(Self FK)
+//        respObjectCreatingField.setFieldType(objectFieldDto.getFieldType());
+//        return respObjectCreatingField;
+//    }
 
 
 }

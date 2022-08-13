@@ -2,12 +2,9 @@ package edu.duke.summer.server;
 
 import edu.duke.summer.server.config.SpringConfig;
 import edu.duke.summer.server.database.model.DiceRolling;
-import edu.duke.summer.server.database.model.ObjectField;
-import edu.duke.summer.server.database.model.ObjectFieldType;
 import edu.duke.summer.server.database.model.Player;
 import edu.duke.summer.server.database.repository.*;
 import edu.duke.summer.server.dto.DiceRollingDto;
-import edu.duke.summer.server.dto.ObjectFieldDto;
 import edu.duke.summer.server.dto.ObjectValueDto;
 import edu.duke.summer.server.service.GameService;
 import org.junit.jupiter.api.Test;
@@ -125,11 +122,6 @@ public class GameServiceTest {
 //        System.out.println(objectFieldDto.toString());
 //    }
 
-    @Test
-    public void getObjectsListTest() {
-        List<String> objectsList = gameService.getObjectsList("1");
-        assertEquals(2, objectsList.size());
-    }
 
 //    @Test
 //    public void getObjectFieldsTest() {

@@ -9,11 +9,11 @@ import edu.duke.summer.server.algorithm.TypeInfo;
 import edu.duke.summer.server.algorithm.absyn.FieldList;
 import edu.duke.summer.server.algorithm.absyn.Ty;
 import edu.duke.summer.server.database.model.*;
-import edu.duke.summer.server.database.model.Object;
+import edu.duke.summer.server.database.model.UserDefinedObject;
 import edu.duke.summer.server.database.repository.*;
 import edu.duke.summer.server.dto.*;
-import edu.duke.summer.server.dto.Function.FunctionInfoDto;
-import edu.duke.summer.server.dto.Object.ObjectDto;
+import edu.duke.summer.server.dto.Function.*;
+import edu.duke.summer.server.dto.Object.*;
 import edu.duke.summer.server.dto.Request.*;
 import edu.duke.summer.server.dto.Response.*;
 import edu.duke.summer.server.service.GameService;
@@ -38,7 +38,7 @@ public class GameServiceImpl implements GameService {
   private GameRepository gameRepository;
 
   @Autowired
-  private ObjectRepository objectRepository;
+  private UserDefinedObjectRepository userDefinedObjectRepository;
 
   @Autowired
   private ObjectFieldRepository objectFieldRepository;
@@ -84,10 +84,10 @@ public class GameServiceImpl implements GameService {
   public void initializeObjects(String gameId, HashMap<String, TypeInfo> types) {
     for (String type : types.keySet()) {
       if (!type.equals("int") && !type.equals("boolean") && !type.equals("string") && !type.equals("void")) {
-        Object object = new Object();
-        object.setGameId(gameId);
-        object.setObjectName(type);
-        objectRepository.save(object);
+        UserDefinedObject userObject = new UserDefinedObject();
+        userObject.setGameId(gameId);
+        userObject.setObjectName(type);
+        userDefinedObjectRepository.save(userObject);
         TypeInfo typeDefNode = types.get(type);
         FieldList fields = typeDefNode.getFields();
         traverseFields(gameId, type, 0, fields);
@@ -237,13 +237,60 @@ public class GameServiceImpl implements GameService {
 
   @Override
   public GameStartResponseDto startGame(GameStartRequestDto gameStartRequestDto) {
-    String gameId = gameStartRequestDto.getGameId();
-    Game game = gameRepository.findById(gameId);
-    String code = game.getCode();
     List<ObjectDto> objects = new ArrayList<>();
     List<FunctionInfoDto> functions = new ArrayList<>();
-    initializeGame(gameId, code);
+    String gameId = gameStartRequestDto.getGameId();
+    List<UserDefinedObject> userObjectList = userDefinedObjectRepository.findByGameId(gameId);
+    for (UserDefinedObject userObject : userObjectList) {
+      String objectName = userObject.getObjectName();
+      ObjectDto objectDto = getObjectDto(gameId, objectName);
+      objects.add(objectDto);
+    }
     return new GameStartResponseDto(objects, functions);
+  }
+
+  public ObjectDto getObjectDto(String gameId, String objectName) {
+    ObjectDto objectDto = new ObjectDto();
+    objectDto.setId(objectDto.getId());
+    objectDto.setObjectName(objectName);
+    List<ObjectField> objectFields = objectFieldRepository.findObjectFields(gameId, objectName);
+    for (ObjectField objectField : objectFields) {
+      ObjectFieldDto objectFieldDto = getObjectFieldDto(objectField);
+      objectDto.addFields(objectFieldDto);
+    }
+    return objectDto;
+  }
+
+  public ObjectFieldDto getObjectFieldDto(ObjectField objectField) {
+    ObjectFieldDto objectFieldDto = new ObjectFieldDto();
+    objectFieldDto.setId(objectField.getId());
+    objectFieldDto.setFieldName(objectField.getFieldName());
+    ObjectFieldTypeDto objectFieldTypeDto = getObjectFieldTypeDto(objectFieldTypeRepository.findById(objectField.getFieldType()));
+    objectFieldDto.setObjectFieldTypeDto(objectFieldTypeDto);
+    return objectFieldDto;
+  }
+
+  public ObjectFieldTypeDto getObjectFieldTypeDto(ObjectFieldType objectFieldType) {
+    ObjectFieldTypeDto objectFieldTypeDto = new ObjectFieldTypeDto();
+    objectFieldTypeDto.setId(objectFieldType.getId());
+    objectFieldTypeDto.setK(objectFieldType.getK());
+    if (objectFieldType.getName() != null) {
+      objectFieldTypeDto.setName(objectFieldType.getName());
+    }
+    else {
+      String nextId = objectFieldType.getElem();
+      objectFieldTypeDto.setElem(getObjectFieldTypeDto(objectFieldTypeRepository.findById(nextId)));
+    }
+    return objectFieldTypeDto;
+  }
+
+  public List<String> getObjectTypes(String gameId) {
+    List<UserDefinedObject> userObjects = userDefinedObjectRepository.findByGameId(gameId);
+    List<String> objectList = new ArrayList<>();
+    for (UserDefinedObject userObject : userObjects) {
+      objectList.add(userObject.getObjectName());
+    }
+    return objectList;
   }
 
   @Override
@@ -305,30 +352,6 @@ public class GameServiceImpl implements GameService {
     return playerRepository.findAllByGame(game);
   }
 
-  public List<String> getObjectsList(String gameId) {
-    List<String> objects = objectRepository.findByGameId(gameId);
-    return objects;
-  }
-
-
-  public ObjectFieldDto getObjectFields(String gameId, String typeName) {
-    ObjectFieldDto objectFieldDto = new ObjectFieldDto();
-    objectFieldDto.setGameId(gameId);
-    objectFieldDto.setTypeName(typeName);
-    List<String> objectIdList = objectValueRepository.findIdList(gameId, typeName);
-    if (!objectIdList.isEmpty()) {
-      objectFieldDto.addObjectIdList(typeName, objectIdList);
-    }
-    List<ObjectField> objectFields = objectFieldRepository.findObjectFields(gameId, typeName);
-    for (ObjectField objectField : objectFields) {
-      objectFieldDto.addObjectField(objectField.getFieldName());
-      String fieldTypeId = objectField.getFieldType();
-      ObjectFieldType objectFieldType = objectFieldTypeRepository.findById(fieldTypeId);
-      ObjectFieldTypeDto objectFieldTypeDto = saveObjectFieldTypeToDto(objectFieldType);
-      objectFieldDto.addFieldType(objectField.getFieldName(), objectFieldTypeDto);
-    }
-    return objectFieldDto;
-  }
 
   private ObjectFieldTypeDto saveObjectFieldTypeToDto(ObjectFieldType objectFieldType) {
     ObjectFieldTypeDto objectFieldTypeDto = new ObjectFieldTypeDto();

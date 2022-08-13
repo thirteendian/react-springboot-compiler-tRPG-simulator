@@ -39,22 +39,6 @@ public class DiceRolling {
     public DiceRolling() {}
 
     @Override
-    public int hashCode() {
-        return toString().hashCode();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj.getClass().equals(getClass())) {
-            DiceRolling diceRolling = (DiceRolling) obj;
-            if (this.id.equals(diceRolling.getId())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
     public String toString() {
         return "DiceRolling{" +
                 "id=" + id +
