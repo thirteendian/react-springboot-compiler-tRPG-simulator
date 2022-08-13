@@ -1,5 +1,8 @@
 package edu.duke.summer.server.database.model;
 
+import edu.duke.summer.server.dto.Object.ObjectFieldDto;
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 
 import java.io.Serializable;
@@ -7,18 +10,19 @@ import java.lang.*;
 
 @Entity
 @Table(name = "objectField")
-@IdClass(ObjectField.class)
-public class ObjectField implements Serializable {
+public class ObjectField {
 
-    @Id
+    @Id @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid",strategy = "uuid")
+    @Column(unique = true, nullable = false, insertable = false, updatable = false)
+    private String id;
+
     @Column(nullable = false)
     private String gameId;
 
-    @Id
     @Column(nullable = false)
-    private String typeName;
+    private String objectName;
 
-    @Id
     @Column(nullable = false)
     private String fieldNum;
 
@@ -28,51 +32,55 @@ public class ObjectField implements Serializable {
     @Column(nullable = false)
     private String fieldType;
 
-    public void setGameId(String gameId) {
-        this.gameId = gameId;
+    public String getId() {
+        return id;
     }
 
     public String getGameId() {
         return gameId;
     }
 
-    public void setTypeName(String typeName) {
-        this.typeName = typeName;
+    public void setGameId(String gameId) {
+        this.gameId = gameId;
     }
 
-    public String getTypeName() {
-        return typeName;
+    public String getObjectName() {
+        return objectName;
     }
 
-    public void setFieldNum(String fieldNum) {
-        this.fieldNum = fieldNum;
+    public void setObjectName(String objectName) {
+        this.objectName = objectName;
     }
 
     public String getFieldNum() {
         return fieldNum;
     }
 
-    public void setFieldName(String fieldName) {
-        this.fieldName = fieldName;
+    public void setFieldNum(String fieldNum) {
+        this.fieldNum = fieldNum;
     }
 
     public String getFieldName() {
         return fieldName;
     }
 
-    public void setFieldType(String fieldType) {
-        this.fieldType = fieldType;
+    public void setFieldName(String fieldName) {
+        this.fieldName = fieldName;
     }
 
     public String getFieldType() {
         return fieldType;
     }
 
+    public void setFieldType(String fieldType) {
+        this.fieldType = fieldType;
+    }
+
     public ObjectField() {}
 
-    public ObjectField(String gameId, String typeName, String fieldNum, String fieldName, String fieldType) {
+    public ObjectField( String gameId, String objectName, String fieldNum, String fieldName, String fieldType) {
         this.gameId = gameId;
-        this.typeName = typeName;
+        this.objectName = objectName;
         this.fieldNum = fieldNum;
         this.fieldName = fieldName;
         this.fieldType = fieldType;
@@ -81,12 +89,12 @@ public class ObjectField implements Serializable {
     @Override
     public String toString() {
         return "ObjectField{" +
-                "gameId=" + gameId +
-                ", typeName='" + typeName + '\'' +
+                "id='" + id + '\'' +
+                ", gameId='" + gameId + '\'' +
+                ", objectName='" + objectName + '\'' +
                 ", fieldNum='" + fieldNum + '\'' +
                 ", fieldName='" + fieldName + '\'' +
                 ", fieldType='" + fieldType + '\'' +
                 '}';
     }
-
 }

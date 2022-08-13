@@ -22,6 +22,8 @@ public interface GameService {
 
   void deleteGame(final Game game);
 
+  GameStartResponseDto startGame(final GameStartRequestDto gameStartRequestDto);
+
   /**
    * Get result of the dice-rolling
    *
@@ -65,8 +67,6 @@ public interface GameService {
    */
   List<Player> getAllPlayers(String game);
 
-  void initializeGame(String gameId, String code);
-
   /**
    * Get all object types in the game
    *
@@ -74,6 +74,7 @@ public interface GameService {
    * @return list of object types in the game
    */
   List<String> getObjectsList(String gameId);
+
 
   /**
    * Get all field names & field types of one object type in the game

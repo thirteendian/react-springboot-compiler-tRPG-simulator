@@ -1,7 +1,9 @@
 package edu.duke.summer.server.controller;
 
+import edu.duke.summer.server.database.model.FunctionInfo;
 import edu.duke.summer.server.database.repository.GameRepository;
 import edu.duke.summer.server.dto.CreateGameDto;
+import edu.duke.summer.server.dto.Object.ObjectDto;
 import edu.duke.summer.server.dto.Request.CreateGameRequestDto;
 import edu.duke.summer.server.dto.Response.*;
 import edu.duke.summer.server.service.GameService;
@@ -19,6 +21,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -132,7 +135,7 @@ public class GameController {
 
         // return success response
         attributes.addFlashAttribute("message", "You successfully uploaded " + fileName + '!');
-        gameService.initializeGame("1", uploadString);
+        //gameService.initializeGame("1", uploadString);
         System.out.println("Successfully Create Objects, the Objects List:");
         System.out.println(gameService.getObjectsList("1"));
         return "redirect:/createobject";
