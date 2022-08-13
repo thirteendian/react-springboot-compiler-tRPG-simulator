@@ -14,80 +14,78 @@ import javax.persistence.*;
 @Table(name = "games")
 public class Game {
 
-//  @SequenceGenerator(
-//          name = "game_sequence",
-//          sequenceName = "game_sequence",
-//          allocationSize = 1
-//  )
   @Id @GeneratedValue(generator = "system-uuid")
   @GenericGenerator(name = "system-uuid",strategy = "uuid")
   @Column(unique = true, nullable = false, insertable = false, updatable = false)
   private String id;
 
   @Column(nullable = false, unique = true, length = 45)
-  private String creatorEmail;
+  private String hostUuid;
+
+  @Column(nullable = false, length = 45)
+  private String gameName;
 
   @Column(nullable = false)
   private int playerNum;
 
   @Column(nullable = false, length = 45)
-  private String gameName;
+  private String code;
 
-  public Game() {}
-
-  @Column(name = "GAME_ID")
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
   public String getId() {
     return id;
   }
 
-  public void setId(String id) {
-    this.id = id;
+  public String getHostUuid() {
+    return hostUuid;
   }
 
-  public String getCreatorEmail() {
-    return creatorEmail;
+  public void setHostUuid(String hostUuid) {
+    this.hostUuid = hostUuid;
   }
-
 
   public String getGameName() {
     return gameName;
-  }
-
-
-  public Integer getPlayerNum() {return playerNum;}
-
-  public void setCreatorEmail(String creatorEmail) {
-    this.creatorEmail = creatorEmail;
   }
 
   public void setGameName(String gameName) {
     this.gameName = gameName;
   }
 
-  public void setPlayerNum(int playerNum) {this.playerNum = playerNum;}
-
-  public Game(String id, String creatorEmail, Integer playerNum, String gameName) {
-    this.id = id;
-    this.creatorEmail = creatorEmail;
-    this.playerNum = playerNum;
-    this.gameName = gameName;
+  public int getPlayerNum() {
+    return playerNum;
   }
 
-  public Game(String creatorEmail, Integer playerNum, String gameName) {
-    this.creatorEmail = creatorEmail;
+  public void setPlayerNum(int playerNum) {
     this.playerNum = playerNum;
+  }
+
+  public String getCode() {
+    return code;
+  }
+
+  public void setCode(String code) {
+    this.code = code;
+  }
+
+  public Game() {}
+
+  public Game(String hostUuid, String gameName, int playerNum, String code) {
+    this.hostUuid = hostUuid;
     this.gameName = gameName;
+    this.playerNum = playerNum;
+    this.code = code;
   }
 
   @Override
   public String toString() {
     return "Game{" +
-            "id=" + id +
-            ", CreatorEmail='" + creatorEmail + '\'' +
+            "id='" + id + '\'' +
+            ", hostUuid='" + hostUuid + '\'' +
             ", gameName='" + gameName + '\'' +
+            ", playerNum=" + playerNum +
+            ", code='" + code + '\'' +
             '}';
   }
 }
+
 

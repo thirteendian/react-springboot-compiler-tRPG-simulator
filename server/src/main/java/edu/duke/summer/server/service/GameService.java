@@ -7,12 +7,14 @@ import edu.duke.summer.server.dto.*;
 import edu.duke.summer.server.database.model.Game;
 import edu.duke.summer.server.database.model.MagicCheck;
 import edu.duke.summer.server.database.model.Player;
+import edu.duke.summer.server.dto.Request.*;
+import edu.duke.summer.server.dto.Response.*;
 import org.springframework.stereotype.Service;
 
 @Service
 public interface GameService {
-  
-  Game createNewGame(final CreateGameDto createGameDto);
+
+  CreateGameResponseDto createNewGame(final CreateGameRequestDto createGameRequestDto);
 
   List<Game> filterGame(final GameFilterDto gameFilterDto);
 
@@ -63,13 +65,7 @@ public interface GameService {
    */
   List<Player> getAllPlayers(String game);
 
-  /**
-   * Create and store object types & fields through the code provided by the game creator
-   *
-   * @param gameId the game that the creator is involved in
-   * @param code the code that contains the description of objects
-   */
-  void createObjects(String gameId, String code);
+  void initializeGame(String gameId, String code);
 
   /**
    * Get all object types in the game
@@ -147,6 +143,5 @@ public interface GameService {
    * @return objectFieldDto that contains all field information of the array in this game
    */
   ObjectValueDto getArrayValues(String gameId, String valueNum);
-
 
 }

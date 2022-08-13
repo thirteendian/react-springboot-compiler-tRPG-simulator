@@ -14,22 +14,23 @@ public class GameConfig {
 
     @Bean
     CommandLineRunner commandLineRunnerGame(GameRepository repository){
-        return args -> {
-            Game marianGame = new Game(
-                    "Marian@gmail.com",
-                    4,
-                    "Marian's Game"
-            );
-
-            Game alexGame = new Game(
-                    "alex@gmail.com",
-                    5,
-                    "Mariam's Game"
-            );
-
-            repository.saveAll(
-                    List.of(marianGame, alexGame)
-            );
-        };
+//        return args -> {
+//            Game marianGame = new Game(
+//                    "Marian@gmail.com",
+//                    4,
+//                    "Marian's Game"
+//            );
+//
+//            Game alexGame = new Game(
+//                    "alex@gmail.com",
+//                    5,
+//                    "Mariam's Game"
+//            );
+//
+//            repository.saveAll(
+//                    List.of(marianGame, alexGame)
+//            );
+//        };
+        return null;
     }
 }

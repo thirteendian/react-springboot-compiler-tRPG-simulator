@@ -2,6 +2,8 @@ package edu.duke.summer.server.controller;
 
 import edu.duke.summer.server.database.repository.GameRepository;
 import edu.duke.summer.server.dto.CreateGameDto;
+import edu.duke.summer.server.dto.Request.CreateGameRequestDto;
+import edu.duke.summer.server.dto.Response.*;
 import edu.duke.summer.server.service.GameService;
 import edu.duke.summer.server.service.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,8 +40,8 @@ public class GameController {
 
     @PostMapping("/user/{uuid}/creategame")
     public String postCreateGame(@RequestParam("file") MultipartFile file, RedirectAttributes attributes,
-                                 @PathVariable String uuid, @ModelAttribute @Valid CreateGameDto createGameDto) {
-        gameService.createNewGame(createGameDto);
+                                 @PathVariable String uuid, @ModelAttribute @Valid CreateGameRequestDto createGameRequestDto) {
+        gameService.createNewGame(createGameRequestDto);
         // check if file is empty
         if (file.isEmpty()) {
             attributes.addFlashAttribute("message", "Please select a file to upload.");
@@ -65,8 +67,9 @@ public class GameController {
             e.printStackTrace();
         }
 
-        gameService.createObjects(createGameDto.getId(), uploadString);
-        return "redirect:/user/" + uuid + "/" + createGameDto.getId() + "/gamecenter";
+//        gameService.createObjects(createGameDto.getId(), uploadString);
+//        return "redirect:/user/" + uuid + "/" + createGameDto.getId() + "/gamecenter";
+        return null;
     }
 
     @GetMapping("/user/{uuid}/{gameid}/gamecenter")
@@ -129,7 +132,7 @@ public class GameController {
 
         // return success response
         attributes.addFlashAttribute("message", "You successfully uploaded " + fileName + '!');
-        gameService.createObjects("1", uploadString);
+        gameService.initializeGame("1", uploadString);
         System.out.println("Successfully Create Objects, the Objects List:");
         System.out.println(gameService.getObjectsList("1"));
         return "redirect:/createobject";

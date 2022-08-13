@@ -115,7 +115,7 @@ public class GameServiceTest {
                 "    c:boolean option []\n" +
                 "    }\n" +
                 "}";
-        gameService.createObjects("1", code);
+        gameService.initializeGame("1", code);
         assertEquals(6, objectFieldRepository.findByGameId("1").size());
         List<ObjectField> objectFields = objectFieldRepository.findByGameId("1");
         for (ObjectField objectField : objectFields) {
@@ -154,7 +154,7 @@ public class GameServiceTest {
                 "     addonsneak: rollwithmod,\n" +
                 "     addoncritsneak:rollwithmod\n" +
                 "};\n}";
-        gameService.createObjects("2", code);
+        gameService.initializeGame("2", code);
         ObjectFieldDto attackField = gameService.getObjectFields("2", "attack");
         assertEquals(8, attackField.getObjectField().size());
         assertEquals(8, attackField.getFieldType().size());
@@ -179,7 +179,7 @@ public class GameServiceTest {
                 "    c:boolean option []\n" +
                 "    }\n" +
                 "}";
-        gameService.createObjects("3", code);
+        gameService.initializeGame("3", code);
         gameService.deleteObjectField("3", "newType", "a");
 
         String codeAdd = "{type rollwithmod {\n" +
