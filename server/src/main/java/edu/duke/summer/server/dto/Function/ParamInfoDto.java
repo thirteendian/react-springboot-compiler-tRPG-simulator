@@ -17,7 +17,7 @@ public class ParamInfoDto {
     private String name;
 
     // while elem is not null, it would be either array or option
-    private ObjectFieldTypeDto elem;
+    private ParamInfoDto elem;
 
     public String getId() {
         return id;
@@ -43,17 +43,17 @@ public class ParamInfoDto {
         this.name = name;
     }
 
-    public ObjectFieldTypeDto getElem() {
+    public ParamInfoDto getElem() {
         return elem;
     }
 
-    public void setElem(ObjectFieldTypeDto elem) {
+    public void setElem(ParamInfoDto elem) {
         this.elem = elem;
     }
 
     public ParamInfoDto() {}
 
-    public ParamInfoDto(String id, String k, String name, ObjectFieldTypeDto elem) {
+    public ParamInfoDto(String id, String k, String name, ParamInfoDto elem) {
         this.id = id;
         this.k = k;
         this.name = name;
