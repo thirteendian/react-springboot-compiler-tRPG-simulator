@@ -20,12 +20,26 @@ public class JwtUtils {
     @Value("${duke.edu.summer.app.jwtExpirationMs}")
     private int jwtExpirationMs;
 
+    /*
+     * Helper Function
+     */
     public String generateJwtToken(MyUserDetailsImpl userPrincipal) {
         return generateTokenFromUsername(userPrincipal.getUsername());
     }
 
+    /*
+     * Generate Token for new Registration
+     * The Subject is depends on username
+        {
+         Issuer:DiceRolling_Yuxuan,
+         Subject: username,
+         IssuedAt: date,
+         Expiration: date+expirationMs,
+         signature: HS512
+        }
+     */
     public String generateTokenFromUsername(String username) {
-        return Jwts.builder().setSubject(username).setIssuedAt(new Date())
+        return Jwts.builder().setIssuer("DiceRolling_Yuxuan").setSubject(username).setIssuedAt(new Date())
                 .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs)).signWith(SignatureAlgorithm.HS512, jwtSecret)
                 .compact();
     }

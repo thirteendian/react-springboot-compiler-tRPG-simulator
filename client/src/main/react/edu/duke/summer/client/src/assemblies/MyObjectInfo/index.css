@@ -1,0 +1,10 @@
+.myObjectInfo{
+    position: absolute;
+    width: 325px;
+    height: 708px;
+    left: 13px;
+    top: 177px;
+
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 60px;
+}

@@ -46,28 +46,7 @@
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.myNavLink_login_login{
-    font-family: 'Bungee Regular', serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 40px;
-    line-height: 48px;
-    cursor: pointer;
-    color: #000000;
 
-    box-sizing: border-box;
-
-    position: absolute;
-    width: 494px;
-    height: 90px;
-    left: 824px;
-    top: 819px;
-
-    text-align: center;
-    background: rgba(217, 217, 217, 0.5);
-    border: 1px solid #000000;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
 
 .myNavLink_login_back{
     font-family: 'Bungee Regular', serif;
@@ -114,28 +93,7 @@
     border: 1px solid #000000;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
-.myNavLink_signup_signup{
-    font-family: 'Bungee Regular', serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 40px;
-    line-height: 48px;
-    cursor: pointer;
-    color: #000000;
 
-    box-sizing: border-box;
-
-    position: absolute;
-    width: 494px;
-    height: 60px;
-    left: 824px;
-    top: 920px;
-
-    text-align: center;
-    background: rgba(217, 217, 217, 0.5);
-    border: 1px solid #000000;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
 
 
 
@@ -282,7 +240,8 @@
 }
 
 
-.myNavLink_createGame{
+
+.myNavLink_createGame_back{
     font-family: 'Bungee Regular', serif;
     font-style: normal;
     font-weight: 400;
@@ -294,13 +253,37 @@
     box-sizing: border-box;
     position: absolute;
     width: 400px;
-    height: 74px;
-    left: 800px;
-    top: 800px;
+    height: 50px;
+    left: 150px;
+    top: 900px;
 
     cursor: pointer;
     text-align: center;
-    background: rgba(217, 217, 217, 0.5);
+    background: rgba(217, 217, 217, 0.7);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.myNavLink_gameCenter_createObject{
+    font-family: 'Bungee Regular', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    color: #000000;
+
+
+    line-height: 48px;
+
+    box-sizing: border-box;
+    position: absolute;
+    width: 100px;
+    height: 50px;
+    left: 60px;
+    top: 600px;
+
+    cursor: pointer;
+    text-align: center;
+    background: rgba(217, 217, 217, 0.7);
     border: 1px solid #000000;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }

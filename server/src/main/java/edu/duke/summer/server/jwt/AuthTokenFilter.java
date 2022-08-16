@@ -17,6 +17,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * This filter will execute once per request(thus extends OncePerRequestFilter)
+ * refer to Spring Security, Basic Authentication
+ */
 public class AuthTokenFilter extends OncePerRequestFilter {
     @Autowired
     private JwtUtils jwtUtils;
@@ -31,11 +35,9 @@ public class AuthTokenFilter extends OncePerRequestFilter {
      */
     private String parseJwt(HttpServletRequest request) {
         String headerAuth = request.getHeader("Authorization");
-
         if (StringUtils.hasText(headerAuth) && headerAuth.startsWith("Bearer ")) {
-            return headerAuth.substring(7, headerAuth.length());
+            return headerAuth.substring(7, headerAuth.length());//remove "Bearer "
         }
-
         return null;
     }
 
@@ -44,31 +46,35 @@ public class AuthTokenFilter extends OncePerRequestFilter {
         try {
             //get JWT from header(Removing Bearer prefix)
             String jwt = parseJwt(request);
-            //If has JWT
+            //If has JWT, and authentication is successful, then success
             if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
                 //parse username
                 String username = jwtUtils.getUserNameFromJwtToken(jwt);
-                //get UserDetails from username
+                //DATABASE get UserDetails from username
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-                //create Authentication Object
+                /*
+                 * Create Authentication Object
+                    Constructor(Object principal,Object credentials, Collection<? extends GrantedAuthority> authorities)
+                 * The principal that the authentication Manager will look depends on user info storage where is
+                     MyUserDetailsImpl by MyUserDetailsServiceImpl
+                 * The AuthenticationManager is configured by AuthenticationManagerBuilder in securityConfig
+                 */
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null,
                         userDetails.getAuthorities());
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                //Set Authentication method to be Authentication
+                //The Authentication is set on the SecurityContextHolder
                 SecurityContextHolder.getContext().setAuthentication(authentication);
-                //========NOW IF ONE WANT TO GET USERDETAILS:=================
-                // use SecurityContext:
-                //UserDetails userDetails = (UserDetails) SecurityContextHolder
-                // .getContext().getAuthentication().getPrincipal()
-                //========AND THEN USE THEM==============
-                // userDetails.getUsername()
-                // userDetails.getPassword()
-                // userDetails.getAuthorities()
+                //RememberMeServices.loginSuccess if set
+                /* Now one can get userdetails in securityContext:
+                 * Examples:
+                  UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()
+                 */
             }
+            //If authentication fails, then Failure
         } catch (Exception e) {
             logger.error("Cannot set user authentication: {}", e.getMessage());
         }
-
+        //BasicAuthenticationFilter invokes FilterChain.doFilter(request,response)
         filterChain.doFilter(request, response);
     }
 }

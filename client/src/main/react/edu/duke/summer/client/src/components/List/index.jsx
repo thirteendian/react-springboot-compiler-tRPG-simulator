@@ -3,9 +3,8 @@ import Header from "../Header";
 import InputText from "../InputText";
 import Items from "../Items";
 
-class Index extends Component {
+export default function Index(props){
 
-    render() {
         const {toarray} = this.props;
         return (
             <div>
@@ -20,7 +19,4 @@ class Index extends Component {
 
             </div>
         );
-    }
 }
-
-export default Index;

@@ -37,12 +37,25 @@ import java.util.stream.Collectors;
 
 /**
  * Handle Signup/login request & authorized requests
+ * Authorization: Bearer [header].[payload].[signature]
+ * How to create JWT examples:
+ * 1. Header: {"typ":"JWT", "alg":"HS256"}
+ * 2. Payload: userID, username,email...., iss(Issuer), iat(Issued at the time), exp(Expiration Time), seconds past at 1970-01-01
+ * 3. Signature:
+ *      In Javascript:
+ *      const data = Base64UrlEncode(header) + '.' + Base64UrlEncode(payload);//data = '[encodedHeader].[encodedPayload]'
+ *      const hashedData = Hash(data, secret);//Hash the data
+ *      const signature = Base64UrlEncode(hashedData);//Encode hash data to get Signature
+ * 4. Full JWT = encodedHeader + "." + encodedPayload + "." + signature;
+ *
+ * Man-in-the-middle attack can get JWT, make sure to have https encryption
+ *
+ * In this design the JWT is stored on Local Storage for Browser on Client side.
+ *
  */
-
-@CrossOrigin(origins = "http://localhost:3000")
-@RestController
 @RequestMapping("/api/auth")
-//@RequestMapping("/api/auth")
+@RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class AuthenticationController {
     @Autowired
     AuthenticationManager authenticationManager;
@@ -71,10 +84,10 @@ public class AuthenticationController {
      * The user must use header
      * {"Authorization" : "Bearer _token_"} to access corresponding page
      *
-     * @param loginRequest
-     * @return
+     * @param loginRequest JSON from client: {username, password}
+     * @return ResponseEntity{jwt,refreshToken,uuid,username,email,roles}
      */
-    @PostMapping("/signin")
+    @PostMapping("/login")
     public ResponseEntity<?> postSignIn(@Valid @RequestBody LoginRequest loginRequest) {
         Authentication authentication = authenticationManager
                 .authenticate(
@@ -92,7 +105,7 @@ public class AuthenticationController {
                 .collect(Collectors.toList());
         RefreshToken refreshToken = refreshTokenService.createRefreshToken(userDetails.getUuid());
         return ResponseEntity.ok(new JwtResponse(jwt, refreshToken.getToken(), userDetails.getUuid(),
-                userDetails.getUsername(), userDetails.getEmail(), roles));
+                userDetails.getUsername(), userDetails.getEmail(), roles,userDetails.getFirstname(),userDetails.getLastname()));
     }
 
     @PostMapping("/signup")
@@ -104,14 +117,17 @@ public class AuthenticationController {
         if (userRepository.existsByEmail(signUpRequest.getEmail())) {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
         }
-
-        // Create new user's account
-        //    String email,
-        //    String username,
-        //    String firstName,
-        //    String lastName,
-        //    String password,
-        //    boolean active
+        /*
+         * Create new user's account
+            {
+            String email,
+            String username,
+            String firstName,
+            String lastName,
+            String password,
+            boolean active
+            }
+         */
         User user = new User(
                 signUpRequest.getEmail(),
                 signUpRequest.getUsername(),
@@ -121,11 +137,14 @@ public class AuthenticationController {
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();
 
+        //Default role is ROLE_USER
         if (strRoles == null) {
             Role userRole = roleRepository.findByName(ERole.ROLE_USER)
                     .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
             roles.add(userRole);
-        } else {
+        }
+        //Otherwise refer to the info from client
+        else {
             strRoles.forEach(role -> {
                 switch (role) {
                     case "admin":
@@ -150,10 +169,16 @@ public class AuthenticationController {
 
         user.setRoles(roles);
         userRepository.save(user);
-
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
 
+    /**
+     * Send newly generated Token back when asking
+     * Only use this while accessToken is expired,
+     * Client Send with exist unexpired refreshToken to get new accessToken
+     * @param request JSON {refreshToken}
+     * @return ResponseEntity {(new)accessToken,refreshToken,tokenType = "Bearer"}
+     */
     @PostMapping("/refreshtoken")
     public ResponseEntity<?> refreshtoken(@Valid @RequestBody TokenRefreshRequest request) {
         String requestRefreshToken = request.getRefreshToken();

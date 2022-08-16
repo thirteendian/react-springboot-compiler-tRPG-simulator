@@ -1,14 +1,15 @@
-import React, {Component} from 'react';
-import"./index.css";
+import React from 'react';
 
-class Index extends Component {
-    render() {
-        return (
-            <div>
-                <input className={this.props.className} onChange={this.props.onChange} placeholder={this.props.placeholder}/>
-            </div>
-        );
-    }
+import "./index.css";
+
+export default function Index(props) {
+    return (
+        <div>
+            <input className={props.className}
+                   onChange={props.onChange}
+                   placeholder={props.placeholder}
+                   value={props.value}
+            />
+        </div>
+    );
 }
-
-export default Index;

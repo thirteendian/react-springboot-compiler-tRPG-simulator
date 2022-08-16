@@ -1,16 +1,12 @@
-import React, {Component} from 'react';
+import React from 'react';
 import "./index.css";
 
-class Index extends Component {
+export default function Index (props){
 
-    render() {
         return (
             <div>
-                <input className = {this.props.classNameInput} type="file" onChange={this.props.onFileChange}/>
-                <button className={this.props.classNameButton} onClick={this.props.onFileClick}>Upload</button>
+                <input className = {props.classNameInput} type="file" onChange={props.onChange}/>
+                {/*<button className={this.props.classNameButton} onClick={this.props.onFileClick}>Upload</button>*/}
             </div>
         );
-    }
 }
-
-export default Index;

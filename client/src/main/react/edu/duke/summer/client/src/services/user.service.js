@@ -1,7 +1,10 @@
+//This is a service to get page infomation
+//(only a test)
 import axios from 'axios';
 import authHeader from './auth-header';
-const API_URL = 'http://localhost:8080/api/test/';
-class UserService {
+const API_URL = "http://localhost:12345/user/";
+
+export default class UserService {
     getPublicContent() {
         return axios.get(API_URL + 'all');
     }
@@ -14,5 +17,26 @@ class UserService {
     getAdminBoard() {
         return axios.get(API_URL + 'admin', { headers: authHeader() });
     }
+
+    static createGame(code,gameName,playerNum){
+        const user = JSON.parse(localStorage.getItem('user'));
+        const hostUuid = user.uuid;
+        return axios.post(API_URL+'creategame',{
+            headers: authHeader(),
+            hostUuid,
+            gameName,
+            playerNum,
+            code
+        });
+    }
+
+    static startGame(gameId){
+        return axios.post(API_URL+'startgame',{
+            gameId
+        })
+    }
+
+    static getObjectInfo(){
+        return axios.get(API_URL+'objectInfo');
+    }
 }
-export default new UserService();

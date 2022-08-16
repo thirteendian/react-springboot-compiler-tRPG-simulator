@@ -5,7 +5,7 @@ import InputText from "../InputText";
 class Index extends Component {
     render() {
         return (
-            <li >
+            <li>
                 <Header className={"header_createObject_a"}>Test Field</Header>
                 <InputText className={"input_createObject_Rollwithmod"} placeholder={"Enter..."}/>
             </li>

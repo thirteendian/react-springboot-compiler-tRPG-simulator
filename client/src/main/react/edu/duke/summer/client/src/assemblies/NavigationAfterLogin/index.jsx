@@ -1,35 +1,44 @@
-import React, {Component} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import Header from "../../components/Header";
 import MyNavLink from "../../components/MyNavLink";
 import PlayerInfo from "../PlayerInfo";
+import AuthService from "../../services/auth.service";
+import {useNavigate} from "react-router-dom";
 
-class Index extends Component {
-    render() {
-        return (
-            <div>
-                <Header className={"header_dice_rolling_game"}>Dice Rolling Game</Header>
+export default function Index() {
+    let navigate = useNavigate();
+    const mountRedirect = useCallback(()=>{
+        navigate("/")
+    },[navigate]);
 
-                    <MyNavLink className={"myNavLink_createGame1"} to={"/user/createGame"}>
-                        Create Game
-                    </MyNavLink>
+    useEffect(()=>{
+        if(AuthService.getUserDetails()===null){
+            mountRedirect();
+        }
+    });
 
-                    <MyNavLink className={"myNavLink_joinGame"} to={"/user/joinGame"}>
-                        Join Game
-                    </MyNavLink>
+    return (
+        <div>
+            <Header className={"header_dice_rolling_game"}>Dice Rolling Game</Header>
 
-                    <MyNavLink className={"myNavLink_loadGame"} to={"/user/LoadGame"}>
-                        Load Game
-                    </MyNavLink>
+            <MyNavLink className={"myNavLink_createGame1"} to={"/user/createGame"}>
+                Create Game
+            </MyNavLink>
 
-                    <MyNavLink className={"myNavLink_logout"} to={"/user/logout"}>
-                        Log Out
-                    </MyNavLink>
+            <MyNavLink className={"myNavLink_joinGame"} to={"/user/joinGame"}>
+                Join Game
+            </MyNavLink>
 
-                <PlayerInfo/>
+            <MyNavLink className={"myNavLink_loadGame"} to={"/user/LoadGame"}>
+                Load Game
+            </MyNavLink>
 
-            </div>
-        );
-    }
+            <MyNavLink className={"myNavLink_logout"} onClick={AuthService.logout} to={"/"}>
+                Log Out
+            </MyNavLink>
+
+            <PlayerInfo/>
+
+        </div>
+    );
 }
-
-export default Index;

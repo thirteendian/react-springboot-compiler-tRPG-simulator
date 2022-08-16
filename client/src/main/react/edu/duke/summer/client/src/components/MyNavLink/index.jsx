@@ -1,17 +1,11 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {NavLink} from "react-router-dom";
 import "./index.css";
 
-
-class Index extends Component {
-
-    render() {
+export default function Index(props){
         return (
-            <NavLink className={this.props.className} to={this.props.to} onClick={this.props.onClick}>
-                {this.props.children}
+            <NavLink className={props.className} to={props.to} onClick={props.onClick} >
+                {props.children}
             </NavLink>
         );
-    }
 }
-
-export default Index;

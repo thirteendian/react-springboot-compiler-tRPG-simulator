@@ -200,6 +200,7 @@
 }
 
 .input_createGame_numberOfPlayer{
+
     box-sizing: border-box;
 
     position: absolute;
@@ -243,4 +244,23 @@
     line-height: 48px;
 
     color: #000000;
+}
+.input_createGame_text{
+    font-family: Georgia, serif;
+    font-style:normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+    overflow: auto;
+    color: #ffffff;
+
+    position: absolute;
+    width: 1200px;
+    height: 500px;
+    left: 130px;
+    top: 370px;
+
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 60px;
+    white-space: pre-wrap;
 }

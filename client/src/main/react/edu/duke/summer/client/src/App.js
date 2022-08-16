@@ -7,14 +7,14 @@ import Signup from "./assemblies/Signup";
 import NavigationAfterLogin from "./assemblies/NavigationAfterLogin";
 import CreateGame from "./assemblies/CreateGame";
 import CreateObject from "./assemblies/CreateObject";
-
+import GameCenter from "./assemblies/GameCenter";
 class App extends Component {
     state={
         isLogin: false
     }
-    login=()=>{
-        this.setState({isLogin:true});
-    }
+    // login=()=>{
+    //     this.setState({isLogin:true});
+    // }
     render() {
        console.log(this.state.isLogin);
         return (
@@ -27,7 +27,7 @@ class App extends Component {
                             <Route path="/user/index_after_login" element={<NavigationAfterLogin/>}/>
                             <Route path="/user/createGame" element={<CreateGame/>}/>
                             <Route path="/user/createObject" element={<CreateObject/>}/>
-
+                            <Route path="/user/gameCenter" element={<GameCenter/>}/>
                         </Routes>
                     </div>
                 </div>

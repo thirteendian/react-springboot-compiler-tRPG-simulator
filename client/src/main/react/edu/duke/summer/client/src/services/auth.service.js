@@ -5,30 +5,24 @@ const API_URL = "http://localhost:12345/api/auth/";
 class AuthService {
 
     //helper method
-    postToServer(url,object){
-        return axios.post(url,object)
-            .then(response=>{
+    static postToServer(url, object) {
+        return axios.post(url, object)
+            .then(response => {
                 return response.data;
             })
     }
 
     //Login method
-    login(username, password) {
+    static login(username, password) {
         return axios
-            .post(API_URL + "signin", {
+            .post(API_URL + "login", {
                 username,
                 password
-            })
-            .then(response => {
-                if (response.data.accessToken) {
-                    localStorage.setItem("user", JSON.stringify(response.data));
-                }
-                return response.data;
             });
     }
 
     //Logout method
-    logout() {
+    static logout() {
         localStorage.removeItem("user");
     }
 
@@ -40,16 +34,18 @@ class AuthService {
     // private String lastname;
     // private String password;
     //Signup method
-    signup(username, email, password) {
+    static signup(username, email, firstname, lastname, password) {
         return axios.post(API_URL + "signup", {
             username,
             email,
+            firstname,
+            lastname,
             password
         });
     }
 
     //Signin method
-    getUserDetails() {
+    static getUserDetails() {
         return JSON.parse(localStorage.getItem('user'));
     }
 }

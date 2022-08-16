@@ -19,6 +19,11 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
@@ -34,7 +39,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     /**
      * Following two will Help DaoAuthenticationProvider in AuthenticationManager to validate
      * UsernamePasswordAuthenticationToken
-     * @return
      */
     @Autowired
     MyUserDetailsServiceImpl myUserDetailsService;
@@ -48,24 +52,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     /**
      * Will UserDetailsServer to build Authentication object
      * with the help of PasswordEncoder
-     *
+     * <p>
      * First, after API(with login request) entering, OncePerRequestFilter will use
      * doFilterInternal() to load Userdetail(help of UserDetailsService)
-     *
+     * <p>
      * Second, will use UsernamePasswordAuthenticationToken to get {password,username} from login request
      * and authenticate an account
-     *
+     * <p>
      * Third, will use DaoAuthenticationProvider to valid UsernamePasswordAuthenticationToken
      * return Authentication object
-     *
+     * <p>
      * Fourth, AuthenticationEntryPoint catch unauthorized error and return 401
+     *
      * @param auth build AuthenticationManager
      */
     @Override
@@ -79,8 +84,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        final CorsConfiguration config = new CorsConfiguration();
+
+        config.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
+        config.setAllowedMethods(Arrays.asList("GET", "POST", "OPTIONS", "DELETE", "PUT", "PATCH"));
+        config.setAllowCredentials(true);
+        config.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
+
+        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", config);
+
+        return source;
+    }
+
     /**
-     *
      * @param http HttpSecurity, used for configure "cors", "csrf","session management" and "authorization"
      */
     @Override
@@ -91,8 +110,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //config csrf
                 .and()
                 .csrf().disable()
-
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler)
+
 
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -101,7 +120,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests().antMatchers("/api/auth/**").permitAll()
                 .antMatchers("/api/test/**").permitAll()
-                .antMatchers("/react/**").permitAll()
+                .antMatchers("/user/**").permitAll()
                 .anyRequest().authenticated();
 //                .and()
 //                .authorizeRequests()
@@ -111,7 +130,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/index_after_login").hasAnyRole("USER","ADMIN")
 //                .antMatchers("/admin").hasRole("ADMIN")
 
-                //Logout delete Cookies
+        //Logout delete Cookies
 //                .and()
 //                .logout()
 //                .deleteCookies("JSESSIONID")
@@ -127,7 +146,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                                .defaultSuccessUrl("/")
 //                                .failureUrl("/login.html?error=true")
 //                )
-                ;
+        ;
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
@@ -139,7 +158,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //     */
 //    @Autowired
 //    private LoginSuccessHandler loginSuccessHandler;
-
 
 
 }

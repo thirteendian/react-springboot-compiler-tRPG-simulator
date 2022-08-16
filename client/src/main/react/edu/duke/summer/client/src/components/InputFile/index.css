@@ -1,12 +1,12 @@
-.inputFile_createGame{
+.inputFile_createGame[type="file"]{
+    display: block;
     box-sizing: border-box;
-
+    border-radius: 25px;
     position: absolute;
-    width: 700px;
-    height: 74px;
-    left: 200px;
-    top: 620px;
-
+    width: 1000px;
+    height: 60px;
+    left: 150px;
+    top: 300px;
 
     background: rgba(217, 217, 217, 0.5);
     border: 1px solid #000000;

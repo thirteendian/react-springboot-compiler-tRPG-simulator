@@ -19,16 +19,16 @@ public class Game {
   @Column(unique = true, nullable = false, insertable = false, updatable = false)
   private String id;
 
-  @Column(nullable = false, unique = true, length = 45)
+  @Column(nullable = false, unique = false, length = 45)
   private String hostUuid;
 
-  @Column(nullable = false, length = 45)
+  @Column(nullable = false, unique=true,length = 45)
   private String gameName;
 
   @Column(nullable = false)
   private int playerNum;
 
-  @Column(nullable = false, length = 45)
+  @Column(nullable = false)
   private String code;
 
   public String getId() {

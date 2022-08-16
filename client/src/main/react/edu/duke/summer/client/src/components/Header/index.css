@@ -32,7 +32,54 @@
     left: 242px;
     top: 200px;
 }
+.header_login_error{
+    font-family: 'Bungee Inline',serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 43px;
+    text-align: center;
 
+    color: #ff0000;
+
+    position: absolute;
+    width: 1000px;
+    height: 117px;
+    left: 242px;
+    top: 300px;
+}
+.header_signup_error{
+    font-family: 'Bungee Inline',serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 43px;
+    text-align: center;
+
+    color: #ff0000;
+
+    position: absolute;
+    width: 1000px;
+    height: 117px;
+    left: 242px;
+    top: 840px;
+}
+.header_createGame_error{
+    font-family: 'Bungee Inline',serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 43px;
+    text-align: center;
+
+    color: #ff0000;
+
+    position: absolute;
+    width: 1000px;
+    height: 117px;
+    left: 242px;
+    top: 840px;
+}
 .header_login_username{
     font-family: 'Bungee Regular', serif;
     font-style: normal;
@@ -282,5 +329,54 @@
     height: 90px;
     left: 200px;
     top: 270px;
+    color: #FFFFFF;
+}
+
+
+
+
+
+.header_newType1{
+    font-family: 'Bungee Regular', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 48px;
+
+    position: absolute;
+    width: 466px;
+    height: 90px;
+    left: 500px;
+    top: 300px;
+    color: #FFFFFF;
+}
+
+.header_newType2{
+    font-family: 'Bungee Regular', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 48px;
+
+    position: absolute;
+    width: 466px;
+    height: 90px;
+    left: 500px;
+    top: 400px;
+    color: #FFFFFF;
+}
+
+.header_newType3{
+    font-family: 'Bungee Regular', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 48px;
+
+    position: absolute;
+    width: 466px;
+    height: 90px;
+    left: 500px;
+    top: 500px;
     color: #FFFFFF;
 }
