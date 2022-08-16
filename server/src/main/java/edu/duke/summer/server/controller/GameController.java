@@ -1,15 +1,11 @@
 package edu.duke.summer.server.controller;
 
-import edu.duke.summer.server.database.model.FunctionInfo;
 import edu.duke.summer.server.database.repository.GameRepository;
 import edu.duke.summer.server.dto.CreateGameDto;
-import edu.duke.summer.server.dto.Object.ObjectDto;
 import edu.duke.summer.server.dto.Request.CreateGameRequestDto;
-import edu.duke.summer.server.dto.Response.*;
 import edu.duke.summer.server.service.GameService;
 import edu.duke.summer.server.service.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +17,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController

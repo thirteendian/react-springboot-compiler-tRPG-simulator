@@ -11,6 +11,4 @@ public interface ObjectFieldTypeRepository extends JpaRepository<ObjectFieldType
 
     ObjectFieldType findById(String id);
 
-    List<ObjectFieldType> findAll();
-
 }
