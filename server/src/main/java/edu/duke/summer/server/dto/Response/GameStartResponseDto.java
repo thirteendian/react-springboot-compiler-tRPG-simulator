@@ -1,7 +1,7 @@
 package edu.duke.summer.server.dto.Response;
 
-import edu.duke.summer.server.dto.Function.ParamDto;
 import edu.duke.summer.server.dto.Object.ObjectDto;
+import edu.duke.summer.server.dto.Function.FunctionDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,7 @@ public class GameStartResponseDto {
     public List<ObjectDto> objects;
 
     // functionInfoDto contains all parameter information of the function in this game
-    public List<ParamDto> functions;
+    public List<FunctionDto> functions;
 
     public List<ObjectDto> getObjects() {
         return objects;
@@ -26,16 +26,16 @@ public class GameStartResponseDto {
         objects.add(objectDto);
     }
 
-    public List<ParamDto> getFunctions() {
+    public List<FunctionDto> getFunctions() {
         return functions;
     }
 
-    public void setFunctions(List<ParamDto> functions) {
+    public void setFunctions(List<FunctionDto> functions) {
         this.functions = functions;
     }
 
-    public void addFunctions(ParamDto paramDto) {
-        functions.add(paramDto);
+    public void addFunctions(FunctionDto functionDto) {
+        functions.add(functionDto);
     }
 
     public GameStartResponseDto() {
@@ -43,7 +43,7 @@ public class GameStartResponseDto {
         this.functions = new ArrayList<>();
     };
 
-    public GameStartResponseDto(List<ObjectDto> objects, List<ParamDto> functions) {
+    public GameStartResponseDto(List<ObjectDto> objects, List<FunctionDto> functions) {
         this.objects = objects;
         this.functions = functions;
     }

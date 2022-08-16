@@ -260,13 +260,18 @@ public class GameServiceImpl implements GameService {
 
   @Override
   public GameStartResponseDto startGame(GameStartRequestDto gameStartRequestDto) {
-    List<ObjectDto> objects = new ArrayList<>();
-    List<ParamDto> functions = new ArrayList<>();
     String gameId = gameStartRequestDto.getGameId();
+    List<ObjectDto> objects = new ArrayList<>();
     List<UserDefinedObject> userObjectList = userDefinedObjectRepository.findByGameId(gameId);
     for (UserDefinedObject userObject : userObjectList) {
       ObjectDto objectDto = getObjectDto(gameId, userObject);
       objects.add(objectDto);
+    }
+    List<FunctionDto> functions = new ArrayList<>();
+    List<UserDefinedFunction> userFunctionList = userDefinedFunctionRepository.findByGameId(gameId);
+    for (UserDefinedFunction userFunction : userFunctionList) {
+      FunctionDto functionDto = getFunctionDto(gameId, userFunction);
+      functions.add(functionDto);
     }
     return new GameStartResponseDto(objects, functions);
   }
@@ -305,6 +310,42 @@ public class GameServiceImpl implements GameService {
       objectFieldTypeDto.setElem(getObjectFieldTypeDto(objectFieldTypeRepository.findById(nextId)));
     }
     return objectFieldTypeDto;
+  }
+
+  public FunctionDto getFunctionDto(String gameId, UserDefinedFunction userFunction) {
+    FunctionDto functionDto = new FunctionDto();
+    functionDto.setId(userFunction.getId());
+    String functionName = userFunction.getFunctionName();
+    functionDto.setFunctionName(functionName);
+    List<Parameter> parameters = parameterRepository.findParameters(gameId, functionName);
+    for (Parameter parameter : parameters) {
+      ParamDto paramDto = getParamDto(parameter);
+      functionDto.addParams(paramDto);
+    }
+    return functionDto;
+  }
+
+  public ParamDto getParamDto(Parameter parameter) {
+    ParamDto paramDto = new ParamDto();
+    paramDto.setId(parameter.getId());
+    paramDto.setParamName(parameter.getParamName());
+    ParamInfoDto paramInfoDto = getParamInfo(paramInfoRepository.findById(parameter.getParamType()));
+    paramDto.setParamInfoDto(paramInfoDto);
+    return paramDto;
+  }
+
+  public ParamInfoDto getParamInfo(ParamInfo paramInfo) {
+    ParamInfoDto paramInfoDto = new ParamInfoDto();
+    paramInfoDto.setId(paramInfo.getId());
+    paramInfoDto.setK(paramInfo.getK());
+    if (paramInfo.getName() != null) {
+      paramInfoDto.setName(paramInfo.getName());
+    }
+    else {
+      String nextId = paramInfo.getElem();
+      paramInfoDto.setElem(getParamInfo(paramInfoRepository.findById(nextId)));
+    }
+    return paramInfoDto;
   }
 
   public List<String> getObjectTypes(String gameId) {
