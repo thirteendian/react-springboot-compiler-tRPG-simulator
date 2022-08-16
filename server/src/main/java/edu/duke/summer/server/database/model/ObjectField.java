@@ -1,6 +1,5 @@
 package edu.duke.summer.server.database.model;
 
-import edu.duke.summer.server.dto.Object.ObjectFieldDto;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;

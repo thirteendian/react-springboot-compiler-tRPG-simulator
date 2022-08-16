@@ -3,12 +3,11 @@ package edu.duke.summer.server.database.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-
 import java.lang.*;
 
 @Entity
-@Table(name = "UserDefinedObject")
-public class UserDefinedObject {
+@Table(name = "UserDefinedFunction")
+public class UserDefinedFunction {
 
     @Id
     @GeneratedValue(generator = "system-uuid")
@@ -20,7 +19,7 @@ public class UserDefinedObject {
     private String gameId;
 
     @Column(nullable = false)
-    private String objectName;
+    private String functionName;
 
     public String getId() {return id;}
 
@@ -32,27 +31,27 @@ public class UserDefinedObject {
         this.gameId = gameId;
     }
 
-    public String getObjectName() {
-        return objectName;
+    public String getFunctionName() {
+        return functionName;
     }
 
-    public void setObjectName(String objectName) {
-        this.objectName = objectName;
+    public void setFunctionName(String functionName) {
+        this.functionName = functionName;
     }
 
-    public UserDefinedObject() {}
+    public UserDefinedFunction() {}
 
-    public UserDefinedObject(String gameId, String objectName) {
+    public UserDefinedFunction(String gameId, String functionName) {
         this.gameId = gameId;
-        this.objectName = objectName;
+        this.functionName = functionName;
     }
 
     @Override
     public String toString() {
-        return "UserDefinedObject{" +
+        return "UserDefinedFunction{" +
                 "id='" + id + '\'' +
                 ", gameId='" + gameId + '\'' +
-                ", objectName='" + objectName + '\'' +
+                ", functionName='" + functionName + '\'' +
                 '}';
     }
 }

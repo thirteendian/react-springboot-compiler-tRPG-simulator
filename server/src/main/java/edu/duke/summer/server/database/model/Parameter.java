@@ -1,20 +1,23 @@
 package edu.duke.summer.server.database.model;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 
-import java.io.Serializable;
 import java.lang.*;
 
 @Entity
-@Table(name = "functionInfo")
-@IdClass(FunctionInfo.class)
-public class FunctionInfo implements Serializable {
+@Table(name = "param")
+public class Parameter {
 
-    @Id
+    @Id @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid",strategy = "uuid")
+    @Column(unique = true, nullable = false, insertable = false, updatable = false)
+    private String id;
+
     @Column(nullable = false)
     private String gameId;
 
-    @Id
     @Column(nullable = false)
     private String funcName;
 
@@ -26,6 +29,10 @@ public class FunctionInfo implements Serializable {
 
     @Column(nullable = false)
     private String paramType;
+
+    public String getId() {
+        return id;
+    }
 
     public void setGameId(String gameId) {
         this.gameId = gameId;
@@ -67,9 +74,9 @@ public class FunctionInfo implements Serializable {
         return paramType;
     }
 
-    public FunctionInfo() {}
+    public Parameter() {}
 
-    public FunctionInfo(String gameId, String funcName, String paramNum, String paramName, String paramType) {
+    public Parameter(String gameId, String funcName, String paramNum, String paramName, String paramType) {
         this.gameId = gameId;
         this.funcName = funcName;
         this.paramNum = paramNum;
@@ -79,8 +86,9 @@ public class FunctionInfo implements Serializable {
 
     @Override
     public String toString() {
-        return "FunctionInfo{" +
-                "gameId=" + gameId +
+        return "Param{" +
+                "id='" + id + '\'' +
+                ", gameId='" + gameId + '\'' +
                 ", funcName='" + funcName + '\'' +
                 ", paramNum='" + paramNum + '\'' +
                 ", paramName='" + paramName + '\'' +

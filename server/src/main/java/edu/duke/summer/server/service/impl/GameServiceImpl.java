@@ -47,13 +47,15 @@ public class GameServiceImpl implements GameService {
   private ObjectFieldTypeRepository objectFieldTypeRepository;
 
   @Autowired
-  private ObjectValueRepository objectValueRepository;
-
+  private UserDefinedFunctionRepository userDefinedFunctionRepository;
   @Autowired
-  private FunctionInfoRepository functionInfoRepository;
+  private ParameterRepository parameterRepository;
 
   @Autowired
   private ParamInfoRepository paramInfoRepository;
+
+  @Autowired
+  private ObjectValueRepository objectValueRepository;
 
   @Override
   public CreateGameResponseDto createNewGame(final CreateGameRequestDto createGameRequestDto) {
@@ -148,24 +150,28 @@ public class GameServiceImpl implements GameService {
       FuncInfo funcInfo = functions.get(func);
       String funcName = funcInfo.getFuncName();
       if (!funcName.equals("output") && !funcName.equals("roll") && !funcName.equals("oneUserOption") && !funcName.equals("userOption")) {
-        FieldList param = funcInfo.getParams();
-        traverseParams(gameId, funcName, 0, param);
+        UserDefinedFunction userDefinedFunction = new UserDefinedFunction();
+        userDefinedFunction.setGameId(gameId);
+        userDefinedFunction.setFunctionName(funcName);
+        userDefinedFunctionRepository.save(userDefinedFunction);
+        FieldList params = funcInfo.getParams();
+        traverseParams(gameId, funcName, 0, params);
       }
     }
   }
 
-  public void traverseParams(String gameId, String funcName, int fieldNum, FieldList param) {
-    if (param != null) {
-      Ty ty  =param.getType();
+  public void traverseParams(String gameId, String funcName, int fieldNum, FieldList params) {
+    if (params != null) {
+      Ty ty  =params.getType();
       String paramType = traverseParamTypes(ty);
-      FunctionInfo funcInfo = new FunctionInfo();
-      funcInfo.setGameId(gameId);
-      funcInfo.setFuncName(funcName);
-      funcInfo.setParamNum(Integer.toString(fieldNum++));
-      funcInfo.setParamName(param.getName().toString());
-      funcInfo.setParamType(paramType);
-      functionInfoRepository.save(funcInfo);
-      traverseParams(gameId, funcName, fieldNum, param.getTail());
+      Parameter parameter = new Parameter();
+      parameter.setGameId(gameId);
+      parameter.setFuncName(funcName);
+      parameter.setParamNum(Integer.toString(fieldNum++));
+      parameter.setParamName(params.getName().toString());
+      parameter.setParamType(paramType);
+      parameterRepository.save(parameter);
+      traverseParams(gameId, funcName, fieldNum, params.getTail());
     }
   }
 
@@ -255,20 +261,20 @@ public class GameServiceImpl implements GameService {
   @Override
   public GameStartResponseDto startGame(GameStartRequestDto gameStartRequestDto) {
     List<ObjectDto> objects = new ArrayList<>();
-    List<FunctionInfoDto> functions = new ArrayList<>();
+    List<ParamDto> functions = new ArrayList<>();
     String gameId = gameStartRequestDto.getGameId();
     List<UserDefinedObject> userObjectList = userDefinedObjectRepository.findByGameId(gameId);
     for (UserDefinedObject userObject : userObjectList) {
-      String objectName = userObject.getObjectName();
-      ObjectDto objectDto = getObjectDto(gameId, objectName);
+      ObjectDto objectDto = getObjectDto(gameId, userObject);
       objects.add(objectDto);
     }
     return new GameStartResponseDto(objects, functions);
   }
 
-  public ObjectDto getObjectDto(String gameId, String objectName) {
+  public ObjectDto getObjectDto(String gameId, UserDefinedObject userObject) {
     ObjectDto objectDto = new ObjectDto();
-    objectDto.setId(objectDto.getId());
+    objectDto.setId(userObject.getId());
+    String objectName = userObject.getObjectName();
     objectDto.setObjectName(objectName);
     List<ObjectField> objectFields = objectFieldRepository.findObjectFields(gameId, objectName);
     for (ObjectField objectField : objectFields) {
