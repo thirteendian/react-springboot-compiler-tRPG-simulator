@@ -204,6 +204,7 @@ public class GameServiceTest {
         System.out.println(createObjectResponseDto.getMyObjectList());
     }
 
+    @Test
     public void startGameTest() {
         // 1. Create game
         CreateGameRequestDto createGameRequestDto = new CreateGameRequestDto();
@@ -295,7 +296,6 @@ public class GameServiceTest {
         String gameId = "1";
         String funcName = "cal";
         FuncCallResult result = gameService.callFunction(gameId, funcName);
-
     }
 
 }
