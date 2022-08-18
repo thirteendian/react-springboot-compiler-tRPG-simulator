@@ -2,6 +2,7 @@ package edu.duke.summer.server.service;
 
 import java.util.List;
 
+import edu.duke.summer.server.algorithm.FuncCallResult;
 import edu.duke.summer.server.database.model.DiceRolling;
 import edu.duke.summer.server.dto.*;
 import edu.duke.summer.server.database.model.Game;
@@ -99,5 +100,7 @@ public interface GameService {
    *             should be the same format as createObjects function
    */
   void addObjectFields(String gameId, String code);
+
+  FuncCallResult callFunction(String gameId, String funcName);
 
 }
