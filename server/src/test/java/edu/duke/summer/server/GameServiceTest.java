@@ -1,5 +1,6 @@
 package edu.duke.summer.server;
 
+import edu.duke.summer.server.algorithm.FuncCallResult;
 import edu.duke.summer.server.config.SpringConfig;
 import edu.duke.summer.server.database.model.DiceRolling;
 import edu.duke.summer.server.database.model.ObjectValue;
@@ -7,9 +8,16 @@ import edu.duke.summer.server.database.model.Player;
 import edu.duke.summer.server.database.repository.*;
 import edu.duke.summer.server.dto.DiceRollingDto;
 import edu.duke.summer.server.dto.ObjectValueDto;
+import edu.duke.summer.server.dto.Request.CreateGameRequestDto;
 import edu.duke.summer.server.dto.Request.CreateObjectRequestDto;
+import edu.duke.summer.server.dto.Request.GameStartRequestDto;
+import edu.duke.summer.server.dto.Request.JoinGameRequestDto;
+import edu.duke.summer.server.dto.Response.CreateGameResponseDto;
 import edu.duke.summer.server.dto.Response.CreateObjectResponseDto;
+import edu.duke.summer.server.dto.Response.GameStartResponseDto;
+import edu.duke.summer.server.dto.Response.JoinGameResponseDto;
 import edu.duke.summer.server.service.GameService;
+import org.checkerframework.checker.units.qual.C;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -194,6 +202,100 @@ public class GameServiceTest {
         createObjectRequestDto.setObjectValue("[height: 2m, weight: 10t]");
         CreateObjectResponseDto createObjectResponseDto = gameService.createObject(createObjectRequestDto);
         System.out.println(createObjectResponseDto.getMyObjectList());
+    }
+
+    public void startGameTest() {
+        // 1. Create game
+        CreateGameRequestDto createGameRequestDto = new CreateGameRequestDto();
+        createGameRequestDto.setHostUuid("0001");
+        createGameRequestDto.setGameName("RISK");
+        createGameRequestDto.setPlayerNum(6);
+        createGameRequestDto.setCode("{type rollwithmod {\n" +
+                "    numdice:int,\n" +
+                "    numsides:int option option [],\n" +
+                "    modifier:int [][][] option\n" +
+                "    }\n" +
+                " type test = rollwithmod;\n" +
+                " type newType {\n" +
+                "    a:test,\n" +
+                "    b:string option [] option,\n" +
+                "    c:boolean option []\n" +
+                "    }\n" +
+                " fun int cal(int a, int x, int y, int z){\n" +
+                "    var b = 0;\n" +
+                "    var anArray:int [] = {1};\n" +
+                "    var sum = 0;\n" +
+                "    var opti: int option;\n" +
+                "    var userTest : newType;\n" +
+                "    userTest.a.numdice = 5;\n" +
+                "    opti = SOME(1);\n" +
+                "    opti = NONE;\n" +
+                "    anArray = {1,2,3,7,10};\n" +
+                "    anArray[3] = 10;\n" +
+                "    output(a);\n" +
+                "    for(i : anArray){\n" +
+                "        sum = sum + i;\n" +
+                "        if (sum > 10) then { break;}\n" +
+                "    }\n" +
+                "    a = 1;\n" +
+                "    output(a);\n" +
+                "    return sum;\n" +
+                "    }\n" +
+                "   \n" +
+                "    fun int test(int i){\n" +
+                "        i = 1;\n" +
+                "        while(i < 10){\n" +
+                "            i = i + 1;\n" +
+                "        }\n" +
+                "        return i;\n" +
+                "    }\n" +
+                "    fun int testCallExp(){\n" +
+                "        var i = test(20);\n" +
+                "        return i;\n" +
+                "    }\n" +
+                "    fun int testRoll(){\n" +
+                "        var i = roll(\"d100\");\n" +
+                "        if(userOption(\"Reroll?\")) then{\n" +
+                "            var i = 1;\n" +
+                "            output(i);\n" +
+                "        }\n" +
+                "        if(i > 1) then {\n" +
+                "            output(\"roll:\" + roll(\"3d4\"));\n" +
+                "        }else{\n" +
+                "            var i = roll(\"d100\");   \n" +
+                "            output(i);\n" +
+                "        }\n" +
+                "        output(\"force reroll\");\n" +
+                "        return i;\n" +
+                "   }\n" +
+                "}");
+        CreateGameResponseDto createGameResponseDto = gameService.createNewGame(createGameRequestDto);
+
+        // 2. Join game
+        JoinGameRequestDto joinGameRequestDto = new JoinGameRequestDto();
+        joinGameRequestDto.setGameId("1");
+        joinGameRequestDto.setPlayerUuid("0002");
+        JoinGameResponseDto joinGameResponseDto = gameService.joinGame(joinGameRequestDto);
+
+        // 3. start game
+        GameStartRequestDto gameStartRequestDto = new GameStartRequestDto();
+        gameStartRequestDto.setGameId("1");
+        GameStartResponseDto gameStartResponseDto = gameService.startGame(gameStartRequestDto);
+
+        // 4. create object
+        CreateObjectRequestDto createObjectRequestDto = new CreateObjectRequestDto();
+        createObjectRequestDto.setGameId("1");
+        createObjectRequestDto.setPlayerUuid("0001");
+        createObjectRequestDto.setObjectName("dragon");
+        String value = "power: 100dmg";
+        createObjectRequestDto.setObjectValue(value);
+        CreateObjectResponseDto createObjectResponseDto = gameService.createObject(createObjectRequestDto);
+
+        // 5. call function (maybe need a Dto after we finish introducing params and states)
+        String gameId = "1";
+        String funcName = "cal";
+        FuncCallResult result = gameService.callFunction(gameId, funcName);
+
     }
 
 }

@@ -2,10 +2,7 @@ package edu.duke.summer.server.service.impl;
 
 import java.util.*;
 
-import edu.duke.summer.server.algorithm.EvalServicempl;
-import edu.duke.summer.server.algorithm.FuncInfo;
-import edu.duke.summer.server.algorithm.RuleInfo;
-import edu.duke.summer.server.algorithm.TypeInfo;
+import edu.duke.summer.server.algorithm.*;
 import edu.duke.summer.server.algorithm.absyn.FieldList;
 import edu.duke.summer.server.algorithm.absyn.Ty;
 import edu.duke.summer.server.database.model.*;
@@ -503,5 +500,13 @@ public class GameServiceImpl implements GameService {
       }
     }
   }
+
+  public FuncCallResult callFunction(String gameId, String funcName) {
+    String code = gameRepository.findById(gameId).getCode();
+    EvalServicempl evalService = new EvalServicempl();
+    FuncCallResult result = evalService.getFunResult(code, funcName, new HashMap<>(), new StateInfo());
+    return result;
+  }
+
 
 }
