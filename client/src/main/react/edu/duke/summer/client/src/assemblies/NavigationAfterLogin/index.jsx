@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect} from 'react';
 import Header from "../../components/Header";
 import MyNavLink from "../../components/MyNavLink";
-import PlayerInfo from "../PlayerInfo";
+import PlayerInfo from "../../components/PlayerInfo";
 import AuthService from "../../services/auth.service";
 import {useNavigate} from "react-router-dom";
 

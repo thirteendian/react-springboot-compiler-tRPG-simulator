@@ -1,6 +1,6 @@
 import React from 'react';
 import "./index.css";
-import MyNavLink from "../../components/MyNavLink";
+import MyNavLink from "../MyNavLink";
 
 export default function Index()
 {

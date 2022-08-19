@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import Header from "../../components/Header";
-import MyNavLink from "../../components/MyNavLink";
+import Header from "../Header";
+import MyNavLink from "../MyNavLink";
 import "./index.css";
 import AuthService from "../../services/auth.service";
 

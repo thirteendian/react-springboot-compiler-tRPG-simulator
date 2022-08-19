@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import MyObjectInfo from "../MyObjectInfo";
+import MyObjectInfo from "../../components/MyObjectInfo";
 import UserService from "../../services/user.service";
 
 export default function Index (){
