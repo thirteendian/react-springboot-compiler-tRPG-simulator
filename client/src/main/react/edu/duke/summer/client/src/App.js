@@ -8,6 +8,7 @@ import NavigationAfterLogin from "./assemblies/NavigationAfterLogin";
 import CreateGame from "./assemblies/CreateGame";
 import CreateObject from "./assemblies/CreateObject";
 import GameCenter from "./assemblies/GameCenter";
+import WaitingRoom from "./assemblies/WaitingRoom";
 class App extends Component {
     state={
         isLogin: false
@@ -28,6 +29,7 @@ class App extends Component {
                             <Route path="/user/createGame" element={<CreateGame/>}/>
                             <Route path="/user/createObject" element={<CreateObject/>}/>
                             <Route path="/user/gameCenter" element={<GameCenter/>}/>
+                            <Route path="/user/waitingRoom" element={<WaitingRoom/>}/>
                         </Routes>
                     </div>
                 </div>
