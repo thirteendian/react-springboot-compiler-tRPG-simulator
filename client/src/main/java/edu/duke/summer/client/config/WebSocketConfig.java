@@ -57,6 +57,9 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         registry.addEndpoint("/admin_endpoint")
                 .addInterceptors(new HttpHandShakeInteceptor())
                 .withSockJS();
+        registry.addEndpoint("player_endpoint")
+                .addInterceptors(new HttpHandShakeInteceptor())
+                .withSockJS();
     }
 
 
