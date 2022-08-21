@@ -7,6 +7,8 @@ public class AvaliableGameDto {
     private Integer CurrNumOfPlayer;
     private String creator;
 
+    public AvaliableGameDto() {}
+
     public AvaliableGameDto(String gameName, String gameID, Integer numOfPlayer, Integer currNumOfPlayer, String creator) {
         this.gameName = gameName;
         this.gameID = gameID;

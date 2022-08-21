@@ -20,11 +20,15 @@ public class Player {
     @Column(nullable = false)
     private String userId;
 
+    @Column(nullable = false)
+    private String status;
+
     public Player() {}
 
     public Player(String gameId, String userId) {
         this.gameId = gameId;
         this.userId = userId;
+        this.status = "joined";
     }
 
 
@@ -40,12 +44,20 @@ public class Player {
 
     public void setUserId(String userId) { this.userId = userId; }
 
+    public String getStatus() {return status;}
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+
     @Override
     public String toString() {
         return "Player{" +
                 "id=" + id +
                 ", game='" + gameId + '\'' +
                 ", user='" + userId + '\'' +
+                ", status='" + status + '\'' +
                 '}';
     }
 }

@@ -2,6 +2,7 @@ package edu.duke.summer.server.controller;
 
 import edu.duke.summer.server.dto.Request.CreateGameRequestDto;
 import edu.duke.summer.server.dto.Request.GameStartRequestDto;
+import edu.duke.summer.server.dto.Request.GetAllAvailableGameForJoinRequestDto;
 import edu.duke.summer.server.dto.Response.*;
 import edu.duke.summer.server.service.GameService;
 import edu.duke.summer.server.service.MyUserDetailsService;
@@ -37,7 +38,8 @@ public class GameController {
 
     @GetMapping("/getallgame")
     public ResponseEntity<?> getAllGames(){
-        GetAllAvailableGameForJoinResponseDto getAllAvailableGameForJoinResponseDto = gameService.getAllAvailableGameForJoinDto();
+        GetAllAvailableGameForJoinRequestDto getAllAvailableGameForJoinRequestDto = new GetAllAvailableGameForJoinRequestDto();
+        GetAllAvailableGameForJoinResponseDto getAllAvailableGameForJoinResponseDto = gameService.getAllAvailableGameForJoin(getAllAvailableGameForJoinRequestDto);
         return ResponseEntity.ok(getAllAvailableGameForJoinResponseDto);
     }
 

@@ -60,6 +60,8 @@ public class GameServiceImpl implements GameService {
     game.setHostUuid(createGameRequestDto.getHostUuid());
     game.setGameName(createGameRequestDto.getGameName());
     game.setPlayerNum(createGameRequestDto.getPlayerNum());
+    game.setCurNum(1);
+    game.setStatus("preparing");
     game.setCode(createGameRequestDto.getCode());
     gameRepository.save(game);
     initializeGame(game.getId(), game.getCode());
@@ -71,8 +73,24 @@ public class GameServiceImpl implements GameService {
   }
 
   @Override
-  public GetAllAvailableGameForJoinResponseDto getAllAvailableGameForJoinDto() {
-    return null;
+  public GetAllAvailableGameForJoinResponseDto getAllAvailableGameForJoin(GetAllAvailableGameForJoinRequestDto getAllAvailableGameForJoinRequestDto) {
+    GetAllAvailableGameForJoinResponseDto getAllAvailableGameForJoinResponseDto = new GetAllAvailableGameForJoinResponseDto();
+    String playerId = getAllAvailableGameForJoinRequestDto.getPlayerId();
+    List<Game> gameList = gameRepository.findAvailableGames();
+    List<AvaliableGameDto> availableGameList = new ArrayList<>();
+    for (Game game : gameList) {
+      if (playerRepository.findPlayer(game.getId(), playerId) == null) {
+        AvaliableGameDto avaliableGameDto = new AvaliableGameDto();
+        avaliableGameDto.setGameID(game.getId());
+        avaliableGameDto.setGameName(game.getGameName());
+        avaliableGameDto.setCreator(game.getHostUuid());
+        avaliableGameDto.setNumOfPlayer(game.getPlayerNum());
+        avaliableGameDto.setCurrNumOfPlayer(game.getCurNum());
+        availableGameList.add(avaliableGameDto);
+      }
+    }
+    getAllAvailableGameForJoinResponseDto.setListOfAvailableGame(availableGameList);
+    return getAllAvailableGameForJoinResponseDto;
   }
 
   @Override
@@ -247,6 +265,7 @@ public class GameServiceImpl implements GameService {
     player.setGameId(game.getId());
     player.setUserId(joinGameRequestDto.getPlayerUuid());
     playerRepository.save(player);
+    gameRepository.addPlayer(game.getId());
     return joinGameResponseDto;
   }
 

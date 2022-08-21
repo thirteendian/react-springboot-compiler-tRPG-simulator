@@ -5,13 +5,13 @@ import edu.duke.summer.server.dto.AvaliableGameDto;
 import java.util.List;
 
 public class GetAllAvailableGameForJoinResponseDto {
-    private List<AvaliableGameDto> listOfAvaliableGame;
+    private List<AvaliableGameDto> listOfAvailableGame;
 
-    public List<AvaliableGameDto> getListOfAvaliableGame() {
-        return listOfAvaliableGame;
+    public List<AvaliableGameDto> getListOfAvailableGame() {
+        return listOfAvailableGame;
     }
 
-    public void setListOfAvaliableGame(List<AvaliableGameDto> listOfAvaliableGame) {
-        this.listOfAvaliableGame = listOfAvaliableGame;
+    public void setListOfAvailableGame(List<AvaliableGameDto> listOfAvailableGame) {
+        this.listOfAvailableGame = listOfAvailableGame;
     }
 }

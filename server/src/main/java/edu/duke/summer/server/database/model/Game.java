@@ -29,6 +29,13 @@ public class Game {
   private int playerNum;
 
   @Column(nullable = false)
+  private int curNum;
+
+  @Column(nullable = false)
+  private String status;
+
+  @Lob
+  @Column(nullable = false)
   private String code;
 
   public String getId() {
@@ -59,6 +66,22 @@ public class Game {
     this.playerNum = playerNum;
   }
 
+  public int getCurNum() {
+    return curNum;
+  }
+
+  public void setCurNum(int curNum) {
+    this.curNum = curNum;
+  }
+
+  public String getStatus() {
+    return status;
+  }
+
+  public void setStatus(String status) {
+    this.status = status;
+  }
+
   public String getCode() {
     return code;
   }
@@ -73,6 +96,8 @@ public class Game {
     this.hostUuid = hostUuid;
     this.gameName = gameName;
     this.playerNum = playerNum;
+    this.curNum = 1;
+    this.status = "waiting";
     this.code = code;
   }
 
@@ -83,6 +108,8 @@ public class Game {
             ", hostUuid='" + hostUuid + '\'' +
             ", gameName='" + gameName + '\'' +
             ", playerNum=" + playerNum +
+            ", curNum=" + curNum +
+            ", status=" + status +
             ", code='" + code + '\'' +
             '}';
   }

@@ -276,8 +276,12 @@ public class GameServiceTest {
         JoinGameRequestDto joinGameRequestDto = new JoinGameRequestDto();
         joinGameRequestDto.setGameId("1");
         joinGameRequestDto.setPlayerUuid("0002");
-        JoinGameResponseDto joinGameResponseDto = gameService.joinGame(joinGameRequestDto);
-
+        try {
+            JoinGameResponseDto joinGameResponseDto = gameService.joinGame(joinGameRequestDto);
+        }
+        catch (Exception e){
+            System.out.print(e);
+        }
         // 3. start game
         GameStartRequestDto gameStartRequestDto = new GameStartRequestDto();
         gameStartRequestDto.setGameId("1");
@@ -295,7 +299,12 @@ public class GameServiceTest {
         // 5. call function (maybe need a Dto after we finish introducing params and states)
         String gameId = "1";
         String funcName = "cal";
-        FuncCallResult result = gameService.callFunction(gameId, funcName);
+        try {
+            FuncCallResult result = gameService.callFunction(gameId, funcName);
+        }
+        catch (Exception e) {
+            System.out.println("Game does not exists!");
+        }
     }
 
 }
