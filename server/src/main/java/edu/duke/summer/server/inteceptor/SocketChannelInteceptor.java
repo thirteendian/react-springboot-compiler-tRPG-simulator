@@ -28,15 +28,6 @@ public class SocketChannelInteceptor implements ChannelInterceptor {
 
         StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(message);
         if (headerAccessor.getCommand() == null) return;// avoid no stomp message(heartbeat etc.)
-        String sessionID = headerAccessor.getSessionAttributes().get("sessionID").toString();
-        System.out.println("SocketChannelIntecepter.postSend()---[sessionID]: " + sessionID);
-        switch (headerAccessor.getCommand()) {
-            case CONNECT:
-                connect(sessionID);
-                break;
-            case DISCONNECT:
-                break;
-        }
     }
 
     /**

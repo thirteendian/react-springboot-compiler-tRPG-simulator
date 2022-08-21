@@ -16,6 +16,19 @@ public interface GameService {
 
   CreateGameResponseDto createNewGame(final CreateGameRequestDto createGameRequestDto);
 
+  /**
+   * TODO：Return All Available Game
+   * Return all game that: 1.not full, 2.not started, 3. I'm not joined before
+   */
+  GetAllAvailableGameForJoinResponseDto getAllAvailableGameForJoinDto();
+
+  /**
+   * TODO: Get All Joined Game(for Loading previous unfinished joined game)
+   * Return all game that: 1.joined before, 2.not start
+   */
+  GetAllJoinedGameResponseDto getAllJoinedGameDto();
+
+
   List<Game> filterGame(final GameFilterDto gameFilterDto);
 
   JoinGameResponseDto joinGame(final JoinGameRequestDto createGameRequestDto);

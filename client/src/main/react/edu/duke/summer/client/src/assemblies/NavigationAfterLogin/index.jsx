@@ -6,6 +6,7 @@ import AuthService from "../../services/auth.service";
 import {useNavigate} from "react-router-dom";
 
 export default function Index() {
+
     let navigate = useNavigate();
     const mountRedirect = useCallback(()=>{
         navigate("/")

@@ -71,6 +71,16 @@ public class GameServiceImpl implements GameService {
     return createGameResponseDto;
   }
 
+  @Override
+  public GetAllAvailableGameForJoinResponseDto getAllAvailableGameForJoinDto() {
+    return null;
+  }
+
+  @Override
+  public GetAllJoinedGameResponseDto getAllJoinedGameDto() {
+    return null;
+  }
+
   public void initializeGame(String gameId, String code) {
     EvalServicempl evalService = new EvalServicempl();
     RuleInfo ruleInfo = evalService.saveRules(code);

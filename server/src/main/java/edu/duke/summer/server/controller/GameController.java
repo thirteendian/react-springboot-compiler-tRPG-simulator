@@ -1,9 +1,5 @@
 package edu.duke.summer.server.controller;
 
-import edu.duke.summer.server.database.model.FunctionInfo;
-import edu.duke.summer.server.database.repository.GameRepository;
-import edu.duke.summer.server.dto.CreateGameDto;
-import edu.duke.summer.server.dto.Object.ObjectDto;
 import edu.duke.summer.server.dto.Request.CreateGameRequestDto;
 import edu.duke.summer.server.dto.Request.GameStartRequestDto;
 import edu.duke.summer.server.dto.Response.*;
@@ -11,21 +7,9 @@ import edu.duke.summer.server.service.GameService;
 import edu.duke.summer.server.service.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
 
 @RequestMapping("/user")
 @RestController
@@ -49,6 +33,18 @@ public class GameController {
     public ResponseEntity<?> postStartGame(@Valid @RequestBody GameStartRequestDto gameStartRequestDto){
         GameStartResponseDto gameStartResponseDto = gameService.startGame(gameStartRequestDto);
         return ResponseEntity.ok(gameStartResponseDto);
+    }
+
+    @GetMapping("/getallgame")
+    public ResponseEntity<?> getAllGames(){
+        GetAllAvailableGameForJoinResponseDto getAllAvailableGameForJoinResponseDto = gameService.getAllAvailableGameForJoinDto();
+        return ResponseEntity.ok(getAllAvailableGameForJoinResponseDto);
+    }
+
+    @GetMapping("/getmyjoinedgame")
+    public ResponseEntity<?> getAllJoinedGames(){
+        GetAllJoinedGameResponseDto getAllJoinedGameResponseDto = gameService.getAllJoinedGameDto();
+        return ResponseEntity.ok(getAllJoinedGameResponseDto);
     }
 
 

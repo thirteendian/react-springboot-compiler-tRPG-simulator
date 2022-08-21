@@ -18,6 +18,15 @@ export default class UserService {
         return axios.get(API_URL + 'admin', { headers: authHeader() });
     }
 
+    static getAllGames(){
+        return axios.get(API_URL+'getallgame',{headers: authHeader()});
+    }
+
+    static getAllJoinedGame(){
+        return axios.get(API_URL+'getmyjoinedgame',{headers:authHeader()});
+    }
+
+
     static createGame(code,gameName,playerNum){
         const user = JSON.parse(localStorage.getItem('user'));
         const hostUuid = user.uuid;

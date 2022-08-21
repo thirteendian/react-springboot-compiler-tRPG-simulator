@@ -121,6 +121,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests().antMatchers("/api/auth/**").permitAll()
                 .antMatchers("/api/test/**").permitAll()
                 .antMatchers("/user/**").permitAll()
+                .antMatchers("/player_endpoint/**").permitAll()
                 .anyRequest().authenticated();
 //                .and()
 //                .authorizeRequests()
