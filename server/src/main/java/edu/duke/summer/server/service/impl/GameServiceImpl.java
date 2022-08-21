@@ -94,13 +94,30 @@ public class GameServiceImpl implements GameService {
   }
 
   @Override
-  public GetAllJoinedGameResponseDto getAllJoinedGameDto() {
-    return null;
+  public GetAllJoinedGameResponseDto getAllJoinedGameDto(GetAllJoinedGameRequestDto getAllJoinedGameRequestDto) {
+    GetAllJoinedGameResponseDto getAllJoinedGameResponseDto = new GetAllJoinedGameResponseDto();
+    String playerId = getAllJoinedGameRequestDto.getPlayerId();
+    List<Game> joinedGameList = gameRepository.findJoinedGames(playerId);
+    List<AvaliableGameDto> gameList = new ArrayList<>();
+    for(Game game : joinedGameList) {
+      AvaliableGameDto avaliableGameDto = new AvaliableGameDto();
+      avaliableGameDto.setGameID(game.getId());
+      avaliableGameDto.setGameName(game.getGameName());
+      avaliableGameDto.setCreator(game.getHostUuid());
+      avaliableGameDto.setNumOfPlayer(game.getPlayerNum());
+      avaliableGameDto.setCurrNumOfPlayer(game.getCurNum());
+      gameList.add(avaliableGameDto);
+    }
+    getAllJoinedGameResponseDto.setListOfGame(gameList);
+    return getAllJoinedGameResponseDto;
   }
 
   @Override
   public void quitGame(QuitGameRequestDto quitGameRequestDto) {
-
+    String gameId = quitGameRequestDto.getGameId();
+    String playerId = quitGameRequestDto.getPlayerUuid();
+    gameRepository.changeGameStatus(gameId, "paused");
+    playerRepository.changeGamePausedStatus(gameId, playerId);
   }
 
   @Override
@@ -289,6 +306,8 @@ public class GameServiceImpl implements GameService {
       FunctionDto functionDto = getFunctionDto(gameId, userFunction);
       functions.add(functionDto);
     }
+    gameRepository.changeGameStatus(gameId, "start");
+    playerRepository.changeGameStartStatus(gameId);
     return new GameStartResponseDto(objects, functions);
   }
 
@@ -451,8 +470,16 @@ public class GameServiceImpl implements GameService {
   }
 
   @Override
-  public List<Player> getAllPlayers(String game) {
-    return playerRepository.findAllByGameId(game);
+  public GetAllPlayersResponseDto getAllPlayers(GetAllPlayersRequestDto getAllPlayersRequestDto) {
+    GetAllPlayersResponseDto getAllPlayersResponseDto = new GetAllPlayersResponseDto();
+    String gameId = getAllPlayersRequestDto.getGameId();
+    List<Player> players = playerRepository.findAllByGameId(gameId);
+    List<String> playerList = new ArrayList<>();
+    for (Player player : players) {
+      playerList.add(player.getUserId());
+    }
+    getAllPlayersResponseDto.setPlayerList(playerList);
+    return getAllPlayersResponseDto;
   }
 
 

@@ -23,13 +23,13 @@ public interface GameService {
   GetAllAvailableGameForJoinResponseDto getAllAvailableGameForJoin(GetAllAvailableGameForJoinRequestDto getAllAvailableGameForJoinRequestDto);
 
   /**
-   * TODO: Get All Joined Game(for Loading previous unfinished joined game)
+   * Get All Joined Game(for Loading previous unfinished joined game)
    * Return all game that: 1.joined before, 2.not start
    */
-  GetAllJoinedGameResponseDto getAllJoinedGameDto();
+  GetAllJoinedGameResponseDto getAllJoinedGameDto(GetAllJoinedGameRequestDto getAllJoinedGameRequestDto);
 
   /**
-   * TODO：Quit Game(refresh player status, game status, and all other related status)
+   * Quit Game(refresh player status, game status, and all other related status)
    */
   void quitGame(QuitGameRequestDto quitGameRequestDto);
 
@@ -95,10 +95,10 @@ public interface GameService {
   /**
    * Get all players that are involved in the game
    *
-   * @param game the game that the player is involved in
+   * @param getAllPlayersRequestDto contains gameId of the game
    * @return list of players in the game
    */
-  List<Player> getAllPlayers(String game);
+  GetAllPlayersResponseDto getAllPlayers(GetAllPlayersRequestDto getAllPlayersRequestDto);
 
   /**
    * Check whether a new object is required to be created for this object field

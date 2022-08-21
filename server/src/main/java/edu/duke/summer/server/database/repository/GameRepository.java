@@ -27,4 +27,9 @@ public interface GameRepository extends JpaRepository<Game, Long> {
   @Query("update Game game set game.curNum = game.curNum + 1 where game.id = :gameId")
   void addPlayer(@Param("gameId") String gameId);
 
+  @Query("update Game game set game.status = :status where game.id = :gameId")
+  void changeGameStatus(@Param("gameId") String gameId, @Param("status") String status);
+  @Query("select game from Game game, Player player where game.status='paused' and game.id = player.gameId and player.userId = :playerId")
+  List<Game> findJoinedGames(@Param ("playerId") String playerId);
+
 }
