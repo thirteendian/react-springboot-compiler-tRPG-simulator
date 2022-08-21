@@ -81,6 +81,16 @@ public class GameServiceImpl implements GameService {
     return null;
   }
 
+  @Override
+  public void quitGame(QuitGameRequestDto quitGameRequestDto) {
+
+  }
+
+  @Override
+  public GetGameInfoResponseDto getGameInfo(GetGameInfoRequestDto getGameInfoRequestDto) {
+    return null;
+  }
+
   public void initializeGame(String gameId, String code) {
     EvalServicempl evalService = new EvalServicempl();
     RuleInfo ruleInfo = evalService.saveRules(code);

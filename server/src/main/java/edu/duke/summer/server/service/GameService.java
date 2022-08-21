@@ -28,6 +28,16 @@ public interface GameService {
    */
   GetAllJoinedGameResponseDto getAllJoinedGameDto();
 
+  /**
+   * TODO：Quit Game(refresh player status, game status, and all other related status)
+   */
+  void quitGame(QuitGameRequestDto quitGameRequestDto);
+
+  /**
+   * TODO: Get Game Info(get all my owned objects, functions, List of dice rolling results, saved check, again)
+   */
+  GetGameInfoResponseDto getGameInfo(GetGameInfoRequestDto getGameInfoRequestDto);
+
 
   List<Game> filterGame(final GameFilterDto gameFilterDto);
 
