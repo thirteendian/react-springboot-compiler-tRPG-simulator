@@ -136,7 +136,7 @@ public class GameServiceImpl implements GameService {
 
   public void initializeObjects(String gameId, HashMap<String, TypeInfo> types) {
     for (String type : types.keySet()) {
-      if (!type.equals("int") && !type.equals("boolean") && !type.equals("string") && !type.equals("void")) {
+      if (!type.equals("int") && !type.equals("boolean") && !type.equals("string") && !type.equals("void") && !type.equals("test")) {
         UserDefinedObject userObject = new UserDefinedObject();
         userObject.setGameId(gameId);
         userObject.setObjectName(type);
@@ -308,8 +308,8 @@ public class GameServiceImpl implements GameService {
       FunctionDto functionDto = getFunctionDto(gameId, userFunction);
       functions.add(functionDto);
     }
-    gameRepository.changeGameStatus(gameId, "start");
-    playerRepository.changeGameStartStatus(gameId);
+    //gameRepository.changeGameStatus(gameId, "start");
+    //playerRepository.changeGameStartStatus(gameId);
     return new GameStartResponseDto(objects, functions);
   }
 
@@ -339,7 +339,7 @@ public class GameServiceImpl implements GameService {
     ObjectFieldTypeDto objectFieldTypeDto = new ObjectFieldTypeDto();
     objectFieldTypeDto.setId(objectFieldType.getId());
     objectFieldTypeDto.setK(objectFieldType.getK());
-    if (objectFieldType.getName() != null) {
+    if (!objectFieldType.getName().equals("null")) {
       objectFieldTypeDto.setName(objectFieldType.getName());
     }
     else {
@@ -375,7 +375,7 @@ public class GameServiceImpl implements GameService {
     ParamInfoDto paramInfoDto = new ParamInfoDto();
     paramInfoDto.setId(paramInfo.getId());
     paramInfoDto.setK(paramInfo.getK());
-    if (paramInfo.getName() != null) {
+    if (!paramInfo.getName().equals("null")) {
       paramInfoDto.setName(paramInfo.getName());
     }
     else {
