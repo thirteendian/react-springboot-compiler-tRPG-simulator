@@ -308,8 +308,8 @@ public class GameServiceImpl implements GameService {
       FunctionDto functionDto = getFunctionDto(gameId, userFunction);
       functions.add(functionDto);
     }
-    //gameRepository.changeGameStatus(gameId, "start");
-    //playerRepository.changeGameStartStatus(gameId);
+//    gameRepository.changeGameStatus(gameId, "start");
+//    playerRepository.changeGameStartStatus(gameId);
     return new GameStartResponseDto(objects, functions);
   }
 
@@ -485,7 +485,7 @@ public class GameServiceImpl implements GameService {
   }
 
 
-  private ObjectFieldTypeDto saveObjectFieldTypeToDto(ObjectFieldType objectFieldType) {
+  public ObjectFieldTypeDto saveObjectFieldTypeToDto(ObjectFieldType objectFieldType) {
     ObjectFieldTypeDto objectFieldTypeDto = new ObjectFieldTypeDto();
     objectFieldTypeDto.setId(objectFieldType.getId());
     objectFieldTypeDto.setK(objectFieldType.getK());
