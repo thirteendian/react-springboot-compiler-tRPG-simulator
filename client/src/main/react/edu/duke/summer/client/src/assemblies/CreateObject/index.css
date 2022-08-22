@@ -1,9 +1,21 @@
 .objectGenerateBackground{
     position: absolute;
-    width: 914px;
+    width: 1000px;
     height: 700px;
     left: 405px;
-    top: 261px;
+    top: 150px;
+
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 60px;
+    overflow: auto;
+}
+
+.objectMenuBackground{
+    position: absolute;
+    width: 370px;
+    height: 700px;
+    left: 20px;
+    top: 150px;
 
     background: rgba(0, 0, 0, 0.5);
     border-radius: 60px;
