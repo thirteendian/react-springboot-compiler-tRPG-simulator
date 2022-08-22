@@ -132,4 +132,11 @@ public class StateInfo {
         }
     }
 
+    public void setTrueUserOptions(ArrayList<String> trueUserOptions) {
+        this.trueUserOptions = trueUserOptions;
+    }
+
+    public void setReRollDices(ArrayList<String> reRollDices) {
+        this.reRollDices = reRollDices;
+    }
 }

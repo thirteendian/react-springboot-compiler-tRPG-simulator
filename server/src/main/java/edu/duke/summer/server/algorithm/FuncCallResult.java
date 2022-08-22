@@ -41,6 +41,10 @@ public class FuncCallResult {
         return userOptions;
     }
 
+    public StateInfo getState() {
+        return state;
+    }
+
     public void printInfo(){
         System.out.println("------rollInfo in funcCallResult------");
         for(Map.Entry<String, Integer> entry : rolls.entrySet()){

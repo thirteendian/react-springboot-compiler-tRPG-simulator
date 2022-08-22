@@ -13,4 +13,6 @@ public interface UserDefinedFunctionRepository extends JpaRepository<UserDefined
 
     @Query("select o from UserDefinedFunction o where o.gameId= :gameId")
     List<UserDefinedFunction> findByGameId(String gameId);
+
+    UserDefinedFunction findById(String id);
 }

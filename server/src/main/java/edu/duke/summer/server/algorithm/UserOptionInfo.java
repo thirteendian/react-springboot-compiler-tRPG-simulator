@@ -22,4 +22,16 @@ public class UserOptionInfo {
         System.out.println("------UserOptionInfo------");
         System.out.println(gameId + " " + objectId + " " + promptMsg);
     }
+
+    public String getGameId() {
+        return gameId;
+    }
+
+    public String getObjectId() {
+        return objectId;
+    }
+
+    public String getPromptMsg() {
+        return promptMsg;
+    }
 }

@@ -40,13 +40,13 @@ public class GameServiceImpl implements GameService {
   private UserDefinedObjectRepository userDefinedObjectRepository;
 
   @Autowired
+  private UserDefinedFunctionRepository userDefinedFunctionRepository;
+
+  @Autowired
   private ObjectFieldRepository objectFieldRepository;
 
   @Autowired
   private ObjectFieldTypeRepository objectFieldTypeRepository;
-
-  @Autowired
-  private UserDefinedFunctionRepository userDefinedFunctionRepository;
   @Autowired
   private ParameterRepository parameterRepository;
 
@@ -553,11 +553,77 @@ public class GameServiceImpl implements GameService {
     String gameId = callFunctionRequestDto.getGameId();
     Game game = gameRepository.findById(gameId);
     String code = game.getCode();
+    String functionId = callFunctionRequestDto.getFunctionId();
+    UserDefinedFunction userDefinedFunction = userDefinedFunctionRepository.findById(functionId);
+    String funcName = userDefinedFunction.getFunctionName();
     EvalServicempl evalService = new EvalServicempl();
-    //FuncCallResult result = evalService.getFunResult(code, funcName, new HashMap<String, Value>(), new StateInfo());
+    FuncCallResult result = evalService.getFunResult(code, funcName, new HashMap<String, Value>(), new StateInfo());
+    StateInfo state = result.getState();
+
     CallFunctionResponseDto callFunctionResponseDto = new CallFunctionResponseDto();
+    callFunctionResponseDto.setOutputMsgs(state.getOutputMsgs());
+    HashMap<String, Integer> rolls = state.getRolls();
+    List<FunctionOneRollDto> rollList = new ArrayList<>();
+    for (Map.Entry<String, Integer> entry : rolls.entrySet()) {
+      FunctionOneRollDto functionOneRollDto = new FunctionOneRollDto();
+      functionOneRollDto.setId(entry.getKey());
+      functionOneRollDto.setValue(entry.getValue());
+      rollList.add(functionOneRollDto);
+    }
+    callFunctionResponseDto.setRolls(rollList);
+    HashMap<String, UserOptionInfo> userOptions = state.getUserOptions();
+    List<FunctionOneOptionDto> userOptionList = new ArrayList<>();
+    for (Map.Entry<String, UserOptionInfo> entry : userOptions.entrySet()) {
+      FunctionOneOptionDto functionOneOptionDto = new FunctionOneOptionDto();
+      functionOneOptionDto.setId(entry.getKey());
+      UserOptionInfo userOptionInfo = entry.getValue();
+      functionOneOptionDto.setGameId(userOptionInfo.getGameId());
+      functionOneOptionDto.setObjectId(userOptionInfo.getObjectId());
+      functionOneOptionDto.setPromptMsg(userOptionInfo.getPromptMsg());
+      userOptionList.add(functionOneOptionDto);
+    }
+    callFunctionResponseDto.setUserOptions(userOptionList);
     return callFunctionResponseDto;
   }
 
+  public ReCallFunctionResponseDto reCallFunction(ReCallFunctionRequestDto reCallFunctionRequestDto) {
+    String gameId = reCallFunctionRequestDto.getGameId();
+    Game game = gameRepository.findById(gameId);
+    String code = game.getCode();
+    String functionId = reCallFunctionRequestDto.getFunctionId();
+    UserDefinedFunction userDefinedFunction = userDefinedFunctionRepository.findById(functionId);
+    String funcName = userDefinedFunction.getFunctionName();
+    EvalServicempl evalService = new EvalServicempl();
+    StateInfo stateInfo = new StateInfo();
+    stateInfo.setReRollDices(reCallFunctionRequestDto.getReRollDiceIds());
+    stateInfo.setTrueUserOptions(reCallFunctionRequestDto.getTrueUserOptionIds());
+    FuncCallResult result = evalService.getFunResult(code, funcName, new HashMap<String, Value>(), stateInfo);
+    StateInfo state = result.getState();
+
+    ReCallFunctionResponseDto reCallFunctionResponseDto = new ReCallFunctionResponseDto();
+    reCallFunctionResponseDto.setOutputMsgs(state.getOutputMsgs());
+    HashMap<String, Integer> rolls = state.getRolls();
+    List<FunctionOneRollDto> rollList = new ArrayList<>();
+    for (Map.Entry<String, Integer> entry : rolls.entrySet()) {
+      FunctionOneRollDto functionOneRollDto = new FunctionOneRollDto();
+      functionOneRollDto.setId(entry.getKey());
+      functionOneRollDto.setValue(entry.getValue());
+      rollList.add(functionOneRollDto);
+    }
+    reCallFunctionResponseDto.setRolls(rollList);
+    HashMap<String, UserOptionInfo> userOptions = state.getUserOptions();
+    List<FunctionOneOptionDto> userOptionList = new ArrayList<>();
+    for (Map.Entry<String, UserOptionInfo> entry : userOptions.entrySet()) {
+      FunctionOneOptionDto functionOneOptionDto = new FunctionOneOptionDto();
+      functionOneOptionDto.setId(entry.getKey());
+      UserOptionInfo userOptionInfo = entry.getValue();
+      functionOneOptionDto.setGameId(userOptionInfo.getGameId());
+      functionOneOptionDto.setObjectId(userOptionInfo.getObjectId());
+      functionOneOptionDto.setPromptMsg(userOptionInfo.getPromptMsg());
+      userOptionList.add(functionOneOptionDto);
+    }
+    reCallFunctionResponseDto.setUserOptions(userOptionList);
+    return reCallFunctionResponseDto;
+  }
 
 }

@@ -125,4 +125,6 @@ public interface GameService {
 
   CallFunctionResponseDto callFunction(CallFunctionRequestDto callFunctionRequestDto);
 
+  ReCallFunctionResponseDto reCallFunction(ReCallFunctionRequestDto reCallFunctionRequestDto);
+
 }
