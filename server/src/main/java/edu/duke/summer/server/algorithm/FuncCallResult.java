@@ -51,6 +51,5 @@ public class FuncCallResult {
             System.out.println(entry.getKey() + ":");
             entry.getValue().printInfo();
         }
-
     }
 }

@@ -123,6 +123,6 @@ public interface GameService {
    */
   void addObjectFields(String gameId, String code);
 
-  FuncCallResult callFunction(String gameId, String funcName);
+  CallFunctionResponseDto callFunction(CallFunctionRequestDto callFunctionRequestDto);
 
 }

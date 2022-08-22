@@ -1,6 +1,8 @@
 package edu.duke.summer.server;
 
 import edu.duke.summer.server.algorithm.FuncCallResult;
+import edu.duke.summer.server.algorithm.value.StringValue;
+import edu.duke.summer.server.algorithm.value.Value;
 import edu.duke.summer.server.config.SpringConfig;
 import edu.duke.summer.server.database.model.DiceRolling;
 import edu.duke.summer.server.database.model.ObjectValue;
@@ -8,16 +10,11 @@ import edu.duke.summer.server.database.model.Player;
 import edu.duke.summer.server.database.repository.*;
 import edu.duke.summer.server.dto.DiceRollingDto;
 import edu.duke.summer.server.dto.ObjectValueDto;
-import edu.duke.summer.server.dto.Request.CreateGameRequestDto;
-import edu.duke.summer.server.dto.Request.CreateObjectRequestDto;
-import edu.duke.summer.server.dto.Request.GameStartRequestDto;
-import edu.duke.summer.server.dto.Request.JoinGameRequestDto;
-import edu.duke.summer.server.dto.Response.CreateGameResponseDto;
-import edu.duke.summer.server.dto.Response.CreateObjectResponseDto;
-import edu.duke.summer.server.dto.Response.GameStartResponseDto;
-import edu.duke.summer.server.dto.Response.JoinGameResponseDto;
+import edu.duke.summer.server.dto.Request.*;
+import edu.duke.summer.server.dto.Response.*;
 import edu.duke.summer.server.service.GameService;
 import org.checkerframework.checker.units.qual.C;
+import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -289,7 +286,8 @@ public class GameServiceTest {
         String gameId = "1";
         String funcName = "cal";
         try {
-            FuncCallResult result = gameService.callFunction(gameId, funcName);
+            CallFunctionRequestDto callFunctionRequestDto = new CallFunctionRequestDto();
+            CallFunctionResponseDto result = gameService.callFunction(callFunctionRequestDto);
         }
         catch (Exception e) {
             System.out.println("Game does not exists!");

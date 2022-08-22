@@ -19,6 +19,25 @@ public class ParamInfoDto {
     // while elem is not null, it would be either array or option
     private ParamInfoDto elem;
 
+    /**
+     * JSON {id:id,
+     *       k:k,
+     *       name:null,
+     *       elem: {
+     *           id:id,
+     *           k:k,
+     *           name:null,
+     *           elem:{
+     *               id:id,
+     *               k:k,
+     *               name:name,
+     *               elem:null,
+     *               value: [Object1, Object2, Object3]
+     *           }
+     *       }}
+     *
+     */
+
     public String getId() {
         return id;
     }
