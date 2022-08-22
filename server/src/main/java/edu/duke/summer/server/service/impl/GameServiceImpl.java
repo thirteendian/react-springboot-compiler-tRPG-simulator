@@ -5,6 +5,8 @@ import java.util.*;
 import edu.duke.summer.server.algorithm.*;
 import edu.duke.summer.server.algorithm.absyn.FieldList;
 import edu.duke.summer.server.algorithm.absyn.Ty;
+import edu.duke.summer.server.algorithm.value.IntValue;
+import edu.duke.summer.server.algorithm.value.Value;
 import edu.duke.summer.server.database.model.*;
 import edu.duke.summer.server.database.model.UserDefinedObject;
 import edu.duke.summer.server.database.repository.*;
@@ -547,11 +549,14 @@ public class GameServiceImpl implements GameService {
     }
   }
 
-  public FuncCallResult callFunction(String gameId, String funcName) {
-    String code = gameRepository.findById(gameId).getCode();
+  public CallFunctionResponseDto callFunction(CallFunctionRequestDto callFunctionRequestDto) {
+    String gameId = callFunctionRequestDto.getGameId();
+    Game game = gameRepository.findById(gameId);
+    String code = game.getCode();
     EvalServicempl evalService = new EvalServicempl();
-    FuncCallResult result = evalService.getFunResult(code, funcName, new HashMap<>(), new StateInfo());
-    return result;
+    //FuncCallResult result = evalService.getFunResult(code, funcName, new HashMap<String, Value>(), new StateInfo());
+    CallFunctionResponseDto callFunctionResponseDto = new CallFunctionResponseDto();
+    return callFunctionResponseDto;
   }
 
 

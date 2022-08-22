@@ -6,6 +6,8 @@ import edu.duke.summer.server.algorithm.absyn.Ty;
 import java.util.ArrayList;
 
 public class ArrayValue extends Value{
+
+    // type of elements
     Ty type;
     ArrayList<Value> value;
 
