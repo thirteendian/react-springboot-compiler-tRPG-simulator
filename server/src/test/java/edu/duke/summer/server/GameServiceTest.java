@@ -144,17 +144,17 @@ public class GameServiceTest {
 
 //    @Test
 //    public void deleteAndAddObjectFieldTest() {
-//        String code = "{type rollwithmod {\n" +
-//                "    numdice:int,\n" +
-//                "    numsides:int [][],\n" +
-//                "    modifier:int []\n" +
-//                "    };\n" +
-//                "type newType {\n" +
-//                "    a:rollwithmod [],\n" +
-//                "    b:string option [] option,\n" +
-//                "    c:boolean option []\n" +
-//                "    }\n" +
-//                "}";
+        String code = "{type rollwithmod {\n" +
+                "    numdice:int,\n" +
+                "    numsides:int [][],\n" +
+                "    modifier:int []\n" +
+                "    };\n" +
+                "type newType {\n" +
+                "    a:rollwithmod [],\n" +
+                "    b:string option [] option,\n" +
+                "    c:boolean option []\n" +
+                "    }\n" +
+                "}";
 //        gameService.initializeGame("3", code);
 //        gameService.deleteObjectField("3", "newType", "a");
 //
