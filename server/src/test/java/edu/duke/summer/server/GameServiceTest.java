@@ -31,6 +31,9 @@ public class GameServiceTest {
     private GameService gameService;
 
     @Autowired
+    private GameRepository gameRepository;
+
+    @Autowired
     private PlayerRepository playerRepository;
 
     @Autowired
@@ -361,7 +364,6 @@ public class GameServiceTest {
                 "   }\n" +
                 "}");
         CreateGameResponseDto createGameResponseDto = gameService.createNewGame(createGameRequestDto);
-        System.out.println(createGameResponseDto.getGameId());
         GameStartRequestDto gameStartRequestDto = new GameStartRequestDto();
         gameStartRequestDto.setGameId(createGameResponseDto.getGameId());
         GameStartResponseDto gameStartResponseDto = gameService.startGame(gameStartRequestDto);
@@ -369,6 +371,77 @@ public class GameServiceTest {
         for (ObjectDto objectDto : objectDtos) {
             System.out.println(objectDto.toString());
         }
+    }
+
+    @Test
+    public void sqlTest() {
+        CreateGameRequestDto createGameRequestDto = new CreateGameRequestDto();
+        createGameRequestDto.setHostUuid("0001");
+        createGameRequestDto.setGameName("RISK");
+        createGameRequestDto.setPlayerNum(6);
+        createGameRequestDto.setCode("{type rollwithmod {\n" +
+                "    numdice:int,\n" +
+                "    numsides:int option option [],\n" +
+                "    modifier:int [][][] option\n" +
+                "    }\n" +
+                " type test = rollwithmod;\n" +
+                " type newType {\n" +
+                "    a:test,\n" +
+                "    b:string option [] option,\n" +
+                "    c:boolean option []\n" +
+                "    }\n" +
+                " fun int cal(int a, int x, int y, int z){\n" +
+                "    var b = 0;\n" +
+                "    var anArray:int [] = {1};\n" +
+                "    var sum = 0;\n" +
+                "    var opti: int option;\n" +
+                "    var userTest : newType;\n" +
+                "    userTest.a.numdice = 5;\n" +
+                "    opti = SOME(1);\n" +
+                "    opti = NONE;\n" +
+                "    anArray = {1,2,3,7,10};\n" +
+                "    anArray[3] = 10;\n" +
+                "    output(a);\n" +
+                "    for(i : anArray){\n" +
+                "        sum = sum + i;\n" +
+                "        if (sum > 10) then { break;}\n" +
+                "    }\n" +
+                "    a = 1;\n" +
+                "    output(a);\n" +
+                "    return sum;\n" +
+                "    }\n" +
+                "   \n" +
+                "    fun int test(int i){\n" +
+                "        i = 1;\n" +
+                "        while(i < 10){\n" +
+                "            i = i + 1;\n" +
+                "        }\n" +
+                "        return i;\n" +
+                "    }\n" +
+                "    fun int testCallExp(){\n" +
+                "        var i = test(20);\n" +
+                "        return i;\n" +
+                "    }\n" +
+                "    fun int testRoll(){\n" +
+                "        var i = roll(\"d100\");\n" +
+                "        if(userOption(\"Reroll?\")) then{\n" +
+                "            var i = 1;\n" +
+                "            output(i);\n" +
+                "        }\n" +
+                "        if(i > 1) then {\n" +
+                "            output(\"roll:\" + roll(\"3d4\"));\n" +
+                "        }else{\n" +
+                "            var i = roll(\"d100\");   \n" +
+                "            output(i);\n" +
+                "        }\n" +
+                "        output(\"force reroll\");\n" +
+                "        return i;\n" +
+                "   }\n" +
+                "}");
+        CreateGameResponseDto createGameResponseDto = gameService.createNewGame(createGameRequestDto);
+        String gameId = createGameResponseDto.getGameId();
+        gameRepository.changeGameStatus(gameId, "start");
+        gameRepository.addPlayer(gameId);
     }
 
 

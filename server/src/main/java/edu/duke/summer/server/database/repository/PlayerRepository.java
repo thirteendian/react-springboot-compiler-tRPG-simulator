@@ -8,9 +8,11 @@ import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.repository.query.Param;
 
+import javax.transaction.Transactional;
 import java.util.*;
 
 @Repository
+@Transactional
 public interface PlayerRepository extends JpaRepository<Player, Long> {
 
     Player findById(String id);
