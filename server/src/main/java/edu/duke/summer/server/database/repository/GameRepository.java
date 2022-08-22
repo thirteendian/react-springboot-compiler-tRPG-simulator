@@ -7,9 +7,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.repository.query.Param;
 
+import javax.transaction.Transactional;
 import java.util.*;
 
 @Repository
+@Transactional
 public interface GameRepository extends JpaRepository<Game, Long> {
 
   Game findById(String id);
