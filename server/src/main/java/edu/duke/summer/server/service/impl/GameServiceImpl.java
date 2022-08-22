@@ -308,8 +308,8 @@ public class GameServiceImpl implements GameService {
       FunctionDto functionDto = getFunctionDto(gameId, userFunction);
       functions.add(functionDto);
     }
-    gameRepository.changeGameStatus(gameId, "start");
-    playerRepository.changeGameStartStatus(gameId);
+//    gameRepository.changeGameStatus(gameId, "start");
+//    playerRepository.changeGameStartStatus(gameId);
     return new GameStartResponseDto(objects, functions);
   }
 
