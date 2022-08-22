@@ -31,6 +31,8 @@ export default function Index() {
         console.log("connected: "+frame);
     }
 
+
+
     return (
         <div>
             <ul>
