@@ -11,3 +11,14 @@
     top: 680px;
 }
 
+.inputCheckBox_objectCreate{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+
+    position: relative;
+    width: 45px;
+    height: 45px;
+}
+

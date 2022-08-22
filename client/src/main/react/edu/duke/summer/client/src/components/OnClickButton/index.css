@@ -129,78 +129,48 @@
     background: rgba(217, 217, 217, 0.3);
 }
 
-
-
-
-
-.onClickButton_createObject1{
+.onClickButton_game_right{
     font-family: 'Bungee Regular', serif;
     font-style: normal;
     font-weight: 400;
-    font-size: 30px;
+    font-size: 40px;
+    line-height: 48px;
+    cursor: pointer;
     color: #000000;
 
-
-    line-height: 48px;
-
     box-sizing: border-box;
-    position: absolute;
-    width: 300px;
-    height: 50px;
-    left: 50px;
-    top: 300px;
 
-    cursor: pointer;
+    position: absolute;
+    width: 494px;
+    height: 50px;
+    left: 824px;
+    top: 900px;
+
     text-align: center;
-    background: rgba(217, 217, 217, 0.7);
+    background: rgba(217, 217, 217, 0.5);
     border: 1px solid #000000;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.onClickButton_createObject2{
+.onClickButton_game_left{
     font-family: 'Bungee Regular', serif;
     font-style: normal;
     font-weight: 400;
-    font-size: 30px;
+    font-size: 40px;
+    line-height: 48px;
+    cursor: pointer;
     color: #000000;
 
-
-    line-height: 48px;
-
     box-sizing: border-box;
+
     position: absolute;
-    width: 300px;
+    width: 494px;
     height: 50px;
-    left: 50px;
-    top: 350px;
+    left: 100px;
+    top: 900px;
 
-    cursor: pointer;
     text-align: center;
-    background: rgba(217, 217, 217, 0.7);
-    border: 1px solid #000000;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
-
-.onClickButton_createObject3{
-    font-family: 'Bungee Regular', serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 30px;
-    color: #000000;
-
-
-    line-height: 48px;
-
-    box-sizing: border-box;
-    position: absolute;
-    width: 300px;
-    height: 50px;
-    left: 50px;
-    top: 400px;
-
-    cursor: pointer;
-    text-align: center;
-    background: rgba(217, 217, 217, 0.7);
+    background: rgba(217, 217, 217, 0.5);
     border: 1px solid #000000;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }

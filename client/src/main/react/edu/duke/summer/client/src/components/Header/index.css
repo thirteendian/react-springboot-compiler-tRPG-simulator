@@ -2,7 +2,7 @@
     font-family: 'Bungee Regular';
     font-style: normal;
     font-weight: 400;
-    font-size: 40px;
+    font-size: 25px;
     line-height: 96px;
     text-align: center;
     color: #FFFFFF;
@@ -11,9 +11,9 @@
     /*margin: 0 auto;*/
     position: absolute;
     width: 1317px;
-    height: 118px;
+    height: 100px;
     left: 62px;
-    top: 80px;
+    top: 0px;
 }
 
 .header_login{
@@ -333,50 +333,18 @@
 }
 
 
-
-
-
-.header_newType1{
+.header_fieldName{
     font-family: 'Bungee Regular', serif;
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
     line-height: 48px;
 
-    position: absolute;
-    width: 466px;
-    height: 90px;
-    left: 500px;
-    top: 300px;
+    position: relative;
+    /*width: 466px;*/
+    /*height: 90px;*/
+    /*left: 500px;*/
+    /*top: 300px;*/
     color: #FFFFFF;
 }
 
-.header_newType2{
-    font-family: 'Bungee Regular', serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 48px;
-
-    position: absolute;
-    width: 466px;
-    height: 90px;
-    left: 500px;
-    top: 400px;
-    color: #FFFFFF;
-}
-
-.header_newType3{
-    font-family: 'Bungee Regular', serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 48px;
-
-    position: absolute;
-    width: 466px;
-    height: 90px;
-    left: 500px;
-    top: 500px;
-    color: #FFFFFF;
-}
