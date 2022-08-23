@@ -1,5 +1,7 @@
 package edu.duke.summer.server.dto.Response;
 
+import edu.duke.summer.server.database.model.ObjectValue;
+
 import java.util.List;
 
 public class CreateObjectResponseDto {
@@ -10,26 +12,18 @@ public class CreateObjectResponseDto {
     // {uuid, name, value}
     // ...
     // ]
-    public String myObjectList;
+    private List<ObjectValue> objectList;
 
-    public String getMyObjectList() {
-        return myObjectList;
+    public CreateObjectResponseDto(List<ObjectValue> objectList) {
+        this.objectList = objectList;
     }
 
-    public void setMyObjectList(String myObjectList) {
-        this.myObjectList = myObjectList;
+    public List<ObjectValue> getObjectList() {
+        return objectList;
     }
 
-    public CreateObjectResponseDto() {}
-
-    public CreateObjectResponseDto(String myObjectList) {
-        this.myObjectList = myObjectList;
+    public void setObjectList(List<ObjectValue> objectList) {
+        this.objectList = objectList;
     }
-
-    @Override
-    public String toString() {
-        return "CreateObjectResponseDto{" +
-                "myObjectList='" + myObjectList + '\'' +
-                '}';
-    }
+    //
 }

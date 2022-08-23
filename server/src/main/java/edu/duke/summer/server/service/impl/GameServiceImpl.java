@@ -309,8 +309,8 @@ public class GameServiceImpl implements GameService {
       FunctionDto functionDto = getFunctionDto(gameId, userFunction);
       functions.add(functionDto);
     }
-//    gameRepository.changeGameStatus(gameId, "start");
-//    playerRepository.changeGameStartStatus(gameId);
+    gameRepository.changeGameStatus(gameId, "start");
+    playerRepository.changeGameStartStatus(gameId);
     return new GameStartResponseDto(objects, functions);
   }
 
@@ -405,17 +405,18 @@ public class GameServiceImpl implements GameService {
     StringBuilder myObjectList = new StringBuilder();
     myObjectList.append('[');
     List<ObjectValue> objects = objectValueRepository.findMyObjects(createObjectRequestDto.getGameId(), createObjectRequestDto.getPlayerUuid());
-    for (ObjectValue object : objects) {
-      StringBuilder myObject = new StringBuilder();
-      myObject.append('{');
-      myObject.append("\"uuid\":\"").append(object.getId()).append("\",");
-      myObject.append("\"name\":\"").append(object.getObjectName()).append("\",");
-      myObject.append("\"value\":").append(object.getObjectValue());
-      myObject.append("}, ");
-      myObjectList.append(myObject.toString());
-    }
-    myObjectList.setCharAt(myObjectList.length() - 2, ']');
-    return new CreateObjectResponseDto(myObjectList.substring(0, myObjectList.length() - 2));
+//    for (ObjectValue object : objects) {
+//      StringBuilder myObject = new StringBuilder();
+//      myObject.append('{');
+//      myObject.append("\"uuid\":\"").append(object.getId()).append("\",");
+//      myObject.append("\"name\":\"").append(object.getObjectName()).append("\",");
+//      myObject.append("\"value\":").append(object.getObjectValue());
+//      myObject.append("}, ");
+//      myObjectList.append(myObject.toString());
+//    }
+//    myObjectList.setCharAt(myObjectList.length() - 2, ']');
+//    return new CreateObjectResponseDto(myObjectList.substring(0, myObjectList.length() - 2));
+    return new CreateObjectResponseDto(objects);
   }
 
   @Override

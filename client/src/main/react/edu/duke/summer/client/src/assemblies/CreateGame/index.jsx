@@ -40,7 +40,7 @@ export default function Index() {
                     localStorage.setItem("game",JSON.stringify(response.data))
                     console.log(response.data)
                 }
-                navigate("/user/gameCenter")//Her
+                navigate("/user/gameCenter")
                 return response.data;
             },
             error=>{

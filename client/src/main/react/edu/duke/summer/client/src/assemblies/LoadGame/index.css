@@ -1,0 +1,10 @@
+.loadGame_list{
+    position: absolute;
+    width: 914px;
+    height: 553px;
+    left: 405px;
+    top: 261px;
+
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 60px;
+}

@@ -10,6 +10,7 @@ import CreateObject from "./assemblies/CreateObject";
 import GameCenter from "./assemblies/GameCenter";
 import WaitingRoom from "./assemblies/GameRoom";
 import JoinGame from "./assemblies/JoinGame";
+import LoadGame from "./assemblies/LoadGame";
 class App extends Component {
     state={
         isLogin: false
@@ -32,6 +33,7 @@ class App extends Component {
                             <Route path="/user/createObject" element={<CreateObject/>}/>
                             <Route path="/user/gameCenter" element={<GameCenter/>}/>
                             <Route path="/user/waitingRoom" element={<WaitingRoom/>}/>
+                            <Route path="/user/LoadGame" element={<LoadGame/>}/>
                         </Routes>
                     </div>
                 </div>

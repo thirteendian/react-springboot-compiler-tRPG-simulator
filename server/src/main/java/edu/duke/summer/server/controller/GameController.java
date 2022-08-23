@@ -1,6 +1,7 @@
 package edu.duke.summer.server.controller;
 
 import edu.duke.summer.server.dto.Request.CreateGameRequestDto;
+import edu.duke.summer.server.dto.Request.CreateObjectRequestDto;
 import edu.duke.summer.server.dto.Request.GameStartRequestDto;
 import edu.duke.summer.server.dto.Response.*;
 import edu.duke.summer.server.service.GameService;
@@ -30,9 +31,15 @@ public class GameController {
     }
 
     @PostMapping("/startgame")
-    public ResponseEntity<?> postStartGame(@Valid @RequestBody GameStartRequestDto gameStartRequestDto){
+    public ResponseEntity<?> postStartGame(@Valid @RequestBody GameStartRequestDto gameStartRequestDto) {
         GameStartResponseDto gameStartResponseDto = gameService.startGame(gameStartRequestDto);
         return ResponseEntity.ok(gameStartResponseDto);
+    }
+
+    @PostMapping("/createobject")
+    public ResponseEntity<?> postCreateGame(@Valid @RequestBody CreateObjectRequestDto createObjectRequestDto) {
+        CreateObjectResponseDto createObjectResponseDto = gameService.createObject(createObjectRequestDto);
+        return ResponseEntity.ok(createObjectResponseDto);
     }
 
 //    @GetMapping("/getallgame")
@@ -46,9 +53,6 @@ public class GameController {
 ////        GetAllJoinedGameResponseDto getAllJoinedGameResponseDto = gameService.getAllJoinedGameDto();
 //        return ResponseEntity.ok(getAllJoinedGameResponseDto);
 //    }
-
-
-
 
 
 //    @GetMapping("/user/{uuid}/creategame")

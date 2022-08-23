@@ -264,3 +264,22 @@
     border-radius: 60px;
     white-space: pre-wrap;
 }
+
+
+.input_createObject_prim{
+    font-family: Georgia, serif;
+    font-style:normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+    overflow: auto;
+    color: #000000;
+
+    position: relative;
+    width: 100px;
+    height: 40px;
+
+    background: rgb(255, 255, 255);
+    border-radius: 40px;
+    white-space: pre-wrap;
+}

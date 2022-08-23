@@ -21,3 +21,10 @@
     border-radius: 60px;
     overflow: auto;
 }
+
+.flexbox-container {
+    display: flex;
+    flex-direction: row;
+    border: 5px solid #ffeb00;
+
+}

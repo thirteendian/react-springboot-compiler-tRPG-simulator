@@ -275,11 +275,11 @@
     line-height: 48px;
 
     box-sizing: border-box;
-    position: absolute;
+    position: relative;
     width: 100px;
     height: 50px;
     left: 60px;
-    top: 600px;
+    /*top: 600px;*/
 
     cursor: pointer;
     text-align: center;

@@ -44,6 +44,16 @@ export default class UserService {
             gameId
         })
     }
+    static createObject(objectName,objectValueString){
+        const user = JSON.parse(localStorage.getItem('user'));
+        const game = JSON.parse(localStorage.getItem('game'));
+        return axios.post(API_URL+'createobject',{
+            gameId:game.gameId,
+            playerUuid:user.uuid,
+            objectName:objectName,
+            objectValue:objectValueString
+        })
+    }
 
     static getObjectInfo(){
         return axios.get(API_URL+'objectInfo');
