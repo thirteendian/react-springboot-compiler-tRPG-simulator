@@ -1,6 +1,7 @@
 package edu.duke.summer.server;
 
 import edu.duke.summer.server.algorithm.FuncCallResult;
+import edu.duke.summer.server.algorithm.value.IntValue;
 import edu.duke.summer.server.algorithm.value.StringValue;
 import edu.duke.summer.server.algorithm.value.Value;
 import edu.duke.summer.server.config.SpringConfig;
@@ -444,5 +445,18 @@ public class GameServiceTest {
         gameRepository.addPlayer(gameId);
     }
 
+    @Test
+    public void JSONtest() {
+        String json = "{\n" +
+                "  \"value\": {\n" +
+                "    \"height\": 6,\n" +
+                "    \"weight\": \"1t\"\n" +
+                "  }\n" +
+                "}";
+        JSONObject obj = new JSONObject(json);
+        JSONObject val = obj.getJSONObject("value");
+        int intVal = val.getInt("height");
+        System.out.println(intVal);
+    }
 
 }

@@ -12,6 +12,8 @@ import java.util.List;
 @Repository
 public interface ParameterRepository extends JpaRepository<Parameter, Long> {
 
+    Parameter findById(String id);
+
     @Query("select o from Parameter o where o.gameId = :gameId and o.funcName = :functionName order by o.id")
     List<Parameter> findParameters(@Param("gameId") String gameId, @Param("functionName") String functionName);
 

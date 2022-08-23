@@ -16,6 +16,7 @@ import edu.duke.summer.server.dto.Object.*;
 import edu.duke.summer.server.dto.Request.*;
 import edu.duke.summer.server.dto.Response.*;
 import edu.duke.summer.server.service.GameService;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -556,10 +557,25 @@ public class GameServiceImpl implements GameService {
     String functionId = callFunctionRequestDto.getFunctionId();
     UserDefinedFunction userDefinedFunction = userDefinedFunctionRepository.findById(functionId);
     String funcName = userDefinedFunction.getFunctionName();
-    EvalServicempl evalService = new EvalServicempl();
-    FuncCallResult result = evalService.getFunResult(code, funcName, new HashMap<String, Value>(), new StateInfo());
-    StateInfo state = result.getState();
+    HashMap<String, String> map = callFunctionRequestDto.getParams();
+    HashMap<String, Value> params = new HashMap<>();
 
+    // test for all int type params
+    for (Map.Entry<String, String> entry :  map.entrySet()) {
+      String paramId = entry.getKey();
+      Parameter parameter = parameterRepository.findById(paramId);
+      String paramName = parameter.getParamName();
+      String value = entry.getValue();
+      JSONObject obj = new JSONObject(value);
+      JSONObject val = obj.getJSONObject("value");
+      int intVal = val.getInt(paramName);
+      IntValue intValue = new IntValue(intVal);
+      params.put(paramName, intValue);
+    }
+
+    EvalServicempl evalService = new EvalServicempl();
+    FuncCallResult result = evalService.getFunResult(code, funcName, params, new StateInfo());
+    StateInfo state = result.getState();
     CallFunctionResponseDto callFunctionResponseDto = new CallFunctionResponseDto();
     callFunctionResponseDto.setOutputMsgs(state.getOutputMsgs());
     HashMap<String, Integer> rolls = state.getRolls();
