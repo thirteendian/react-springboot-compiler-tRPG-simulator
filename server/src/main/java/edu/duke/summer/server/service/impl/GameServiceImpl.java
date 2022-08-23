@@ -5,7 +5,9 @@ import java.util.*;
 import edu.duke.summer.server.algorithm.*;
 import edu.duke.summer.server.algorithm.absyn.FieldList;
 import edu.duke.summer.server.algorithm.absyn.Ty;
+import edu.duke.summer.server.algorithm.value.BooleanValue;
 import edu.duke.summer.server.algorithm.value.IntValue;
+import edu.duke.summer.server.algorithm.value.StringValue;
 import edu.duke.summer.server.algorithm.value.Value;
 import edu.duke.summer.server.database.model.*;
 import edu.duke.summer.server.database.model.UserDefinedObject;
@@ -560,7 +562,7 @@ public class GameServiceImpl implements GameService {
     HashMap<String, String> map = callFunctionRequestDto.getParams();
     HashMap<String, Value> params = new HashMap<>();
 
-    // test for all int type params
+    // for all prim type params
     for (Map.Entry<String, String> entry :  map.entrySet()) {
       String paramId = entry.getKey();
       Parameter parameter = parameterRepository.findById(paramId);
@@ -568,9 +570,24 @@ public class GameServiceImpl implements GameService {
       String value = entry.getValue();
       JSONObject obj = new JSONObject(value);
       JSONObject val = obj.getJSONObject("value");
-      int intVal = val.getInt(paramName);
-      IntValue intValue = new IntValue(intVal);
-      params.put(paramName, intValue);
+      String paramInfoId= parameter.getParamType();
+      ParamInfo paramInfo = paramInfoRepository.findById(paramInfoId);
+      String paramTypeName = paramInfo.getName();
+      if (paramTypeName.equals("int")) {
+        int intVal = val.getInt(paramName);
+        IntValue intValue = new IntValue(intVal);
+        params.put(paramName, intValue);
+      }
+      else if (paramTypeName.equals("boolean")) {
+        boolean boolVal = val.getBoolean(paramName);
+        BooleanValue booleanValue = new BooleanValue(boolVal);
+        params.put(paramName, booleanValue);
+      }
+      else if (paramTypeName.equals("string")) {
+        String strVal = val.getString(paramName);
+        StringValue stringValue = new StringValue(strVal);
+        params.put(paramName, stringValue);
+      }
     }
 
     EvalServicempl evalService = new EvalServicempl();
@@ -609,11 +626,42 @@ public class GameServiceImpl implements GameService {
     String functionId = reCallFunctionRequestDto.getFunctionId();
     UserDefinedFunction userDefinedFunction = userDefinedFunctionRepository.findById(functionId);
     String funcName = userDefinedFunction.getFunctionName();
+    HashMap<String, String> map = reCallFunctionRequestDto.getParams();
+    HashMap<String, Value> params = new HashMap<>();
+
+    // for all prim type params
+    for (Map.Entry<String, String> entry :  map.entrySet()) {
+      String paramId = entry.getKey();
+      Parameter parameter = parameterRepository.findById(paramId);
+      String paramName = parameter.getParamName();
+      String value = entry.getValue();
+      JSONObject obj = new JSONObject(value);
+      JSONObject val = obj.getJSONObject("value");
+      String paramInfoId= parameter.getParamType();
+      ParamInfo paramInfo = paramInfoRepository.findById(paramInfoId);
+      String paramTypeName = paramInfo.getName();
+      if (paramTypeName.equals("int")) {
+        int intVal = val.getInt(paramName);
+        IntValue intValue = new IntValue(intVal);
+        params.put(paramName, intValue);
+      }
+      else if (paramTypeName.equals("boolean")) {
+        boolean boolVal = val.getBoolean(paramName);
+        BooleanValue booleanValue = new BooleanValue(boolVal);
+        params.put(paramName, booleanValue);
+      }
+      else if (paramTypeName.equals("string")) {
+        String strVal = val.getString(paramName);
+        StringValue stringValue = new StringValue(strVal);
+        params.put(paramName, stringValue);
+      }
+    }
+
     EvalServicempl evalService = new EvalServicempl();
     StateInfo stateInfo = new StateInfo();
     stateInfo.setReRollDices(reCallFunctionRequestDto.getReRollDiceIds());
     stateInfo.setTrueUserOptions(reCallFunctionRequestDto.getTrueUserOptionIds());
-    FuncCallResult result = evalService.getFunResult(code, funcName, new HashMap<String, Value>(), stateInfo);
+    FuncCallResult result = evalService.getFunResult(code, funcName, params, stateInfo);
     StateInfo state = result.getState();
 
     ReCallFunctionResponseDto reCallFunctionResponseDto = new ReCallFunctionResponseDto();
